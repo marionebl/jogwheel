@@ -6,7 +6,7 @@
 		<img width="200" src="https://cdn.rawgit.com/undefined/master/source/jogwheel.svg" />
 	</a> -->
 </div>
-<h1 align="center">:minidisc: jogwheel</h1>
+<h1 align="center"> jogwheel</h1>
 <p align="center">
 	<b>
 	<a href="#about" target="_blank">About</a> | <a href="#install" target="_blank">Install</a> | <a href="#usage" target="_blank">Usage</a> | <a href="./documentation/api.md" target="_blank">API</a>
@@ -15,27 +15,15 @@
 <br />
 
 
-> Health
-
-[![npm version][npm-image]][npm-url] [![Downloads][npm-dl-image]][npm-url]
-[![Unix build status][ci-image]][ci-url] [![Coverage][coverage-image]][coverage-url] [![Code Quality][climate-image]][climate-url]
-
-> Activity
-
-[![Pull requests][pr-image]][pr-url] [![Issues][issue-image]][issue-url]
-
-> Browser support
-
-
 
 ## About
 jogwheel gives you the power to control your CSS keyframe animations via CSS. By combining the best of CSS keyframe animations and the upcoming Web Animation API you get:
 
-[x] **separation of concerns**: Animations are styling, thus should be written in CSS
-[x] **declarative animations**: CSS keyframes are the simplest way to author animations on the web
-[x] **animation sequences**: No fiddling with animationEnd
-[x] **static interpolation**: Because jogwheel leverages the Web Animation API you can play, pause and scrub your animations
-[ ] world peace
+- [x] **separation of concerns**: Animations are styling, thus should be written in CSS
+- [x] **declarative animations**: CSS keyframes are the simplest way to author animations on the web
+- [x] **animation sequences**: No fiddling with animationEnd
+- [x] **static interpolation**: Because jogwheel leverages the Web Animation API you can play, pause and scrub your animations
+- [ ] world peace
 
 ## Install
 [jogwheel](npm-url) is available on npm.
@@ -50,7 +38,7 @@ See [API Documentation](./documentation/api.md) for details.
 ```js
 import JogWheel from 'jogwheel';
 const element = document.querySelector('[data-animated]');
-const player = JogWheel.create(element});
+const player = JogWheel.create(element);
 
 // Jump halfway into the animation
 player.seek(0.5);

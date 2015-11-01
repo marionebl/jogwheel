@@ -4,7 +4,7 @@
 		<img width="200" src="https://cdn.rawgit.com/undefined/master/source/jogwheel.svg" />
 	</a> -->
 </div>
-<h1 align="center">:minidisc: jogwheel</h1>
+<h1 align="center"> jogwheel</h1>
 <p align="center">
 	<b>
 	<a href="#found-an-issue" target="_blank">found-an-issue</a> | <a href="#want-to-contribute" target="_blank">want-to-contribute</a> | <a href="#coding-rules" target="_blank">coding-rules</a> | <a href="#commit-rules" target="_blank">commit-rules</a>
