@@ -17,7 +17,7 @@
 
 
 ## About
-jogwheel gives you the power to control your CSS keyframe animations via CSS. By combining the best of CSS keyframe animations and the upcoming Web Animation API you get:
+jogwheel gives you the power to take full control over your CSS keyframe animations via JavaScript.
 
 - [x] **separation of concerns**: Animations are styling, thus should be written in CSS
 - [x] **declarative animations**: CSS keyframes are the simplest way to author animations on the web
