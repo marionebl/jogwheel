@@ -2,27 +2,15 @@
 
 <%= props.partials.header('', ['About', 'Install', 'Usage', {'name': 'API', 'href': './documentation/api.md'}]) %>
 
-> Health
-
-[![npm version][npm-image]][npm-url] [![Downloads][npm-dl-image]][npm-url]
-[![Unix build status][ci-image]][ci-url] [![Coverage][coverage-image]][coverage-url] [![Code Quality][climate-image]][climate-url]
-
-> Activity
-
-[![Pull requests][pr-image]][pr-url] [![Issues][issue-image]][issue-url]
-
-> Browser support
-
-
 
 ## About
 ${props.pkg.name} gives you the power to control your CSS keyframe animations via CSS. By combining the best of CSS keyframe animations and the upcoming Web Animation API you get:
 
-[x] **separation of concerns**: Animations are styling, thus should be written in CSS
-[x] **declarative animations**: CSS keyframes are the simplest way to author animations on the web
-[x] **animation sequences**: No fiddling with animationEnd
-[x] **static interpolation**: Because ${props.pkg.name} leverages the Web Animation API you can play, pause and scrub your animations
-[ ] world peace
+- [x] **separation of concerns**: Animations are styling, thus should be written in CSS
+- [x] **declarative animations**: CSS keyframes are the simplest way to author animations on the web
+- [x] **animation sequences**: No fiddling with animationEnd
+- [x] **static interpolation**: Because ${props.pkg.name} leverages the Web Animation API you can play, pause and scrub your animations
+- [ ] world peace
 
 ## Install
 [${props.pkg.name}](npm-url) is available on npm.
@@ -37,7 +25,7 @@ See [API Documentation](./documentation/api.md) for details.
 ```js
 import JogWheel from '${props.pkg.name}';
 const element = document.querySelector('[data-animated]');
-const player = JogWheel.create(element});
+const player = JogWheel.create(element);
 
 // Jump halfway into the animation
 player.seek(0.5);
