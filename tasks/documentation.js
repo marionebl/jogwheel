@@ -1,0 +1,41 @@
+var merge = require('lodash.merge');
+
+var cached = require('gulp-cached');
+var remember = require('gulp-remember');
+
+var data = require('gulp-data');
+var template = require('gulp-template');
+var extension = require('gulp-ext-replace');
+
+var pkg = require('../package');
+var header = require('./partials/header');
+var footer = require('./partials/footer');
+
+module.exports = function (gulp, paths) {
+	var props = {
+		paths: paths,
+		gulp: gulp,
+		pkg: merge({}, pkg, pkg.config.documentation),
+		helpers: {
+
+		}
+	};
+
+	props.partials = {
+		header: header(props),
+		footer: footer(props)
+	};
+
+	return function documentation() {
+		/* @desc build markdown from sources */
+		return gulp.src(paths.source.documentation)
+			.pipe(cached('documentation'))
+			.pipe(data({
+				props: props
+			}))
+			.pipe(template())
+			.pipe(remember('documentation'))
+			.pipe(extension('.md'))
+			.pipe(gulp.dest(paths.target.root));
+	};
+};

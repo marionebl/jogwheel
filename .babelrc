@@ -1,0 +1,11 @@
+{
+    "presets":
+    [
+        "stage-0", "es2015-without-regenerator"
+    ],
+    "plugins":
+    [
+        "transform-strict-mode",
+        "transform-runtime"
+    ]
+}

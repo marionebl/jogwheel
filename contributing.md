@@ -1,0 +1,115 @@
+
+<div align="center">
+	<!-- <a href="https://github.com/marionebl/jogwheel#readme">
+		<img width="200" src="https://cdn.rawgit.com/undefined/master/source/jogwheel.svg" />
+	</a> -->
+</div>
+<h1 align="center">:minidisc: jogwheel</h1>
+<p align="center">
+	<b>
+	<a href="#found-an-issue" target="_blank">found-an-issue</a> | <a href="#want-to-contribute" target="_blank">want-to-contribute</a> | <a href="#coding-rules" target="_blank">coding-rules</a> | <a href="#commit-rules" target="_blank">commit-rules</a>
+	</b>
+</p>
+<br />
+
+
+Yeay! You want to contribute to jogwheel. That's amazing!
+To smoothen everyone's experience involved with the project please take note of the following guidelines and rules.
+
+## Found an Issue?
+Thank you for reporting any issues you find. We do our best to test and make jogwheel as solid as possible, but any reported issue is a real help.
+[![Issues][issue-image]][issue-url]
+
+Please follow these guidelines when reporting issues:
+* Provide a title in the format of `<Error> when <Task>`
+* Tag your issue with the tag `bug`
+* Provide a short summary of what you are trying to do
+* Provide the log of the encountered error if applicable
+* Provide the exact version of jogwheel. Check `npm ls jogwheel` when in doubt
+* Be awesome and consider contributing a [pull request](#want-to-contribute)
+
+## Want to contribute?
+You consider contributing changes to jogwheel – we dig that!
+Please consider these guidelines when filing a pull request:
+
+> jogwheel pull requests
+
+[![Pull requests][pr-image]][pr-url]
+
+* Follow the [Coding Rules](#coding-rules)
+* Follow the [Commit Rules](#commit-rules)
+* Make sure you rebased the current master branch when filing the pull request
+* Squash your commits when filing the pull request
+* Provide a short title with a maximum of 100 characters
+* Provide a more detailed description containing
+	* What you want to achieve
+	* What you changed
+	* What you added
+	* What you removed
+
+## Coding Rules
+To keep the code base of jogwheel neat and tidy the following rules apply to every change
+
+> Coding standards
+
+![Ecmascript version][ecma-image] [![Javascript coding style][codestyle-image]][codestyle-url]
+
+* [Happiness](/sindresorhus/xo) enforced via eslint
+* Use advanced language features where possible
+* JSdoc comments for everything
+* Favor micro library over swiss army knives (rimraf, ncp vs. fs-extra)
+* Coverage never drops below 90%
+* No change may lower coverage by more than 5%
+* Be awesome
+
+## Commit Rules
+To help everyone with understanding the commit history of jogwheel the following commit rules are enforced.
+To make your life easier jogwheel is commitizen-friendly and provides the npm run-script `commit`.
+
+> Commit standards
+
+[![Commitizen friendly][commitizen-image]][commitizen-url]
+
+* [conventional-changelog](/commitizen/cz-conventional-changelog)
+* present tense
+* maximum of 100 characters
+* message format of `$type($scope): $message`
+
+
+---
+jogwheel is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+and released under the [MIT License](./license.md).
+
+[npm-url]: https://www.npmjs.org/package/jogwheel
+[npm-image]: https://img.shields.io/npm/v/jogwheel.svg?style=flat-square
+[npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
+
+[ci-url]: https://travis-ci.org/undefined
+[ci-image]: https://img.shields.io/travis/undefined/master.svg?style=flat-square
+
+[coverage-url]: https://coveralls.io/r/undefined
+[coverage-image]: https://img.shields.io/coveralls/undefined.svg?style=flat-square
+[climate-url]: https://codeclimate.com/github/undefined
+[climate-image]: https://img.shields.io/codeclimate/github/undefined.svg?style=flat-square
+
+[pr-url]: http://issuestats.com/github/undefined
+[pr-image]: http://issuestats.com/github/undefined/badge/pr?style=flat-square
+[issue-url]: https://github.com/marionebl/jogwheel/issues
+[issue-image]: http://issuestats.com/github/undefined/badge/issue?style=flat-square
+
+[dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-3989c9.svg?style=flat-square
+[dependency-manager-url]: https://github.com/greenkeeperio/greenkeeper
+[release-manager-image]: https://img.shields.io/badge/releases%20with-semantic--release-3989c9.svg?style=flat-square
+[release-manager-url]: https://github.com/semantic-release/semantic-release
+[buildsystem-url]: https://github.com/flyjs/fly
+[ecma-image]: https://img.shields.io/badge/babel%20stage-0-3989c9.svg?style=flat-square
+[codestyle-url]: https://github.com/sindresorhus/xo
+[codestyle-image]: https://img.shields.io/badge/code%20style-xo-3989c9.svg?style=flat-square
+[license-url]: ./license.md
+[license-image]: https://img.shields.io/badge/license-MIT-3989c9.svg?style=flat-square
+[commitizen-url]: http://commitizen.github.io/cz-cli/
+[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-3989c9.svg?style=flat-square
+
+[gitter-image]: https://img.shields.io/badge/gitter-join%20chat-3989c9.svg?style=flat-square
+[gitter-url]: https://gitter.im/sinnerschrader/patternplate
+
