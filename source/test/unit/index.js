@@ -1,7 +1,7 @@
 import tape from 'tape-catch';
 
 import JogWheel from '../../library/index.js';
-// import getPlayer from '../../library/get-player.js';
+import getPlayer from '../../library/get-player.js';
 
 const playerStub = {
 	play() {
@@ -23,10 +23,10 @@ const elementStub = {
 	}
 };
 
-/* tape('get-player', t => {
+tape('get-player', t => {
 	t.ok(typeof getPlayer(elementStub) === 'object', 'should return an object');
 	t.end();
-}); */
+});
 
 tape('constructor', t => {
 	t.throws(() => {
