@@ -35,6 +35,8 @@ npm install --save jogwheel
 jogwheel exposes its API as commonjs module.
 See [API Documentation](./documentation/api.md) for details.
 
+**JavaScript**
+
 ```js
 import JogWheel from 'jogwheel';
 const element = document.querySelector('[data-animated]');
@@ -44,12 +46,47 @@ const player = JogWheel.create(element);
 player.seek(0.5);
 ```
 
+**CSS**
+
 ```css
+@keframes bounce {
+	0% {
+		transform: none;
+	}
+
+	25% {
+		transform: translateY(-100%);
+	}
+
+	50% {
+		transform: none;
+	}
+
+	75% {
+		transform: translateY(100%);
+	}
+
+	100% {
+		transform: none;
+	}
+}
+
 [data-animated] {
 	animation: bounce 1s;
 	animation-play-state: paused;
+	height: 100px;
+	width: 100px;
+	background: #333;
+	border-radius: 50%;
 }
 
+```
+
+**HTML**
+
+```html
+<div data-animated>
+</div>
 ```
 
 ## Development
