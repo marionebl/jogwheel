@@ -17,8 +17,7 @@ module.exports = function (gulp, paths, options) {
 				task(lint),
 				task(documentation),
 				task(transpile)
-			],
-			task(test)
+			]
 		)(done);
 	};
 };

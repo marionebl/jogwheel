@@ -10,10 +10,12 @@
     "test": "parallelshell \"npm run test:local:unit\" \"npm run test:local:browser\"",
     "test:local:unit": "$npm_package_config_jogwheel_task_runner test",
     "test:local:browser": "$npm_package_config_jogwheel_test_launcher distribution/test/unit/**/*.js --local",
-    "pretest:remote": "npm run build",
-    "test:remote": "node $npm_package_config_jogwheel_when_ci_leader && $npm_package_config_jogwheel_test_launcher distribution/test/unit/**/*.js || echo ''",
+    "pretest:remote": "npm run build && npm run commitmsg",
+    "test:remote": "parallelshell \"npm run test:remote:unit\" \"npm run test:remote:browser\"",
+    "test:remote:unit": "$npm_package_config_jogwheel_task_runner test",
+    "test:remote:browser": "node $npm_package_config_jogwheel_when_ci_leader && $npm_package_config_jogwheel_test_launcher distribution/test/unit/**/*.js || echo ''",
     "commit": "git-cz",
-    "commitmsg": "node $npm_package_config_test .git/COMMIT_EDITMSG",
+    "commitmsg": "node $npm_package_config_jogwheel_when_ci_leader && node $npm_package_config_jogwheel_validate_commit || node $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
     "env": "env"
   },
   "repository": {
