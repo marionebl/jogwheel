@@ -2,6 +2,10 @@
 
 <%= props.partials.header('', ['About', 'Install', 'Usage', {'name': 'API', 'href': './documentation/api.md'}]) %>
 
+<%= props.partials.badges(['ci']) %>
+<br />
+<%= props.partials.badges(['dependency-manager', 'release-manager', 'ecma', 'codestyle', 'license', 'commitizen']) %>
+
 
 ## About
 ${props.pkg.name} gives you the power to take full control over your CSS keyframe animations via JavaScript.

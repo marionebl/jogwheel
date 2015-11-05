@@ -10,6 +10,7 @@ var extension = require('gulp-ext-replace');
 var pkg = require('../package');
 var header = require('./partials/header');
 var footer = require('./partials/footer');
+var badges = require('./partials/badges');
 
 module.exports = function (gulp, paths) {
 	var props = {
@@ -23,7 +24,8 @@ module.exports = function (gulp, paths) {
 
 	props.partials = {
 		header: header(props),
-		footer: footer(props)
+		footer: footer(props),
+		badges: badges(props)
 	};
 
 	return function documentation() {

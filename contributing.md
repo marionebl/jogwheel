@@ -7,7 +7,7 @@
 <h1 align="center"> jogwheel</h1>
 <p align="center">
 	<b>
-	<a href="#found-an-issue" target="_blank">found-an-issue</a> | <a href="#want-to-contribute" target="_blank">want-to-contribute</a> | <a href="#coding-rules" target="_blank">coding-rules</a> | <a href="#commit-rules" target="_blank">commit-rules</a>
+	<a href="#found-an-issue" target="_self">found-an-issue</a> | <a href="#want-to-contribute" target="_self">want-to-contribute</a> | <a href="#coding-rules" target="_self">coding-rules</a> | <a href="#commit-rules" target="_self">commit-rules</a>
 	</b>
 </p>
 <br />
@@ -84,16 +84,16 @@ and released under the [MIT License](./license.md).
 [npm-image]: https://img.shields.io/npm/v/jogwheel.svg?style=flat-square
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
-[ci-url]: https://travis-ci.org/undefined
-[ci-image]: https://img.shields.io/travis/undefined/master.svg?style=flat-square
+[ci-url]: https://travis-ci.org/marionebl/jogwheel
+[ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square
 
-[coverage-url]: https://coveralls.io/r/undefined
-[coverage-image]: https://img.shields.io/coveralls/undefined.svg?style=flat-square
-[climate-url]: https://codeclimate.com/github/undefined
-[climate-image]: https://img.shields.io/codeclimate/github/undefined.svg?style=flat-square
+[coverage-url]: https://coveralls.io/r/marionebl/jogwheel
+[coverage-image]: https://img.shields.io/coveralls/marionebl/jogwheel.svg?style=flat-square
+[climate-url]: https://codeclimate.com/github/marionebl/jogwheel
+[climate-image]: https://img.shields.io/codeclimate/github/marionebl/jogwheel.svg?style=flat-square
 
-[pr-url]: http://issuestats.com/github/undefined
-[pr-image]: http://issuestats.com/github/undefined/badge/pr?style=flat-square
+[pr-url]: http://issuestats.com/github/marionebl/jogwheel
+[pr-image]: http://issuestats.com/github/marionebl/jogwheel/badge/pr?style=flat-square
 [issue-url]: https://github.com/marionebl/jogwheel/issues
 [issue-image]: http://issuestats.com/github/undefined/badge/issue?style=flat-square
 
@@ -101,8 +101,8 @@ and released under the [MIT License](./license.md).
 [dependency-manager-url]: https://github.com/greenkeeperio/greenkeeper
 [release-manager-image]: https://img.shields.io/badge/releases%20with-semantic--release-3989c9.svg?style=flat-square
 [release-manager-url]: https://github.com/semantic-release/semantic-release
-[buildsystem-url]: https://github.com/flyjs/fly
 [ecma-image]: https://img.shields.io/badge/babel%20stage-0-3989c9.svg?style=flat-square
+[ecma-url]: https://github.com/babel/babel
 [codestyle-url]: https://github.com/sindresorhus/xo
 [codestyle-image]: https://img.shields.io/badge/code%20style-xo-3989c9.svg?style=flat-square
 [license-url]: ./license.md

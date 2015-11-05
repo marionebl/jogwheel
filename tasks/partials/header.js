@@ -19,7 +19,8 @@ module.exports = function (props) {
 	${navigation.map(function (item) {
 		var name = item.name || item;
 		var href = item.href || `#${name.split(' ').join('-').toLowerCase()}`;
-		return `<a href="${href}" target="_blank">${name}</a>`;
+		var target = href[0] === '#' ? '_self' : '_blank';
+		return `<a href="${href}" target="${target}">${name}</a>`;
 	}).join(' | ')}
 	</b>
 </p>
