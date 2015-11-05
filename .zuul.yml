@@ -1,0 +1,18 @@
+ui: tape
+browsers:
+  - name: chrome
+    version: -2..latest
+    platform: Linux
+  - name: firefox
+    version: -2..latest
+    platform: Linux
+  - name: ie
+    version: [10, 11]
+  - name: microsoftedge
+    version: latest
+  - name: safari
+    version: '7..latest'
+  - name: iphone
+    version: '8.0..latest'
+  - name: android
+    version: '4.4..latest'
