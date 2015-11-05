@@ -5,12 +5,15 @@
   "main": "library/index.js",
   "jsnext:main": "source/library/index.js",
   "scripts": {
-    "start": "$npm_package_config_taskrunner",
-    "build": "$npm_package_config_taskrunner build",
-    "test": "$npm_package_config_taskrunner test",
-    "zuul": "$npm_package_config_testlauncher distribution/test/unit/**/*.js",
+    "start": "$npm_package_config_jogwheel_task_runner",
+    "build": "$npm_package_config_jogwheel_task_runner build",
+    "test": "parallelshell \"npm run test:local:unit\" \"npm run test:local:browser\"",
+    "test:local:unit": "$npm_package_config_jogwheel_task_runner test",
+    "test:local:browser": "$npm_package_config_jogwheel_test_launcher distribution/test/unit/**/*.js --local",
+    "pretest:remote": "npm run build",
+    "test:remote": "node $npm_package_config_jogwheel_when_ci_leader && $npm_package_config_jogwheel_test_launcher distribution/test/unit/**/*.js || echo ''",
     "commit": "git-cz",
-    "commitmsg": "node distribution/scripts/validate-commit.js .git/COMMIT_EDITMSG",
+    "commitmsg": "node $npm_package_config_test .git/COMMIT_EDITMSG",
     "env": "env"
   },
   "repository": {
@@ -34,8 +37,12 @@
   },
   "homepage": "https://github.com/marionebl/jogwheel#readme",
   "config": {
-    "taskrunner": "gulp",
-    "testlauncher": "zuul",
+    "jogwheel": {
+      "task-runner": "gulp",
+      "test-launcher": "zuul",
+      "validate-commit": "distribution/scripts/validate-commit.js",
+      "when-ci-leader": "distribution/scripts/when-ci-leader"
+    },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     },
@@ -70,7 +77,6 @@
     "babel-plugin-transform-es2015-template-literals": "6.0.14",
     "babel-plugin-transform-es2015-typeof-symbol": "6.1.2",
     "babel-plugin-transform-es2015-unicode-regex": "6.0.18",
-    "babel-plugin-transform-runtime": "6.1.2",
     "babel-plugin-transform-strict-mode": "6.1.2",
     "babel-polyfill": "6.0.16",
     "babel-preset-stage-0": "6.1.2",
@@ -105,6 +111,7 @@
     "husky": "0.10.1",
     "lodash.merge": "3.3.2",
     "node-notifier": "4.3.1",
+    "parallelshell": "2.0.0",
     "tap-spec": "4.1.0",
     "tape": "4.2.2",
     "tape-catch": "1.0.4",
