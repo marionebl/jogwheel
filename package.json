@@ -111,6 +111,7 @@
     "gulp-template": "3.0.0",
     "gulp-util": "3.0.7",
     "husky": "0.10.1",
+    "js-git": "0.7.7",
     "lodash.merge": "3.3.2",
     "node-notifier": "4.3.1",
     "parallelshell": "2.0.0",

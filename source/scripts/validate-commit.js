@@ -5,6 +5,11 @@ import denodeify from 'denodeify';
 import {exec} from 'child_process';
 import {readFile} from 'fs';
 
+import {resolve} from 'path';
+import fs from 'fs';
+import mixinMemory from 'js-git/mixins/fs-db';
+import mixinWalkers from 'js-git/mixins/walkers';
+
 const execute = denodeify(exec);
 const read = denodeify(readFile);
 
@@ -69,13 +74,51 @@ async function getHashes() {
 	return [process.env.TRAVIS_COMMIT];
 }
 
+function getRepository() {
+	const repository = {
+		rootPath: resolve('.git')
+	};
+	mixinMemory(repository, fs);
+	mixinWalkers(repository);
+	return repository;
+}
+
+function getLogStream(repository, hash) {
+	return new Promise((resolve, reject) => {
+		repository.logWalk(hash, function(err, result){
+			if (err) {
+				return reject(err);
+			}
+			resolve(result);
+		}.bind(repository));
+	});
+}
+
+function getLogMessage(logStream) {
+	return new Promise((resolve, reject) => {
+		logStream.read(function(err, result) {
+			if (err) {
+				return reject(err);
+			}
+			resolve(result);
+		});
+	});
+}
+
 async function getMessage(hash) {
 	if (!hash) {
 		return '';
 	}
 
-	const raw = await execute(`git log -1 --format=oneline ${hash}`);
-	return raw.split('\n')[0].replace(`${hash} `, '');
+	try {
+		const repository = getRepository();
+		const logStream = await getLogStream(repository, hash);
+		const raw = await getLogMessage(logStream);
+		return raw.message.split('\n')[0];
+	} catch (err) {
+		console.error(err);
+		return '';
+	}
 }
 
 async function getMessages(hashes) {
@@ -85,8 +128,12 @@ async function getMessages(hashes) {
 
 	// message path provided, read from fs
 	if (messagePath) {
-		const message = await read(messagePath);
-		return [message.toString().split('\n')[0]];
+		try {
+			const message = await read(messagePath);
+			return [message.toString().split('\n')[0]];
+		} catch (err) {
+			return [''];
+		}
 	}
 
 	// Try to read from history by hashes array
@@ -101,15 +148,43 @@ async function main() {
 	const messagePath = process.argv.slice(2)[0];
 	const hashes = await getHashes();
 	const messages = await getMessages(hashes, messagePath);
-	const checked = messages.filter(message => message).map(validate);
 
-	return `  ${chalk.green('✔')}   Executed validate-commit-msg on ${checked.length} messages successfully.\n`;
+	const checked = messages.filter(Boolean).map(message => {
+		try {
+			validate(message);
+			return {
+				valid: true,
+				error: null,
+				message: `  ${chalk.green('✔')}   Commit message "${message}" is valid.`
+			};
+		} catch (error) {
+			return {
+				valid: false,
+				error,
+				message: `  ${chalk.red('✖')}   Commit message "${message}" is invalid: ${error.message}`
+			};
+		}
+	});
+
+	checked.forEach((check) => {
+		console.log(check.message);
+	});
+
+	const valid = checked.filter(check => check.valid);
+	const invalid = checked.filter(check => !check.valid);
+
+	if (invalid.length) {
+		const errors = invalid.map(check => `${check.error.message}`).join('\n');
+		throw new Error(`Some commit messages did not validate: ${errors}`);
+	}
+
+	return `  ${chalk.green('✔')}   Executed validate-commit-msg on ${valid.length} messages successfully.\n`;
 }
 
 main()
 	.then(message => console.log(message))
 	.catch(err => {
-		console.error(`  ✖   validate-commit-msg failed.\n`);
+		console.error(`  ${chalk.red('✖')}   validate-commit-msg failed.\n`);
 		console.trace(err);
 		setTimeout(() => {
 			throw new Error(err);
