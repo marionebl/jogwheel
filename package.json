@@ -105,6 +105,7 @@
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.0.1",
     "gulp-remember": "0.3.0",
+    "gulp-rename": "1.2.2",
     "gulp-sequence": "0.4.1",
     "gulp-shell": "0.5.1",
     "gulp-tape": "git+https://github.com/marionebl/gulp-tape.git#93abadf0f130afed6c63910ba0acb790ca01aa37",

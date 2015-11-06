@@ -1,4 +1,4 @@
-<%= props.partials.header('', ['found-an-issue', 'want-to-contribute', 'coding-rules', 'commit-rules']) %>
+<%= props.partials.header('', '', ['found-an-issue', 'want-to-contribute', 'coding-rules', 'commit-rules']) %>
 
 Yeay! You want to contribute to ${props.pkg.name}. That's amazing!
 To smoothen everyone's experience involved with the project please take note of the following guidelines and rules.

@@ -1,5 +1,5 @@
 module.exports = function (props) {
-	return function (image, navigation) {
+	return function (image, headline, navigation) {
 		image = image || {
 			href: props.pkg.homepage,
 			src: props.pkg.logo
@@ -13,7 +13,7 @@ module.exports = function (props) {
 		<img width="200" src="https://cdn.rawgit.com/${props.pkg.repository.slug}/master/${image.src}" />
 	</a> -->
 </div>
-<h1 align="center">${props.pkg.icon} ${props.pkg.name}</h1>
+<h1 align="center">${props.pkg.icon} ${headline || props.pkg.name}</h1>
 <p align="center">
 	<b>
 	${navigation.map(function (item) {

@@ -1,6 +1,6 @@
 > ${props.pkg.description}
 
-<%= props.partials.header('', ['About', 'Install', 'Usage', {'name': 'API', 'href': './documentation/api.md'}]) %>
+<%= props.partials.header('', '', ['About', 'Install', 'Usage', {'name': 'API', 'href': './documentation/api.md'}]) %>
 
 <%= props.partials.badges(['ci']) %>
 <br />
