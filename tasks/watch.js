@@ -20,7 +20,8 @@ module.exports = function (gulp, paths) {
 				gulp.watch([
 					paths.source.library,
 					paths.source.test,
-					paths.source.scripts
+					paths.source.scripts,
+					paths.source.static
 				], function () {
 					sequence(
 						[

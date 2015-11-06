@@ -16,3 +16,4 @@ browsers:
     version: '8.0..latest'
   - name: android
     version: '4.4..latest'
+html: distribution/test/integration/index.html
