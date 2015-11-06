@@ -7,6 +7,7 @@
   "scripts": {
     "start": "$npm_package_config_jogwheel_task_runner",
     "build": "$npm_package_config_jogwheel_task_runner build",
+    "pretest": "npm run build",
     "test": "node $npm_package_config_jogwheel_when_ci_leader && npm run test:remote || npm run test:local",
     "test:local": "parallelshell \"npm run test:local:unit\" \"npm run test:local:integration\" && echo 'test:local:browser disabled for now'",
     "test:local:unit": "$npm_package_config_jogwheel_task_runner test",
