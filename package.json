@@ -7,18 +7,20 @@
   "scripts": {
     "start": "$npm_package_config_jogwheel_task_runner",
     "build": "$npm_package_config_jogwheel_task_runner build",
-    "test": "parallelshell \"npm run test:local:unit\" \"npm run test:local:browser\" \"npm run test:local:integration\"",
+    "test": "node $npm_package_config_jogwheel_when_ci_leader && npm run test:remote || npm run test:local",
+    "test:local": "parallelshell \"npm run test:local:unit\" \"npm run test:local:integration\" && echo 'test:local:browser disabled for now'",
     "test:local:unit": "$npm_package_config_jogwheel_task_runner test",
     "test:local:integration": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry --phantom",
     "test:local:browser": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry --phantom",
     "pretest:remote": "npm run build && npm run commitmsg",
-    "test:remote": "parallelshell \"npm run test:remote:unit\" \"npm run test:remote:browser\" && npm run test:remote:integration",
+    "test:remote": "parallelshell \"npm run test:remote:unit\" \"npm run test:remote:integration\" && npm run test:remote:browser",
     "test:remote:unit": "$npm_package_config_jogwheel_task_runner test",
     "test:remote:integration": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry",
     "test:remote:browser": "node $npm_package_config_jogwheel_when_ci_leader && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry || echo ''",
     "commit": "git-cz",
     "commitmsg": "node $npm_package_config_jogwheel_when_ci_leader && node $npm_package_config_jogwheel_validate_commit || node $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
-    "env": "env"
+    "env": "env",
+    "binaries": "ls node_modules/.bin/"
   },
   "repository": {
     "type": "git",
