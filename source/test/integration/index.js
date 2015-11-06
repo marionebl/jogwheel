@@ -77,7 +77,6 @@ async function main() {
 		// inject js when css and html is injected
 		const js = await jsLoading;
 		const code = await js.text();
-		console.log(code);
 		eval(code); // eslint-disable-line no-eval
 	}
 }
