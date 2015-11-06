@@ -10,10 +10,9 @@
 ## About
 ${props.pkg.name} gives you the power to take full control over your CSS keyframe animations via JavaScript.
 
-- [x] **separation of concerns**: Animations are styling, thus should be written in CSS
-- [x] **declarative animations**: CSS keyframes are the simplest way to author animations on the web
-- [x] **animation sequences**: No fiddling with animationEnd
-- [x] **static interpolation**: Because ${props.pkg.name} leverages the Web Animation API you can play, pause and scrub your animations
+- [x] **separation of concerns**: Declare animations with CSS
+- [x] **full control**: Play, pause and scrub your animations
+- [x] **animation sequences**: No brittle fiddling with animationEnd
 - [ ] world peace
 
 ## Install
