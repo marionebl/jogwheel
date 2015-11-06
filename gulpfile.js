@@ -25,7 +25,7 @@ var paths = {
 	},
 	// executables
 	executable: {
-		unit: 'distribution/test/unit/*.js'
+		unit: 'distribution/test/unit/index.js'
 	}
 };
 

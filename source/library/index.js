@@ -10,13 +10,13 @@ class JogWheel {
 		media: null
 	};
 
-	constructor(element, options) {
+	constructor(element, options, document = global.document, window = global.window) {
 		if (!element) {
 			throw new Error(`Could not construct JogWheel, missing element`);
 		}
 
 		this.element = element;
-		this.player = getPlayer(element);
+		this.player = getPlayer(element, document, window);
 		this.settings = {...defaults, ...options};
 	}
 
