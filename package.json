@@ -7,13 +7,15 @@
   "scripts": {
     "start": "$npm_package_config_jogwheel_task_runner",
     "build": "$npm_package_config_jogwheel_task_runner build",
-    "test": "parallelshell \"npm run test:local:unit\" \"npm run test:local:browser\"",
+    "test": "parallelshell \"npm run test:local:unit\" \"npm run test:local:browser\" \"npm run test:local:integration\"",
     "test:local:unit": "$npm_package_config_jogwheel_task_runner test",
-    "test:local:browser": "$npm_package_config_jogwheel_test_launcher distribution/test/unit/**/*.js --local",
+    "test:local:integration": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry --phantom",
+    "test:local:browser": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry --phantom",
     "pretest:remote": "npm run build && npm run commitmsg",
-    "test:remote": "parallelshell \"npm run test:remote:unit\" \"npm run test:remote:browser\"",
+    "test:remote": "parallelshell \"npm run test:remote:unit\" \"npm run test:remote:browser\" && npm run test:remote:integration",
     "test:remote:unit": "$npm_package_config_jogwheel_task_runner test",
-    "test:remote:browser": "node $npm_package_config_jogwheel_when_ci_leader && $npm_package_config_jogwheel_test_launcher distribution/test/unit/**/*.js || echo ''",
+    "test:remote:integration": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry",
+    "test:remote:browser": "node $npm_package_config_jogwheel_when_ci_leader && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry || echo ''",
     "commit": "git-cz",
     "commitmsg": "node $npm_package_config_jogwheel_when_ci_leader && node $npm_package_config_jogwheel_validate_commit || node $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
     "env": "env"
@@ -24,8 +26,11 @@
   },
   "keywords": [
     "css",
+    "cssom",
     "keyframe",
+    "keyframes",
     "animations",
+    "webanimations",
     "static",
     "interpolation"
   ],
@@ -43,7 +48,9 @@
       "task-runner": "gulp",
       "test-launcher": "zuul",
       "validate-commit": "distribution/scripts/validate-commit.js",
-      "when-ci-leader": "distribution/scripts/when-ci-leader"
+      "when-ci-leader": "distribution/scripts/when-ci-leader",
+      "unit-test-entry": "distribution/test/unit/index.js",
+      "integration-test-entry": "distribution/test/integration/index.js"
     },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -116,6 +123,8 @@
     "lodash.merge": "3.3.2",
     "node-notifier": "4.3.1",
     "parallelshell": "2.0.0",
+    "phantomjs": "1.9.18",
+    "rc": "1.1.5",
     "tap-spec": "4.1.0",
     "tape": "4.2.2",
     "tape-catch": "1.0.4",

@@ -1,0 +1,44 @@
+{
+  "paths":{
+    // sources
+    "source":{
+      "entry":"source/library/index.js",
+      "library":"source/library/**/*.js",
+      "test":"source/test/**/*.js",
+      "scripts":"source/scripts/**/*.js",
+      "documentation":"source/**/*.tpl",
+      "coverage":"distribution/library/**/*.js",
+      "static":"source/**/*.{html,css}"
+    },
+    // clean targets
+    "clean":{
+      "documentation":"*.md",
+      "distribution":"distribution"
+    },
+    // targets
+    "target":{
+      "root":".",
+      "distribution":"distribution",
+      "library":"distribution/library/",
+      "test":"distribution/test/",
+      "scripts":"distribution/scripts/"
+    },
+    // executables
+    "executable":{
+      "unit":"distribution/test/unit/index.js"
+    }
+  },
+  "tasks": {
+    "directory": "tasks",
+    "public": [
+      "clean",
+      "transpile",
+      "test",
+      "documentation",
+      "lint",
+      "build",
+      ["watch", ["default"]],
+      ["list", ["help"]]
+    ]
+  }
+}

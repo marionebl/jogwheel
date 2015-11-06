@@ -9,11 +9,13 @@ module.exports = function (gulp, paths, options) {
 	var documentation = require('./documentation')(gulp, paths, options);
 	var transpile = require('./transpile')(gulp, paths, options);
 	var test = require('./test')(gulp, paths, options);
+	var copy = require('./copy')(gulp, paths, options);
 
 	return function build(done) {
 		return sequence(
 			task(clean),
 			[
+				task(copy),
 				task(lint),
 				task(documentation),
 				task(transpile)

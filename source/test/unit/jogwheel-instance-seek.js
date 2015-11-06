@@ -1,12 +1,12 @@
-import tape from 'tape-catch';
+import tape from 'tape';
 
-import windowStub from '../stubs/window.js';
-import documentStub from '../stubs/document.js';
-import elementStub from '../stubs/element.js';
+import windowStub from './stubs/window.js';
+import documentStub from './stubs/document.js';
+import elementStub from './stubs/element.js';
 
-import runningAnimation from '../fixtures/running-animation';
-import pausedAnimation from '../fixtures/paused-animation';
-import slowAnimation from '../fixtures/slow-animation';
+import runningAnimation from './fixtures/running-animation';
+import pausedAnimation from './fixtures/paused-animation';
+import slowAnimation from './fixtures/slow-animation';
 
 import JogWheel from '../../library/';
 

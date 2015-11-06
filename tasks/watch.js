@@ -12,6 +12,7 @@ module.exports = function (gulp, paths) {
 		var transpile = require('./transpile')(gulp, paths, watchOptions);
 		var test = require('./test')(gulp, paths, watchOptions);
 		var lint = require('./lint')(gulp, paths, watchOptions);
+		var copy = require('./copy')(gulp, paths, watchOptions);
 
 		return sequence(
 			task(build, 'first-run'),
@@ -23,6 +24,7 @@ module.exports = function (gulp, paths) {
 				], function () {
 					sequence(
 						[
+							task(copy),
 							task(lint),
 							task(transpile)
 						],

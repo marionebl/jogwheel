@@ -1,18 +1,18 @@
 import tape from 'tape';
-import windowStub from '../stubs/window.js';
-import documentStub from '../stubs/document.js';
-import keywordDocumentStub from '../stubs/keyword-document';
-import elementStub from '../stubs/element.js';
+import windowStub from './stubs/window.js';
+import documentStub from './stubs/document.js';
+import keywordDocumentStub from './stubs/keyword-document';
+import elementStub from './stubs/element.js';
 
-import pausedAnimation from '../fixtures/paused-animation.js';
+import pausedAnimation from './fixtures/paused-animation.js';
 
 import {
 	animation as simpleAnimationDefinition
-} from '../fixtures/simple-animation-declaration.js';
+} from './fixtures/simple-animation-declaration.js';
 
 import {
 	animation as keyWordAnimationDefinition
-} from '../fixtures/keyword-animation-declaration.js';
+} from './fixtures/keyword-animation-declaration.js';
 
 import getKeyframes from '../../library/get-keyframes.js';
 

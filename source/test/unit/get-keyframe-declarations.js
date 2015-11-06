@@ -1,8 +1,8 @@
 import tape from 'tape';
-import windowStub from '../stubs/window.js';
-import documentStub from '../stubs/document.js';
+import windowStub from './stubs/window.js';
+import documentStub from './stubs/document.js';
 
-import simpleAnimation from '../fixtures/simple-animation-declaration.js';
+import simpleAnimation from './fixtures/simple-animation-declaration.js';
 const simpleAnimationKeyFramesRule = simpleAnimation[0].cssRules;
 const simpleAnimationKeyFrameRules = simpleAnimation[0].cssRules[0].cssRules;
 

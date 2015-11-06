@@ -1,53 +1,52 @@
+/**
+ * This gulpfile bootstraps the tasks found in './tasks'
+ * using the configuration in ./.gulprc
+ * Please adapt configuration in ./gulprc 
+ */
+var resolve = require('path').resolve;
+var rc = require('rc');
 var gulp = require('gulp');
-var sequence = require('gulp-sequence');
-
-var paths = {
-	// sources
-	source: {
-		entry: 'source/library/index.js',
-		library: 'source/library/**/*.js',
-		test: 'source/test/**/*.js',
-		scripts: 'source/scripts/**/*.js',
-		documentation: 'source/**/*.tpl',
-		coverage: 'distribution/library/**/*.js'
-	},
-	// clean targets
-	clean: {
-		documentation: '*.md',
-		distribution: 'distribution'
-	},
-	// targets
-	target: {
-		root: '.',
-		library: 'distribution/library/',
-		test: 'distribution/test/',
-		scripts: 'distribution/scripts/',
-	},
-	// executables
-	executable: {
-		unit: 'distribution/test/unit/index.js'
-	}
-};
+var util = require('gulp-util');
 
 // Helpers
 var task = require('./tasks/helpers/task')(gulp);
 
-// Gulp tasks
-var transpile = require('./tasks/transpile')(gulp, paths);
-var test = require('./tasks/test')(gulp, paths);
-var clean = require('./tasks/clean')(gulp, paths);
-var documentation = require('./tasks/documentation')(gulp, paths);
-var lint = require('./tasks/lint')(gulp, paths);
-var list = require('./tasks/list')(gulp, paths);
-var build = require('./tasks/build')(gulp, paths);
-var watch = require('./tasks/watch')(gulp, paths);
+// Get configuration
+var config = rc('gulp', {
+	paths: {},
+	tasks: {
+		directory: 'tasks',
+		public: []
+	}
+});
 
-// Register public tasks
-task(clean);
-task(transpile);
-task(test);
-task(documentation);
-task(lint);
-task(build);
-task(watch, ['watch', 'default']);
-task(list, ['list', 'help'])
+// Iterate gulp task config
+config.tasks.public.forEach(function(taskDefinition){
+	var isAliased = Array.isArray(taskDefinition);
+	var taskName = isAliased ? taskDefinition[0] : taskDefinition;
+	var taskAliases = isAliased ? (taskDefinition[1] || []).concat([taskName]) : [taskName];
+	var taskOptions = isAliased ? (taskDefinition[2] || {}) : {};
+	var taskFile = resolve(config.tasks.directory, taskName + '.js');
+	var taskFactory, taskFunction;
+
+	try {
+		taskFactory = require(taskFile);
+	} catch(err) {
+		util.log('Could not load task "' + taskName +'" from "' + taskFile + '":');
+		util.log(err);
+	}
+
+	if (typeof taskFactory !== 'function') {
+		util.log('Could not load task "' + taskName +'" from "' + taskFile + '", does not export factory function.');
+		return;
+	}
+
+	try {
+		taskFunction = taskFactory(gulp, config.paths, taskOptions);
+	} catch(err) {
+		util.log('Could not initialize task function "' + taskName +'" from "' + taskFile + '":');
+		util.log(err);
+	}
+
+	task(taskFunction, taskAliases, taskOptions);
+});

@@ -1,8 +1,8 @@
 import tape from 'tape';
 
-import windowStub from '../stubs/window.js';
-import documentStub from '../stubs/document.js';
-import elementStub from '../stubs/element.js';
+import windowStub from './stubs/window.js';
+import documentStub from './stubs/document.js';
+import elementStub from './stubs/element.js';
 
 import JogWheel from '../../library/index.js';
 
