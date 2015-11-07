@@ -116,34 +116,35 @@ async function main() {
 			stage.appendChild(container);
 			containers.push(container);
 
-			const inject = getInject(frame.contentDocument.querySelector('body'));
-
-			// fetch test styling
-			const cssURI = [base, test, `index.css`].join('/');
-			const cssLoading = fetch(cssURI);
-
-			// fetch test markup
-			const htmlURI = [base, test, `index.html`].join('/');
-			const htmlLoading = fetch(htmlURI);
-
-			// fetch test javascript
-			const jsURI = [base, test, `index.js`].join('/');
-			const jsLoading = fetch(jsURI);
-
-			// await css and html, inject them
-			const css = await cssLoading;
-			const html = await htmlLoading;
-
-			await inject(css);
-			await inject(html);
-
-			// inject js when css and html is injected
-			const js = await jsLoading;
-			const code = await js.text();
-
 			try {
 				/* eslint-disable no-loop-func */
-				const onload = () => {
+				const onload = async function () {
+					const frameDocument = frame.contentDocument || frame.contentWindow.document;
+					const inject = getInject(frameDocument.body);
+
+					// fetch test styling
+					const cssURI = [base, test, `index.css`].join('/');
+					const cssLoading = fetch(cssURI);
+
+					// fetch test markup
+					const htmlURI = [base, test, `index.html`].join('/');
+					const htmlLoading = fetch(htmlURI);
+
+					// fetch test javascript
+					const jsURI = [base, test, `index.js`].join('/');
+					const jsLoading = fetch(jsURI);
+
+					// await css and html, inject them
+					const css = await cssLoading;
+					const html = await htmlLoading;
+
+					await inject(css);
+					await inject(html);
+
+					// inject js when css and html is injected
+					const js = await jsLoading;
+					const code = await js.text();
+
 					frame.contentWindow.__jogWheelTape = t.test;
 					frame.contentWindow.eval(`
 						var __jogwheel_originalRequire = require;
@@ -159,12 +160,6 @@ async function main() {
 				};
 
 				frame.onload = onload;
-				frame.contentDocument.onreadystatechange = () => {
-					if (frame.contentDocument.readyState === 'complete') {
-						onload();
-					}
-				};
-
 				if (frame.contentDocument.readyState === 'complete') {
 					onload();
 				}
