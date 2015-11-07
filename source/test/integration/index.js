@@ -63,7 +63,7 @@ async function main() {
 
 	tape('integration', t => {
 		t.plan(tests.length);
-		testing = t.test;
+		testing = t;
 	});
 
 	const state = document.querySelector('[data-stage-state]');
@@ -120,7 +120,7 @@ async function main() {
 		stage.appendChild(container);
 		containers.push(container);
 
-		const inject = getInject(frame.contentDocument.body);
+		const inject = getInject(frame.contentDocument.querySelector('body'));
 
 		// fetch test styling
 		const cssURI = [base, test, `index.css`].join('/');
@@ -145,8 +145,23 @@ async function main() {
 		const js = await jsLoading;
 		const code = await js.text();
 
-		frame.contentWindow.tape = testing;
-		frame.contentWindow.eval(code); // eslint-disable-line no-eval
+		try {
+			frame.contentWindow.__jogWheelTape = testing.test;
+			frame.contentWindow.eval(`
+				var __jogwheel_originalRequire = require;
+				function require(module) {
+					if (module === 'tape') {
+						return window.__jogWheelTape;
+					} else {
+						return __jogwheel_originalRequire(module);
+					}
+				}
+				${code}
+			`); // eslint-disable-line no-eval
+		} catch (err) {
+			container.setAttribute('class', `demo-failed`);
+			testing.fail(err);
+		}
 	}
 
 	const poller = setInterval(() => {

@@ -1,4 +1,4 @@
-const tape = window.tape;
+const tape = require('tape');
 
 tape('keyword integration', t => {
 	console.log('Keyword!');

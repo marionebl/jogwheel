@@ -1,4 +1,4 @@
-const tape = window.tape;
+const tape = require('tape');
 // const element = document.querySelector('[data-animated]');
 
 tape('simple integration', t => {
