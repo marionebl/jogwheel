@@ -47,6 +47,7 @@
   "homepage": "https://github.com/marionebl/jogwheel#readme",
   "config": {
     "jogwheel": {
+      "test-port": 1337,
       "task-runner": "gulp",
       "test-launcher": "zuul",
       "validate-commit": "node distribution/scripts/validate-commit.js",

@@ -1,9 +1,104 @@
 <style>
+	html, body {
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.tabs {
+		overflow: auto;
+	}
+
 	[data-stage] {
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		min-height: 50vh;
+		width: 100vw;
+		overflow: auto;
+		transform: translateY(calc(100% - 20px));
+		transition: .3s transform ease-in-out, .3s .2s border-color ease-in;
+		resize: horizontal;
+		border-top: 5px solid transparent;
+	}
+
+	[data-stage-handle] {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 15px;
+		flex-shrink: 0;
+		background: #d1d1d1;
+		cursor: row-resize;
+	}
+
+	[data-stage-handle]:before {
+		content: '…';
+		width: 15px;
+		display: inline-block;
+		height: 15px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 7.5px;
+		color: #b1b1b1;
+	}
+
+	[data-stage-demo-container] {
+		flex: 1 1 300px;
+		height: 200px;
+		margin-right: 15px;
+		color: #d1d1d1;
+		transition: .3s color ease-in-out;
+	}
+
+	[data-stage-demo-container].demo-pending {
+		color: orange;
+	}
+
+	[data-stage-demo-container].demo-failed {
+		color: red;
+	}
+
+	[data-stage-demo-container].demo-passed {
+		color: rgb(126, 206, 126);
+	}
+
+	[data-stage-demo-frame] {
+		width: 100%;
+		border: 1px solid currentcolor;
+	}
+
+	[data-stage-demos] {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		box-sizing: border-box;
+		flex-grow: 1;
+		padding: 15px;
+		background: #e1e1e1;
+	}
+
+	[data-stage-state] {
 		position: fixed;
 		top: -100vh;
 		left: -100vw;
 	}
+
+	[data-stage-state]:checked ~ [data-stage] {
+		transform: none;
+		border-color: rgba(0,0,0,.1);
+	}
+
+	[data-stage-state] {
+
+	}
 </style>
-<div data-stage>
-</div>
+<label data-stage-state-trigger>
+	<input type="checkbox" data-stage-state />
+	<aside data-stage>
+		<div data-stage-handle draggable="true"></div>
+		<div data-stage-demos></div>
+	</aside>
+</label>
