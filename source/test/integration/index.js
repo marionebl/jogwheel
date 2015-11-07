@@ -59,13 +59,6 @@ function onStateChange(e) {
 }
 
 async function main() {
-	let testing;
-
-	tape('integration', t => {
-		t.plan(tests.length);
-		testing = t;
-	});
-
 	const state = document.querySelector('[data-stage-state]');
 	const stage = document.querySelector('[data-stage-demos]');
 	const handle = document.querySelector('[data-stage-handle]');
@@ -105,64 +98,87 @@ async function main() {
 
 	const containers = [];
 
-	for (const test of tests) {
-		const container = document.createElement('div');
-		container.setAttribute('data-stage-demo-container', 'data-stage-demo-container');
-		container.setAttribute('class', 'demo-pending');
-		const frame = document.createElement('iframe');
-		frame.setAttribute('data-stage-demo-frame', 'data-stage-demo-frame');
+	tape('integration', async function(t) { // eslint-disable-line no-loop-func
+		t.plan(tests.length);
 
-		const headline = document.createElement('h4');
-		headline.innerHTML = test;
+		for (const test of tests) {
+			const container = document.createElement('div');
+			container.setAttribute('data-stage-demo-container', 'data-stage-demo-container');
+			container.setAttribute('class', 'demo-pending');
+			const frame = document.createElement('iframe');
+			frame.setAttribute('data-stage-demo-frame', 'data-stage-demo-frame');
 
-		container.appendChild(headline);
-		container.appendChild(frame);
-		stage.appendChild(container);
-		containers.push(container);
+			const headline = document.createElement('h4');
+			headline.innerHTML = test;
 
-		const inject = getInject(frame.contentDocument.querySelector('body'));
+			container.appendChild(headline);
+			container.appendChild(frame);
+			stage.appendChild(container);
+			containers.push(container);
 
-		// fetch test styling
-		const cssURI = [base, test, `index.css`].join('/');
-		const cssLoading = fetch(cssURI);
+			const inject = getInject(frame.contentDocument.querySelector('body'));
 
-		// fetch test markup
-		const htmlURI = [base, test, `index.html`].join('/');
-		const htmlLoading = fetch(htmlURI);
+			// fetch test styling
+			const cssURI = [base, test, `index.css`].join('/');
+			const cssLoading = fetch(cssURI);
 
-		// fetch test javascript
-		const jsURI = [base, test, `index.js`].join('/');
-		const jsLoading = fetch(jsURI);
+			// fetch test markup
+			const htmlURI = [base, test, `index.html`].join('/');
+			const htmlLoading = fetch(htmlURI);
 
-		// await css and html, inject them
-		const css = await cssLoading;
-		const html = await htmlLoading;
+			// fetch test javascript
+			const jsURI = [base, test, `index.js`].join('/');
+			const jsLoading = fetch(jsURI);
 
-		await inject(css);
-		await inject(html);
+			// await css and html, inject them
+			const css = await cssLoading;
+			const html = await htmlLoading;
 
-		// inject js when css and html is injected
-		const js = await jsLoading;
-		const code = await js.text();
+			await inject(css);
+			await inject(html);
 
-		try {
-			frame.contentWindow.__jogWheelTape = testing.test;
-			frame.contentWindow.eval(`
-				var __jogwheel_originalRequire = require;
-				function require(module) {
-					if (module === 'tape') {
-						return window.__jogWheelTape;
-					} else {
-						return __jogwheel_originalRequire(module);
+			// inject js when css and html is injected
+			const js = await jsLoading;
+			const code = await js.text();
+
+			try {
+				/* eslint-disable no-loop-func */
+				const onload = () => {
+					console.log(code);
+					console.log(frame.contentWindow);
+
+					frame.contentWindow.__jogWheelTape = t.test;
+					frame.contentWindow.eval(`
+						var __jogwheel_originalRequire = require;
+						function require(module) {
+							if (module === 'tape') {
+								return window.__jogWheelTape;
+							} else {
+								return __jogwheel_originalRequire(module);
+							}
+						}
+						${code}
+					`);
+				};
+
+				frame.onload = onload;
+				frame.contentDocument.onreadystatechange = () => {
+					if (frame.contentDocument.readyState === 'complete') {
+						onload();
 					}
+				};
+
+				if (frame.contentDocument.readyState === 'complete') {
+					onload();
 				}
-				${code}
-			`); // eslint-disable-line no-eval
-		} catch (err) {
-			container.setAttribute('class', `demo-failed`);
-			testing.fail(err);
+				/* eslint-disable */
+			} catch (err) {
+				console.error(err);
+				container.setAttribute('class', `demo-failed`);
+				t.fail(err);
+			}
 		}
-	}
+	});
 
 	const poller = setInterval(() => {
 		const ends = window.zuul_msg_bus.filter(message => message.type === 'test_end');
