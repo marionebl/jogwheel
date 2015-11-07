@@ -1,4 +1,5 @@
 import getKeyframes from './get-keyframes';
+import {prefix as getPrefixed} from './get-vendor-prefix';
 
 function getAnimationDuration(CSSAnimationDuration = '0s') {
 	const [unit, factor] = CSSAnimationDuration.includes('ms') ? ['ms', 1] : ['s', 1000];
@@ -8,13 +9,17 @@ function getAnimationDuration(CSSAnimationDuration = '0s') {
 }
 
 export default function getPlayer(element, window = global.window, document = global.document) {
+	function prefix(propertyName) {
+		return getPrefixed(propertyName, window, document);
+	}
+
 	const {
-		animationName,
-		animationDuration: CSSDuration,
-		animationIterations: iterations,
-		animationEasing: easing,
-		animationFill: fill,
-		animationPlayState: playState
+		[prefix('animationDuration')]: animationName,
+		[prefix('animationDuration')]: CSSDuration,
+		[prefix('animationIterations')]: iterations,
+		[prefix('animationEasing')]: easing,
+		[prefix('animationFill')]: fill,
+		[prefix('animationPlayState')]: playState
 	} = window.getComputedStyle(element);
 
 	const keyframes = getKeyframes(animationName, window, document);

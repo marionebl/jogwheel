@@ -2,6 +2,7 @@ import 'babel-polyfill';
 
 import './get-keyframe-declarations';
 import './get-keyframes';
+import './get-vendor-prefix';
 import './get-player';
 
 import './jogwheel-constructor.js';
