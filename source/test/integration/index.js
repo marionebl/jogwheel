@@ -144,9 +144,6 @@ async function main() {
 			try {
 				/* eslint-disable no-loop-func */
 				const onload = () => {
-					console.log(code);
-					console.log(frame.contentWindow);
-
 					frame.contentWindow.__jogWheelTape = t.test;
 					frame.contentWindow.eval(`
 						var __jogwheel_originalRequire = require;
