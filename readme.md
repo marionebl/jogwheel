@@ -1,32 +1,33 @@
 > take control over your css keyframe animations
 
 
-<div align="center">
-	<!-- <a href="https://github.com/marionebl/jogwheel#readme">
-		<img width="200" src="https://cdn.rawgit.com/undefined/master/source/jogwheel.svg" />
-	</a> -->
-</div>
-<h1 align="center"> jogwheel</h1>
-<p align="center">
-	<b>
-	<a href="#about" target="_self">About</a> | <a href="#install" target="_self">Install</a> | <a href="#usage" target="_self">Usage</a> | <a href="#browser-support" target="_self">Browser Support</a> | <a href="./documentation/api.md" target="_blank">API</a>
-	</b>
-</p>
+<header class="jogwheel-header">
+	<div align="center">
+		<!-- <a href="https://github.com/marionebl/jogwheel#readme">
+			<img width="200" src="https://cdn.rawgit.com/undefined/master/source/jogwheel.svg" />
+		</a> -->
+	</div>
+	<nav class="jogwheel-navigation">
+		<h1 align="center"> jogwheel</h1>
+		<div align="center" class="jogwheel-navigation-list"><b><a href="#about" target="_self">About</a></b> | <b><a href="#install" target="_self">Install</a></b> | <b><a href="#usage" target="_self">Usage</a></b> | <b><a href="#browser-support" target="_self">Browser Support</a></b> | <b><a href="./documentation/api.md" target="_blank">API Documentation</a></b> | <b><a href="./examples/readme.md" target="_blank">Examples</a></b> | <b><a href="./contributing.md" target="_blank">Contributing</a></b></div>
+	</nav>
+</header>
 <br />
 
 
-[![ci][ci-image]][ci-url]
-[![coverage][coverage-image]][coverage-url] [![climate][climate-image]][climate-url]
-<br />
-<br />
-[![npm][npm-image]][npm-url] [![npm-dl][npm-dl-image]][npm-dl-url]
-<br />
-<br />
-[![pr][pr-image]][pr-url] [![issue][issue-image]][issue-url]
-<br />
-<br />
-[![dependency-manager][dependency-manager-image]][dependency-manager-url] [![release-manager][release-manager-image]][release-manager-url] [![ecma][ecma-image]][ecma-url] [![codestyle][codestyle-image]][codestyle-url] [![license][license-image]][license-url] [![commitizen][commitizen-image]][commitizen-url]
-
+<aside class="jogwheel-badges">
+	[![ci][ci-image]][ci-url]
+	[![coverage][coverage-image]][coverage-url] [![climate][climate-image]][climate-url]
+	<br />
+	<br />
+	[![npm][npm-image]][npm-url] [![npm-dl][npm-dl-image]][npm-dl-url]
+	<br />
+	<br />
+	[![pr][pr-image]][pr-url] [![issue][issue-image]][issue-url]
+	<br />
+	<br />
+	[![dependency-manager][dependency-manager-image]][dependency-manager-url] [![release-manager][release-manager-image]][release-manager-url] [![ecma][ecma-image]][ecma-url] [![codestyle][codestyle-image]][codestyle-url] [![license][license-image]][license-url] [![commitizen][commitizen-image]][commitizen-url]
+</aside>
 
 ## About
 jogwheel gives you the power to take full control over your CSS keyframe animations via JavaScript.
@@ -44,7 +45,21 @@ npm install --save jogwheel
 
 ## Usage
 jogwheel exposes its API as commonjs module.
+
+```js
+import JogWheel from 'jogwheel';
+const element = document.querySelector('[data-animated]');
+const player = JogWheel.create(element);
+
+// Jump halfway into the animation
+player.seek(0.5);
+```
+---
 See [API Documentation](./documentation/api.md) for details.
+
+
+## Example
+jogwheel shines brightest when used with CSS animations.
 
 **JavaScript**
 
@@ -99,6 +114,9 @@ player.seek(0.5);
 <div data-animated>
 </div>
 ```
+---
+See [Examples](./examples/readme.md) for more use cases.
+
 
 ## Browser support
 jogwheel performs cross browser testing with SauceLabs
@@ -143,19 +161,19 @@ and released under the [MIT License](./license.md).
 [issue-url]: undefined
 [issue-image]: http://issuestats.com/github/marionebl/jogwheel/badge/issue?style=flat-square
 
-[dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-3989c9.svg?style=flat-square
+[dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-5ec792.svg?style=flat-square
 [dependency-manager-url]: https://github.com/greenkeeperio/greenkeeper
-[release-manager-image]: https://img.shields.io/badge/releases%20with-semantic--release-3989c9.svg?style=flat-square
+[release-manager-image]: https://img.shields.io/badge/releases%20with-semantic--release-5ec792.svg?style=flat-square
 [release-manager-url]: https://github.com/semantic-release/semantic-release
-[ecma-image]: https://img.shields.io/badge/babel%20stage-0-3989c9.svg?style=flat-square
+[ecma-image]: https://img.shields.io/badge/babel%20stage-0-5ec792.svg?style=flat-square
 [ecma-url]: https://github.com/babel/babel
 [codestyle-url]: https://github.com/sindresorhus/xo
-[codestyle-image]: https://img.shields.io/badge/code%20style-xo-3989c9.svg?style=flat-square
+[codestyle-image]: https://img.shields.io/badge/code%20style-xo-5ec792.svg?style=flat-square
 [license-url]: ./license.md
-[license-image]: https://img.shields.io/badge/license-MIT-3989c9.svg?style=flat-square
+[license-image]: https://img.shields.io/badge/license-MIT-5ec792.svg?style=flat-square
 [commitizen-url]: http://commitizen.github.io/cz-cli/
-[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-3989c9.svg?style=flat-square
+[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-5ec792.svg?style=flat-square
 
-[gitter-image]: https://img.shields.io/badge/gitter-join%20chat-3989c9.svg?style=flat-square
+[gitter-image]: https://img.shields.io/badge/gitter-join%20chat-5ec792.svg?style=flat-square
 [gitter-url]: https://gitter.im/sinnerschrader/patternplate
 

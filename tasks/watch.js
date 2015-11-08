@@ -2,6 +2,13 @@ var sequence = require('gulp-sequence');
 var util = require('gulp-util');
 var onError = require('./helpers/on-error');
 
+function values(object) {
+	return Object.keys(object)
+		.map(function(key){
+			return object[key];
+		});
+}
+
 module.exports = function (gulp, paths) {
 	var task = require('./helpers/task')(gulp);
 	var build = require('./build')(gulp, paths, {fails: true, notifies: true});
@@ -17,21 +24,19 @@ module.exports = function (gulp, paths) {
 		return sequence(
 			task(build, 'first-run'),
 			task(function () {
-				gulp.watch([
-					paths.source.library,
-					paths.source.test,
-					paths.source.scripts,
-					paths.source.static
-				], function () {
-					sequence(
-						[
-							task(copy),
-							task(lint),
-							task(transpile)
-						],
-						task(test)
-					)(onError(watchOptions));
-				});
+				gulp.watch(
+					values(paths.source),
+					function () {
+						sequence(
+							[
+								task(copy),
+								task(lint),
+								task(transpile)
+							],
+							task(test)
+						)(onError(watchOptions));
+					}
+				);
 			}, 'watch-setup')
 		)(function (err) {
 			if (err) {

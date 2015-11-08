@@ -111,10 +111,17 @@ async function getMessage(hash) {
 	}
 
 	try {
-		const repository = getRepository();
-		const logStream = await getLogStream(repository, hash);
-		const raw = await getLogMessage(logStream);
-		return raw.message.split('\n')[0];
+		// Travis checkout seem to produce git-js incompatible
+		// local repositories, needs furhter investigation
+		if (!process.env.CI) {
+			const repository = getRepository();
+			const logStream = await getLogStream(repository, hash);
+			const raw = await getLogMessage(logStream);
+			return raw.message.split('\n')[0];
+		} else {
+			const raw = await execute(`git log -1 --format=oneline ${hash}`);
+			return raw.split('\n')[0].replace(`${hash} `, '');
+		}
 	} catch (err) {
 		console.error(err);
 		return '';

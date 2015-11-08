@@ -1,15 +1,15 @@
 
-<div align="center">
-	<!-- <a href="https://github.com/marionebl/jogwheel#readme">
-		<img width="200" src="https://cdn.rawgit.com/undefined/master/source/jogwheel.svg" />
-	</a> -->
-</div>
-<h1 align="center"> jogwheel</h1>
-<p align="center">
-	<b>
-	<a href="#found-an-issue" target="_self">Report issues</a> | <a href="#want-to-contribute" target="_self">Contribute</a> | <a href="#coding-rules" target="_self">Coding Rules</a> | <a href="#commit-rules" target="_self">Commit Rules</a>
-	</b>
-</p>
+<header class="jogwheel-header">
+	<div align="center">
+		<!-- <a href="https://github.com/marionebl/jogwheel#readme">
+			<img width="200" src="https://cdn.rawgit.com/undefined/master/source/jogwheel.svg" />
+		</a> -->
+	</div>
+	<nav class="jogwheel-navigation">
+		<h1 align="center"> jogwheel</h1>
+		<div align="center" class="jogwheel-navigation-list"><b><a href="#found-an-issue" target="_self">Report issues</a></b> | <b><a href="#want-to-contribute" target="_self">Contribute</a></b> | <b><a href="#coding-rules" target="_self">Coding Rules</a></b> | <b><a href="#commit-rules" target="_self">Commit Rules</a></b></div>
+	</nav>
+</header>
 <br />
 
 
@@ -102,19 +102,19 @@ and released under the [MIT License](./license.md).
 [issue-url]: undefined
 [issue-image]: http://issuestats.com/github/marionebl/jogwheel/badge/issue?style=flat-square
 
-[dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-3989c9.svg?style=flat-square
+[dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-5ec792.svg?style=flat-square
 [dependency-manager-url]: https://github.com/greenkeeperio/greenkeeper
-[release-manager-image]: https://img.shields.io/badge/releases%20with-semantic--release-3989c9.svg?style=flat-square
+[release-manager-image]: https://img.shields.io/badge/releases%20with-semantic--release-5ec792.svg?style=flat-square
 [release-manager-url]: https://github.com/semantic-release/semantic-release
-[ecma-image]: https://img.shields.io/badge/babel%20stage-0-3989c9.svg?style=flat-square
+[ecma-image]: https://img.shields.io/badge/babel%20stage-0-5ec792.svg?style=flat-square
 [ecma-url]: https://github.com/babel/babel
 [codestyle-url]: https://github.com/sindresorhus/xo
-[codestyle-image]: https://img.shields.io/badge/code%20style-xo-3989c9.svg?style=flat-square
+[codestyle-image]: https://img.shields.io/badge/code%20style-xo-5ec792.svg?style=flat-square
 [license-url]: ./license.md
-[license-image]: https://img.shields.io/badge/license-MIT-3989c9.svg?style=flat-square
+[license-image]: https://img.shields.io/badge/license-MIT-5ec792.svg?style=flat-square
 [commitizen-url]: http://commitizen.github.io/cz-cli/
-[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-3989c9.svg?style=flat-square
+[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-5ec792.svg?style=flat-square
 
-[gitter-image]: https://img.shields.io/badge/gitter-join%20chat-3989c9.svg?style=flat-square
+[gitter-image]: https://img.shields.io/badge/gitter-join%20chat-5ec792.svg?style=flat-square
 [gitter-url]: https://gitter.im/sinnerschrader/patternplate
 

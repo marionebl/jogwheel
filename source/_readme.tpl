@@ -1,21 +1,42 @@
 > ${props.pkg.description}
 
-<%= props.partials.header('', '', ['About', 'Install', 'Usage', {
-	'name': 'Browser Support', 'href': '#browser-support'
-}, {'name': 'API', 'href': './documentation/api.md'}]) %>
+<%= props.partials.header('', '',
+	[
+		'About',
+		'Install',
+		'Usage',
+		{
+			name: 'Browser Support',
+			href: '#browser-support'
+		},
+		{
+			name: 'API Documentation',
+			href: './documentation/api.md'
+		},
+		{
+			name: 'Examples',
+			href: './examples/readme.md'
+		},
+		{
+			name: 'Contributing',
+			href: './contributing.md'
+		}
+	]
+) %>
 
-<%= props.partials.badges(['ci']) %>
-<%= props.partials.badges(['coverage', 'climate']) %>
-<br />
-<br />
-<%= props.partials.badges(['npm', 'npm-dl']) %>
-<br />
-<br />
-<%= props.partials.badges(['pr', 'issue']) %>
-<br />
-<br />
-<%= props.partials.badges(['dependency-manager', 'release-manager', 'ecma', 'codestyle', 'license', 'commitizen']) %>
-
+<aside class="jogwheel-badges">
+	<%= props.partials.badges(['ci']) %>
+	<%= props.partials.badges(['coverage', 'climate']) %>
+	<br />
+	<br />
+	<%= props.partials.badges(['npm', 'npm-dl']) %>
+	<br />
+	<br />
+	<%= props.partials.badges(['pr', 'issue']) %>
+	<br />
+	<br />
+	<%= props.partials.badges(['dependency-manager', 'release-manager', 'ecma', 'codestyle', 'license', 'commitizen']) %>
+</aside>
 
 ## About
 ${props.pkg.name} gives you the power to take full control over your CSS keyframe animations via JavaScript.
@@ -33,7 +54,21 @@ npm install --save ${props.pkg.name}
 
 ## Usage
 ${props.pkg.name} exposes its API as commonjs module.
+
+```js
+import JogWheel from '${props.pkg.name}';
+const element = document.querySelector('[data-animated]');
+const player = JogWheel.create(element);
+
+// Jump halfway into the animation
+player.seek(0.5);
+```
+---
 See [API Documentation](./documentation/api.md) for details.
+
+
+## Example
+${props.pkg.name} shines brightest when used with CSS animations.
 
 **JavaScript**
 
@@ -88,6 +123,9 @@ player.seek(0.5);
 <div data-animated>
 </div>
 ```
+---
+See [Examples](./examples/readme.md) for more use cases.
+
 
 ## Browser support
 ${props.pkg.name} performs cross browser testing with SauceLabs

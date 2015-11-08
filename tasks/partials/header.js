@@ -8,22 +8,22 @@ module.exports = function (props) {
 
 		return (
 `
-<div align="center">
-	<!-- <a href="${image.href}">
-		<img width="200" src="https://cdn.rawgit.com/${props.pkg.repository.slug}/master/${image.src}" />
-	</a> -->
-</div>
-<h1 align="center">${props.pkg.icon} ${headline || props.pkg.name}</h1>
-<p align="center">
-	<b>
-	${navigation.map(function (item) {
-		var name = item.name || item;
-		var href = item.href || `#${name.split(' ').join('-').toLowerCase()}`;
-		var target = href[0] === '#' ? '_self' : '_blank';
-		return `<a href="${href}" target="${target}">${name}</a>`;
-	}).join(' | ')}
-	</b>
-</p>
+<header class="jogwheel-header">
+	<div align="center">
+		<!-- <a href="${image.href}">
+			<img width="200" src="https://cdn.rawgit.com/${props.pkg.repository.slug}/master/${image.src}" />
+		</a> -->
+	</div>
+	<nav class="jogwheel-navigation">
+		<h1 align="center">${props.pkg.icon} ${headline || props.pkg.name}</h1>
+		<div align="center" class="jogwheel-navigation-list">${navigation.map(function (item) {
+				var name = item.name || item;
+				var href = item.href || `#${name.split(' ').join('-').toLowerCase()}`;
+				var target = href[0] === '#' ? '_self' : '_blank';
+				return `<b><a href="${href}" target="${target}">${name}</a></b>`;
+			}).join(' | ')}</div>
+	</nav>
+</header>
 <br />
 `
 		);
