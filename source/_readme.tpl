@@ -1,6 +1,8 @@
 > ${props.pkg.description}
 
-<%= props.partials.header('', '', ['About', 'Install', 'Usage', {'name': 'API', 'href': './documentation/api.md'}]) %>
+<%= props.partials.header('', '', ['About', 'Install', 'Usage', {
+	'name': 'Browser Support', 'href': '#browser-support'
+}, {'name': 'API', 'href': './documentation/api.md'}]) %>
 
 <%= props.partials.badges(['ci']) %>
 <br />
@@ -78,6 +80,11 @@ player.seek(0.5);
 <div data-animated>
 </div>
 ```
+
+## Browser support
+${props.pkg.name} performs cross browser testing with SauceLabs
+
+[![Browser Support](https://saucelabs.com/browser-matrix/jogwheel-unit.svg)](https://saucelabs.com/u/jogwheel-unit)
 
 ## Development
 You dig ${props.pkg.name} and want to submit a pull request? Awesome!

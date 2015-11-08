@@ -9,7 +9,7 @@
 <h1 align="center"> jogwheel</h1>
 <p align="center">
 	<b>
-	<a href="#about" target="_self">About</a> | <a href="#install" target="_self">Install</a> | <a href="#usage" target="_self">Usage</a> | <a href="./documentation/api.md" target="_blank">API</a>
+	<a href="#about" target="_self">About</a> | <a href="#install" target="_self">Install</a> | <a href="#usage" target="_self">Usage</a> | <a href="#browser-support" target="_self">Browser Support</a> | <a href="./documentation/api.md" target="_blank">API</a>
 	</b>
 </p>
 <br />
@@ -91,6 +91,11 @@ player.seek(0.5);
 <div data-animated>
 </div>
 ```
+
+## Browser support
+jogwheel performs cross browser testing with SauceLabs
+
+[![Browser Support](https://saucelabs.com/browser-matrix/jogwheel-unit.svg)](https://saucelabs.com/u/jogwheel-unit)
 
 ## Development
 You dig jogwheel and want to submit a pull request? Awesome!
