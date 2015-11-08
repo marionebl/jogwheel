@@ -7,7 +7,6 @@
       "test":"source/test/**/*.js",
       "scripts":"source/scripts/**/*.js",
       "documentation":"source/**/*.tpl",
-      "coverage":"distribution/library/**/*.js",
       "static":"source/**/*.{html,css}"
     },
     // clean targets

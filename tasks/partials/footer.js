@@ -24,20 +24,20 @@ and released under the [${props.pkg.license} License](./license.md).
 [issue-url]: ${props.pkg.bugs.url}
 [issue-image]: http://issuestats.com/github/${props.pkg.slug}/badge/issue?style=flat-square
 
-[dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-3989c9.svg?style=flat-square
+[dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-${props.pkg.color}.svg?style=flat-square
 [dependency-manager-url]: https://github.com/greenkeeperio/greenkeeper
-[release-manager-image]: https://img.shields.io/badge/releases%20with-semantic--release-3989c9.svg?style=flat-square
+[release-manager-image]: https://img.shields.io/badge/releases%20with-semantic--release-${props.pkg.color}.svg?style=flat-square
 [release-manager-url]: https://github.com/semantic-release/semantic-release
-[ecma-image]: https://img.shields.io/badge/babel%20stage-0-3989c9.svg?style=flat-square
+[ecma-image]: https://img.shields.io/badge/babel%20stage-0-${props.pkg.color}.svg?style=flat-square
 [ecma-url]: https://github.com/babel/babel
 [codestyle-url]: https://github.com/sindresorhus/xo
-[codestyle-image]: https://img.shields.io/badge/code%20style-xo-3989c9.svg?style=flat-square
+[codestyle-image]: https://img.shields.io/badge/code%20style-xo-${props.pkg.color}.svg?style=flat-square
 [license-url]: ./license.md
-[license-image]: https://img.shields.io/badge/license-MIT-3989c9.svg?style=flat-square
+[license-image]: https://img.shields.io/badge/license-MIT-${props.pkg.color}.svg?style=flat-square
 [commitizen-url]: http://commitizen.github.io/cz-cli/
-[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-3989c9.svg?style=flat-square
+[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-${props.pkg.color}.svg?style=flat-square
 
-[gitter-image]: https://img.shields.io/badge/gitter-join%20chat-3989c9.svg?style=flat-square
+[gitter-image]: https://img.shields.io/badge/gitter-join%20chat-${props.pkg.color}.svg?style=flat-square
 [gitter-url]: https://gitter.im/sinnerschrader/patternplate
 `
 );
