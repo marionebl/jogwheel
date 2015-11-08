@@ -5,6 +5,14 @@
 }, {'name': 'API', 'href': './documentation/api.md'}]) %>
 
 <%= props.partials.badges(['ci']) %>
+<%= props.partials.badges(['coverage', 'climate']) %>
+<br />
+<br />
+<%= props.partials.badges(['npm', 'npm-dl']) %>
+<br />
+<br />
+<%= props.partials.badges(['pr', 'issue']) %>
+<br />
 <br />
 <%= props.partials.badges(['dependency-manager', 'release-manager', 'ecma', 'codestyle', 'license', 'commitizen']) %>
 

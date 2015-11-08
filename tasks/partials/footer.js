@@ -8,6 +8,7 @@ and released under the [${props.pkg.license} License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/${props.pkg.name}
 [npm-image]: https://img.shields.io/npm/v/${props.pkg.name}.svg?style=flat-square
+[npm-dl-url]: https://www.npmjs.org/package/${props.pkg.name}
 [npm-dl-image]: http://img.shields.io/npm/dm/${props.pkg.name}.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/${props.pkg.slug}
@@ -21,7 +22,7 @@ and released under the [${props.pkg.license} License](./license.md).
 [pr-url]: http://issuestats.com/github/${props.pkg.slug}
 [pr-image]: http://issuestats.com/github/${props.pkg.slug}/badge/pr?style=flat-square
 [issue-url]: ${props.pkg.bugs.url}
-[issue-image]: http://issuestats.com/github/${props.pkg.bugs.slug}/badge/issue?style=flat-square
+[issue-image]: http://issuestats.com/github/${props.pkg.slug}/badge/issue?style=flat-square
 
 [dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-3989c9.svg?style=flat-square
 [dependency-manager-url]: https://github.com/greenkeeperio/greenkeeper
