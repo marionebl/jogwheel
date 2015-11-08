@@ -60,6 +60,7 @@
     },
     "documentation": {
       "slug": "marionebl/jogwheel",
+      "bugs": "marionebl/jogwheel/issues",
       "icon": "",
       "logo": "source/jogwheel.svg"
     }

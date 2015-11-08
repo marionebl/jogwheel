@@ -1,10 +1,30 @@
-<%= props.partials.header('', '', ['found-an-issue', 'want-to-contribute', 'coding-rules', 'commit-rules']) %>
+<%= props.partials.header('', '', [
+	{
+		name: 'Report issues',
+		href: '#found-an-issue'
+	},
+	{
+		name: 'Contribute',
+		href: '#want-to-contribute'
+	},
+	{
+		name: 'Coding Rules',
+		href: '#coding-rules'
+	},
+	{
+		name: 'Commit Rules',
+		href: '#commit-rules'
+	}
+]) %>
 
 Yeay! You want to contribute to ${props.pkg.name}. That's amazing!
 To smoothen everyone's experience involved with the project please take note of the following guidelines and rules.
 
 ## Found an Issue?
 Thank you for reporting any issues you find. We do our best to test and make ${props.pkg.name} as solid as possible, but any reported issue is a real help.
+
+> ${props.pkg.name} issues
+
 [![Issues][issue-image]][issue-url]
 
 Please follow these guidelines when reporting issues:
@@ -58,6 +78,7 @@ To make your life easier ${props.pkg.name} is commitizen-friendly and provides t
 [![Commitizen friendly][commitizen-image]][commitizen-url]
 
 * [conventional-changelog](/commitizen/cz-conventional-changelog)
+* husky commit message hook available
 * present tense
 * maximum of 100 characters
 * message format of `$type($scope): $message`

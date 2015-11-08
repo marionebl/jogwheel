@@ -16,6 +16,14 @@
 
 
 [![ci][ci-image]][ci-url]
+[![coverage][coverage-image]][coverage-url] [![climate][climate-image]][climate-url]
+<br />
+<br />
+[![npm][npm-image]][npm-url] [![npm-dl][npm-dl-image]][npm-dl-url]
+<br />
+<br />
+[![pr][pr-image]][pr-url] [![issue][issue-image]][issue-url]
+<br />
 <br />
 [![dependency-manager][dependency-manager-image]][dependency-manager-url] [![release-manager][release-manager-image]][release-manager-url] [![ecma][ecma-image]][ecma-url] [![codestyle][codestyle-image]][codestyle-url] [![license][license-image]][license-url] [![commitizen][commitizen-image]][commitizen-url]
 
@@ -119,6 +127,7 @@ and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
 [npm-image]: https://img.shields.io/npm/v/jogwheel.svg?style=flat-square
+[npm-dl-url]: https://www.npmjs.org/package/jogwheel
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
@@ -131,8 +140,8 @@ and released under the [MIT License](./license.md).
 
 [pr-url]: http://issuestats.com/github/marionebl/jogwheel
 [pr-image]: http://issuestats.com/github/marionebl/jogwheel/badge/pr?style=flat-square
-[issue-url]: https://github.com/marionebl/jogwheel/issues
-[issue-image]: http://issuestats.com/github/undefined/badge/issue?style=flat-square
+[issue-url]: undefined
+[issue-image]: http://issuestats.com/github/marionebl/jogwheel/badge/issue?style=flat-square
 
 [dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-3989c9.svg?style=flat-square
 [dependency-manager-url]: https://github.com/greenkeeperio/greenkeeper

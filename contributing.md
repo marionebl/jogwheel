@@ -7,7 +7,7 @@
 <h1 align="center"> jogwheel</h1>
 <p align="center">
 	<b>
-	<a href="#found-an-issue" target="_self">found-an-issue</a> | <a href="#want-to-contribute" target="_self">want-to-contribute</a> | <a href="#coding-rules" target="_self">coding-rules</a> | <a href="#commit-rules" target="_self">commit-rules</a>
+	<a href="#found-an-issue" target="_self">Report issues</a> | <a href="#want-to-contribute" target="_self">Contribute</a> | <a href="#coding-rules" target="_self">Coding Rules</a> | <a href="#commit-rules" target="_self">Commit Rules</a>
 	</b>
 </p>
 <br />
@@ -18,6 +18,9 @@ To smoothen everyone's experience involved with the project please take note of 
 
 ## Found an Issue?
 Thank you for reporting any issues you find. We do our best to test and make jogwheel as solid as possible, but any reported issue is a real help.
+
+> jogwheel issues
+
 [![Issues][issue-image]][issue-url]
 
 Please follow these guidelines when reporting issues:
@@ -71,6 +74,7 @@ To make your life easier jogwheel is commitizen-friendly and provides the npm ru
 [![Commitizen friendly][commitizen-image]][commitizen-url]
 
 * [conventional-changelog](/commitizen/cz-conventional-changelog)
+* husky commit message hook available
 * present tense
 * maximum of 100 characters
 * message format of `$type($scope): $message`
@@ -82,6 +86,7 @@ and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
 [npm-image]: https://img.shields.io/npm/v/jogwheel.svg?style=flat-square
+[npm-dl-url]: https://www.npmjs.org/package/jogwheel
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
@@ -94,8 +99,8 @@ and released under the [MIT License](./license.md).
 
 [pr-url]: http://issuestats.com/github/marionebl/jogwheel
 [pr-image]: http://issuestats.com/github/marionebl/jogwheel/badge/pr?style=flat-square
-[issue-url]: https://github.com/marionebl/jogwheel/issues
-[issue-image]: http://issuestats.com/github/undefined/badge/issue?style=flat-square
+[issue-url]: undefined
+[issue-image]: http://issuestats.com/github/marionebl/jogwheel/badge/issue?style=flat-square
 
 [dependency-manager-image]: https://img.shields.io/badge/tracks%20with-greenkeeper-3989c9.svg?style=flat-square
 [dependency-manager-url]: https://github.com/greenkeeperio/greenkeeper
