@@ -10,9 +10,9 @@ module.exports = function (props) {
 `
 <header class="jogwheel-header">
 	<div align="center">
-		<!-- <a href="${image.href}">
+		<a href="${image.href}">
 			<img width="200" src="https://cdn.rawgit.com/${props.pkg.repository.slug}/master/${image.src}" />
-		</a> -->
+		</a>
 	</div>
 	<nav class="jogwheel-navigation">
 		<h1 align="center">${props.pkg.icon} ${headline || props.pkg.name}</h1>
