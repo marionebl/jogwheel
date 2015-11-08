@@ -1,7 +1,9 @@
 import 'babel-polyfill';
-import 'web-animations-js';
+import 'web-animations-js/web-animations-next.min.js';
 import 'whatwg-fetch';
 import tape from 'tape';
+
+import JogWheel from '../../library';
 
 const tests = [
 	'simple',
@@ -145,12 +147,24 @@ async function main() {
 					const js = await jsLoading;
 					const code = await js.text();
 
+					frame.contentWindow.__jogwheel = JogWheel;
 					frame.contentWindow.__jogWheelTape = t.test;
+					frame.contentWindow.___jogWheelElement = {
+						animate: HTMLElement.prototype.animate,
+						getAnimations: HTMLElement.prototype.getAnimations
+					};
+
 					frame.contentWindow.eval(`
 						var __jogwheel_originalRequire = require;
 						function require(module) {
 							if (module === 'tape') {
 								return window.__jogWheelTape;
+							} else if (module === 'web-animations-js/web-animations-next.min.js') {
+								HTMLElement.prototype.animate = window.___jogWheelElement.animate;
+								HTMLElement.prototype.getAnimations = window.___jogWheelElement.getAnimations
+								return;
+							} else if (module === 'jogwheel') {
+								return window.__jogwheel;
 							} else {
 								return __jogwheel_originalRequire(module);
 							}

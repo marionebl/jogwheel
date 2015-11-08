@@ -1,4 +1,7 @@
 var merge = require('lodash.merge');
+var async = require('async');
+var documentationjs = require('documentation');
+
 
 var cached = require('gulp-cached');
 var remember = require('gulp-remember');
@@ -7,6 +10,7 @@ var data = require('gulp-data');
 var template = require('gulp-template');
 var extension = require('gulp-ext-replace');
 var rename = require('gulp-rename');
+
 
 var pkg = require('../package');
 var header = require('./partials/header');
@@ -29,21 +33,51 @@ module.exports = function (gulp, paths) {
 		badges: badges(props)
 	};
 
-	return function documentation() {
+	function getApiDocumentation(entry, formats, callback) {
+		async.waterfall([
+			function(cb) {
+				documentationjs(entry, {
+					private: false,
+					github: false
+				}, cb);
+			},
+			function(comments, cb) {
+				async.reduce(formats, {}, function(result, format, callback){
+					documentationjs.formats[format](comments, {}, function(err, formatted){
+						if (err) {
+							return callback(err);
+						}
+						result[format] = formatted;
+						callback(err, result);
+					});
+				}, cb);
+			}
+		], callback);
+	}
+
+	return function documentation(done) {
 		/* @desc build markdown from sources */
-		return gulp.src(paths.source.documentation)
-			.pipe(cached('documentation'))
-			.pipe(data({
-				props: props
-			}))
-			.pipe(template())
-			.pipe(remember('documentation'))
-			.pipe(extension('.md'))
-			.pipe(rename(function(pathInfo){
-				if (pathInfo.basename[0] === '_') {
-					pathInfo.basename = pathInfo.basename.slice(1);
-				}
-			}))
-			.pipe(gulp.dest(paths.target.root));
+		getApiDocumentation(paths.source.entry, ['md', 'json', 'html'], function(err, docs) {
+			if (err) {
+				return done(err);
+			}
+
+			gulp.src(paths.source.documentation)
+				.pipe(cached('documentation'))
+				.pipe(data({
+					props: props,
+					docs: docs
+				}))
+				.pipe(template())
+				.pipe(remember('documentation'))
+				.pipe(extension('.md'))
+				.pipe(rename(function(pathInfo){
+					if (pathInfo.basename[0] === '_') {
+						pathInfo.basename = pathInfo.basename.slice(1);
+					}
+				}))
+				.pipe(gulp.dest(paths.target.root))
+				.on('end', done);
+		});
 	};
 };

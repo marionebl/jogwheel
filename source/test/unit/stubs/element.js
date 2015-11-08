@@ -5,6 +5,9 @@ const elementStub = {
 	},
 	animate(_, options) {
 		return playerStub(options);
+	},
+	getAnimations() {
+		return [];
 	}
 };
 

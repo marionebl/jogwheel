@@ -1,6 +1,23 @@
+import 'web-animations-js/web-animations-next.min.js';
+
 const tape = require('tape');
-// const element = document.querySelector('[data-animated]');
+const JogWheel = require('jogwheel');
+
+const element = document.querySelector('[data-animated]');
 
 tape('simple integration', t => {
-	t.end();
+	/**
+	 * Reset a running animation
+	 * - pause
+	 * - rewind to 0
+	 * - play
+	 */
+	const wheel = JogWheel.create(element);
+	t.doesNotThrow(() => wheel.pause(), 'Pausing does not throw');
+	t.doesNotThrow(() => wheel.seek(0), 'Seeking does not throw');
+
+	setTimeout(() => {
+		wheel.play();
+		t.end();
+	}, 10);
 });

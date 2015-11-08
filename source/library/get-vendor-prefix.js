@@ -1,6 +1,14 @@
 const cacheKey = '__jogwheel_vendor_prefix_cache';
 
+/**
+ * Gets the primary CSS vendor prefix for the current or provided document environment
+ * @param  {Window} [window = global.window] The window context to use
+ * @param  {Document} [document = global.document] The document context to use
+ * @return {string} The primary CSS vendor prefix
+ * @private
+ */
 export default function getVendorPrefix(window = global.window, document = global.document) {
+	// Replace this when we get WeakMaps
 	if (document[cacheKey]) {
 		return document[cacheKey];
 	}
@@ -20,6 +28,14 @@ export default function getVendorPrefix(window = global.window, document = globa
 	return document[cacheKey];
 }
 
+/**
+ * Prefixes a given CSS property if needed in the current or provided document environment
+ * @param  {string} propertyName CSS property to prefix
+ * @param  {Window} [window = global.window] The window context to use
+ * @param  {Document} [document = global.document] The document context to use
+ * @return {string} The prefixed version of the CSS property
+ * @private
+ */
 export function prefix(propertyName, window = global.window, document = global.document) {
 	const element = document.body;
 	const prefix = getVendorPrefix(window, document);
