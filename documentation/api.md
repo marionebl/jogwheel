@@ -1,9 +1,9 @@
 
 <header class="jogwheel-header">
 	<div align="center">
-		<!-- <a href="https://github.com/marionebl/jogwheel#readme">
-			<img width="200" src="https://cdn.rawgit.com/undefined/master/source/jogwheel.svg" />
-		</a> -->
+		<a href="https://github.com/marionebl/jogwheel#readme">
+			<img width="200" src="https://cdn.rawgit.com/marionebl/jogwheel/master/jogwheel.svg" />
+		</a>
 	</div>
 	<nav class="jogwheel-navigation">
 		<h1 align="center"> jogwheel API</h1>

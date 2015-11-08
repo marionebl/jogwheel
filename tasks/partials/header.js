@@ -11,7 +11,7 @@ module.exports = function (props) {
 <header class="jogwheel-header">
 	<div align="center">
 		<a href="${image.href}">
-			<img width="200" src="https://cdn.rawgit.com/${props.pkg.repository.slug}/master/${image.src}" />
+			<img width="200" src="https://cdn.rawgit.com/${props.pkg.slug}/master/${image.src}" />
 		</a>
 	</div>
 	<nav class="jogwheel-navigation">
