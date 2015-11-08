@@ -3,12 +3,27 @@ language: node_js
 cache:
   directories:
     - node_modules
-notifications:
-  email: false
 node_js:
   - 4
   - stable
+before_script:
+  - npm prune
+  - 'curl -Lo travis_after_all.py https://git.io/vLSON'
+  - npm run build
+  - npm run commitmsg
+after_success:
+  - python travis_after_all.py
+  - export $(cat .to_export_back)
+  - npm run coveralls
 env:
   global:
     - secure: lO1vDnxOltuOcUFQPcCokqiX6ih3X33s9CwYDKtwfMKKYBvTNuDa2UVa52eDwJdVpkYn2jGPBrOOJ4mJhjbYuw0/w/4SMyI+wdfmE2q9yC3rTVtSHkkKdqGn0aATyyPSbfJSkGBLF6+izqn00x3t9YfO6Aw9OhDljx30Qrb7UEYUV09YjchesygleBdSsyTv5zQZ1fROrhJEQu+jj+vRFcUeCjVYUA5yvRA6omCk0kw51cSSKTuzeXH0z6VnOP38ZJ2kPNpP0veof76jK5ZQ9glvGyFgj+ye4dbCZyP3b7rIlSRcfVj6S1gKTBq7Shuc1mQXN2it3NIpDSlTdZa4fCR153P8rnOpHTF6ZTsOiMB3Z3RY3Q7suPUFHPnlVbqyKIhcq15LDG0hm649VRIOGYnmYiI7yS0F9gilpGp1+eDYP5bbbst60dge/vWAXQGpXB2oN3YbrRtP8VQhjUTmWpXS/kp7nQY/1kVKRvPAaE5FjOWcyrvPDOaTcWiV3xtxQ6fFDEYiLnXUkKIG3Bp3XX7bScvo9bVAH1pw1rE70OLOie0cQGBOeQlhRnNHs/L3dAP2z6jz3xPZsHaG+Wv4SE+yg/TFaORxIgS63Zlp1xkv51G0sS1qvKo3H22FlQSzzEBAFFSSo5e/n8Pc2j4vPXEP5EjCJFCTqOTOSaG544g=
     - secure: N2nV0cGAk7txOAaaCIWlgs/0H7ciLyM+5auta+Kh8ZntHIlblTHv+3MHC0fGxjEUwbhLgDVNRyl2yuX5eWG2KumBEpl8A3cFRM/EkyhKjxTV7+WEh6lMzMO5t5NAhwi44dXKPxVOMS+ZZUw7b5xzmi42stLxwyL5VEMEv9VXAUzIvYV4uEtSRjQBRXKz3pIsxfETxTtkDIqe0yf20YGs8wGTU1TpuuZJWmjz4cMi/60dz/X6JRC5KQvpIVc99cHOajM+a0Ci6xi3iQ0wOnk8C0C9IqHHlsncy1lVL97mBkZJrywW8jtzLzAHocMmjjNj5hJN9M/yFUAzo+KXuuUKtW79Z+G7Pr5PIeiQget1PWrj1h2EyBec1hTN4gskB1Qc0gawNBa6fXOI0KARS52h6OZCxOqLsOPYup9xjLwsg0sbJI4Ngkbh1YgOPi1WfHmuSMH1j2GJFqq6acSZ7nq2VuzZ0Oyn4POD/w/c4eCZWpFHTI+vCrFyraf86IIsIpV92JQNqcSIWbsTCVRlJ4GSZoCK1tnTMKxj6dyM2oj2jhDCq+UIirqnGSwiJrj/ZbgIpIhQ0fYyHd4/lLPGZgP1WNndgOfhCE3M1etjDEFNPZ0I9KU/bSACgNuRKQACMHPWtad/VMsrlH2RgxshUuner85tyMOHZGvO7X5HmOPWqbw=
+notifications:
+  email: false
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/429941b00e1a3874f9a9
+    on_success: always
+    on_failure: always
+    on_start: never
