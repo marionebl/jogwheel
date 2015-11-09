@@ -10,6 +10,10 @@ function isTrusted() {
 	return process.env.TRAVIS_SECURE_ENV_VARS === 'true';
 }
 
+function isNoPullRequest() {
+	return process.env.TRAVIS_PULL_REQUEST === 'false';
+}
+
 function main(options) {
 	const job = process.env.TRAVIS_JOB_NUMBER;
 
@@ -20,27 +24,40 @@ function main(options) {
 		console.log(`  ${chalk.green('✔')}   Job number is "${job}".`);
 	}
 
-	if (options.leader && !isLeader(job)) {
-		console.log(`  ${chalk.yellow('⚠')}   Skipping, job "${job}" is not the leader. ${chalk.gray('[--leader]')}`);
-		throw new Error(1);
-	} else if (options.leader) {
-		console.log(`  ${chalk.green('✔')}   Job "${job}" is the leader. ${chalk.gray('[--leader]')}`);
+	if (options.leader) {
+		if  (!isLeader(job)) {
+			console.log(`  ${chalk.yellow('⚠')}   Skipping, job "${job}" is not the leader. ${chalk.gray('[--leader]')}`);
+			throw new Error(1);
+		} else if (options.leader) {
+			console.log(`  ${chalk.green('✔')}   Job "${job}" is the leader. ${chalk.gray('[--leader]')}`);
+		}
 	}
 
-	if (options.trusted && !isTrusted(job)) {
-		console.log(`  ${chalk.yellow('⚠')}   Skipping, job "${job}" has no secure env variables. ${chalk.grey('[--trusted]')}`);
-		throw new Error(1);
-	} else if (options.trusted) {
-		console.log(`  ${chalk.green('✔')}   Job "${job}" has secure env variables. ${chalk.grey('[--trusted]')}`);
+	if (options['pull-request'] === false) {
+		if (!isNoPullRequest()) {
+			console.log(`  ${chalk.yellow('⚠')}   Skipping, "${job}" is a pull request. ${chalk.gray('[--no-pull-request]')}`);
+			throw new Error(1);
+		} else {
+			console.log(`  ${chalk.green('✔')}   Job "${job}" is no pull request. ${chalk.gray('[--no-pull-request]')}`);
+		}
 	}
 
-	if (isLeader(process.env.TRAVIS_JOB_NUMBER)) {
-		return;
+	if (options.trusted) {
+		if (!isTrusted(job)) {
+			console.log(`  ${chalk.yellow('⚠')}   Skipping, job "${job}" has no secure env variables. ${chalk.grey('[--trusted]')}`);
+			throw new Error(1);
+		} else if (options.trusted) {
+			console.log(`  ${chalk.green('✔')}   Job "${job}" has secure env variables. ${chalk.grey('[--trusted]')}`);
+		}
 	}
 }
 
 try {
 	main(minimist(process.argv.slice(2)));
 } catch (err) {
+	if (err.message !== '1') {
+		console.error(err.message);
+		console.trace(err.trace);
+	}
 	process.exit(1);
 }
