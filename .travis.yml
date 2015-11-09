@@ -15,6 +15,10 @@ after_success:
   - python travis_after_all.py
   - export $(cat .to_export_back)
   - npm run coveralls
+  - npm run semantic-release
+branches:
+  except:
+    - "/^v\\d+\\.\\d+\\.\\d+$/"
 env:
   global:
     - secure: lO1vDnxOltuOcUFQPcCokqiX6ih3X33s9CwYDKtwfMKKYBvTNuDa2UVa52eDwJdVpkYn2jGPBrOOJ4mJhjbYuw0/w/4SMyI+wdfmE2q9yC3rTVtSHkkKdqGn0aATyyPSbfJSkGBLF6+izqn00x3t9YfO6Aw9OhDljx30Qrb7UEYUV09YjchesygleBdSsyTv5zQZ1fROrhJEQu+jj+vRFcUeCjVYUA5yvRA6omCk0kw51cSSKTuzeXH0z6VnOP38ZJ2kPNpP0veof76jK5ZQ9glvGyFgj+ye4dbCZyP3b7rIlSRcfVj6S1gKTBq7Shuc1mQXN2it3NIpDSlTdZa4fCR153P8rnOpHTF6ZTsOiMB3Z3RY3Q7suPUFHPnlVbqyKIhcq15LDG0hm649VRIOGYnmYiI7yS0F9gilpGp1+eDYP5bbbst60dge/vWAXQGpXB2oN3YbrRtP8VQhjUTmWpXS/kp7nQY/1kVKRvPAaE5FjOWcyrvPDOaTcWiV3xtxQ6fFDEYiLnXUkKIG3Bp3XX7bScvo9bVAH1pw1rE70OLOie0cQGBOeQlhRnNHs/L3dAP2z6jz3xPZsHaG+Wv4SE+yg/TFaORxIgS63Zlp1xkv51G0sS1qvKo3H22FlQSzzEBAFFSSo5e/n8Pc2j4vPXEP5EjCJFCTqOTOSaG544g=

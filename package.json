@@ -1,6 +1,5 @@
 {
   "name": "jogwheel",
-  "version": "1.0.0",
   "description": "take control over your css keyframe animations",
   "main": "library/index.js",
   "jsnext:main": "source/library/index.js",
@@ -20,11 +19,12 @@
     "commit": "git-cz",
     "commitmsg": "$npm_package_config_jogwheel_when_ci && $npm_package_config_jogwheel_validate_commit || $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
     "env": "env",
-    "binaries": "ls node_modules/.bin/"
+    "binaries": "ls node_modules/.bin/",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marionebl/jogwheel.git"
+    "url": "https://github.com/marionebl/jogwheel.git"
   },
   "keywords": [
     "css",
@@ -116,7 +116,8 @@
     "tape-catch": "1.0.4",
     "web-animations-js": "2.1.3",
     "whatwg-fetch": "0.10.1",
-    "zuul": "3.7.2"
+    "zuul": "3.7.2",
+    "semantic-release": "^4.3.5"
   },
   "dependencies": {
     "documentation": "3.0.3"
