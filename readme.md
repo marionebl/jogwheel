@@ -128,6 +128,16 @@ You dig jogwheel and want to submit a pull request? Awesome!
 Be sure to read the [contribution guide](./contributing.md) and you should be good to go.
 Here are some notes to get you coding real quick.
 
+Fetch, install and start the default watch task
+```
+git clone https://github.com/marionebl/jogwheel.git
+cd jogwheel
+npm install
+npm start
+```
+This will watch all files in `source` and start the appropriate tasks when changes are detected.
+See [development](./documentation/development.md) for more details.
+
 ## Roadmap
 jogwheel is up to a lot of good. This includes but is not limited to
 - [x] super-awesome cross-browser tests
@@ -138,15 +148,6 @@ jogwheel is up to a lot of good. This includes but is not limited to
 ---
 See [Roadmap](./documentation/roadmap.md) for details.
 
-Fetch, install and start the default watch task
-```
-git clone git+https://github.com/marionebl/jogwheel.git
-cd jogwheel
-npm install
-npm start
-```
-This will watch all files in `source` and start the appropriate tasks when changes are detected.
-See [development](./documentation/development.md) for more details.
 
 
 ---
