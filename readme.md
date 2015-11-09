@@ -134,6 +134,7 @@ jogwheel is up to a lot of good. This includes but is not limited to
 - [ ] unit-tested documentation code examples, because rust isn't the only language that can do cool dev convenience stuff
 - [ ] an interactive playground and animation editor
 - [ ] a plug-an-play react integration component
+
 ---
 See [Roadmap](./documentation/roadmap.md) for details.
 
