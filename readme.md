@@ -128,6 +128,15 @@ You dig jogwheel and want to submit a pull request? Awesome!
 Be sure to read the [contribution guide](./contributing.md) and you should be good to go.
 Here are some notes to get you coding real quick.
 
+## Roadmap
+jogwheel is up to a lot of good. This includes but is not limited to
+- [x] super-awesome cross-browser tests
+- [ ] unit-tested documentation code examples, because rust isn't the only language that can do cool dev convenience stuff
+- [ ] an interactive playground and animation editor
+- [ ] a plug-an-play react integration component
+---
+See [Roadmap](./documentation/roadmap.md) for details.
+
 Fetch, install and start the default watch task
 ```
 git clone git+https://github.com/marionebl/jogwheel.git
