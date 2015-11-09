@@ -120,6 +120,6 @@
     "semantic-release": "^4.3.5"
   },
   "dependencies": {
-    "documentation": "3.0.3"
+    "documentation": "3.0.4"
   }
 }
