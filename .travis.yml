@@ -15,7 +15,7 @@ after_success:
   - python travis_after_all.py
   - export $(cat .to_export_back)
   - npm run coveralls
-  - npm run semantic-release
+  - npm run semantic-release && npm run pages:update || npm run pages:archive && npm run pages:update
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
