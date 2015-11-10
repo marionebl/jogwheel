@@ -16,7 +16,6 @@ after_success:
   - export $(cat .to_export_back)
   - npm run coveralls
   - npm run semantic-release
-  - npm run pages
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"

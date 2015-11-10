@@ -11,7 +11,7 @@
     "test:local:unit": "$npm_package_config_jogwheel_task_runner test",
     "test:local:integration": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry --phantom",
     "test:local:browser": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry --phantom",
-    "test:remote": "parallelshell \"npm run test:remote:unit | tap-spec\" \"npm run test:remote:browser | tap-spec\" && npm run test:remote:integration | tap-spec",
+    "test:remote": "parallelshell \"npm run test:remote:unit\" \"npm run test:remote:browser\" && npm run test:remote:integration",
     "test:remote:unit": "$npm_package_config_jogwheel_task_runner test",
     "test:remote:integration": "$npm_package_config_jogwheel_when_ci --leader --trusted && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry || echo ''",
     "test:remote:browser": "$npm_package_config_jogwheel_when_ci --leader --trusted && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry || echo ''",
