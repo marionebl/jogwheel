@@ -207,7 +207,6 @@ async function main(options) {
 	await Promise.all(queue);
 
 	if (options['pull-request']) {
-		const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
 		const hashCall = shell.exec(`git rev-parse --short HEAD`, {silent:true});
 
 		if (hashCall.code !== 0) {
@@ -259,6 +258,7 @@ async function main(options) {
 		}
 	}
 
+	const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
 	return `  ${chalk.green('✔')}   pages-update executed successfully. ${timestamp}\n`;
 }
 
