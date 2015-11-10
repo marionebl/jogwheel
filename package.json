@@ -110,7 +110,7 @@
     "gulp-cached": "1.1.0",
     "gulp-data": "1.2.0",
     "gulp-documentation": "2.0.0",
-    "gulp-eslint": "1.0.0",
+    "gulp-eslint": "1.1.0",
     "gulp-ext-replace": "0.2.0",
     "gulp-istanbul": "0.10.2",
     "gulp-notify": "2.2.0",
