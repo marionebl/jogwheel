@@ -36,7 +36,7 @@ SOFTWARE.
 
 
 ---
-jogwheel `vundefined` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.0.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel

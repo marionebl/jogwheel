@@ -1,7 +1,7 @@
 var merge = require('lodash.merge');
 var async = require('async');
 var documentationjs = require('documentation');
-
+var shell = require('shelljs');
 
 var cached = require('gulp-cached');
 var remember = require('gulp-remember');
@@ -61,6 +61,8 @@ module.exports = function (gulp, paths) {
 			if (err) {
 				return done(err);
 			}
+
+			props.pkg.tag = shell.exec('git describe --abbrev=0 --tags', {silent:true}).output.split('\n')[0];
 
 			gulp.src(paths.source.documentation)
 				.pipe(cached('documentation'))

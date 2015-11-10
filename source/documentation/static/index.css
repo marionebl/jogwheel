@@ -14,6 +14,7 @@
 @custom-selector :--navigationlist .jogwheel-navigation-list;
 @custom-selector :--navigationitem .jogwheel-navigation-list b;
 @custom-selector :--navigationlink .jogwheel-navigation-list b a;
+@custom-selector :--archiveteaser .jogwheel-archive-teaser;
 
 :root {
 	--primaryColor: rgb(94, 199, 146);
@@ -146,6 +147,13 @@ hr {
 	display: block;
 	padding: 20px;
 	white-space: nowrap;
+}
+
+:--archiveteaser {
+	padding: 15px;
+	background: #000;
+	text-align: center;
+	font-size: 12px;
 }
 
 a[href="https://saucelabs.com/u/jogwheel-unit"] {
