@@ -207,16 +207,16 @@ async function main(options) {
 
 	await Promise.all(queue);
 	const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
-	const hashCall = shell.exec(`git rev-parse HEAD`, {silent:true});
+	const hashCall = shell.exec(`git rev-parse --short HEAD`, {silent:true});
 
 	if (hashCall.code !== 0) {
 		console.error(`  ${chalk.red('✖')}   Could not obtain commit hash`);
 	}
 
-	const branchName = `gh-pages-update-${pkg.name}`;
+	const branchName = `gh-pages-update-${pkg.name}-${hashCall.output.split('\n')[0]}`;
 	const remote = options.local ?
 		`origin` :
-		'https://${process.env.GH_TOKEN}@github.com/${pkg.config.documentation.slug}.git'
+		`https://${process.env.GH_TOKEN}@github.com/${pkg.config.documentation.slug}.git`
 
 	if (!options.local) {
 		shell.exec(`git config --global user.email "${pkg.name}@herebecode.com"`,{silent:true});
@@ -229,9 +229,9 @@ async function main(options) {
 	const createBranch = shell.exec(`git checkout -b ${branchName}`, {silent:true});
 
 	shell.exec('cp -rf ./public/*', '.');
+	shell.exec(`git clean -fd`);
 
-	const add = shell.exec(`git add *.html documentation/ examples/`,{silent:true});
-
+	const add = shell.exec(`git add ./*.html documentation/ examples/`,{silent:true});
 	const commit = shell.exec(`git commit -m "docs: update gh-pages"`,{silent:true});
 
 	if (commit.code === 0) {
@@ -240,7 +240,8 @@ async function main(options) {
 		throw new Error(commit.output);
 	}
 
-	const push = shell.exec(`git push "${remote}" ${branchName}:${branchName}`,{silent:true});
+	console.log(`  ${chalk.gray('⧗')}   Pushing to github.com/${pkg.config.documentation.slug}`);
+	const push = shell.exec(`git push -f "${remote}" ${branchName}`,{silent:true});
 
 	if (push.code === 0) {
 		console.log(`  ${chalk.green('✔')}   Push to ${branchName} successful.`);

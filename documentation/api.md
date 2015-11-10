@@ -150,7 +150,7 @@ Returns **JogWheel** JogWheel instance
 
 
 ---
-jogwheel is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `vundefined` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
