@@ -21,7 +21,7 @@
     "env": "env",
     "binaries": "ls node_modules/.bin/",
     "semantic-release": "(semantic-release pre && npm publish && semantic-release post) && npm run pages || npm run pages:update",
-    "pages": "npm run pages:update && npm run pages:archive",
+    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted && (npm run pages:update && npm run pages:archive) || echo ''",
     "pages:update": "node $npm_package_config_jogwheel_pages_update",
     "pages:archive": "node $npm_package_config_jogwheel_pages_archive"
   },
@@ -143,6 +143,7 @@
     "postcss-import": "7.1.3",
     "rc": "1.1.5",
     "semantic-release": "4.3.5",
+    "shelljs": "0.5.3",
     "tap-spec": "4.1.0",
     "tape": "4.2.2",
     "tape-catch": "1.0.4",
