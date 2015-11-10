@@ -137,6 +137,16 @@ You dig ${props.pkg.name} and want to submit a pull request? Awesome!
 Be sure to read the [contribution guide](./contributing.md) and you should be good to go.
 Here are some notes to get you coding real quick.
 
+Fetch, install and start the default watch task
+```
+git clone ${props.pkg.repository.url}
+cd ${props.pkg.name}
+npm install
+npm start
+```
+This will watch all files in `source` and start the appropriate tasks when changes are detected.
+See [development](./documentation/development.md) for more details.
+
 ## Roadmap
 ${props.pkg.name} is up to a lot of good. This includes but is not limited to
 - [x] super-awesome cross-browser tests
@@ -147,14 +157,5 @@ ${props.pkg.name} is up to a lot of good. This includes but is not limited to
 ---
 See [Roadmap](./documentation/roadmap.md) for details.
 
-Fetch, install and start the default watch task
-```
-git clone ${props.pkg.repository.url}
-cd ${props.pkg.name}
-npm install
-npm start
-```
-This will watch all files in `source` and start the appropriate tasks when changes are detected.
-See [development](./documentation/development.md) for more details.
 
 <%= props.partials.footer() %>
