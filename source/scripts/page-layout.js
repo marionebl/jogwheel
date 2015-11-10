@@ -17,6 +17,9 @@ export default function (props) {
 			</a>
 		</aside>
 		${props.body}
+		<aside class="jogwheel-archive-teaser">
+			Looking for older versions? Search our <a href="./archives/index.html">archives</a>.
+		</aside>
 		<script src="${props.static}/${props.pkg.pages.script}"></script>
 	</body>
 </html>

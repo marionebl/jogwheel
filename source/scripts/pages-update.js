@@ -21,6 +21,7 @@ import cssnano from 'cssnano';
 import cssimport from 'postcss-import';
 
 import shell from 'shelljs';
+import Github from 'github-api';
 
 import layout from './page-layout.js';
 import pkg from '../../package.json';
@@ -128,13 +129,6 @@ async function render(options) {
 	return Promise.all(queue);
 }
 
-async function copyFiles() {
-	await mkdir('public/static');
-	return copy('source/documentation/static', 'public/static', {
-		filter: /index\.{css,js}$/
-	});
-}
-
 function bundle() {
 	const bundler = browserify(['./source/documentation/static/index.js'], {
 		transform: ['babelify']
@@ -171,12 +165,17 @@ async function style() {
 async function main(options) {
 	const start = Date.now();
 
+	// Prepare gh-pages git subtree
+	shell.exec('git stash',{silent:true});
+	shell.exec('rm -rf public', {silent:true});
+	shell.exec('git subtree add --prefix public origin gh-pages',{silent:true});
+	shell.exec('git stash pop',{silent:true});
+	shell.exec('mkdir -p public/static');
+	shell.exec('cp -rf source/documentation/static/ public/static', {silent:true});
+
 	const tasks = [{
 		name: 'rendering',
 		fn: render
-	}, {
-		name: 'copying',
-		fn: copyFiles
 	}, {
 		name: 'packing',
 		fn: pack
@@ -206,52 +205,59 @@ async function main(options) {
 	});
 
 	await Promise.all(queue);
-	const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
-	const hashCall = shell.exec(`git rev-parse --short HEAD`, {silent:true});
 
-	if (hashCall.code !== 0) {
-		console.error(`  ${chalk.red('✖')}   Could not obtain commit hash`);
+	if (options['pull-request']) {
+		const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
+		const hashCall = shell.exec(`git rev-parse --short HEAD`, {silent:true});
+
+		if (hashCall.code !== 0) {
+			console.error(`  ${chalk.red('✖')}   Could not obtain commit hash`);
+		}
+
+		const branchName = `gh-pages-update-${hashCall.output.split('\n')[0]}`;
+		const remote = options.local ?
+			`origin` :
+			`https://${process.env.GH_TOKEN}@github.com/${pkg.config.documentation.slug}.git`
+
+		if (!options.local) {
+			shell.exec(`git config --global user.email "${pkg.name}.ghpages@herebecode.com"`,{silent:true});
+			shell.exec(`git config --global user.name "${pkg.name} Github pages bot"`,{silent:true});
+		}
+
+		shell.exec(`git add public`,{silent:true});
+		const status = shell.exec(`git status --porcelain`,{silent:true});
+
+		if (status.output.split('\n').filter(path => path.includes('public/')).length === 0) {
+			console.log(`  ${chalk.green('✔')}   No changes on ${branchName}, aborting.`);
+		} else {
+			shell.exec(`git commit -m "docs: update master → gh-pages"`,{silent:true});
+			console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${branchName}.`);
+			shell.exec(`git subtree --prefix=public/ push ${remote} ${branchName}`,{silent:true});
+			console.log(`  ${chalk.green('✔')}   pushed to github.com/${pkg.config.documentation.slug}#${branchName}.`);
+			shell.exec(`git reset --soft "HEAD^2"`,{silent:true});
+
+			if (process.env.GH_TOKEN) {
+				const github = new Github({
+					auth: 'oauth',
+					token: process.env.GH_TOKEN
+				});
+
+				const repositoryNames = pkg.config.pages.slug.split('/');
+				const repository = github.getRepo(...repositoryNames);
+
+				console.log(`  ${chalk.gray('⧗')}   submitting pull request ${branchName} → gh-pages`);
+				const pullRequest = await denodeify(repository.createPullRequest)({
+					title: 'docs: update gh-pages to latest master build',
+					body: 'This pull request was submitted automatically by Travis CI',
+					base: 'gh-pages',
+					head: branchName
+				});
+				console.log(`  ${chalk.green('✔')}   submitted pull request ${branchName} → gh-pages`);
+			} else {
+				console.log(`  ${chalk.yellow('✔')}  GH_TOKEN not set, will not submit PR.`);
+			}
+		}
 	}
-
-	const branchName = `gh-pages-update-${pkg.name}-${hashCall.output.split('\n')[0]}`;
-	const remote = options.local ?
-		`origin` :
-		`https://${process.env.GH_TOKEN}@github.com/${pkg.config.documentation.slug}.git`
-
-	if (!options.local) {
-		shell.exec(`git config --global user.email "${pkg.name}@herebecode.com"`,{silent:true});
-		shell.exec(`git config --global user.name "${pkg.name} bot"`,{silent:true});
-	}
-
-	shell.exec(`git stash`);
-
-	const branchSwitch = shell.exec('git checkout gh-pages',{silent:true});
-	const createBranch = shell.exec(`git checkout -b ${branchName}`, {silent:true});
-
-	shell.exec('cp -rf ./public/*', '.');
-	shell.exec(`git clean -fd`);
-
-	const add = shell.exec(`git add ./*.html documentation/ examples/`,{silent:true});
-	const commit = shell.exec(`git commit -m "docs: update gh-pages"`,{silent:true});
-
-	if (commit.code === 0) {
-		console.log(`  ${chalk.green('✔')}   Commit to ${branchName} successful.`);
-	} else {
-		throw new Error(commit.output);
-	}
-
-	console.log(`  ${chalk.gray('⧗')}   Pushing to github.com/${pkg.config.documentation.slug}`);
-	const push = shell.exec(`git push -f "${remote}" ${branchName}`,{silent:true});
-
-	if (push.code === 0) {
-		console.log(`  ${chalk.green('✔')}   Push to ${branchName} successful.`);
-	} else {
-		throw new Error(push.output);
-	}
-
-	shell.exec(`git checkout .`);
-	shell.exec('git checkout master');
-	shell.exec(`git stash pop`);
 
 	return `  ${chalk.green('✔')}   pages-update executed successfully. ${timestamp}\n`;
 }

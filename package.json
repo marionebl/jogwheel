@@ -20,10 +20,8 @@
     "commitmsg": "$npm_package_config_jogwheel_when_ci && $npm_package_config_jogwheel_validate_commit || $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
     "env": "env",
     "binaries": "ls node_modules/.bin/",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request && (npm run pages:update && npm run pages:archive) || echo ''",
-    "pages:update": "node $npm_package_config_jogwheel_pages_update",
-    "pages:archive": "node $npm_package_config_jogwheel_pages_archive"
+    "semantic-release": "(semantic-release pre && npm publish && semantic-release post) && GH_PAGES_ARCHIVE=\"true\" npm run pages || GH_PAGES_ARCHIVE=\"false\" npm run pages",
+    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request && $npm_package_config_jogwheel_pages_update -- --pull-request || echo ''"
   },
   "repository": {
     "type": "git",
@@ -57,8 +55,7 @@
       "when-ci": "node distribution/scripts/when-ci",
       "unit-test-entry": "distribution/test/unit/index.js",
       "integration-test-entry": "distribution/test/integration/index.js",
-      "pages-update": "distribution/scripts/pages-update.js",
-      "pages-archive": "distribution/scripts/pages-archive.js"
+      "pages-update": "node distribution/scripts/pages-update.js"
     },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -104,6 +101,7 @@
     "eslint-config-xo": "0.7.1",
     "eslint-plugin-babel": "2.1.1",
     "fn-name": "2.0.1",
+    "github-api": "0.10.6",
     "globby": "3.0.1",
     "gulp": "3.9.0",
     "gulp-babel": "5.3.0",
