@@ -29,7 +29,6 @@ npm-debug.log
 
 # Build output
 distribution
-public
 
 # Sensitive config files
 .zuulrc
