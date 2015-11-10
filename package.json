@@ -21,7 +21,7 @@
     "env": "env",
     "binaries": "ls node_modules/.bin/",
     "semantic-release": "(semantic-release pre && npm publish && semantic-release post) && GH_PAGES_ARCHIVE=\"true\" npm run pages || GH_PAGES_ARCHIVE=\"false\" npm run pages",
-    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request && $npm_package_config_jogwheel_pages_update -- --pull-request || echo ''"
+    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request && $npm_package_config_jogwheel_pages_update --pull-request || echo ''"
   },
   "repository": {
     "type": "git",
