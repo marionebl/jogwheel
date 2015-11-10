@@ -19,3 +19,5 @@
 
 - [ ] ~~Run browser tests only for code changes vs. documentation~~
 - [ ] ~~Run full cross-browser tests for relase-builds~~
+
+<%= props.partials.footer() %>
