@@ -20,7 +20,10 @@
     "commitmsg": "$npm_package_config_jogwheel_when_ci && $npm_package_config_jogwheel_validate_commit || $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
     "env": "env",
     "binaries": "ls node_modules/.bin/",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "(semantic-release pre && npm publish && semantic-release post) && npm run pages || npm run pages:update",
+    "pages": "npm run pages:update && npm run pages:archive",
+    "pages:update": "node $npm_package_config_jogwheel_pages_update",
+    "pages:archive": "node $npm_package_config_jogwheel_pages_archive"
   },
   "repository": {
     "type": "git",
@@ -53,7 +56,9 @@
       "validate-commit": "node distribution/scripts/validate-commit.js",
       "when-ci": "node distribution/scripts/when-ci",
       "unit-test-entry": "distribution/test/unit/index.js",
-      "integration-test-entry": "distribution/test/integration/index.js"
+      "integration-test-entry": "distribution/test/integration/index.js",
+      "pages-update": "distribution/scripts/pages-update.js",
+      "pages-archive": "distribution/scripts/pages-archive.js"
     },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -63,7 +68,19 @@
       "bugs": "marionebl/jogwheel/issues",
       "icon": "",
       "color": "5ec792",
-      "logo": "jogwheel.svg"
+      "logo": "source/documentation/static/jogwheel.svg",
+      "statichost": "https://cdn.rawgit.com"
+    },
+    "pages": {
+      "slug": "marionebl/jogwheel",
+      "branch": "gh-pages",
+      "image": "static/jogwheel.svg",
+      "svgicon": "static/jogwheel.svg",
+      "pngicon": "static/jogwheel.png",
+      "script": "static/index.js",
+      "stylesheet": "static/index.css",
+      "archives": "archives",
+      "statichost": "https://cdn.rawgit.com"
     }
   },
   "devDependencies": {
@@ -77,6 +94,8 @@
     "chalk": "1.1.1",
     "commitizen": "2.4.1",
     "coveralls": "2.11.4",
+    "cssnano": "3.3.2",
+    "cssnext": "1.8.4",
     "cz-conventional-changelog": "1.1.4",
     "del": "2.0.2",
     "denodeify": "1.2.1",
@@ -85,6 +104,7 @@
     "eslint-config-xo": "0.7.1",
     "eslint-plugin-babel": "2.1.1",
     "fn-name": "2.0.1",
+    "globby": "3.0.1",
     "gulp": "3.9.0",
     "gulp-babel": "5.3.0",
     "gulp-cached": "1.1.0",
@@ -106,18 +126,30 @@
     "istanbul": "0.4.0",
     "js-git": "0.7.7",
     "lodash.merge": "3.3.2",
+    "mdast": "2.1.0",
+    "mdast-highlight.js": "1.2.0",
+    "mdast-html": "1.2.1",
+    "mdast-inline-links": "1.0.0",
+    "mdast-slug": "2.0.0",
     "minimist": "1.2.0",
+    "mkdirp": "0.5.1",
+    "ncp": "2.0.0",
     "node-notifier": "4.3.1",
+    "normalize.css": "3.0.3",
     "parallelshell": "2.0.0",
     "phantomjs": "1.9.18",
+    "postcss": "5.0.11",
+    "postcss-cssnext": "2.2.0",
+    "postcss-import": "7.1.3",
     "rc": "1.1.5",
+    "semantic-release": "4.3.5",
     "tap-spec": "4.1.0",
     "tape": "4.2.2",
     "tape-catch": "1.0.4",
+    "unist-util-visit": "1.0.0",
     "web-animations-js": "2.1.3",
     "whatwg-fetch": "0.10.1",
-    "zuul": "3.7.2",
-    "semantic-release": "^4.3.5"
+    "zuul": "3.7.2"
   },
   "dependencies": {
     "documentation": "3.0.4"

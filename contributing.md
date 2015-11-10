@@ -1,13 +1,12 @@
 
 <header class="jogwheel-header">
-	<div align="center">
-		<a href="https://github.com/marionebl/jogwheel#readme">
-			<img width="200" src="https://cdn.rawgit.com/marionebl/jogwheel/master/jogwheel.svg" />
-		</a>
+	<blockquote class="jogwheel-claim">take control over your css keyframe animations</blockquote>
+	<div class="jogwheel-logo" align="center">
+		<img width="200" src="https://cdn.rawgit.com/marionebl/jogwheel/master/source/documentation/static/jogwheel.svg" />
 	</div>
+	<h1 class="jogwheel-name" align="center"> jogwheel</h1>
 	<nav class="jogwheel-navigation">
-		<h1 align="center"> jogwheel</h1>
-		<div align="center" class="jogwheel-navigation-list"><b><a href="#found-an-issue" target="_self">Report issues</a></b> | <b><a href="#want-to-contribute" target="_self">Contribute</a></b> | <b><a href="#coding-rules" target="_self">Coding Rules</a></b> | <b><a href="#commit-rules" target="_self">Commit Rules</a></b></div>
+		<div align="center" class="jogwheel-navigation-list"><b><a href="#found-an-issue">Report issues</a></b> | <b><a href="#want-to-contribute">Contribute</a></b> | <b><a href="#coding-rules">Coding Rules</a></b> | <b><a href="#commit-rules">Commit Rules</a></b></div>
 	</nav>
 </header>
 <br />
