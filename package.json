@@ -85,7 +85,7 @@
     "babel-core": "5.8.33",
     "babel-eslint": "4.1.5",
     "babel-polyfill": "6.0.16",
-    "babel-runtime": "5.8.29",
+    "babel-runtime": "5.8.34",
     "babelify": "6.4.0",
     "browserify": "12.0.1",
     "chalk": "1.1.1",
