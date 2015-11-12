@@ -26,7 +26,7 @@ class JogWheel {
 	 * wheel.play();
 	 */
 	static create(...args) {
-		return new JogWheel(...args);
+		return Object.seal(Object.freeze(new JogWheel(...args)));
 	}
 
 	static _cache = {
@@ -126,7 +126,7 @@ class JogWheel {
 	 * loop();
 	 */
 	seek(progress) {
-		const duration = this.player.effect.activeDuration;
+		const duration = this.player.effect ? this.player.effect.activeDuration || this.player.effect.timing.duration : this.player._totalDuration;
 		this.player.currentTime = duration * progress;
 		return this;
 	}

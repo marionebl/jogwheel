@@ -1,33 +1,28 @@
-> take control over your css keyframe animations
-
 
 <header class="jogwheel-header">
-	<div align="center">
-		<a href="https://github.com/marionebl/jogwheel#readme">
-			<img width="200" src="https://cdn.rawgit.com/marionebl/jogwheel/master/jogwheel.svg" />
-		</a>
+	<blockquote class="jogwheel-claim">take control over your css keyframe animations</blockquote>
+	<div class="jogwheel-logo" align="center">
+		<img width="200" src="https://cdn.rawgit.com/marionebl/jogwheel/master/source/documentation/static/jogwheel.svg" />
 	</div>
+	<h1 class="jogwheel-name" align="center"> jogwheel</h1>
 	<nav class="jogwheel-navigation">
-		<h1 align="center"> jogwheel</h1>
-		<div align="center" class="jogwheel-navigation-list"><b><a href="#about" target="_self">About</a></b> | <b><a href="#install" target="_self">Install</a></b> | <b><a href="#usage" target="_self">Usage</a></b> | <b><a href="#browser-support" target="_self">Browser Support</a></b> | <b><a href="./documentation/api.md" target="_blank">API Documentation</a></b> | <b><a href="./examples/readme.md" target="_blank">Examples</a></b> | <b><a href="./contributing.md" target="_blank">Contributing</a></b></div>
+		<div align="center" class="jogwheel-navigation-list"><b><a href="#about">About</a></b> | <b><a href="#install">Install</a></b> | <b><a href="#usage">Usage</a></b> | <b><a href="#browser-support">Browser Support</a></b> | <b><a href="./documentation/api.md">API Documentation</a></b> | <b><a href="./examples/readme.md">Examples</a></b> | <b><a href="./contributing.md">Contributing</a></b></div>
 	</nav>
 </header>
 <br />
 
 
-<aside class="jogwheel-badges">
-	[![ci][ci-image]][ci-url]
-	[![coverage][coverage-image]][coverage-url] [![climate][climate-image]][climate-url]
-	<br />
-	<br />
-	[![npm][npm-image]][npm-url] [![npm-dl][npm-dl-image]][npm-dl-url]
-	<br />
-	<br />
-	[![pr][pr-image]][pr-url] [![issue][issue-image]][issue-url]
-	<br />
-	<br />
-	[![dependency-manager][dependency-manager-image]][dependency-manager-url] [![release-manager][release-manager-image]][release-manager-url] [![ecma][ecma-image]][ecma-url] [![codestyle][codestyle-image]][codestyle-url] [![license][license-image]][license-url] [![commitizen][commitizen-image]][commitizen-url]
-</aside>
+[![ci][ci-image]][ci-url]
+[![coverage][coverage-image]][coverage-url] [![climate][climate-image]][climate-url]
+
+
+[![npm][npm-image]][npm-url] [![npm-dl][npm-dl-image]][npm-dl-url]
+
+
+[![pr][pr-image]][pr-url] [![issue][issue-image]][issue-url]
+
+
+[![dependency-manager][dependency-manager-image]][dependency-manager-url] [![release-manager][release-manager-image]][release-manager-url] [![ecma][ecma-image]][ecma-url] [![codestyle][codestyle-image]][codestyle-url] [![license][license-image]][license-url] [![commitizen][commitizen-image]][commitizen-url]
 
 ## About
 jogwheel gives you the power to take full control over your CSS keyframe animations via JavaScript.
@@ -99,6 +94,8 @@ player.seek(0.5);
 
 [data-animated] {
 	animation: bounce 1s;
+	/* animation-fill-mode and animation-play-state are recommended */
+	animation-fill-mode: both;
 	animation-play-state: paused;
 	height: 100px;
 	width: 100px;
@@ -136,7 +133,6 @@ npm install
 npm start
 ```
 This will watch all files in `source` and start the appropriate tasks when changes are detected.
-See [development](./documentation/development.md) for more details.
 
 ## Roadmap
 jogwheel is up to a lot of good. This includes but is not limited to
@@ -151,7 +147,7 @@ See [Roadmap](./documentation/roadmap.md) for details.
 
 
 ---
-jogwheel is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.0.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel

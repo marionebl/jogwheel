@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 
+import './get-defined-styles';
 import './get-keyframe-declarations';
 import './get-keyframes';
 import './get-vendor-prefix';

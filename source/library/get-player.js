@@ -23,37 +23,21 @@ function getAnimationDuration(CSSAnimationDuration = '0s') {
  * @private
  */
 export default function getPlayer(element, window = global.window, document = global.document) {
-	// Try to take a shortcut and use HTMLElement.prototype.getAnimations
-	// This should make this idempotent
-	const animations = element.getAnimations();
-
-	// Warn the user about the fact that we do not support more than one animation
-	if (animations.length > 1) {
-		console.warn(`JogWheel supports one CSS animation per element, found ${animations.length}. Will use only first animation.`);
-		console.debug(animations);
-	}
-
-	// If HTMLElement.prototype.getAnimations retrieves something, use it
-	if (animations.length > 0) {
-		return animations[0];
-	}
-
-	// "Curry" getPrefixed for easier usage
 	function prefix(propertyName) {
 		return getPrefixed(propertyName, window, document);
 	}
 
+	// TODO: Make this a function, test it
 	// Read all animation related styles from element, respect prefixes
 	const {
-		[prefix('animationDuration')]: animationName,
+		[prefix('animationName')]: animationName,
 		[prefix('animationDuration')]: CSSDuration,
 		[prefix('animationIterations')]: iterations,
 		[prefix('animationEasing')]: easing,
-		[prefix('animationFill')]: fill,
+		[prefix('animationFillMode')]: fill,
 		[prefix('animationPlayState')]: playState
 	} = window.getComputedStyle(element);
 
-	// TODO: Should bail/stub? here if no animationName is found
 	// Generate keyframes based on the assigned animationName
 	const keyframes = getKeyframes(animationName, window, document);
 
@@ -64,8 +48,16 @@ export default function getPlayer(element, window = global.window, document = gl
 		iterations, easing, fill
 	};
 
+	// Sort by offset and remove duplicates
+	// TODO: Test get-keyframes for sorting and duplication
+	keyframes.sort((a, b) => a.offset - b.offset);
+
 	// Construct webanimation player instance with keyframes and options
 	const player = element.animate(keyframes, options);
+	element.style[prefix('animationName')] = 'jogwheel-none';
+
+	// Detach the former animation to prevent problems with polyfill
+	player.__jogwheelName = animationName;
 
 	// Pause or play the webanimation player instance based on CSS animationPlayState
 	if (playState === 'paused') {

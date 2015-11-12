@@ -1,5 +1,3 @@
-> ${props.pkg.description}
-
 <%= props.partials.header('', '',
 	[
 		'About',
@@ -24,19 +22,17 @@
 	]
 ) %>
 
-<aside class="jogwheel-badges">
-	<%= props.partials.badges(['ci']) %>
-	<%= props.partials.badges(['coverage', 'climate']) %>
-	<br />
-	<br />
-	<%= props.partials.badges(['npm', 'npm-dl']) %>
-	<br />
-	<br />
-	<%= props.partials.badges(['pr', 'issue']) %>
-	<br />
-	<br />
-	<%= props.partials.badges(['dependency-manager', 'release-manager', 'ecma', 'codestyle', 'license', 'commitizen']) %>
-</aside>
+<%= props.partials.badges(['ci']) %>
+<%= props.partials.badges(['coverage', 'climate']) %>
+
+
+<%= props.partials.badges(['npm', 'npm-dl']) %>
+
+
+<%= props.partials.badges(['pr', 'issue']) %>
+
+
+<%= props.partials.badges(['dependency-manager', 'release-manager', 'ecma', 'codestyle', 'license', 'commitizen']) %>
 
 ## About
 ${props.pkg.name} gives you the power to take full control over your CSS keyframe animations via JavaScript.
@@ -108,6 +104,8 @@ player.seek(0.5);
 
 [data-animated] {
 	animation: bounce 1s;
+	/* animation-fill-mode and animation-play-state are recommended */
+	animation-fill-mode: both;
 	animation-play-state: paused;
 	height: 100px;
 	width: 100px;
@@ -145,7 +143,6 @@ npm install
 npm start
 ```
 This will watch all files in `source` and start the appropriate tasks when changes are detected.
-See [development](./documentation/development.md) for more details.
 
 ## Roadmap
 ${props.pkg.name} is up to a lot of good. This includes but is not limited to

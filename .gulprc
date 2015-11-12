@@ -24,7 +24,8 @@
     },
     // executables
     "executable":{
-      "unit":"distribution/test/unit/index.js"
+      "unit": "distribution/test/unit/index.js",
+      "pages": "distribution/scripts/pages-update.js"
     }
   },
   "tasks": {

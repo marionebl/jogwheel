@@ -3,7 +3,7 @@ module.exports = function (props) {
 		return (
 `
 ---
-${props.pkg.name} is built by ${props.pkg.author.name} and [contributors](./documentation/contributors.md) with :heart:
+${props.pkg.name} \`${props.pkg.tag}\` is built by ${props.pkg.author.name} and [contributors](./documentation/contributors.md) with :heart:
 and released under the [${props.pkg.license} License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/${props.pkg.name}
