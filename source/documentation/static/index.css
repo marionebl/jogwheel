@@ -216,10 +216,10 @@ hr {
 }
 
 :--archiveteaser {
-	margin: 0 -20px;
 	padding: 15px;
-	background: white;
-	color: #111;
+	background: #000;
+	text-align: center;
+	font-size: 12px;
 }
 
 a[href="https://saucelabs.com/u/jogwheel-unit"] {
