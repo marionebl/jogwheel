@@ -23,7 +23,7 @@ module.exports = function (gulp, paths, _, cli) {
 			var repositoryName = slugFragments[1];
 
 			var base = path.relative(file.filePath(), path.resolve('./'));
-			pkg.staticBase = base === '..' ? '.' : base;
+			pkg.staticBase = base === '..' ? '.' : path.dirname(base);
 
 			visit(ast, 'link', function (node) {
 				// Rewrite local md links to html files in md
