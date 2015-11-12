@@ -18,6 +18,17 @@ const enums = {
 	region: 16
 };
 
+const empty = [];
+
+/**
+ * Cast array-like objects and collections to Array
+ * @param  {Object} arrayLike array-like to cast to Array
+ * @return {Array} Array cast from arrayLike
+ */
+function toArray(arrayLike) {
+	return empty.slice.call(arrayLike); // eslint-disable-line prefer-reflect
+}
+
 /**
  * Gets all CSSRules of type typeName and matching the predecate from rules
  * @param  {string} [typeName='style']    - CSSRule type to search for, valid types:
@@ -31,7 +42,7 @@ export function getDeclarations(typeName = 'style', rules = [], predecate = Bool
 	// Get target type enum
 	const type = enums[typeName];
 
-	return [...rules]
+	return toArray(rules)
 		// filter by rule type
 		.filter(rule => rule.type === type)
 		// filter with user-provided predecate
@@ -40,7 +51,10 @@ export function getDeclarations(typeName = 'style', rules = [], predecate = Bool
 		.map(rule => rule.cssRules)
 		// flatten cssRules
 		.reduce((results, cssRules) => {
-			return [...results, ...cssRules];
+			return [
+				...results,
+				...toArray(cssRules)
+			];
 		}, []);
 }
 
@@ -78,6 +92,25 @@ export function parseKeyframeKey(keyText) {
 }
 
 /**
+ * Gets map of defined styles from CSS2Properties object
+ * @param  {CSS2Properties} properties CSS2Properties object to return defined styles from
+ * @return {object}       plain object containing defined styles as key value pairs
+ */
+export function getDefinedStyles(properties) {
+	const styles = {};
+
+	for (let i = properties.length - 1; i >= 0; i -= 1) {
+		const name = properties.item(i);
+		const value = properties.getPropertyValue(name);
+		if (value !== 'initial') {
+			styles[name] = value;
+		}
+	}
+
+	return styles;
+}
+
+/**
  * Transforms KeyFrameRule to array of web animation compatible keyframes
  * @param  {Object} keyFrameRule KeyFrameRule to transform
  * @return {Array}               Array of webanimation keyframes
@@ -86,13 +119,14 @@ export function parseKeyframeKey(keyText) {
 export function transformKeyframeDeclaration(keyFrameRule) {
 	// Convert keyFrame.keyText to integers holding percentage of keyframe
 	const percentages = parseKeyframeKey(keyFrameRule.keyText);
+	const style = getDefinedStyles(keyFrameRule.style);
 
 	return percentages.map(percentage => {
 		return {
 			// Convert percentage to fraction of 1 for webanimation compat
 			offset: percentage / 100,
 			// Mixin with extracted keyframe styling
-			...keyFrameRule.style
+			...style
 		};
 	});
 }

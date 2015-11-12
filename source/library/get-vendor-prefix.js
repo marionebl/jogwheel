@@ -15,10 +15,10 @@ export default function getVendorPrefix(window = global.window, document = globa
 
 	document[cacheKey] = '';
 
-	const prefixes = /^(Moz|Webkit|ms)(?=[A-Z])/;
+	const prefixes = /^(Moz|Webkit|ms)(?=[A-Z])/i;
 	const element = document.body;
 
-	for (const property in element.style) {
+	for (const property in element.style) { // eslint-disable-line guard-for-in
 		if (prefixes.test(property)) {
 			document[cacheKey] = property.match(prefixes)[0];
 			return document[cacheKey];

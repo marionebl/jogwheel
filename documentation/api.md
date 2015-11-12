@@ -22,8 +22,6 @@ Creates a new JogWheel instance
 -   `options` **object** Options object
 -   `window` **[Window]** Global context to use (optional, default `global.window`)
 -   `document` **[Document]** Document context to use (optional, default `global.window`)
--   `window`   (optional, default `global.window`)
--   `document`   (optional, default `global.document`)
 
 **Examples**
 
@@ -125,7 +123,7 @@ Creates a new JogWheel instance
 -   `options` **object** Options object
 -   `window` **[Window]** Global context to use (optional, default `global.window`)
 -   `document` **[Document]** Document context to use (optional, default `global.window`)
--   `args` **...** 
+-   `args` **...**
 
 **Examples**
 
@@ -146,6 +144,26 @@ wheel.play();
 ```
 
 Returns **JogWheel** JogWheel instance
+
+# getDefinedStyles
+
+Gets map of defined styles from CSS2Properties object
+
+**Parameters**
+
+-   `properties` **CSS2Properties** CSS2Properties object to return defined styles from
+
+Returns **object** plain object containing defined styles as key value pairs
+
+# toArray
+
+Cast array-like objects and collections to Array
+
+**Parameters**
+
+-   `arrayLike` **Object** array-like to cast to Array
+
+Returns **Array** Array cast from arrayLike
 
 
 
@@ -186,4 +204,3 @@ and released under the [MIT License](./license.md).
 
 [gitter-image]: https://img.shields.io/badge/gitter-join%20chat-5ec792.svg?style=flat-square
 [gitter-url]: https://gitter.im/sinnerschrader/patternplate
-

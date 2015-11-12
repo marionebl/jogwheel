@@ -7,6 +7,7 @@ export default function (props) {
 		<meta property="og:title" content="${props.pkg.name}" />
 		<meta property="og:title" content="${props.pkg.description}" />
 		<meta property="og:image" content="${props.static}/${props.pkg.pages.image}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="${props.static}/${props.pkg.pages.svgicon}" />
 		<link rel="icon" type="image/png" href="${props.static}/${props.pkg.pages.pngicon}" />
 	</head>

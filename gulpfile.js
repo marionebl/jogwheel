@@ -1,7 +1,7 @@
 /**
  * This gulpfile bootstraps the tasks found in './tasks'
  * using the configuration in ./.gulprc
- * Please adapt configuration in ./gulprc 
+ * Please adapt configuration in ./gulprc
  */
 var resolve = require('path').resolve;
 var rc = require('rc');
@@ -34,10 +34,13 @@ config.tasks.public.forEach(function(taskDefinition){
 	} catch(err) {
 		util.log('Could not load task "' + taskName +'" from "' + taskFile + '":');
 		util.log(err);
+		util.log(err.stack);
+		return;
 	}
 
 	if (typeof taskFactory !== 'function') {
 		util.log('Could not load task "' + taskName +'" from "' + taskFile + '", does not export factory function.');
+		util.log(err.stack);
 		return;
 	}
 
@@ -46,6 +49,8 @@ config.tasks.public.forEach(function(taskDefinition){
 	} catch(err) {
 		util.log('Could not initialize task function "' + taskName +'" from "' + taskFile + '":');
 		util.log(err);
+		util.log(err.stack);
+		return;
 	}
 
 	task(taskFunction, taskAliases, taskOptions);

@@ -104,6 +104,8 @@ player.seek(0.5);
 
 [data-animated] {
 	animation: bounce 1s;
+	/* animation-fill-mode and animation-play-state are recommended */
+	animation-fill-mode: both;
 	animation-play-state: paused;
 	height: 100px;
 	width: 100px;

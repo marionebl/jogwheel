@@ -1,12 +1,19 @@
 var sequence = require('gulp-sequence');
 var util = require('gulp-util');
 var onError = require('./helpers/on-error');
+var shell = require('shelljs');
 
 function values(object) {
 	return Object.keys(object)
-		.map(function(key){
+		.map(function (key) {
 			return object[key];
 		});
+}
+
+function getUpdatePages(gulp, paths) {
+	return function updatepages(cb) {
+		shell.exec('node ' + paths.executable.pages + ' --local', cb);
+	};
 }
 
 module.exports = function (gulp, paths) {
@@ -20,9 +27,11 @@ module.exports = function (gulp, paths) {
 		var test = require('./test')(gulp, paths, watchOptions);
 		var lint = require('./lint')(gulp, paths, watchOptions);
 		var copy = require('./copy')(gulp, paths, watchOptions);
+		var updatePages = getUpdatePages(gulp, paths, watchOptions);
 
 		return sequence(
 			task(build, 'first-run'),
+			task(updatePages, 'pages-first-run'),
 			task(function () {
 				gulp.watch(
 					values(paths.source),
@@ -33,7 +42,10 @@ module.exports = function (gulp, paths) {
 								task(lint),
 								task(transpile)
 							],
-							task(test)
+							[
+								task(updatePages),
+								task(test)
+							]
 						)(onError(watchOptions));
 					}
 				);

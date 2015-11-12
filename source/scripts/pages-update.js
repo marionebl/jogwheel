@@ -166,12 +166,15 @@ async function main(options) {
 	const start = Date.now();
 
 	// Prepare gh-pages git subtree
-	shell.exec('git stash',{silent:true});
-	shell.exec('rm -rf public', {silent:true});
-	shell.exec('git subtree add --prefix public origin gh-pages',{silent:true});
-	shell.exec('git stash pop',{silent:true});
-	shell.exec('mkdir -p public/static');
-	shell.exec('cp -rf source/documentation/static/ public/static', {silent:true});
+	if (options['pull-request']) {
+		shell.exec('git stash', {silent: true});
+		shell.exec('rm -rf public', {silent: true});
+		shell.exec('git subtree add --prefix public origin gh-pages', {silent: true});
+		shell.exec('git stash pop', {silent: true});
+	}
+
+	shell.exec('mkdir -p public/static', {silent: true});
+	shell.exec('cp -rf source/documentation/static/ public/static', {silent: true});
 
 	const tasks = [{
 		name: 'rendering',

@@ -11,10 +11,21 @@
 @custom-selector :--logo .jogwheel-logo;
 @custom-selector :--name .jogwheel-name;
 @custom-selector :--navigation .jogwheel-navigation;
+@custom-selector :--navigation-list--fixed .jogwheel-navigation-list.jogwheel-navigation-list--fixed;
 @custom-selector :--navigationlist .jogwheel-navigation-list;
 @custom-selector :--navigationitem .jogwheel-navigation-list b;
 @custom-selector :--navigationlink .jogwheel-navigation-list b a;
 @custom-selector :--archiveteaser .jogwheel-archive-teaser;
+
+@keyframes pan {
+	0% {
+		transform: translateY(0);
+	}
+
+	100% {
+		transform: translateY(-100%);
+	}
+}
 
 :root {
 	--primaryColor: rgb(94, 199, 146);
@@ -83,8 +94,12 @@ hr {
 	left: 0;
 	top: 0;
 	right: 0;
+	z-index: 2;
 	text-align: center;
 	background: #000;
+	animation: pan 1s linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
 }
 
 :--githubteaser a {
@@ -107,22 +122,32 @@ hr {
 }
 
 :--logo {
+	position: relative;
+	z-index: 1;
 	order: 1;
 }
 
 :--name {
+	position: relative;
+	z-index: 1;
 	order: 2;
-	margin: 40px 0 0;
+	margin: 0;
+	padding: 40px 0 0;
 	font-size: 50px;
 	color: #fff;
+	background: inherit;
 }
 
 :--claim {
+	position: relative;
+	z-index: 1;
 	order: 3;
-	margin: 0 0 60px 0;
+	margin: 0;
+	padding: 0 0 60px 0;
 	font-size: 25px;
 	text-align: center;
 	color: #eee;
+	background: inherit;
 }
 
 :--navigation {
@@ -131,11 +156,52 @@ hr {
 	background: #fff;
 }
 
+:--navigation-list--fixed {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+}
+
+:--navigation-list--fixed:after {
+	width: 100%;
+}
+
 :--navigationlist {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+	text-align: center;
 	overflow: auto;
+	max-width: calc(80em + 40px);
+	background: #fff;
+	white-space: nowrap;
+}
+
+:--navigationlist > * {
+	position: relative;
+	display: inline-block;
+	padding: 0 5px;
+	z-index: 1;
+	flex-shrink: 0;
+}
+
+.:--navigationlist:before {
+	content: '';
+	width: 50px;
+	height: 50px;
+	flex-shrink: 0;
+}
+
+:--navigationlist:after {
+	content: '';
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 50%;
+	width: 0;
+	height: 58px;
+	background: #fff;
+	transform: translate(-50%, 0);
+	transition: width 1s ease-in-out;
 }
 
 :--navigationitem {
@@ -179,4 +245,10 @@ body > p:last-of-type {
 	padding: 20px;
 	background: #fff;
 	color: var(--backgroundColor);
+}
+
+@media (--medium) {
+	body {
+		border: none;
+	}
 }
