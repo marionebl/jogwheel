@@ -6,6 +6,7 @@
 		<meta property="og:title" content="jogwheel" />
 		<meta property="og:title" content="take control over your css keyframe animations" />
 		<meta property="og:image" content="https://cdn.rawgit.com/marionebl/jogwheel/gh-pages/static/jogwheel.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="https://cdn.rawgit.com/marionebl/jogwheel/gh-pages/static/jogwheel.svg" />
 		<link rel="icon" type="image/png" href="https://cdn.rawgit.com/marionebl/jogwheel/gh-pages/static/jogwheel.png" />
 	</head>
@@ -87,6 +88,8 @@ player.seek(<span class="hljs-number">0.5</span>);</code></pre>
 
 <span class="hljs-attr_selector">[data-animated]</span> <span class="hljs-rules">{
 	<span class="hljs-rule"><span class="hljs-attribute">animation</span>:<span class="hljs-value"> bounce <span class="hljs-number">1s</span></span></span>;
+	<span class="hljs-comment">/* animation-fill-mode and animation-play-state are recommended */</span>
+	<span class="hljs-rule"><span class="hljs-attribute">animation-fill-mode</span>:<span class="hljs-value"> both</span></span>;
 	<span class="hljs-rule"><span class="hljs-attribute">animation-play-state</span>:<span class="hljs-value"> paused</span></span>;
 	<span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"> <span class="hljs-number">100px</span></span></span>;
 	<span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">100px</span></span></span>;

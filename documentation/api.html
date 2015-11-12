@@ -6,6 +6,7 @@
 		<meta property="og:title" content="jogwheel" />
 		<meta property="og:title" content="take control over your css keyframe animations" />
 		<meta property="og:image" content="https://cdn.rawgit.com/marionebl/jogwheel/gh-pages/static/jogwheel.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="https://cdn.rawgit.com/marionebl/jogwheel/gh-pages/static/jogwheel.svg" />
 		<link rel="icon" type="image/png" href="https://cdn.rawgit.com/marionebl/jogwheel/gh-pages/static/jogwheel.png" />
 	</head>
@@ -124,6 +125,20 @@ wheel.seek(<span class="hljs-number">0.5</span>);
 <span class="hljs-comment">// Play the animation</span>
 wheel.play();</code></pre>
 <p>Returns <strong>JogWheel</strong> JogWheel instance</p>
+<h1 id="getdefinedstyles">getDefinedStyles</h1>
+<p>Gets map of defined styles from CSS2Properties object</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>properties</code> <strong>CSS2Properties</strong> CSS2Properties object to return defined styles from</li>
+</ul>
+<p>Returns <strong>object</strong> plain object containing defined styles as key value pairs</p>
+<h1 id="toarray">toArray</h1>
+<p>Cast array-like objects and collections to Array</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>arrayLike</code> <strong>Object</strong> array-like to cast to Array</li>
+</ul>
+<p>Returns <strong>Array</strong> Array cast from arrayLike</p>
 <hr>
 <p>jogwheel <code>v1.0.0</code> is built by Mario Nebl and <a href="./documentation/contributors.html">contributors</a> with :heart:
 and released under the <a href="./license.html">MIT License</a>.</p>
