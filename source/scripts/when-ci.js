@@ -50,6 +50,15 @@ function main(options) {
 			console.log(`  ${chalk.green('✔')}   Job "${job}" has secure env variables. ${chalk.grey('[--trusted]')}`);
 		}
 	}
+
+	if (options.master) {
+		if (process.env.TRAVIS_BRANCH !== "master" || !isNoPullRequest()) {
+			console.log(`  ${chalk.yellow('⚠')}   Skipping, job "${job}" on branch "${process.env.TRAVIS_BRANCH}", not master. ${chalk.grey('[--master]')}`);
+			throw new Error(1);
+		} else if (options.trusted) {
+			console.log(`  ${chalk.green('✔')}   Job "${job}" is on branch master. ${chalk.grey('[--trusted]')}`);
+		}
+	}
 }
 
 try {
