@@ -27,6 +27,16 @@
 	}
 }
 
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
 :root {
 	--primaryColor: rgb(94, 199, 146);
 	--primaryDarkColor: rgb(131, 182, 156);
@@ -125,6 +135,9 @@ hr {
 	position: relative;
 	z-index: 1;
 	order: 1;
+	animation: fade .5s ease-in;
+	animation-play-state: paused;
+	animation-fill-mode: both;
 }
 
 :--name {
@@ -165,7 +178,9 @@ hr {
 }
 
 :--navigation-list--fixed:after {
+	opacity: 1;
 	width: 100%;
+	transition: width 1s ease-in-out;
 }
 
 :--navigationlist {
@@ -197,11 +212,12 @@ hr {
 	top: 0;
 	right: 0;
 	left: 50%;
+	opacity: 0;
 	width: 0;
 	height: 58px;
 	background: #fff;
 	transform: translate(-50%, 0);
-	transition: width 1s ease-in-out;
+	transition: opacity .3s ease-in-out, width 1ms .3s;
 }
 
 :--navigationitem {
@@ -216,10 +232,11 @@ hr {
 }
 
 :--archiveteaser {
-	padding: 15px;
-	background: #000;
-	text-align: center;
-	font-size: 12px;
+	padding: 0 20px 20px 20px;
+	margin-left: -var(--sPadding);
+	margin-right: -var(--sPadding);
+	background: #fff;
+	color: var(--backgroundColor);
 }
 
 a[href="https://saucelabs.com/u/jogwheel-unit"] {

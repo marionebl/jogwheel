@@ -7,6 +7,7 @@ var resolve = require('path').resolve;
 var rc = require('rc');
 var gulp = require('gulp');
 var util = require('gulp-util');
+var minimist = require('minimist');
 
 // Helpers
 var task = require('./tasks/helpers/task')(gulp);
@@ -19,6 +20,8 @@ var config = rc('gulp', {
 		public: []
 	}
 });
+
+var cliOptions = minimist(process.argv.slice(2));
 
 // Iterate gulp task config
 config.tasks.public.forEach(function(taskDefinition){
@@ -45,7 +48,7 @@ config.tasks.public.forEach(function(taskDefinition){
 	}
 
 	try {
-		taskFunction = taskFactory(gulp, config.paths, taskOptions);
+		taskFunction = taskFactory(gulp, config.paths, taskOptions, cliOptions);
 	} catch(err) {
 		util.log('Could not initialize task function "' + taskName +'" from "' + taskFile + '":');
 		util.log(err);
