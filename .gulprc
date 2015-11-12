@@ -2,30 +2,43 @@
   "paths":{
     // sources
     "source":{
-      "entry":"source/library/index.js",
-      "library":"source/library/**/*.js",
-      "test":"source/test/**/*.js",
-      "scripts":"source/scripts/**/*.js",
-      "documentation":"source/**/*.tpl",
-      "static":"source/**/*.{html,css}"
+      "entry": "source/library/index.js",
+      "library": "source/library/**/*.js",
+      "test": "source/test/**/*.js",
+      "scripts": "source/scripts/**/*.js",
+      "documentation": "source/**/*.tpl",
+      "static": "source/**/*.{html,css}",
+      "public-static": "source/documentation/**/*.{png,svg}",
+      "markdown": [
+        "**/*.md",
+        "!node_modules/**/*",
+        "!distribution/**/*"
+      ],
+      "public-css": "source/documentation/**/*.css",
+      "public-js": "source/documentation/static/index.js"
     },
     // clean targets
     "clean":{
-      "documentation":"*.md",
-      "distribution":"distribution"
+      "documentation": "*.md",
+      "distribution": "distribution"
     },
     // targets
     "target":{
-      "root":".",
-      "distribution":"distribution",
-      "library":"distribution/library/",
-      "test":"distribution/test/",
-      "scripts":"distribution/scripts/"
+      "root": ".",
+      "distribution": "distribution",
+      "library": "distribution/library/",
+      "test": "distribution/test/",
+      "scripts": "distribution/scripts/",
+      "public": "public"
     },
     // executables
     "executable":{
       "unit": "distribution/test/unit/index.js",
       "pages": "distribution/scripts/pages-update.js"
+    },
+    // exclude from watch
+    "exclude": {
+      "markdown": "**/*.md"
     }
   },
   "tasks": {

@@ -123,7 +123,7 @@ Creates a new JogWheel instance
 -   `options` **object** Options object
 -   `window` **[Window]** Global context to use (optional, default `global.window`)
 -   `document` **[Document]** Document context to use (optional, default `global.window`)
--   `args` **...**
+-   `args` **...** 
 
 **Examples**
 
@@ -168,7 +168,7 @@ Returns **Array** Array cast from arrayLike
 
 
 ---
-jogwheel `v1.0.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.0.1` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
@@ -204,3 +204,4 @@ and released under the [MIT License](./license.md).
 
 [gitter-image]: https://img.shields.io/badge/gitter-join%20chat-5ec792.svg?style=flat-square
 [gitter-url]: https://gitter.im/sinnerschrader/patternplate
+
