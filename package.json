@@ -3,7 +3,10 @@
   "description": "take control over your css keyframe animations",
   "main": "distribution/library/index.js",
   "jsnext:main": "source/library/index.js",
-  "files": ["source/library", "distribution/library"],
+  "files": [
+    "source/library",
+    "distribution/library"
+  ],
   "scripts": {
     "start": "$npm_package_config_jogwheel_task_runner",
     "build": "$npm_package_config_jogwheel_task_runner build",
@@ -83,7 +86,7 @@
   },
   "devDependencies": {
     "async": "1.5.0",
-    "babel-core": "5.8.33",
+    "babel-core": "6.1.20",
     "babel-eslint": "4.1.5",
     "babel-polyfill": "6.0.16",
     "babel-runtime": "5.8.29",
