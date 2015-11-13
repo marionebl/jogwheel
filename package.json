@@ -3,7 +3,10 @@
   "description": "take control over your css keyframe animations",
   "main": "distribution/library/index.js",
   "jsnext:main": "source/library/index.js",
-  "files": ["source/library", "distribution/library"],
+  "files": [
+    "source/library",
+    "distribution/library"
+  ],
   "scripts": {
     "start": "$npm_package_config_jogwheel_task_runner",
     "build": "$npm_package_config_jogwheel_task_runner build",
@@ -100,7 +103,7 @@
     "eslint-config-xo": "0.7.1",
     "eslint-plugin-babel": "2.1.1",
     "fn-name": "2.0.1",
-    "github-api": "0.10.6",
+    "github-api": "0.10.7",
     "gulp": "3.9.0",
     "gulp-babel": "5.3.0",
     "gulp-cached": "1.1.0",
