@@ -1,0 +1,14 @@
+---
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+ratings:
+  paths:
+  - "source/**/*.js"
+  - "source/**/*.css"
+  - "tasks/**.js"
+exclude_paths:
+- node_modules/**/*
+- public/**/*
