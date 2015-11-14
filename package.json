@@ -27,9 +27,13 @@
     "semantic-release": "(semantic-release pre && npm publish && semantic-release post) && GH_PAGES_ARCHIVE=\"true\" npm run pages || GH_PAGES_ARCHIVE=\"false\" npm run pages",
     "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --master && $npm_package_config_jogwheel_pages_update --pull-request || echo ''"
   },
+  "homepage": "https://marionebl.github.io/jogwheel",
   "repository": {
     "type": "git",
     "url": "https://github.com/marionebl/jogwheel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marionebl/jogwheel/issues"
   },
   "keywords": [
     "css",

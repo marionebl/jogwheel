@@ -23,7 +23,7 @@ async function main(options) {
 	shell.exec(`git subtree --prefix=public/ push ${remote} ${head}`, {silent: true});
 	console.log(`  ${chalk.green('✔')}   pushed to github.com/${pkg.config.documentation.slug}#${head}.`);
 
-	const title = 'docs: ${hash} master → gh-pages';
+	const title = `docs: ${hash} master → gh-pages`;
 	const base = 'gh-pages';
 
 	if (process.env.CI && process.env.GH_TOKEN) {
