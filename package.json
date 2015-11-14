@@ -96,7 +96,7 @@
     "commitizen": "2.4.4",
     "coveralls": "2.11.4",
     "cz-conventional-changelog": "1.1.4",
-    "del": "2.0.2",
+    "del": "2.1.0",
     "denodeify": "1.2.1",
     "dom-stub": "1.0.1",
     "eslint": "1.8.0",
