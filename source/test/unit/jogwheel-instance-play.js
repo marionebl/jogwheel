@@ -27,7 +27,7 @@ tape('instance.play', t => {
 	pausedInstance.play();
 
 	t.equals(
-		pausedInstance.player.playState,
+		pausedInstance.playState,
 		'running',
 		'should start a paused JogWheel instance'
 	);

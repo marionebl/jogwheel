@@ -5101,7 +5101,7 @@ var JogWheel = (function () {
 			return Object.seal(Object.freeze(new (_bind.apply(JogWheel, [null].concat(args)))()));
 		}
 	}, {
-		key: '_cache',
+		key: '__cache',
 		value: {
 			media: null
 		},
@@ -5109,7 +5109,7 @@ var JogWheel = (function () {
 		/**
    * Creates a new JogWheel instance
    * @constructor
-   * @param  {HTMLElement} element  HTMLElement to instantiate on
+   * @param  {Node|NodeList} nodes  Node or NodeList to instantiate on
    * @param  {object} options Options object
    * @param  {Window} [window=global.window] Global context to use
    * @param  {Document} [document=global.window] Document context to use
@@ -5124,41 +5124,49 @@ var JogWheel = (function () {
 		enumerable: true
 	}]);
 
-	function JogWheel(element, options) {
+	function JogWheel(nodes, options) {
 		var window = arguments.length <= 2 || arguments[2] === undefined ? global.window : arguments[2];
 		var document = arguments.length <= 3 || arguments[3] === undefined ? global.document : arguments[3];
 
 		_classCallCheck(this, JogWheel);
 
-		if (!element) {
+		if (!nodes) {
 			throw new Error('Could not construct JogWheel, missing element');
 		}
 
-		this.element = element;
-		this.player = (0, _getPlayerJs2['default'])(element, window, document);
-		this.settings = _extends({}, _defaultsJs2['default'], options);
-	}
+		var elements = nodes instanceof window.NodeList ? [].slice.call(nodes) : [nodes]; // eslint-disable-line prefer-reflect
+		var players = elements.map(function (element) {
+			return (0, _getPlayerJs2['default'])(element, window, document);
+		});
+		var settings = _extends({}, _defaultsJs2['default'], options);
 
-	/**
-  * Plays the animation
-  * @return {JogWheel} JogWheel instance
-  * @example
-  * import JogWheel from 'jogwheel';
-  * const element = document.querySelector('[data-animated]');
-  *
-  * // Instantiate a paused JogWheel instance on element
-  * const wheel = JogWheel.create(element, {
-  * 	paused: true
-  * });
-  *
-  * // Seek to middle of animation sequence and play
-  * wheel.seek(0.5).play();
-  */
+		this.__instance = {
+			elements: elements, players: players, settings: settings
+		};
+	}
 
 	_createClass(JogWheel, [{
 		key: 'play',
+
+		/**
+   * Plays the animation
+   * @return {JogWheel} JogWheel instance
+   * @example
+   * import JogWheel from 'jogwheel';
+   * const element = document.querySelector('[data-animated]');
+   *
+   * // Instantiate a paused JogWheel instance on element
+   * const wheel = JogWheel.create(element, {
+   * 	paused: true
+   * });
+   *
+   * // Seek to middle of animation sequence and play
+   * wheel.seek(0.5).play();
+   */
 		value: function play() {
-			this.player.play();
+			this.__instance.players.forEach(function (player) {
+				return player.play();
+			});
 			return this;
 		}
 
@@ -5180,7 +5188,9 @@ var JogWheel = (function () {
 	}, {
 		key: 'pause',
 		value: function pause() {
-			this.player.pause();
+			this.__instance.players.forEach(function (player) {
+				return player.pause();
+			});
 			return this;
 		}
 
@@ -5214,8 +5224,11 @@ var JogWheel = (function () {
 	}, {
 		key: 'seek',
 		value: function seek(progress) {
-			var duration = this.player.effect ? this.player.effect.activeDuration || this.player.effect.timing.duration : this.player._totalDuration;
-			this.player.currentTime = duration * progress;
+			this.__instance.players.forEach(function (player) {
+				var duration = player.effect ? player.effect.activeDuration || player.effect.timing.duration : player._totalDuration;
+				player.currentTime = duration * progress;
+			});
+
 			return this;
 		}
 
@@ -5280,11 +5293,21 @@ var JogWheel = (function () {
    */
 	}, {
 		key: 'render',
-		value: function render(styles) {
+		value: function render() {
 			// TODO: add documentation
 			// TODO: implement this, must proxy elemnt writes for e.g. react integration
-			this.settings.render(this.element, styles);
+			// this.settings.render(this.element, styles);
 			return this;
+		}
+	}, {
+		key: 'playState',
+		get: function get() {
+			return this.__instance.players[0].playState;
+		}
+	}, {
+		key: 'currentTime',
+		get: function get() {
+			return this.__instance.players[0].currentTime;
 		}
 	}]);
 

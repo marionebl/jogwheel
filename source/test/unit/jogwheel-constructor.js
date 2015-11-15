@@ -3,6 +3,7 @@ import tape from 'tape';
 import windowStub from './stubs/window.js';
 import documentStub from './stubs/document.js';
 import elementStub from './stubs/element.js';
+import nodeListStub from './stubs/node-list.js';
 
 import JogWheel from '../../library/index.js';
 
@@ -16,6 +17,11 @@ tape('constructor', t => {
 		const instance = new JogWheel(elementStub, {}, windowStub, documentStub);
 		instance.unplug();
 	}, 'should not throw when called with element');
+
+	t.doesNotThrow(() => {
+		const instance = new JogWheel(nodeListStub, {}, windowStub, documentStub);
+		instance.unplug();
+	}, 'should not throw when called with node-list');
 
 	t.end();
 });

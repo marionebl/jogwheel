@@ -29,18 +29,34 @@ tape('instance.seek', t => {
 	instance.seek(0.5);
 
 	t.equals(
-		instance.player.currentTime,
-		150,
-		'should jump to correct currentTime for paused-animation'
+		instance.progress,
+		0.5,
+		'should jump to correct progress for paused-animation'
 	);
+
+	instance.players.forEach(player => {
+		t.equals(
+			player.currentTime,
+			150,
+			'should jump each player instance to correct currentTime for paused-animation'
+		);
+	});
 
 	instance.seek(0);
 
 	t.equals(
-		instance.player.currentTime,
+		instance.progress,
 		0,
-		'should jump to correct currentTime for paused-animation'
+		'should jump to correct progress for paused-animation'
 	);
+
+	instance.players.forEach(player => {
+		t.equals(
+			player.currentTime,
+			0,
+			'should jump each player instance to correct currentTime for paused-animation'
+		);
+	});
 
 	const runningElement = {
 		...elementStub,
@@ -54,17 +70,17 @@ tape('instance.seek', t => {
 	runningInstance.seek(1);
 
 	t.equals(
-		runningInstance.player.currentTime,
-		300,
-		'should jump to correct currentTime for running-animation'
+		runningInstance.progress,
+		1,
+		'should jump to correct progress for running-animation'
 	);
 
 	runningInstance.seek(0.2);
 
 	t.equals(
-		runningInstance.player.currentTime,
-		60,
-		'should jump to correct currentTime for running-animation'
+		runningInstance.progress,
+		0.2,
+		'should jump to correct progress for running-animation'
 	);
 
 	const slowElement = {
@@ -79,16 +95,16 @@ tape('instance.seek', t => {
 	slowInstance.seek(0.5);
 
 	t.equals(
-		slowInstance.player.currentTime,
-		500,
-		'should jump to correct currentTime for slow-animation'
+		slowInstance.progress,
+		0.5,
+		'should jump to correct progress for slow-animation'
 	);
 
 	slowInstance.seek(0.75);
 
 	t.equals(
-		slowInstance.player.currentTime,
-		750,
-		'should jump to correct currentTime for slow-animation'
+		slowInstance.progress,
+		0.75,
+		'should jump to correct progress for slow-animation'
 	);
 });

@@ -28,7 +28,7 @@ tape('instance.pause', t => {
 	runningInstance.pause();
 
 	t.equals(
-		runningInstance.player.playState,
+		runningInstance.playState,
 		'paused',
 		'should pause a running JogWheel instance'
 	);
