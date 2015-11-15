@@ -73,7 +73,7 @@ module.exports = function (gulp, paths) {
 			var navigation = [
 				{
 					name: 'Home',
-					href: path.relative(file.path, './index.html')
+					href: path.relative(file.path, './').slice(1)
 				}
 			].concat(navigationFiles);
 
