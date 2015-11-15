@@ -18,7 +18,7 @@ Creates a new JogWheel instance
 
 **Parameters**
 
--   `element` **HTMLElement** HTMLElement to instantiate on
+-   `nodes` **Node or NodeList** Node or NodeList to instantiate on
 -   `options` **object** Options object
 -   `window` **[Window]** Global context to use (optional, default `global.window`)
 -   `document` **[Document]** Document context to use (optional, default `global.window`)

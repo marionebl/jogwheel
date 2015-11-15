@@ -11,7 +11,6 @@ var template = require('gulp-template');
 var extension = require('gulp-ext-replace');
 var rename = require('gulp-rename');
 
-
 var pkg = require('../package');
 var header = require('./partials/header');
 var footer = require('./partials/footer');
@@ -35,15 +34,15 @@ module.exports = function (gulp, paths) {
 
 	function getApiDocumentation(entry, formats, callback) {
 		async.waterfall([
-			function(cb) {
+			function (cb) {
 				documentationjs(entry, {
 					private: false,
 					github: false
 				}, cb);
 			},
-			function(comments, cb) {
-				async.reduce(formats, {}, function(result, format, callback){
-					documentationjs.formats[format](comments, {}, function(err, formatted){
+			function (comments, cb) {
+				async.reduce(formats, {}, function (result, format, callback) {
+					documentationjs.formats[format](comments, {}, function (err, formatted) {
 						if (err) {
 							return callback(err);
 						}
@@ -57,12 +56,12 @@ module.exports = function (gulp, paths) {
 
 	return function documentation(done) {
 		/* @desc build markdown from sources */
-		getApiDocumentation(paths.source.entry, ['md', 'json', 'html'], function(err, docs) {
+		getApiDocumentation(paths.source.entry, ['md', 'json', 'html'], function (err, docs) {
 			if (err) {
 				return done(err);
 			}
 
-			props.pkg.tag = shell.exec('git describe --abbrev=0 --tags', {silent:true}).output.split('\n')[0];
+			props.pkg.tag = shell.exec('git describe --abbrev=0 --tags', {silent: true}).output.split('\n')[0];
 
 			gulp.src(paths.source.documentation)
 				.pipe(cached('documentation'))
@@ -73,7 +72,7 @@ module.exports = function (gulp, paths) {
 				.pipe(template())
 				.pipe(remember('documentation'))
 				.pipe(extension('.md'))
-				.pipe(rename(function(pathInfo){
+				.pipe(rename(function (pathInfo) {
 					if (pathInfo.basename[0] === '_') {
 						pathInfo.basename = pathInfo.basename.slice(1);
 					}

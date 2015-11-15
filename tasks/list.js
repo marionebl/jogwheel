@@ -1,6 +1,6 @@
 var util = require('gulp-util');
 
-module.exports = function (gulp, paths) {
+module.exports = function (gulp) {
 	return function list() {
 		/* @desc list all public tasks */
 		var tasks = Object.keys(gulp.tasks || {})

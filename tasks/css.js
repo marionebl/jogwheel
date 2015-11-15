@@ -1,6 +1,6 @@
 var next = require('gulp-cssnext');
 
-module.exports = function (gulp, paths, options) {
+module.exports = function (gulp, paths) {
 	return function postcss() {
 		/* @desc postprocess css sources */
 		return gulp.src(paths.source['public-css'])

@@ -19,7 +19,6 @@ module.exports = function (gulp, paths, options, cli) {
 		var watchOptions = {fails: false, notifies: true, watch: true};
 		var transpile = require('./transpile')(gulp, paths, watchOptions, cli);
 		var documentation = require('./documentation')(gulp, paths, watchOptions, cli);
-		var test = require('./test')(gulp, paths, watchOptions, cli);
 		var lint = require('./lint')(gulp, paths, watchOptions, cli);
 		var copy = require('./copy')(gulp, paths, watchOptions, cli);
 		var copyStatic = require('./static')(gulp, paths, watchOptions, cli);
@@ -27,7 +26,7 @@ module.exports = function (gulp, paths, options, cli) {
 		var css = require('./css')(gulp, paths, watchOptions, cli);
 		var pack = require('./pack')(gulp, paths, watchOptions, cli);
 
-		var excludeGlobs = flatten(values(paths.exclude)).map(function(glob){
+		var excludeGlobs = flatten(values(paths.exclude)).map(function (glob) {
 			return '!' + glob;
 		});
 

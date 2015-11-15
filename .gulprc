@@ -50,6 +50,7 @@
       "documentation",
       "lint",
       "build",
+      "html",
       ["watch", ["default"]],
       ["list", ["help"]]
     ]

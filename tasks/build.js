@@ -1,6 +1,6 @@
 var sequence = require('gulp-sequence');
 
-module.exports = function (gulp, paths, options, cli) {
+module.exports = function (gulp, paths, options) {
 	options = Object.assign({}, options, {fails: true});
 
 	var args = [].slice.call(arguments);
@@ -10,7 +10,6 @@ module.exports = function (gulp, paths, options, cli) {
 	var lint = require('./lint').apply(null, args);
 	var documentation = require('./documentation').apply(null, args);
 	var transpile = require('./transpile').apply(null, args);
-	var test = require('./test').apply(null, args);
 	var copy = require('./copy').apply(null, args);
 	var copyStatic = require('./static').apply(null, args);
 	var html = require('./html').apply(null, args);
