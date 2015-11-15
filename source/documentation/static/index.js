@@ -2,9 +2,8 @@ import 'babel-polyfill';
 import 'web-animations-js/web-animations-next.min.js';
 import JogWheel from '../../library';
 
-let state = {
+/* let state = {
 	scrollTop: 0,
-	navigationTop: Infinity,
 	teaserBottom: 0,
 	teaserHeight: 0
 };
@@ -48,31 +47,22 @@ function distinct(fn, thisArg = this) {
 
 function loop(options) {
 	return function frame() {
-		const teaserDelta = clamp((state.teaserBottom - state.navigationTop) * -1, -Infinity, 0) + state.teaserHeight;
-		const navigationFixed = state.navigationTop < state.scrollTop;
-
-		if (teaserDelta !== 0) {
-			const fraction = round(clamp(1 - (teaserDelta / state.teaserHeight)), 5);
-			options.seekTeaser(fraction);
-		}
-
-		options.seekNavigationList(navigationFixed ? 1 : 0);
-		options.toggleNavigationList(navigationFixed);
+		const fraction = clamp(1 - state.teaserHeight - state.scrollTop / state.teaserHeight, 0, 1);
+		console.log(fraction);
+		options.seekTeaser(fraction);
 
 		options.window.requestAnimationFrame(frame);
 	};
 }
 
-function onScroll(context, data = {}) {
+function measure(context, data = {}) {
 	return () => {
 		const scrollTop = context.document.body.scrollTop;
-		const navigationTop = context.navigation.getBoundingClientRect().top;
 
 		state = {
 			...state,
 			...data,
-			scrollTop,
-			navigationTop
+			scrollTop
 		};
 	};
 }
@@ -85,41 +75,26 @@ function main(window, document) {
 	const teaserWheel = JogWheel.create(teaser);
 	teaserWheel.pause();
 
-	const navigation = document.querySelector('.jogwheel-navigation');
-
-	const navigationList = document.querySelector('.jogwheel-navigation-list');
-	const navigationListWheel = JogWheel.create(navigationList);
-
 	const options = {
 		window, document,
-		navigationList: navigationListWheel,
-		navigation,
 		logo: logoWheel,
 		teaser: teaserWheel,
-		seekTeaser: distinct(teaserWheel.seek, teaserWheel),
-		seekNavigationList: distinct(navigationListWheel.seek, navigationListWheel),
-		toggleNavigationList: distinct(fixed => {
-			if (fixed) {
-				navigation.style.height = `${navigationList.getBoundingClientRect().height}px`;
-				navigationList.classList.add('jogwheel-navigation-list--fixed');
-			} else {
-				navigation.style.height = '';
-				navigationList.classList.remove('jogwheel-navigation-list--fixed');
-			}
-		})
+		seekTeaser: distinct(teaserWheel.seek, teaserWheel)
 	};
 
 	const teaserRect = teaser.getBoundingClientRect();
-
-	document.addEventListener('scroll', onScroll(options, {
+	const data = {
 		teaserHeight: teaserRect.height,
 		teaserBottom: teaserRect.bottom
-	}));
+	};
 
+	document.addEventListener('scroll', measure(options, data));
+
+	measure(options, data)();
 	loop(options)();
 
 	window.JogWheel = JogWheel;
 	window.teaser = teaserWheel;
 }
 
-main(global, global.document);
+main(global, global.document); */

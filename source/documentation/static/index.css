@@ -6,16 +6,17 @@
 @custom-media --larger (max-width: 80em);
 
 @custom-selector :--githubteaser .jogwheel-teaser;
+@custom-selector :--mainnavigation .jogwheel-main-navigation;
+@custom-selector :--mainnavigationlist .jogwheel-main-navigation-list;
 @custom-selector :--header .jogwheel-header;
 @custom-selector :--claim .jogwheel-claim;
 @custom-selector :--logo .jogwheel-logo;
 @custom-selector :--name .jogwheel-name;
 @custom-selector :--navigation .jogwheel-navigation;
-@custom-selector :--navigation-list--fixed .jogwheel-navigation-list.jogwheel-navigation-list--fixed;
-@custom-selector :--navigationlist .jogwheel-navigation-list;
-@custom-selector :--navigationitem .jogwheel-navigation-list b;
-@custom-selector :--navigationlink .jogwheel-navigation-list b a;
 @custom-selector :--archiveteaser .jogwheel-archive-teaser;
+@custom-selector :--saucelabs a[href="https://saucelabs.com/u/jogwheel-unit"];
+@custom-selector :--lastseparator body > hr:last-of-type;
+@custom-selector :--lastparagraph body > p:last-of-type;
 
 @keyframes pan {
 	0% {
@@ -99,12 +100,58 @@ hr {
 	margin-top: 20px;
 }
 
+blockquote {
+	margin-bottom: 0;
+	padding: .5em 1em 1em 1em;
+}
+
+blockquote p {
+	margin: 0;
+}
+
+blockquote + p {
+	padding: 0 1em .5em 1em;
+}
+
+blockquote, blockquote + p {
+	border-left: 5px solid rgba(255, 255, 255, 0.2);
+	margin-left: 0;
+	margin-top: 0;
+}
+
+:--mainnavigation {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: var(--backgroundColor);
+	overflow: auto;
+}
+
+:--mainnavigationlist {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-align: left;
+	border-bottom: 1px solid var(--backgroundColor);
+}
+
+:--mainnavigationlist .jogwheel-item {
+	display: inline-block;
+	border-bottom: 7px solid transparent;
+	transition: .3s border-color ease-in-out;
+}
+
+:--mainnavigationlist .jogwheel-item.jogwheel-item--active {
+	border-color: var(--primaryColor);;
+}
+
+:--mainnavigationlist a {
+	padding: 20px 10px;
+	text-align: center;
+}
+
 :--githubteaser {
-	position: fixed;
-	left: 0;
-	top: 0;
-	right: 0;
-	z-index: 2;
+	margin: 0 -var(--sPadding);
 	text-align: center;
 	background: #000;
 	animation: pan 1s linear;
@@ -125,7 +172,7 @@ hr {
 :--header	{
 	display: flex;
 	flex-direction: column;
-	padding-top: 100px;
+	padding-top: 60px;
 	margin: 0 -var(--sPadding);
 	background: var(--primaryColor);
 	color: var(--backgroundColor);
@@ -135,9 +182,6 @@ hr {
 	position: relative;
 	z-index: 1;
 	order: 1;
-	animation: fade .5s ease-in;
-	animation-play-state: paused;
-	animation-fill-mode: both;
 }
 
 :--name {
@@ -164,71 +208,7 @@ hr {
 }
 
 :--navigation {
-	order: 4;
-	color: #fff;
-	background: #fff;
-}
-
-:--navigation-list--fixed {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	margin: 0 auto;
-}
-
-:--navigation-list--fixed:after {
-	opacity: 1;
-	width: 100%;
-	transition: width 1s ease-in-out;
-}
-
-:--navigationlist {
-	text-align: center;
-	overflow: auto;
-	max-width: calc(80em + 40px);
-	background: #fff;
-	white-space: nowrap;
-}
-
-:--navigationlist > * {
-	position: relative;
-	display: inline-block;
-	padding: 0 5px;
-	z-index: 1;
-	flex-shrink: 0;
-}
-
-.:--navigationlist:before {
-	content: '';
-	width: 50px;
-	height: 50px;
-	flex-shrink: 0;
-}
-
-:--navigationlist:after {
-	content: '';
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 50%;
-	opacity: 0;
-	width: 0;
-	height: 58px;
-	background: #fff;
-	transform: translate(-50%, 0);
-	transition: opacity .3s ease-in-out, width 1ms .3s;
-}
-
-:--navigationitem {
-	flex-grow: 1;
-	font-weight: normal;
-}
-
-:--navigationlink {
-	display: block;
-	padding: 20px;
-	white-space: nowrap;
+	display: none;
 }
 
 :--archiveteaser {
@@ -239,22 +219,22 @@ hr {
 	color: var(--backgroundColor);
 }
 
-a[href="https://saucelabs.com/u/jogwheel-unit"] {
+:--saucelabs {
 	display: block;
 	width: 100%;
 	max-width: 800px;
 	margin: 20px auto;
 }
 
-a[href="https://saucelabs.com/u/jogwheel-unit"] img {
+:--saucelabs img {
 	width: 100%;
 }
 
-body > hr:last-of-type {
+:--lastseparator {
 	display: none;
 }
 
-body > p:last-of-type {
+:--lastparagraph {
 	margin-top: 160px;
 	margin-bottom: 0;
 	margin-left: -var(--sPadding);

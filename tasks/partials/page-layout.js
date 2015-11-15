@@ -12,11 +12,19 @@ module.exports = function (props) {
 		<link rel="icon" type="image/png" href="${props.static}/${props.pkg.config.pages.pngicon}" />
 	</head>
 	<body>
-		<aside class="jogwheel-teaser">
+		<div class="jogwheel-teaser">
 			<a href="https://github.com/${props.pkg.config.documentation.slug}#-${props.pkg.name}">
 				Fork me on Github
 			</a>
-		</aside>
+			<nav class="jogwheel-main-navigation">
+				<ul class="jogwheel-main-navigation-list">
+					${props.navigation.map(function(item) {
+						var className = item.active ? 'jogwheel-item jogwheel-item--active' : 'jogwheel-item';
+						return `<li class="${className}"><a href="${item.href}">${item.name}</a></li>`
+					}).join('\n')}
+				</ul>
+			</nav>
+		</div>
 		${props.body}
 		<aside class="jogwheel-archive-teaser">
 			Looking for older versions? Search our <a href="./archives/index.html">archives</a>.
