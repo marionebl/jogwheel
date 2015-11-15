@@ -11,11 +11,21 @@
 		<link rel="icon" type="image/png" href="../static/jogwheel.png" />
 	</head>
 	<body>
-		<aside class="jogwheel-teaser">
+		<div class="jogwheel-teaser">
 			<a href="https://github.com/marionebl/jogwheel#-jogwheel">
 				Fork me on Github
 			</a>
-		</aside>
+			<nav class="jogwheel-main-navigation">
+				<ul class="jogwheel-main-navigation-list">
+					<li class="jogwheel-item"><a href="../../index.html">Home</a></li>
+<li class="jogwheel-item"><a href="./../contributing.html">Contributing</a></li>
+<li class="jogwheel-item jogwheel-item--active"><a href="./api.html">Api</a></li>
+<li class="jogwheel-item"><a href="./roadmap.html">Roadmap</a></li>
+<li class="jogwheel-item"><a href="./../examples/index.html">Examples</a></li>
+<li class="jogwheel-item"><a href="./../license.html">License</a></li>
+				</ul>
+			</nav>
+		</div>
 		<header class="jogwheel-header">
 	<blockquote class="jogwheel-claim">take control over your css keyframe animations</blockquote>
 	<div class="jogwheel-logo" align="center">
@@ -31,7 +41,7 @@
 <p>Creates a new JogWheel instance</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><code>element</code> <strong>HTMLElement</strong> HTMLElement to instantiate on</li>
+<li><code>nodes</code> <strong>Node or NodeList</strong> Node or NodeList to instantiate on</li>
 <li><code>options</code> <strong>object</strong> Options object</li>
 <li><code>window</code> <strong>[Window]</strong> Global context to use (optional, default <code>global.window</code>)</li>
 <li><code>document</code> <strong>[Document]</strong> Document context to use (optional, default <code>global.window</code>)</li>
