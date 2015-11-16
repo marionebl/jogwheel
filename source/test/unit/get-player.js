@@ -25,7 +25,7 @@ tape('get-player', t => {
 	const pausedInstance = getPlayer(pausedElement, windowStub, documentStub);
 
 	t.equals(
-		pausedInstance.playState,
+		pausedInstance.player.playState,
 		'paused',
 		'should return a paused AnimationPlayer instance'
 	);
@@ -41,7 +41,7 @@ tape('get-player', t => {
 	const runningInstance = getPlayer(runningElement, windowStub, documentStub);
 
 	t.equals(
-		runningInstance.playState,
+		runningInstance.player.playState,
 		'running',
 		'should return a running AnimationPlayer instance'
 	);
@@ -49,9 +49,9 @@ tape('get-player', t => {
 	const fastInstance = getPlayer(runningElement, windowStub, documentStub);
 
 	t.equals(
-		fastInstance.effect.activeDuration,
+		fastInstance.duration,
 		300,
-		'should return a running AnimationPlayer with a correct activeDuration'
+		'should return a running AnimationPlayer with correct duration'
 	);
 
 	const slowElement = {
@@ -65,9 +65,9 @@ tape('get-player', t => {
 	const slowInstance = getPlayer(slowElement, windowStub, documentStub);
 
 	t.equals(
-		slowInstance.effect.activeDuration,
+		slowInstance.duration,
 		1000,
-		'should return a running AnimationPlayer with a correct activeDuration'
+		'should return a running AnimationPlayer with correct duration'
 	);
 
 	t.end();

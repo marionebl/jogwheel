@@ -53,8 +53,10 @@ class JogWheel {
 			throw new Error(`Could not construct JogWheel, missing element`);
 		}
 
+		const {player, duration} = getPlayer(element, window, document);
+		this.player = player;
+		this.duration = duration;
 		this.element = element;
-		this.player = getPlayer(element, window, document);
 		this.settings = {...defaults, ...options};
 	}
 
@@ -126,8 +128,7 @@ class JogWheel {
 	 * loop();
 	 */
 	seek(progress) {
-		const duration = this.player.effect ? this.player.effect.activeDuration || this.player.effect.timing.duration : this.player._totalDuration;
-		this.player.currentTime = duration * progress;
+		this.player.currentTime = this.duration * progress;
 		return this;
 	}
 
