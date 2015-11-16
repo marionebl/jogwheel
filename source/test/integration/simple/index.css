@@ -15,6 +15,7 @@
 	text-align: center;
 	border-radius: 50%;
 	background: wheat;
-	animation: simple 3s infinite;
+	animation: simple 3s;
+	animation-iteration-count: infinite;
 	animation-fill-mode: both;
 }

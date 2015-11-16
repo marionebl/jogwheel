@@ -1,4 +1,4 @@
-import 'web-animations-js/web-animations-next.min.js';
+import 'web-animations-js';
 
 const tape = require('tape');
 const JogWheel = require('jogwheel');
@@ -12,7 +12,7 @@ tape('simple integration', t => {
 	 * - rewind to 0
 	 * - play
 	 */
-	const wheel = JogWheel.create(element);
+	const wheel = JogWheel.create(element, {}, window, document);
 	t.doesNotThrow(() => wheel.pause(), 'Pausing does not throw');
 	t.doesNotThrow(() => wheel.seek(0), 'Seeking does not throw');
 
@@ -20,4 +20,6 @@ tape('simple integration', t => {
 		wheel.play();
 		t.end();
 	}, 10);
+
+	console.log(wheel);
 });

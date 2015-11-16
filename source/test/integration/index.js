@@ -7,7 +7,8 @@ import JogWheel from '../../library';
 
 const tests = [
 	'simple',
-	'keyword'
+	'keyword',
+	'iteration-count'
 ];
 const base = './distribution/test/integration';
 
@@ -159,7 +160,7 @@ async function main() {
 						function require(module) {
 							if (module === 'tape') {
 								return window.__jogWheelTape;
-							} else if (module === 'web-animations-js/web-animations-next.min.js') {
+							} else if (module.indexOf('web-animations-js') > -1) {
 								HTMLElement.prototype.animate = window.___jogWheelElement.animate;
 								HTMLElement.prototype.getAnimations = window.___jogWheelElement.getAnimations
 								return;

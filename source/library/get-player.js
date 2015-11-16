@@ -22,6 +22,10 @@ function getAnimationDuration(CSSAnimationDuration = '0s') {
  * @private
  */
 function getAnimationIterations(CSSIterationCount = '1') {
+	if (CSSIterationCount === 'infinite') {
+		return Infinity;
+	}
+
 	return parseInt(CSSIterationCount, 10);
 }
 
@@ -30,7 +34,7 @@ function getAnimationIterations(CSSIterationCount = '1') {
  * @param element {HTMLElement} DOM element to scan for an applied CSS animation
  * @param window {Window} [window=global.window] Global context to use
  * @param document {Document} [document=global.window] Document context to use
- * @return {Object} Configured web animation player instance
+ * @return {Object} `player` and `duration` attached to element
  * @private
  */
 export default function getPlayer(element, window = global.window, document = global.document) {
@@ -74,5 +78,8 @@ export default function getPlayer(element, window = global.window, document = gl
 		player.play();
 	}
 
-	return player;
+	return {
+		player,
+		duration: options.duration
+	};
 }
