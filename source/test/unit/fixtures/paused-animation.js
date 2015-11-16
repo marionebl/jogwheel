@@ -1,6 +1,6 @@
 export default {
 	animationName: 'default-animation',
 	animationPlayState: 'paused',
-	animationEasing: 'linear',
+	animationTimingFunction: 'linear',
 	animationDuration: '300ms'
 };

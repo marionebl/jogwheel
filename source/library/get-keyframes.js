@@ -24,6 +24,7 @@ const empty = [];
  * Cast array-like objects and collections to Array
  * @param  {Object} arrayLike array-like to cast to Array
  * @return {Array} Array cast from arrayLike
+ * @private
  */
 function toArray(arrayLike) {
 	return empty.slice.call(arrayLike); // eslint-disable-line prefer-reflect
@@ -95,6 +96,7 @@ export function parseKeyframeKey(keyText) {
  * Gets map of defined styles from CSS2Properties object
  * @param  {CSS2Properties} properties CSS2Properties object to return defined styles from
  * @return {object}       plain object containing defined styles as key value pairs
+ * @private
  */
 export function getDefinedStyles(properties) {
 	const styles = {};

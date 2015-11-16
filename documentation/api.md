@@ -145,26 +145,6 @@ wheel.play();
 
 Returns **JogWheel** JogWheel instance
 
-# getDefinedStyles
-
-Gets map of defined styles from CSS2Properties object
-
-**Parameters**
-
--   `properties` **CSS2Properties** CSS2Properties object to return defined styles from
-
-Returns **object** plain object containing defined styles as key value pairs
-
-# toArray
-
-Cast array-like objects and collections to Array
-
-**Parameters**
-
--   `arrayLike` **Object** array-like to cast to Array
-
-Returns **Array** Array cast from arrayLike
-
 
 
 ---
