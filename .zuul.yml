@@ -1,5 +1,13 @@
 ui: tape
 browsers:
+  - name: iphone
+    version: 8.0
+  - name: iphone
+    version: 9.0
+  - name: android
+    version: latest
+  - name: android
+    version: 4.4
   - name: chrome
     version: -2..latest
     platform: Linux
@@ -12,10 +20,4 @@ browsers:
     version: latest
   - name: safari
     version: '7..latest'
-  - name: iphone
-    version: '[8.0, 9.0]'
-  - name: android
-    version: latest
-  - name: android
-    version: 4.4
 html: distribution/test/integration/index.html

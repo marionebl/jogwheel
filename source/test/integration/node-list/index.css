@@ -1,0 +1,32 @@
+@keyframes spin {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(-360deg);
+	}
+}
+
+[data-animated] {
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 100px;
+	text-align: center;
+	border-radius: 50%;
+	background: wheat;
+	animation: spin 1s linear;
+	animation-iteration-count: 100;
+	animation-play-state: paused;
+	animation-fill-mode: both;
+}
+
+[data-animated="item-2"] {
+	animation-duration: 30s;
+}
+
+[data-animated="item-2"] {
+	animation-duration: .3s;
+}

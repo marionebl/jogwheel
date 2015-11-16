@@ -8,6 +8,10 @@ const windowStub = {
 	},
 	getComputedStyle(element) {
 		return element.style || {};
+	},
+	NodeList(elements) {
+		elements.forEach((element, index) => this[index] = element);
+		this.length = elements.length;
 	}
 };
 

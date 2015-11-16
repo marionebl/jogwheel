@@ -8,7 +8,8 @@ import JogWheel from '../../library';
 const tests = [
 	'simple',
 	'keyword',
-	'iteration-count'
+	'iteration-count',
+	'node-list'
 ];
 const base = './distribution/test/integration';
 

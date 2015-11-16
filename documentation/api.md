@@ -18,7 +18,7 @@ Creates a new JogWheel instance
 
 **Parameters**
 
--   `element` **HTMLElement** HTMLElement to instantiate on
+-   `nodes` **Node or NodeList** Node or NodeList to instantiate on
 -   `options` **object** Options object
 -   `window` **[Window]** Global context to use (optional, default `global.window`)
 -   `document` **[Document]** Document context to use (optional, default `global.window`)
@@ -34,6 +34,10 @@ const wheel = new JogWheel(element);
 ```
 
 Returns **JogWheel** JogWheel instance
+
+# durations
+
+Returns **array** durations used by JogWheel instance
 
 # pause
 
@@ -76,6 +80,18 @@ wheel.seek(0.5).play();
 ```
 
 Returns **JogWheel** JogWheel instance
+
+# players
+
+Returns **array** WebAnimationPlayer instances by JogWheel instance
+
+# playState
+
+Returns **string** playState, either `running` or `paused`
+
+# progress
+
+Returns **float** progress in fraction of 1 [0..1]
 
 # seek
 

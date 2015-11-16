@@ -26,17 +26,13 @@ class JogWheel {
 	 * wheel.play();
 	 */
 	static create(...args) {
-		return Object.seal(Object.freeze(new JogWheel(...args)));
+		return new JogWheel(...args);
 	}
-
-	static _cache = {
-		media: null
-	};
 
 	/**
 	 * Creates a new JogWheel instance
 	 * @constructor
-	 * @param  {HTMLElement} element  HTMLElement to instantiate on
+	 * @param  {Node|NodeList} nodes  Node or NodeList to instantiate on
 	 * @param  {object} options Options object
 	 * @param  {Window} [window=global.window] Global context to use
 	 * @param  {Document} [document=global.window] Document context to use
@@ -48,16 +44,59 @@ class JogWheel {
 	 * // Instantiate a JogWheel instance on element
 	 * const wheel = new JogWheel(element);
 	 */
-	constructor(element, options, window = global.window, document = global.document) {
-		if (!element) {
+	constructor(nodes, options, window = global.window, document = global.document) {
+		if (!nodes) {
 			throw new Error(`Could not construct JogWheel, missing element`);
 		}
 
-		const {player, duration} = getPlayer(element, window, document);
-		this.player = player;
-		this.duration = duration;
-		this.element = element;
-		this.settings = {...defaults, ...options};
+		const elements = nodes instanceof window.NodeList ? [].slice.call(nodes) : [nodes]; // eslint-disable-line prefer-reflect
+		const configurations = elements.map(element => getPlayer(element, window, document));
+		const players = configurations.map(configuration => configuration.player);
+		const durations = configurations.map(configuration => configuration.duration);
+		const settings = {...defaults, ...options};
+
+		this.__instance = {
+			elements, players, durations, settings
+		};
+	}
+
+	/**
+	 * @readonly
+	 * @return {string} playState, either `running` or `paused`
+	 */
+	get playState() {
+		// JogWheel does not support asynchronously running animations
+		// in one instance, thus fetching the first player is enough
+		const player = this.players[0];
+		return player.playState;
+	}
+
+	/**
+	 * @readonly
+	 * @return {float} progress in fraction of 1 [0..1]
+	 */
+	get progress() {
+		// JogWheel does not support asynchronously running animations
+		// in one instance, thus fetching the first player is enough
+		const player = this.players[0];
+		const duration = this.durations[0];
+		return player.currentTime / duration;
+	}
+
+	/**
+	 * @readonly
+	 * @return {array} WebAnimationPlayer instances by JogWheel instance
+	 */
+	get players() {
+		return this.__instance.players;
+	}
+
+	/**
+	 * @readonly
+	 * @return {array} durations used by JogWheel instance
+	 */
+	get durations() {
+		return this.__instance.durations;
 	}
 
 	/**
@@ -76,7 +115,7 @@ class JogWheel {
 	 * wheel.seek(0.5).play();
 	 */
 	play() {
-		this.player.play();
+		this.players.forEach(player => player.play());
 		return this;
 	}
 
@@ -96,7 +135,7 @@ class JogWheel {
 	 * wheel.pause().seek(0);
 	 */
 	pause() {
-		this.player.pause();
+		this.players.forEach(player => player.pause());
 		return this;
 	}
 
@@ -128,7 +167,9 @@ class JogWheel {
 	 * loop();
 	 */
 	seek(progress) {
-		this.player.currentTime = this.duration * progress;
+		this.__instance.players.forEach((player, index) => {
+			player.currentTime = this.durations[index] * progress;
+		});
 		return this;
 	}
 
@@ -187,10 +228,10 @@ class JogWheel {
 	 * @return {JogWheel} JogWheel instance
 	 * @private
 	 */
-	render(styles) {
+	render() {
 		// TODO: add documentation
-		// TODO: implement this, must proxy elemnt writes for e.g. react integration
-		this.settings.render(this.element, styles);
+		// TODO: implement this, must proxy element writes for e.g. react integration
+		// this.settings.render(this.element, styles);
 		return this;
 	}
 }

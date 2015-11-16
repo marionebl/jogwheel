@@ -20,6 +20,4 @@ tape('simple integration', t => {
 		wheel.play();
 		t.end();
 	}, 10);
-
-	console.log(wheel);
 });

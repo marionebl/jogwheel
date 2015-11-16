@@ -20,6 +20,7 @@ module.exports = function (gulp, paths, options, cli) {
 		var transpile = require('./transpile')(gulp, paths, watchOptions, cli);
 		var documentation = require('./documentation')(gulp, paths, watchOptions, cli);
 		var lint = require('./lint')(gulp, paths, watchOptions, cli);
+		var test = require('./test')(gulp, paths, watchOptions, cli);
 		var copy = require('./copy')(gulp, paths, watchOptions, cli);
 		var copyStatic = require('./static')(gulp, paths, watchOptions, cli);
 		var html = require('./html')(gulp, paths, watchOptions, cli);
@@ -44,8 +45,18 @@ module.exports = function (gulp, paths, options, cli) {
 								task(copyStatic, 'copy-static'),
 								task(lint),
 								task(css),
-								task(sequence(task(documentation), task(html)), 'docs-html'),
-								task(sequence(task(transpile), task(pack)), 'transpile-pack')
+								task(sequence(
+									task(documentation),
+									task(html)), 'docs-html'),
+								task(sequence(
+									task(transpile),
+									task(sequence(
+										[
+											task(pack),
+											task(test)
+										]
+									), 'test-pack')),
+									'transpile-test-pack')
 							]
 						)(onError(watchOptions));
 					}
