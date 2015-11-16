@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 
+import './get-animation-properties';
 import './get-defined-styles';
 import './get-keyframe-declarations';
 import './get-keyframes';
