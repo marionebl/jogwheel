@@ -16,16 +16,16 @@
     "test:local:integration": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry --phantom",
     "test:local:browser": "$npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry --phantom",
     "test:remote": "parallelshell \"npm run test:remote:unit\" \"npm run test:remote:browser\" && npm run test:remote:integration",
-    "test:remote:unit": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request && $npm_package_config_jogwheel_task_runner test || echo ''",
-    "test:remote:integration": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry || echo ''",
-    "test:remote:browser": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry || echo ''",
+    "test:remote:unit": "$npm_package_config_jogwheel_task_runner test",
+    "test:remote:integration": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request --changed=$npm_package_config_jogwheel_functional_files && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry || echo ''",
+    "test:remote:browser": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request --changed=$npm_package_config_jogwheel_functional_files && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry || echo ''",
     "coveralls": "$npm_package_config_jogwheel_when_ci --leader && (istanbul cover distribution/test/unit/index.js && cat coverage/lcov.info | coveralls) || echo ''",
     "commit": "git-cz",
     "commitmsg": "$npm_package_config_jogwheel_when_ci && $npm_package_config_jogwheel_validate_commit || $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
     "env": "env",
     "binaries": "ls node_modules/.bin/",
     "semantic-release": "(semantic-release pre && npm publish && semantic-release post) && GH_PAGES_ARCHIVE=\"true\" npm run pages || GH_PAGES_ARCHIVE=\"false\" npm run pages",
-    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --master && $npm_package_config_jogwheel_pages_update --pull-request || echo ''"
+    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --master --dirty=public/**/* && $npm_package_config_jogwheel_pages_update --pull-request || echo ''"
   },
   "homepage": "https://github.com/marionebl/jogwheel#readme",
   "repository": {
@@ -59,7 +59,9 @@
       "when-ci": "node distribution/scripts/when-ci",
       "unit-test-entry": "distribution/test/unit/index.js",
       "integration-test-entry": "distribution/test/integration/index.js",
-      "pages-update": "node distribution/scripts/pages-update.js"
+      "pages-update": "node distribution/scripts/pages-update.js",
+      "functional-files": "package.json,.babelrc,.zuul.yml,browserslist,source/library/**/*,source/test/**/*",
+      "public-files": "public/**/*,!public/**/*.tpl"
     },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
