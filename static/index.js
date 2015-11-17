@@ -4632,7 +4632,7 @@ function main(window, document) {
 
 main(global, global.document); */
 
-},{"../../library":197,"babel-polyfill":1,"web-animations-js/web-animations-next.min.js":191}],193:[function(require,module,exports){
+},{"../../library":198,"babel-polyfill":1,"web-animations-js/web-animations-next.min.js":191}],193:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4649,6 +4649,43 @@ exports["default"] = {
 module.exports = exports["default"];
 
 },{}],194:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+exports['default'] = getAnimationProperties;
+
+var _getVendorPrefix = require('./get-vendor-prefix');
+
+var propertyNames = ['name', 'duration', 'iterationCount', 'timingFunction', 'fillMode', 'playState'];
+
+/**
+ * Returns applicable animation properties for a given node
+ * @param  {Node} node Node to read animation properties from
+ * @param  {Window} window  Global context to use
+ * @return {Object}         Applicable animation properties for node in window
+ * @private
+ */
+
+function getAnimationProperties(node) {
+	var window = arguments.length <= 1 || arguments[1] === undefined ? global.window : arguments[1];
+	var document = arguments.length <= 2 || arguments[2] === undefined ? global.document : arguments[2];
+
+	var styles = window.getComputedStyle(node);
+
+	return propertyNames.reduce(function (properties, propertyName) {
+		var cssName = 'animation' + propertyName[0].toUpperCase() + propertyName.slice(1);
+		properties[propertyName] = styles[(0, _getVendorPrefix.prefix)(cssName, window, document)];
+		return properties;
+	}, {});
+}
+
+module.exports = exports['default'];
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./get-vendor-prefix":197}],195:[function(require,module,exports){
 (function (global){
 // CSSRule type enums
 'use strict';
@@ -4695,6 +4732,7 @@ var empty = [];
  * Cast array-like objects and collections to Array
  * @param  {Object} arrayLike array-like to cast to Array
  * @return {Array} Array cast from arrayLike
+ * @private
  */
 function toArray(arrayLike) {
 	return empty.slice.call(arrayLike); // eslint-disable-line prefer-reflect
@@ -4782,6 +4820,7 @@ function parseKeyframeKey(keyText) {
  * Gets map of defined styles from CSS2Properties object
  * @param  {CSS2Properties} properties CSS2Properties object to return defined styles from
  * @return {object}       plain object containing defined styles as key value pairs
+ * @private
  */
 
 function getDefinedStyles(properties) {
@@ -4848,7 +4887,7 @@ function getKeyframes(animationName) {
 // Mixin with extracted keyframe styling
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],195:[function(require,module,exports){
+},{}],196:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -4864,11 +4903,15 @@ exports['default'] = getPlayer;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _getVendorPrefix = require('./get-vendor-prefix');
+
 var _getKeyframes = require('./get-keyframes');
 
 var _getKeyframes2 = _interopRequireDefault(_getKeyframes);
 
-var _getVendorPrefix = require('./get-vendor-prefix');
+var _getAnimationProperties2 = require('./get-animation-properties');
+
+var _getAnimationProperties3 = _interopRequireDefault(_getAnimationProperties2);
 
 /**
  * Converts CSS animation duration string to integer holding duration in milliseconds
@@ -4892,11 +4935,27 @@ function getAnimationDuration() {
 }
 
 /**
+ * Converts CSS animation iteration count string to integer
+ * @param CSSIterationCount {string} [CSSIterationCount='1'] CSS animation iteration count
+ * @return {integer}
+ * @private
+ */
+function getAnimationIterations() {
+	var CSSIterationCount = arguments.length <= 0 || arguments[0] === undefined ? '1' : arguments[0];
+
+	if (CSSIterationCount === 'infinite') {
+		return Infinity;
+	}
+
+	return parseInt(CSSIterationCount, 10);
+}
+
+/**
  * Gets a web animation player based on the currently assigned CSS animation
  * @param element {HTMLElement} DOM element to scan for an applied CSS animation
  * @param window {Window} [window=global.window] Global context to use
  * @param document {Document} [document=global.window] Document context to use
- * @return {Object} Configured web animation player instance
+ * @return {Object} `player` and `duration` attached to element
  * @private
  */
 
@@ -4904,49 +4963,41 @@ function getPlayer(element) {
 	var window = arguments.length <= 1 || arguments[1] === undefined ? global.window : arguments[1];
 	var document = arguments.length <= 2 || arguments[2] === undefined ? global.document : arguments[2];
 
-	function prefix(propertyName) {
-		return (0, _getVendorPrefix.prefix)(propertyName, window, document);
-	}
-
-	// TODO: Make this a function, test it
 	// Read all animation related styles from element, respect prefixes
 
-	var _window$getComputedStyle = window.getComputedStyle(element);
+	var _getAnimationProperties = (0, _getAnimationProperties3['default'])(element, window, document);
 
-	var animationName = _window$getComputedStyle[prefix('animationName')];
-
-	var CSSDuration = _window$getComputedStyle[prefix('animationDuration')];
-
-	var iterations = _window$getComputedStyle[prefix('animationIterations')];
-
-	var easing = _window$getComputedStyle[prefix('animationEasing')];
-
-	var fill = _window$getComputedStyle[prefix('animationFillMode')];
-
-	var playState = _window$getComputedStyle[prefix('animationPlayState')];
+	var name = _getAnimationProperties.name;
+	var duration = _getAnimationProperties.duration;
+	var iterationCount = _getAnimationProperties.iterationCount;
+	var timingFunction = _getAnimationProperties.timingFunction;
+	var fillMode = _getAnimationProperties.fillMode;
+	var playState = _getAnimationProperties.playState;
 
 	// Generate keyframes based on the assigned animationName
-	var keyframes = (0, _getKeyframes2['default'])(animationName, window, document);
+	var keyframes = (0, _getKeyframes2['default'])(name, window, document);
 
 	// TODO: Should bail/stub? here if no keyframes are found
 	// Construct options for the webanimation player instance
 	var options = {
-		duration: getAnimationDuration(CSSDuration),
-		iterations: iterations, easing: easing, fill: fill
+		duration: getAnimationDuration(duration),
+		iterations: getAnimationIterations(iterationCount),
+		fill: fillMode,
+		easing: timingFunction
 	};
 
-	// Sort by offset and remove duplicates
 	// TODO: Test get-keyframes for sorting and duplication
+	// Sort by offset and remove duplicates
 	keyframes.sort(function (a, b) {
 		return a.offset - b.offset;
 	});
 
 	// Construct webanimation player instance with keyframes and options
 	var player = element.animate(keyframes, options);
-	element.style[prefix('animationName')] = 'jogwheel-none';
 
 	// Detach the former animation to prevent problems with polyfill
-	player.__jogwheelName = animationName;
+	element.style[(0, _getVendorPrefix.prefix)('animationName', window, document)] = '__jogwheelName-' + name;
+	player.__jogwheelName = name;
 
 	// Pause or play the webanimation player instance based on CSS animationPlayState
 	if (playState === 'paused') {
@@ -4955,13 +5006,16 @@ function getPlayer(element) {
 		player.play();
 	}
 
-	return player;
+	return {
+		player: player,
+		duration: options.duration
+	};
 }
 
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./get-keyframes":194,"./get-vendor-prefix":196}],196:[function(require,module,exports){
+},{"./get-animation-properties":194,"./get-keyframes":195,"./get-vendor-prefix":197}],197:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -5033,7 +5087,7 @@ function prefix(propertyName) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],197:[function(require,module,exports){
+},{}],198:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -5098,13 +5152,8 @@ var JogWheel = (function () {
 				args[_key] = arguments[_key];
 			}
 
-			return Object.seal(Object.freeze(new (_bind.apply(JogWheel, [null].concat(args)))()));
+			return new (_bind.apply(JogWheel, [null].concat(args)))();
 		}
-	}, {
-		key: '__cache',
-		value: {
-			media: null
-		},
 
 		/**
    * Creates a new JogWheel instance
@@ -5121,7 +5170,6 @@ var JogWheel = (function () {
    * // Instantiate a JogWheel instance on element
    * const wheel = new JogWheel(element);
    */
-		enumerable: true
 	}]);
 
 	function JogWheel(nodes, options) {
@@ -5135,15 +5183,26 @@ var JogWheel = (function () {
 		}
 
 		var elements = nodes instanceof window.NodeList ? [].slice.call(nodes) : [nodes]; // eslint-disable-line prefer-reflect
-		var players = elements.map(function (element) {
+		var configurations = elements.map(function (element) {
 			return (0, _getPlayerJs2['default'])(element, window, document);
+		});
+		var players = configurations.map(function (configuration) {
+			return configuration.player;
+		});
+		var durations = configurations.map(function (configuration) {
+			return configuration.duration;
 		});
 		var settings = _extends({}, _defaultsJs2['default'], options);
 
 		this.__instance = {
-			elements: elements, players: players, settings: settings
+			elements: elements, players: players, durations: durations, settings: settings
 		};
 	}
+
+	/**
+  * @readonly
+  * @return {string} playState, either `running` or `paused`
+  */
 
 	_createClass(JogWheel, [{
 		key: 'play',
@@ -5164,7 +5223,7 @@ var JogWheel = (function () {
    * wheel.seek(0.5).play();
    */
 		value: function play() {
-			this.__instance.players.forEach(function (player) {
+			this.players.forEach(function (player) {
 				return player.play();
 			});
 			return this;
@@ -5188,7 +5247,7 @@ var JogWheel = (function () {
 	}, {
 		key: 'pause',
 		value: function pause() {
-			this.__instance.players.forEach(function (player) {
+			this.players.forEach(function (player) {
 				return player.pause();
 			});
 			return this;
@@ -5224,11 +5283,13 @@ var JogWheel = (function () {
 	}, {
 		key: 'seek',
 		value: function seek(progress) {
-			this.__instance.players.forEach(function (player) {
-				var duration = player.effect ? player.effect.activeDuration || player.effect.timing.duration : player._totalDuration;
-				player.currentTime = duration * progress;
-			});
+			// istanbul ignore next
 
+			var _this = this;
+
+			this.__instance.players.forEach(function (player, index) {
+				player.currentTime = _this.durations[index] * progress;
+			});
 			return this;
 		}
 
@@ -5295,19 +5356,51 @@ var JogWheel = (function () {
 		key: 'render',
 		value: function render() {
 			// TODO: add documentation
-			// TODO: implement this, must proxy elemnt writes for e.g. react integration
+			// TODO: implement this, must proxy element writes for e.g. react integration
 			// this.settings.render(this.element, styles);
 			return this;
 		}
 	}, {
 		key: 'playState',
 		get: function get() {
-			return this.__instance.players[0].playState;
+			// JogWheel does not support asynchronously running animations
+			// in one instance, thus fetching the first player is enough
+			var player = this.players[0];
+			return player.playState;
 		}
+
+		/**
+   * @readonly
+   * @return {float} progress in fraction of 1 [0..1]
+   */
 	}, {
-		key: 'currentTime',
+		key: 'progress',
 		get: function get() {
-			return this.__instance.players[0].currentTime;
+			// JogWheel does not support asynchronously running animations
+			// in one instance, thus fetching the first player is enough
+			var player = this.players[0];
+			var duration = this.durations[0];
+			return player.currentTime / duration;
+		}
+
+		/**
+   * @readonly
+   * @return {array} WebAnimationPlayer instances by JogWheel instance
+   */
+	}, {
+		key: 'players',
+		get: function get() {
+			return this.__instance.players;
+		}
+
+		/**
+   * @readonly
+   * @return {array} durations used by JogWheel instance
+   */
+	}, {
+		key: 'durations',
+		get: function get() {
+			return this.__instance.durations;
 		}
 	}]);
 
@@ -5318,4 +5411,4 @@ exports['default'] = JogWheel;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./defaults.js":193,"./get-player.js":195}]},{},[192]);
+},{"./defaults.js":193,"./get-player.js":196}]},{},[192]);
