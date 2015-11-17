@@ -17,7 +17,7 @@
 			</a>
 			<nav class="jogwheel-main-navigation">
 				<ul class="jogwheel-main-navigation-list">
-					<li class="jogwheel-item"><a href="../../index.html">Home</a></li>
+					<li class="jogwheel-item"><a href="./..">Home</a></li>
 <li class="jogwheel-item"><a href="./../contributing.html">Contributing</a></li>
 <li class="jogwheel-item jogwheel-item--active"><a href="./api.html">Api</a></li>
 <li class="jogwheel-item"><a href="./roadmap.html">Roadmap</a></li>
@@ -53,6 +53,8 @@
 <span class="hljs-comment">// Instantiate a JogWheel instance on element</span>
 <span class="hljs-keyword">const</span> wheel = <span class="hljs-keyword">new</span> JogWheel(element);</code></pre>
 <p>Returns <strong>JogWheel</strong> JogWheel instance</p>
+<h1 id="durations">durations</h1>
+<p>Returns <strong>array</strong> durations used by JogWheel instance</p>
 <h1 id="pause">pause</h1>
 <p>Pauses the animation</p>
 <p><strong>Examples</strong></p>
@@ -81,6 +83,12 @@ wheel.pause().seek(<span class="hljs-number">0</span>);</code></pre>
 <span class="hljs-comment">// Seek to middle of animation sequence and play</span>
 wheel.seek(<span class="hljs-number">0.5</span>).play();</code></pre>
 <p>Returns <strong>JogWheel</strong> JogWheel instance</p>
+<h1 id="players">players</h1>
+<p>Returns <strong>array</strong> WebAnimationPlayer instances by JogWheel instance</p>
+<h1 id="playstate">playState</h1>
+<p>Returns <strong>string</strong> playState, either <code>running</code> or <code>paused</code></p>
+<h1 id="progress">progress</h1>
+<p>Returns <strong>float</strong> progress in fraction of 1 [0..1]</p>
 <h1 id="seek">seek</h1>
 <p>Seeks the timeline of the animation</p>
 <p><strong>Parameters</strong></p>
@@ -135,22 +143,8 @@ wheel.seek(<span class="hljs-number">0.5</span>);
 <span class="hljs-comment">// Play the animation</span>
 wheel.play();</code></pre>
 <p>Returns <strong>JogWheel</strong> JogWheel instance</p>
-<h1 id="getdefinedstyles">getDefinedStyles</h1>
-<p>Gets map of defined styles from CSS2Properties object</p>
-<p><strong>Parameters</strong></p>
-<ul>
-<li><code>properties</code> <strong>CSS2Properties</strong> CSS2Properties object to return defined styles from</li>
-</ul>
-<p>Returns <strong>object</strong> plain object containing defined styles as key value pairs</p>
-<h1 id="toarray">toArray</h1>
-<p>Cast array-like objects and collections to Array</p>
-<p><strong>Parameters</strong></p>
-<ul>
-<li><code>arrayLike</code> <strong>Object</strong> array-like to cast to Array</li>
-</ul>
-<p>Returns <strong>Array</strong> Array cast from arrayLike</p>
 <hr>
-<p>jogwheel <code>v1.0.2</code> is built by Mario Nebl and <a href="./documentation/contributors.html">contributors</a> with :heart:
+<p>jogwheel <code>v1.1.0</code> is built by Mario Nebl and <a href="./documentation/contributors.html">contributors</a> with :heart:
 and released under the <a href="./license.html">MIT License</a>.</p>
 
 		<aside class="jogwheel-archive-teaser">
