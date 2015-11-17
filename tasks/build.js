@@ -15,6 +15,7 @@ module.exports = function (gulp, paths, options) {
 	var html = require('./html').apply(null, args);
 	var css = require('./css').apply(null, args);
 	var pack = require('./pack').apply(null, args);
+	var test = require('./test').apply(null, args);
 
 	return function build(done) {
 		return sequence(
@@ -24,8 +25,21 @@ module.exports = function (gulp, paths, options) {
 				task(copyStatic, 'copy-static'),
 				task(lint),
 				task(css),
-				task(sequence(task(documentation), task(html)), 'docs-html'),
-				task(sequence(task(transpile), task(pack)), 'transpile-pack')
+				task(
+					sequence(
+						task(documentation),
+						task(html)
+					),
+				'docs-html'),
+				task(sequence(
+					task(transpile),
+					task(sequence(
+						[
+							task(pack),
+							task(test)
+						]
+					), 'test-pack')),
+					'transpile-test-pack')
 			]
 		)(done);
 	};
