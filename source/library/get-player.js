@@ -1,33 +1,8 @@
 import {prefix} from './get-vendor-prefix';
 import getKeyframes from './get-keyframes';
 import getAnimationProperties from './get-animation-properties';
-
-/**
- * Converts CSS animation duration string to integer holding duration in milliseconds
- * @param CSSAnimationDuration {string} [CSSAnimationDuration='0s'] The CSS animation duration string to convert
- * @return {integer} The duration of the css animation string in milliseconds
- * @private
- */
-function getAnimationDuration(CSSAnimationDuration = '0s') {
-	const [unit, factor] = CSSAnimationDuration.includes('ms') ? ['ms', 1] : ['s', 1000];
-	const trimmed = CSSAnimationDuration.replace(unit, '').trim();
-	const duration = trimmed[0] === '.' ? `0${trimmed}` : trimmed;
-	return parseFloat(duration, 10) * factor;
-}
-
-/**
- * Converts CSS animation iteration count string to integer
- * @param CSSIterationCount {string} [CSSIterationCount='1'] CSS animation iteration count
- * @return {integer}
- * @private
- */
-function getAnimationIterations(CSSIterationCount = '1') {
-	if (CSSIterationCount === 'infinite') {
-		return Infinity;
-	}
-
-	return parseInt(CSSIterationCount, 10);
-}
+import convertAnimationDuration from './convert-animation-duration';
+import convertAnimationIterations from './convert-animation-iterations';
 
 /**
  * Gets a web animation player based on the currently assigned CSS animation
@@ -54,8 +29,8 @@ export default function getPlayer(element, window = global.window, document = gl
 	// TODO: Should bail/stub? here if no keyframes are found
 	// Construct options for the webanimation player instance
 	const options = {
-		duration: getAnimationDuration(duration),
-		iterations: getAnimationIterations(iterationCount),
+		duration: convertAnimationDuration(duration),
+		iterations: convertAnimationIterations(iterationCount),
 		fill: fillMode,
 		easing: timingFunction
 	};

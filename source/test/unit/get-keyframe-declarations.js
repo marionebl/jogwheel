@@ -6,7 +6,7 @@ import simpleAnimation from './fixtures/simple-animation-declaration.js';
 const simpleAnimationKeyFramesRule = simpleAnimation[0].cssRules;
 const simpleAnimationKeyFrameRules = simpleAnimation[0].cssRules[0].cssRules;
 
-import {getKeyframeDeclarations} from '../../library/get-keyframes.js';
+import getKeyframeDeclarations from '../../library/get-keyframe-declarations.js';
 
 tape('get-keyframe-declarations', t => {
 	t.ok(
