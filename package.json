@@ -115,7 +115,7 @@
     "gulp-documentation": "2.0.1",
     "gulp-eslint": "1.1.0",
     "gulp-ext-replace": "0.2.0",
-    "gulp-istanbul": "0.10.2",
+    "gulp-istanbul": "0.10.3",
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.0.1",
     "gulp-remember": "0.3.0",
