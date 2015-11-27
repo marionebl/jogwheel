@@ -108,7 +108,7 @@
     "github-api": "0.10.7",
     "globby": "4.0.0",
     "gulp": "3.9.0",
-    "gulp-babel": "5.3.0",
+    "gulp-babel": "6.1.1",
     "gulp-cached": "1.1.0",
     "gulp-cssnext": "1.0.1",
     "gulp-data": "1.2.1",
