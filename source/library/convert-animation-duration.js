@@ -5,7 +5,7 @@
  * @private
  */
 export default function convertAnimationDuration(CSSAnimationDuration = '0s') {
-	const [unit, factor] = CSSAnimationDuration.includes('ms') ? ['ms', 1] : ['s', 1000];
+	const [unit, factor] = CSSAnimationDuration.indexOf('ms') > -1 ? ['ms', 1] : ['s', 1000];
 	const trimmed = CSSAnimationDuration.replace(unit, '').trim();
 	const duration = trimmed[0] === '.' ? `0${trimmed}` : trimmed;
 	return parseFloat(duration, 10) * factor;

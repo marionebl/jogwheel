@@ -1,5 +1,6 @@
 {
-    "stage": 0,
-    "optional": ["regenerator"],
-    "auxiliaryCommentBefore": "istanbul ignore next"
+  "stage": 0,
+  "optional": ["regenerator"],
+  "auxiliaryCommentBefore": "istanbul ignore next",
+  "plugins": ["object-assign"]
 }
