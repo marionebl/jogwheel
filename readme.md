@@ -12,15 +12,22 @@
 <br />
 
 
+> Health
+
 [![ci][ci-image]][ci-url]
 [![coverage][coverage-image]][coverage-url] [![climate][climate-image]][climate-url]
 
+> Availability
 
 [![npm][npm-image]][npm-url] [![npm-dl][npm-dl-image]][npm-dl-url]
 
+[![brcdn][brcdn-image]][brcdn-url]
+
+> Activity
 
 [![pr][pr-image]][pr-url] [![issue][issue-image]][issue-url]
 
+> Conventions and standards
 
 [![dependency-manager][dependency-manager-image]][dependency-manager-url] [![release-manager][release-manager-image]][release-manager-url] [![ecma][ecma-image]][ecma-url] [![codestyle][codestyle-image]][codestyle-url] [![license][license-image]][license-url] [![commitizen][commitizen-image]][commitizen-url]
 
@@ -39,19 +46,94 @@ npm install --save jogwheel
 ```
 
 ## Usage
-jogwheel exposes its API as commonjs module.
+**⚠ Please note** jogwheel assumes `Element.prototype.animate` is defined and returns a valid WebAnimationPlayer instance.
+To achieve this you will have to include a WebAnimation polyfill, [web-animations-js](https://github.com/web-animations/web-animations-js) by Google is recommended.
+
+The usage examples show recommended ways to include the polyfill.
+
+### CommonJS
+jogwheel exposes its API as CommonJS module. Using the export and bundling your JavaScript with browserify, webpack or rollup is **recommended**.
 
 ```js
+// import the polyfill
+import 'web-animations-js';
+
+// import JogWheel
 import JogWheel from 'jogwheel';
+
+// Select target element
 const element = document.querySelector('[data-animated]');
+
+// Construct JogWheel instance from element
 const player = JogWheel.create(element);
 
 // Jump halfway into the animation
 player.seek(0.5);
 ```
+
+### CDN
+jogwheel provides prebundled downloads via [brcdn.org](https://www.brcdn.org/?module=jogwheel).
+Either embed or download the standalone bundle. Given you do not use a module system the standalone build will pollute `window.jogwheel`. This usage is viable but **not recommended**.
+
+* Development [v1.1.1](https://www.brcdn.org/jogwheel/v1.1.1/?standalone=jogwheel&uglify=false)
+* Production [v1.1.1](https://www.brcdn.org/jogwheel/1.1.1/?standalone=jogwheel&uglify=true)
+* Development [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=false)
+* Production [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true)
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>CDN example</title>
+  </head>
+  <style>
+    @keframes bounce {
+      0% {
+        transform: none;
+      }
+
+      25% {
+        transform: translateY(-100%);
+      }
+
+      50% {
+        transform: none;
+      }
+
+      75% {
+        transform: translateY(100%);
+      }
+
+      100% {
+        transform: none;
+      }
+    }
+
+    [data-animated] {
+      animation: bounce 1s;
+      animation-fill-mode: both;
+      animation-play-state: paused;
+      height: 100px;
+      width: 100px;
+      background: #333;
+      border-radius: 50%;
+    }
+  </style>
+  <body>
+    <div data-animated></div>
+    <script src="https://www.brcdn.org/web-animations-js/latest/?uglify=true" />
+    <script src="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true" />
+    <script>
+      var element = document.querySelector('[data-animated]');
+      var player = JogWheel.create(element);
+      player.seek(0.5).play();
+    </script>
+  </body>
+</html>
+```
+
 ---
 See [API Documentation](./documentation/api.md) for details.
-
 
 ## Example
 jogwheel shines brightest when used with CSS animations.
@@ -71,36 +153,36 @@ player.seek(0.5);
 
 ```css
 @keframes bounce {
-	0% {
-		transform: none;
-	}
+  0% {
+    transform: none;
+  }
 
-	25% {
-		transform: translateY(-100%);
-	}
+  25% {
+    transform: translateY(-100%);
+  }
 
-	50% {
-		transform: none;
-	}
+  50% {
+    transform: none;
+  }
 
-	75% {
-		transform: translateY(100%);
-	}
+  75% {
+    transform: translateY(100%);
+  }
 
-	100% {
-		transform: none;
-	}
+  100% {
+    transform: none;
+  }
 }
 
 [data-animated] {
-	animation: bounce 1s;
-	/* animation-fill-mode and animation-play-state are recommended */
-	animation-fill-mode: both;
-	animation-play-state: paused;
-	height: 100px;
-	width: 100px;
-	background: #333;
-	border-radius: 50%;
+  animation: bounce 1s;
+  /* animation-fill-mode and animation-play-state are recommended */
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  height: 100px;
+  width: 100px;
+  background: #333;
+  border-radius: 50%;
 }
 
 ```
@@ -147,13 +229,16 @@ See [Roadmap](./documentation/roadmap.md) for details.
 
 
 ---
-jogwheel `v1.1.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.1.1` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
 [npm-image]: https://img.shields.io/npm/v/jogwheel.svg?style=flat-square
 [npm-dl-url]: https://www.npmjs.org/package/jogwheel
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
+
+[brcdn-url]: https://www.brcdn.org/?module=jogwheel
+[brcdn-image]: https://img.shields.io/badge/cdn-v1.1.1-5ec792.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
 [ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square

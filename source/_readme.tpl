@@ -1,36 +1,43 @@
 <%= props.partials.header('', '',
-	[
-		'About',
-		'Install',
-		'Usage',
-		{
-			name: 'Browser Support',
-			href: '#browser-support'
-		},
-		{
-			name: 'API Documentation',
-			href: './documentation/api.md'
-		},
-		{
-			name: 'Examples',
-			href: './examples/readme.md'
-		},
-		{
-			name: 'Contributing',
-			href: './contributing.md'
-		}
-	]
+  [
+    'About',
+    'Install',
+    'Usage',
+    {
+      name: 'Browser Support',
+      href: '#browser-support'
+    },
+    {
+      name: 'API Documentation',
+      href: './documentation/api.md'
+    },
+    {
+      name: 'Examples',
+      href: './examples/readme.md'
+    },
+    {
+      name: 'Contributing',
+      href: './contributing.md'
+    }
+  ]
 ) %>
+
+> Health
 
 <%= props.partials.badges(['ci']) %>
 <%= props.partials.badges(['coverage', 'climate']) %>
 
+> Availability
 
 <%= props.partials.badges(['npm', 'npm-dl']) %>
 
+<%= props.partials.badges(['brcdn']) %>
+
+> Activity
 
 <%= props.partials.badges(['pr', 'issue']) %>
 
+> Conventions and standards
 
 <%= props.partials.badges(['dependency-manager', 'release-manager', 'ecma', 'codestyle', 'license', 'commitizen']) %>
 
@@ -49,19 +56,94 @@ npm install --save ${props.pkg.name}
 ```
 
 ## Usage
-${props.pkg.name} exposes its API as commonjs module.
+**⚠ Please note** ${props.pkg.name} assumes `Element.prototype.animate` is defined and returns a valid WebAnimationPlayer instance.
+To achieve this you will have to include a WebAnimation polyfill, [web-animations-js](https://github.com/web-animations/web-animations-js) by Google is recommended.
+
+The usage examples show recommended ways to include the polyfill.
+
+### CommonJS
+${props.pkg.name} exposes its API as CommonJS module. Using the export and bundling your JavaScript with browserify, webpack or rollup is **recommended**.
 
 ```js
+// import the polyfill
+import 'web-animations-js';
+
+// import JogWheel
 import JogWheel from '${props.pkg.name}';
+
+// Select target element
 const element = document.querySelector('[data-animated]');
+
+// Construct JogWheel instance from element
 const player = JogWheel.create(element);
 
 // Jump halfway into the animation
 player.seek(0.5);
 ```
+
+### CDN
+${props.pkg.name} provides prebundled downloads via [brcdn.org](https://www.brcdn.org/?module=${props.pkg.name}).
+Either embed or download the standalone bundle. Given you do not use a module system the standalone build will pollute `window.jogwheel`. This usage is viable but **not recommended**.
+
+* Development [${props.pkg.tag}](https://www.brcdn.org/${props.pkg.name}/${props.pkg.tag}/?standalone=${props.pkg.name}&uglify=false)
+* Production [${props.pkg.tag}](https://www.brcdn.org/${props.pkg.name}/${props.pkg.tag.slice(1)}/?standalone=${props.pkg.name}&uglify=true)
+* Development [latest](https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=false)
+* Production [latest](https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=true)
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>CDN example</title>
+  </head>
+  <style>
+    @keframes bounce {
+      0% {
+        transform: none;
+      }
+
+      25% {
+        transform: translateY(-100%);
+      }
+
+      50% {
+        transform: none;
+      }
+
+      75% {
+        transform: translateY(100%);
+      }
+
+      100% {
+        transform: none;
+      }
+    }
+
+    [data-animated] {
+      animation: bounce 1s;
+      animation-fill-mode: both;
+      animation-play-state: paused;
+      height: 100px;
+      width: 100px;
+      background: #333;
+      border-radius: 50%;
+    }
+  </style>
+  <body>
+    <div data-animated></div>
+    <script src="https://www.brcdn.org/web-animations-js/latest/?uglify=true" />
+    <script src="https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=true" />
+    <script>
+      var element = document.querySelector('[data-animated]');
+      var player = JogWheel.create(element);
+      player.seek(0.5).play();
+    </script>
+  </body>
+</html>
+```
+
 ---
 See [API Documentation](./documentation/api.md) for details.
-
 
 ## Example
 ${props.pkg.name} shines brightest when used with CSS animations.
@@ -81,36 +163,36 @@ player.seek(0.5);
 
 ```css
 @keframes bounce {
-	0% {
-		transform: none;
-	}
+  0% {
+    transform: none;
+  }
 
-	25% {
-		transform: translateY(-100%);
-	}
+  25% {
+    transform: translateY(-100%);
+  }
 
-	50% {
-		transform: none;
-	}
+  50% {
+    transform: none;
+  }
 
-	75% {
-		transform: translateY(100%);
-	}
+  75% {
+    transform: translateY(100%);
+  }
 
-	100% {
-		transform: none;
-	}
+  100% {
+    transform: none;
+  }
 }
 
 [data-animated] {
-	animation: bounce 1s;
-	/* animation-fill-mode and animation-play-state are recommended */
-	animation-fill-mode: both;
-	animation-play-state: paused;
-	height: 100px;
-	width: 100px;
-	background: #333;
-	border-radius: 50%;
+  animation: bounce 1s;
+  /* animation-fill-mode and animation-play-state are recommended */
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  height: 100px;
+  width: 100px;
+  background: #333;
+  border-radius: 50%;
 }
 
 ```
