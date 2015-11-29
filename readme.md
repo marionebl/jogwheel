@@ -46,7 +46,7 @@ npm install --save jogwheel
 ```
 
 ## Usage
-**⚠ Please note** jogwheel assumes `Element.prototype.animate` is defined and returns a valid WebAnimationPlayer instance.
+:warning: **Please note** jogwheel assumes `Element.prototype.animate` is defined and returns a valid WebAnimationPlayer instance.
 To achieve this you will have to include a WebAnimation polyfill, [web-animations-js](https://github.com/web-animations/web-animations-js) by Google is recommended.
 
 The usage examples show recommended ways to include the polyfill.
