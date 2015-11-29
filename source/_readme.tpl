@@ -131,7 +131,7 @@ Either embed or download the standalone bundle. Given you do not use a module sy
   </style>
   <body>
     <div data-animated></div>
-    <script src="https://www.brcdn.org/web-animations-js/latest/?uglify=true" />
+    <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true" />
     <script src="https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=true" />
     <script>
       var element = document.querySelector('[data-animated]');

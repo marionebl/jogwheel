@@ -75,8 +75,8 @@ player.seek(0.5);
 jogwheel provides prebundled downloads via [brcdn.org](https://www.brcdn.org/?module=jogwheel).
 Either embed or download the standalone bundle. Given you do not use a module system the standalone build will pollute `window.jogwheel`. This usage is viable but **not recommended**.
 
-* Development [v1.1.1](https://www.brcdn.org/jogwheel/v1.1.1/?standalone=jogwheel&uglify=false)
-* Production [v1.1.1](https://www.brcdn.org/jogwheel/1.1.1/?standalone=jogwheel&uglify=true)
+* Development [v1.1.2](https://www.brcdn.org/jogwheel/v1.1.2/?standalone=jogwheel&uglify=false)
+* Production [v1.1.2](https://www.brcdn.org/jogwheel/1.1.2/?standalone=jogwheel&uglify=true)
 * Development [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=false)
 * Production [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true)
 
@@ -121,7 +121,7 @@ Either embed or download the standalone bundle. Given you do not use a module sy
   </style>
   <body>
     <div data-animated></div>
-    <script src="https://www.brcdn.org/web-animations-js/latest/?uglify=true" />
+    <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true" />
     <script src="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true" />
     <script>
       var element = document.querySelector('[data-animated]');
@@ -229,7 +229,7 @@ See [Roadmap](./documentation/roadmap.md) for details.
 
 
 ---
-jogwheel `v1.1.1` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.1.2` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
@@ -238,7 +238,7 @@ and released under the [MIT License](./license.md).
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
 [brcdn-url]: https://www.brcdn.org/?module=jogwheel
-[brcdn-image]: https://img.shields.io/badge/cdn-v1.1.1-5ec792.svg?style=flat-square
+[brcdn-image]: https://img.shields.io/badge/cdn-v1.1.2-5ec792.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
 [ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square
