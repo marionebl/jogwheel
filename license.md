@@ -36,7 +36,7 @@ SOFTWARE.
 
 
 ---
-jogwheel `v1.1.1` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.1.2` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
@@ -45,7 +45,7 @@ and released under the [MIT License](./license.md).
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
 [brcdn-url]: https://www.brcdn.org/?module=jogwheel
-[brcdn-image]: https://img.shields.io/badge/cdn-v1.1.1-5ec792.svg?style=flat-square
+[brcdn-image]: https://img.shields.io/badge/cdn-v1.1.2-5ec792.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
 [ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square

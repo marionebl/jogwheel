@@ -49,11 +49,12 @@ class JogWheel {
 			throw new Error(`Could not construct JogWheel, missing element`);
 		}
 
+		const settings = {...defaults, ...options};
+
 		const elements = nodes instanceof window.NodeList ? [].slice.call(nodes) : [nodes]; // eslint-disable-line prefer-reflect
-		const configurations = elements.map(element => getPlayer(element, window, document));
+		const configurations = elements.map(element => getPlayer(element, settings, window, document));
 		const players = configurations.map(configuration => configuration.player);
 		const durations = configurations.map(configuration => configuration.duration);
-		const settings = {...defaults, ...options};
 
 		this.__instance = {
 			elements, players, durations, settings

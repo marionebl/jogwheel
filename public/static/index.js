@@ -4727,9 +4727,6 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports["default"] = {
-	paused: null,
-	duration: null,
-	easing: null,
 	render: function render(el, styles) {
 		el.style = styles;
 	}
@@ -5000,6 +4997,10 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
 	value: true
 });
+// istanbul ignore next
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports['default'] = getPlayer;
 // istanbul ignore next
 
@@ -5026,15 +5027,16 @@ var _convertAnimationIterations2 = _interopRequireDefault(_convertAnimationItera
 /**
  * Gets a web animation player based on the currently assigned CSS animation
  * @param element {HTMLElement} DOM element to scan for an applied CSS animation
+ * @param settings {object} Settings object passed to JogWheel instance
  * @param window {Window} [window=global.window] Global context to use
  * @param document {Document} [document=global.window] Document context to use
  * @return {Object} `player` and `duration` attached to element
  * @private
  */
 
-function getPlayer(element) {
-	var window = arguments.length <= 1 || arguments[1] === undefined ? global.window : arguments[1];
-	var document = arguments.length <= 2 || arguments[2] === undefined ? global.document : arguments[2];
+function getPlayer(element, settings) {
+	var window = arguments.length <= 2 || arguments[2] === undefined ? global.window : arguments[2];
+	var document = arguments.length <= 3 || arguments[3] === undefined ? global.document : arguments[3];
 
 	// Read all animation related styles from element, respect prefixes
 
@@ -5052,12 +5054,13 @@ function getPlayer(element) {
 
 	// TODO: Should bail/stub? here if no keyframes are found
 	// Construct options for the webanimation player instance
-	var options = {
+	var options = _extends({
 		duration: (0, _convertAnimationDuration2['default'])(duration),
 		iterations: (0, _convertAnimationIterations2['default'])(iterationCount),
 		fill: fillMode,
-		easing: timingFunction
-	};
+		easing: timingFunction,
+		playState: playState
+	}, settings);
 
 	// TODO: Test get-keyframes for sorting and duplication
 	// Sort by offset and remove duplicates
@@ -5065,15 +5068,28 @@ function getPlayer(element) {
 		return a.offset - b.offset;
 	});
 
+	// Use user-provided animate function (ponyfill) or HTMLElement.prototype.animate
+	var animate = settings.animate ? function () {
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
+
+		return settings.animate.apply(settings, [element].concat(args));
+	} : element.animate;
+
+	if (typeof animate !== 'function') {
+		console.warn('No animation function found. Have you forgotten to include a pony- or polyfill?');
+	}
+
 	// Construct webanimation player instance with keyframes and options
-	var player = element.animate(keyframes, options);
+	var player = animate.bind(element)(keyframes, options);
 
 	// Detach the former animation to prevent problems with polyfill
 	element.style[(0, _getVendorPrefix.prefix)('animationName', window, document)] = '__jogwheelName-' + name;
 	player.__jogwheelName = name;
 
 	// Pause or play the webanimation player instance based on CSS animationPlayState
-	if (playState === 'paused') {
+	if (options.playState === 'paused') {
 		player.pause();
 	} else {
 		player.play();
@@ -5255,9 +5271,11 @@ var JogWheel = (function () {
 			throw new Error('Could not construct JogWheel, missing element');
 		}
 
+		var settings = _extends({}, _defaultsJs2['default'], options);
+
 		var elements = nodes instanceof window.NodeList ? [].slice.call(nodes) : [nodes]; // eslint-disable-line prefer-reflect
 		var configurations = elements.map(function (element) {
-			return (0, _getPlayerJs2['default'])(element, window, document);
+			return (0, _getPlayerJs2['default'])(element, settings, window, document);
 		});
 		var players = configurations.map(function (configuration) {
 			return configuration.player;
@@ -5265,7 +5283,6 @@ var JogWheel = (function () {
 		var durations = configurations.map(function (configuration) {
 			return configuration.duration;
 		});
-		var settings = _extends({}, _defaultsJs2['default'], options);
 
 		this.__instance = {
 			elements: elements, players: players, durations: durations, settings: settings
