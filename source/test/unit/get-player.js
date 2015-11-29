@@ -11,7 +11,7 @@ import getPlayer from '../../library/get-player.js';
 
 tape('get-player', t => {
 	t.ok(
-		typeof getPlayer(elementStub, windowStub, documentStub) === 'object',
+		typeof getPlayer(elementStub, {}, windowStub, documentStub) === 'object',
 		'should return an object');
 
 	const pausedElement = {
@@ -22,7 +22,7 @@ tape('get-player', t => {
 		}
 	};
 
-	const pausedInstance = getPlayer(pausedElement, windowStub, documentStub);
+	const pausedInstance = getPlayer(pausedElement, {}, windowStub, documentStub);
 
 	t.equals(
 		pausedInstance.player.playState,
@@ -38,7 +38,7 @@ tape('get-player', t => {
 		}
 	};
 
-	const runningInstance = getPlayer(runningElement, windowStub, documentStub);
+	const runningInstance = getPlayer(runningElement, {}, windowStub, documentStub);
 
 	t.equals(
 		runningInstance.player.playState,
@@ -46,7 +46,7 @@ tape('get-player', t => {
 		'should return a running AnimationPlayer instance'
 	);
 
-	const fastInstance = getPlayer(runningElement, windowStub, documentStub);
+	const fastInstance = getPlayer(runningElement, {}, windowStub, documentStub);
 
 	t.equals(
 		fastInstance.duration,
@@ -62,7 +62,7 @@ tape('get-player', t => {
 		}
 	};
 
-	const slowInstance = getPlayer(slowElement, windowStub, documentStub);
+	const slowInstance = getPlayer(slowElement, {}, windowStub, documentStub);
 
 	t.equals(
 		slowInstance.duration,

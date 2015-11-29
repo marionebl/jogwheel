@@ -7,12 +7,13 @@ import convertAnimationIterations from './convert-animation-iterations';
 /**
  * Gets a web animation player based on the currently assigned CSS animation
  * @param element {HTMLElement} DOM element to scan for an applied CSS animation
+ * @param settings {object} Settings object passed to JogWheel instance
  * @param window {Window} [window=global.window] Global context to use
  * @param document {Document} [document=global.window] Document context to use
  * @return {Object} `player` and `duration` attached to element
  * @private
  */
-export default function getPlayer(element, window = global.window, document = global.document) {
+export default function getPlayer(element, settings, window = global.window, document = global.document) {
 	// Read all animation related styles from element, respect prefixes
 	const {
 		name,
@@ -32,22 +33,33 @@ export default function getPlayer(element, window = global.window, document = gl
 		duration: convertAnimationDuration(duration),
 		iterations: convertAnimationIterations(iterationCount),
 		fill: fillMode,
-		easing: timingFunction
+		easing: timingFunction,
+		playState,
+		...settings
 	};
 
 	// TODO: Test get-keyframes for sorting and duplication
 	// Sort by offset and remove duplicates
 	keyframes.sort((a, b) => a.offset - b.offset);
 
+	// Use user-provided animate function (ponyfill) or HTMLElement.prototype.animate
+	const animate = settings.animate ?
+		(...args) => settings.animate(element, ...args) :
+		element.animate;
+
+	if (typeof animate !== 'function') {
+		console.warn('No animation function found. Have you forgotten to include a pony- or polyfill?');
+	}
+
 	// Construct webanimation player instance with keyframes and options
-	const player = element.animate(keyframes, options);
+	const player = animate.bind(element)(keyframes, options);
 
 	// Detach the former animation to prevent problems with polyfill
 	element.style[prefix('animationName', window, document)] = `__jogwheelName-${name}`;
 	player.__jogwheelName = name;
 
 	// Pause or play the webanimation player instance based on CSS animationPlayState
-	if (playState === 'paused') {
+	if (options.playState === 'paused') {
 		player.pause();
 	} else {
 		player.play();
