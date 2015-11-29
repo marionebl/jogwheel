@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import 'web-animations-js/web-animations-next.min.js';
+import 'web-animations-js';
 import 'whatwg-fetch';
 import tape from 'tape';
 
