@@ -1,6 +1,7 @@
+import toArray from './to-array';
+import getCSSRules from './get-css-rules';
 import getKeyframeDeclarations from './get-keyframe-declarations';
 import transformKeyframeDeclaration from './transform-keyframe-declaration';
-import toArray from './to-array';
 
 /**
  * Gets webanimation keyframes attached to a CSS animationName
@@ -11,15 +12,15 @@ import toArray from './to-array';
  * @private
  */
 export default function getKeyframes(animationName, window = global.window, document = global.document) {
-	return toArray(document.styleSheets)
-		// Collect all css keyframe declarations present in the document
-		.reduce((results, styleSheet) => {
-			const rules = toArray(styleSheet.cssRules || []);
-			return [...results, ...toArray(getKeyframeDeclarations(animationName, rules))];
-		}, [])
-		// Transform keyframe declarations to web animation compatible format
+	// Collect CSSRules present in the document
+	const CSSRules = toArray(document.styleSheets)
+		.reduce((results, styleSheet) => [...results, ...getCSSRules(styleSheet)], []);
+
+	// Filter CSSRules for KeyFrameRules
+	return getKeyframeDeclarations(animationName, CSSRules)
+		// Transform KeyFrameRules to web animation compatible format
 		.map(transformKeyframeDeclaration)
-		// Flatten mulitdimensional array of transformed keyframe declarations
+		// Flatten mulitdimensional array of transformed keyframes
 		.reduce((results, declaration) => {
 			const amend = Array.isArray(declaration) ? declaration : [declaration];
 			return [...results, ...amend];
