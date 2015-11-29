@@ -4653,7 +4653,7 @@ exports['default'] = convertAnimationDuration;
 function convertAnimationDuration() {
   var CSSAnimationDuration = arguments.length <= 0 || arguments[0] === undefined ? '0s' : arguments[0];
 
-  var _ref = CSSAnimationDuration.includes('ms') ? ['ms', 1] : ['s', 1000];
+  var _ref = CSSAnimationDuration.indexOf('ms') > -1 ? ['ms', 1] : ['s', 1000];
 
   var _ref2 = _slicedToArray(_ref, 2);
 

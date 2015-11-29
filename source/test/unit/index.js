@@ -1,4 +1,5 @@
-import 'babel-polyfill';
+// obsolete when switching to phantomjs2 / jsdom / zombie
+import 'phantomjs-function-bind-polyfill';
 
 import './get-animation-properties';
 import './get-defined-styles';
