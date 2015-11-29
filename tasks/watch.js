@@ -25,6 +25,7 @@ module.exports = function (gulp, paths, options, cli) {
 		var copyStatic = require('./static')(gulp, paths, watchOptions, cli);
 		var html = require('./html')(gulp, paths, watchOptions, cli);
 		var css = require('./css')(gulp, paths, watchOptions, cli);
+		var testCss = require('./test-css')(gulp, paths, watchOptions, cli);
 		var pack = require('./pack')(gulp, paths, watchOptions, cli);
 
 		var excludeGlobs = flatten(values(paths.exclude)).map(function (glob) {
@@ -45,6 +46,7 @@ module.exports = function (gulp, paths, options, cli) {
 								task(copyStatic, 'copy-static'),
 								task(lint),
 								task(css),
+								task(testCss, 'test-css'),
 								task(sequence(
 									task(documentation),
 									task(html)), 'docs-html'),

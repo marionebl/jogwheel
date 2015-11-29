@@ -26,6 +26,7 @@ export default function getPlayer(element, settings, window = global.window, doc
 
 	// Generate keyframes based on the assigned animationName
 	const keyframes = getKeyframes(name, window, document);
+	console.log(keyframes);
 
 	// TODO: Should bail/stub? here if no keyframes are found
 	// Construct options for the webanimation player instance

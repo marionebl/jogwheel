@@ -7,13 +7,14 @@
       "test": "source/test/**/*.js",
       "scripts": "source/scripts/**/*.js",
       "documentation": "source/**/*.tpl",
-      "static": "source/**/*.{html,css}",
+      "static": "source/**/*.html",
       "public-static": "source/documentation/**/*.{png,svg}",
       "markdown": [
         "**/*.md",
         "!node_modules/**/*",
         "!distribution/**/*"
       ],
+      "test-css": "source/test/**/*.css",
       "public-css": "source/documentation/**/*.css",
       "public-js": "source/documentation/static/index.js"
     },

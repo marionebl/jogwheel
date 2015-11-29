@@ -3,7 +3,7 @@ import 'web-animations-js';
 const tape = require('tape');
 const JogWheel = require('jogwheel');
 
-tape('iteration-count', t => {
+tape('node-list', t => {
 	const elements = document.querySelectorAll('[data-animated]');
 	const wheel = JogWheel.create(elements, {}, window, document);
 
@@ -15,11 +15,5 @@ tape('iteration-count', t => {
 		wheel.play();
 	});
 
-	setTimeout(() => {
-		t.doesNotThrow(() => {
-			wheel.pause();
-		});
-
-		t.end();
-	}, 500);
+	t.end();
 });

@@ -15,11 +15,5 @@ tape('iteration-count', t => {
 		wheel.play();
 	});
 
-	setTimeout(() => {
-		t.doesNotThrow(() => {
-			wheel.pause();
-		});
-	}, 500);
-
 	t.end();
 });
