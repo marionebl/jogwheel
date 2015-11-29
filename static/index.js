@@ -4632,7 +4632,95 @@ function main(window, document) {
 
 main(global, global.document); */
 
-},{"../../library":198,"babel-polyfill":1,"web-animations-js/web-animations-next.min.js":191}],193:[function(require,module,exports){
+},{"../../library":205,"babel-polyfill":1,"web-animations-js/web-animations-next.min.js":191}],193:[function(require,module,exports){
+/**
+ * Converts CSS animation duration string to integer holding duration in milliseconds
+ * @param CSSAnimationDuration {string} [CSSAnimationDuration='0s'] The CSS animation duration string to convert
+ * @return {integer} The duration of the css animation string in milliseconds
+ * @private
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+// istanbul ignore next
+
+var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+
+exports['default'] = convertAnimationDuration;
+
+function convertAnimationDuration() {
+  var CSSAnimationDuration = arguments.length <= 0 || arguments[0] === undefined ? '0s' : arguments[0];
+
+  var _ref = CSSAnimationDuration.includes('ms') ? ['ms', 1] : ['s', 1000];
+
+  var _ref2 = _slicedToArray(_ref, 2);
+
+  var unit = _ref2[0];
+  var factor = _ref2[1];
+
+  var trimmed = CSSAnimationDuration.replace(unit, '').trim();
+  var duration = trimmed[0] === '.' ? '0' + trimmed : trimmed;
+  return parseFloat(duration, 10) * factor;
+}
+
+module.exports = exports['default'];
+
+},{}],194:[function(require,module,exports){
+/**
+ * Converts CSS animation iteration count string to integer
+ * @param CSSIterationCount {string} [CSSIterationCount='1'] CSS animation iteration count
+ * @return {integer}
+ * @private
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports['default'] = convertAnimationIterations;
+
+function convertAnimationIterations() {
+  var CSSIterationCount = arguments.length <= 0 || arguments[0] === undefined ? '1' : arguments[0];
+
+  if (CSSIterationCount === 'infinite') {
+    return Infinity;
+  }
+
+  return parseInt(CSSIterationCount, 10);
+}
+
+module.exports = exports['default'];
+
+},{}],195:[function(require,module,exports){
+// CSSRule type enums
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports["default"] = {
+	unknown: 0,
+	style: 1,
+	charset: 2,
+	"import": 3,
+	media: 4,
+	fontface: 5,
+	page: 6,
+	keyframes: 7,
+	keyframe: 8,
+	namespace: 9,
+	counter: 11,
+	supports: 12,
+	document: 13,
+	fontfeature: 14,
+	viewport: 15,
+	region: 16
+};
+module.exports = exports["default"];
+
+},{}],196:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4648,7 +4736,7 @@ exports["default"] = {
 };
 module.exports = exports["default"];
 
-},{}],194:[function(require,module,exports){
+},{}],197:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -4685,58 +4773,62 @@ function getAnimationProperties(node) {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./get-vendor-prefix":197}],195:[function(require,module,exports){
-(function (global){
-// CSSRule type enums
+},{"./get-vendor-prefix":204}],198:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
 	value: true
 });
+exports['default'] = getCSSRules;
 // istanbul ignore next
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-exports.getDeclarations = getDeclarations;
-exports.getKeyframeDeclarations = getKeyframeDeclarations;
-exports.parseKeyframeKey = parseKeyframeKey;
-exports.getDefinedStyles = getDefinedStyles;
-exports.transformKeyframeDeclaration = transformKeyframeDeclaration;
-exports['default'] = getKeyframes;
+var _toArray = require('./to-array');
+
+var _toArray2 = _interopRequireDefault(_toArray);
+
+/**
+ * get cssRules for styleSheet
+ * @param {string} styleSheet - styleSheet to extract cssRules from
+ * @return {array} cssRules for styleSheet
+ * @private
+ */
+
+function getCSSRules(styleSheet) {
+	try {
+		return (0, _toArray2['default'])(styleSheet.cssRules || []);
+	} catch (err) {
+		console.warn('Error while reading cssRules from StyleSheet "' + (styleSheet.href || 'local') + '".');
+		console.error(err);
+		return [];
+	}
+}
+
+module.exports = exports['default'];
+
+},{"./to-array":207}],199:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+exports['default'] = getDeclarations;
+// istanbul ignore next
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 // istanbul ignore next
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
-var enums = {
-	unknown: 0,
-	style: 1,
-	charset: 2,
-	'import': 3,
-	media: 4,
-	fontface: 5,
-	page: 6,
-	keyframes: 7,
-	keyframe: 8,
-	namespace: 9,
-	counter: 11,
-	supports: 12,
-	document: 13,
-	fontfeature: 14,
-	viewport: 15,
-	region: 16
-};
+var _cssruleEnumerations = require('./cssrule-enumerations');
 
-var empty = [];
+var _cssruleEnumerations2 = _interopRequireDefault(_cssruleEnumerations);
 
-/**
- * Cast array-like objects and collections to Array
- * @param  {Object} arrayLike array-like to cast to Array
- * @return {Array} Array cast from arrayLike
- * @private
- */
-function toArray(arrayLike) {
-	return empty.slice.call(arrayLike); // eslint-disable-line prefer-reflect
-}
+var _toArray = require('./to-array');
+
+var _toArray2 = _interopRequireDefault(_toArray);
 
 /**
  * Gets all CSSRules of type typeName and matching the predecate from rules
@@ -4754,9 +4846,9 @@ function getDeclarations() {
 	var predecate = arguments.length <= 2 || arguments[2] === undefined ? Boolean : arguments[2];
 
 	// Get target type enum
-	var type = enums[typeName];
+	var type = _cssruleEnumerations2['default'][typeName];
 
-	return toArray(rules)
+	return (0, _toArray2['default'])(rules)
 	// filter by rule type
 	.filter(function (rule) {
 		return rule.type === type;
@@ -4769,59 +4861,25 @@ function getDeclarations() {
 	})
 	// flatten cssRules
 	.reduce(function (results, cssRules) {
-		return [].concat(_toConsumableArray(results), _toConsumableArray(toArray(cssRules)));
+		return [].concat(_toConsumableArray(results), _toConsumableArray((0, _toArray2['default'])(cssRules)));
 	}, []);
 }
 
-/**
- * Gets all KeyFrameRule declarations attached to CSS animationName preset in rules
- * @param  {string} animationName - CSS animationName to search KeyFrameRule declarations for
- * @param  {array} rules - Array of CSSRules to search
- * @return {array} Array of matching KeyFrameRules
- * @private
- */
+module.exports = exports['default'];
 
-function getKeyframeDeclarations(animationName, rules) {
-	// Filter for KeyFrameRules matching an animationName
-	return getDeclarations('keyframes', rules, function (rule) {
-		return rule.name === animationName;
-	});
-}
-
-/**
- * Parses KeyFrameRule.keyText to an array of integers holding keyframe percentages
- * @param  {string} keyText KeyFrameRule.keyText to parse
- * @return {array}          Array of percentages for this KeyFrameRule
- * @private
- */
-
-function parseKeyframeKey(keyText) {
-	// Split multivalue key,
-	return keyText.split(',')
-	// Trim any remaining whitespace
-	.map(function (key) {
-		return key.trim();
-	})
-	// "Understand" CSS keyText keywords
-	.map(function (key) {
-		return key.replace('from', '0').replace('to', '100');
-	})
-	// Remove any math symbols
-	.map(function (key) {
-		return key.replace('%', '');
-	})
-	// Parse to integer
-	.map(function (key) {
-		return parseInt(key, 10);
-	});
-}
-
+},{"./cssrule-enumerations":195,"./to-array":207}],200:[function(require,module,exports){
 /**
  * Gets map of defined styles from CSS2Properties object
  * @param  {CSS2Properties} properties CSS2Properties object to return defined styles from
  * @return {object}       plain object containing defined styles as key value pairs
  * @private
  */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+exports['default'] = getDefinedStyles;
 
 function getDefinedStyles(properties) {
 	var styles = {};
@@ -4837,25 +4895,71 @@ function getDefinedStyles(properties) {
 	return styles;
 }
 
+module.exports = exports['default'];
+
+},{}],201:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports['default'] = getKeyframeDeclarations;
+// istanbul ignore next
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _getDeclarations = require('./get-declarations');
+
+var _getDeclarations2 = _interopRequireDefault(_getDeclarations);
+
 /**
- * Transforms KeyFrameRule to array of web animation compatible keyframes
- * @param  {Object} keyFrameRule KeyFrameRule to transform
- * @return {Array}               Array of webanimation keyframes
+ * Gets all KeyFrameRule declarations attached to CSS animationName preset in rules
+ * @param  {string} animationName - CSS animationName to search KeyFrameRule declarations for
+ * @param  {array} rules - Array of CSSRules to search
+ * @return {array} Array of matching KeyFrameRules
  * @private
  */
 
-function transformKeyframeDeclaration(keyFrameRule) {
-	// Convert keyFrame.keyText to integers holding percentage of keyframe
-	var percentages = parseKeyframeKey(keyFrameRule.keyText);
-	var style = getDefinedStyles(keyFrameRule.style);
-
-	return percentages.map(function (percentage) {
-		return _extends({
-			// Convert percentage to fraction of 1 for webanimation compat
-			offset: percentage / 100
-		}, style);
-	});
+function getKeyframeDeclarations(animationName, rules) {
+  // Filter for KeyFrameRules matching an animationName
+  return (0, _getDeclarations2['default'])('keyframes', rules, function (rule) {
+    return rule.name === animationName;
+  });
 }
+
+module.exports = exports['default'];
+
+},{"./get-declarations":199}],202:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+exports['default'] = getKeyframes;
+// istanbul ignore next
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+// istanbul ignore next
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
+var _toArray = require('./to-array');
+
+var _toArray2 = _interopRequireDefault(_toArray);
+
+var _getCssRules = require('./get-css-rules');
+
+var _getCssRules2 = _interopRequireDefault(_getCssRules);
+
+var _getKeyframeDeclarations = require('./get-keyframe-declarations');
+
+var _getKeyframeDeclarations2 = _interopRequireDefault(_getKeyframeDeclarations);
+
+var _transformKeyframeDeclaration = require('./transform-keyframe-declaration');
+
+var _transformKeyframeDeclaration2 = _interopRequireDefault(_transformKeyframeDeclaration);
 
 /**
  * Gets webanimation keyframes attached to a CSS animationName
@@ -4870,34 +4974,32 @@ function getKeyframes(animationName) {
 	var window = arguments.length <= 1 || arguments[1] === undefined ? global.window : arguments[1];
 	var document = arguments.length <= 2 || arguments[2] === undefined ? global.document : arguments[2];
 
-	return [].concat(_toConsumableArray(document.styleSheets))
-	// Collect all css keyframe declarations present in the document
-	.reduce(function (results, styleSheet) {
-		return [].concat(_toConsumableArray(results), _toConsumableArray(getKeyframeDeclarations(animationName, styleSheet.cssRules)));
-	}, [])
-	// Transform keyframe declarations to web animation compatible format
-	.map(transformKeyframeDeclaration)
-	// Flatten mulitdimensional array of transformed keyframe declarations
+	// Collect CSSRules present in the document
+	var CSSRules = (0, _toArray2['default'])(document.styleSheets).reduce(function (results, styleSheet) {
+		return [].concat(_toConsumableArray(results), _toConsumableArray((0, _getCssRules2['default'])(styleSheet)));
+	}, []);
+
+	// Filter CSSRules for KeyFrameRules
+	return (0, _getKeyframeDeclarations2['default'])(animationName, CSSRules)
+	// Transform KeyFrameRules to web animation compatible format
+	.map(_transformKeyframeDeclaration2['default'])
+	// Flatten mulitdimensional array of transformed keyframes
 	.reduce(function (results, declaration) {
 		var amend = Array.isArray(declaration) ? declaration : [declaration];
 		return [].concat(_toConsumableArray(results), _toConsumableArray(amend));
 	}, []);
 }
 
-// Mixin with extracted keyframe styling
+module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],196:[function(require,module,exports){
+},{"./get-css-rules":198,"./get-keyframe-declarations":201,"./to-array":207,"./transform-keyframe-declaration":208}],203:[function(require,module,exports){
 (function (global){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
 	value: true
 });
-// istanbul ignore next
-
-var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-
 exports['default'] = getPlayer;
 // istanbul ignore next
 
@@ -4913,42 +5015,13 @@ var _getAnimationProperties2 = require('./get-animation-properties');
 
 var _getAnimationProperties3 = _interopRequireDefault(_getAnimationProperties2);
 
-/**
- * Converts CSS animation duration string to integer holding duration in milliseconds
- * @param CSSAnimationDuration {string} [CSSAnimationDuration='0s'] The CSS animation duration string to convert
- * @return {integer} The duration of the css animation string in milliseconds
- * @private
- */
-function getAnimationDuration() {
-	var CSSAnimationDuration = arguments.length <= 0 || arguments[0] === undefined ? '0s' : arguments[0];
+var _convertAnimationDuration = require('./convert-animation-duration');
 
-	var _ref = CSSAnimationDuration.includes('ms') ? ['ms', 1] : ['s', 1000];
+var _convertAnimationDuration2 = _interopRequireDefault(_convertAnimationDuration);
 
-	var _ref2 = _slicedToArray(_ref, 2);
+var _convertAnimationIterations = require('./convert-animation-iterations');
 
-	var unit = _ref2[0];
-	var factor = _ref2[1];
-
-	var trimmed = CSSAnimationDuration.replace(unit, '').trim();
-	var duration = trimmed[0] === '.' ? '0' + trimmed : trimmed;
-	return parseFloat(duration, 10) * factor;
-}
-
-/**
- * Converts CSS animation iteration count string to integer
- * @param CSSIterationCount {string} [CSSIterationCount='1'] CSS animation iteration count
- * @return {integer}
- * @private
- */
-function getAnimationIterations() {
-	var CSSIterationCount = arguments.length <= 0 || arguments[0] === undefined ? '1' : arguments[0];
-
-	if (CSSIterationCount === 'infinite') {
-		return Infinity;
-	}
-
-	return parseInt(CSSIterationCount, 10);
-}
+var _convertAnimationIterations2 = _interopRequireDefault(_convertAnimationIterations);
 
 /**
  * Gets a web animation player based on the currently assigned CSS animation
@@ -4980,8 +5053,8 @@ function getPlayer(element) {
 	// TODO: Should bail/stub? here if no keyframes are found
 	// Construct options for the webanimation player instance
 	var options = {
-		duration: getAnimationDuration(duration),
-		iterations: getAnimationIterations(iterationCount),
+		duration: (0, _convertAnimationDuration2['default'])(duration),
+		iterations: (0, _convertAnimationIterations2['default'])(iterationCount),
 		fill: fillMode,
 		easing: timingFunction
 	};
@@ -5015,7 +5088,7 @@ function getPlayer(element) {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./get-animation-properties":194,"./get-keyframes":195,"./get-vendor-prefix":197}],197:[function(require,module,exports){
+},{"./convert-animation-duration":193,"./convert-animation-iterations":194,"./get-animation-properties":197,"./get-keyframes":202,"./get-vendor-prefix":204}],204:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -5087,7 +5160,7 @@ function prefix(propertyName) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],198:[function(require,module,exports){
+},{}],205:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -5411,4 +5484,109 @@ exports['default'] = JogWheel;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./defaults.js":193,"./get-player.js":196}]},{},[192]);
+},{"./defaults.js":196,"./get-player.js":203}],206:[function(require,module,exports){
+/**
+ * Parses KeyFrameRule.keyText to an array of integers holding keyframe percentages
+ * @param  {string} keyText KeyFrameRule.keyText to parse
+ * @return {array}          Array of percentages for this KeyFrameRule
+ * @private
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+exports['default'] = parseKeyframeKey;
+
+function parseKeyframeKey(keyText) {
+	// Split multivalue key,
+	return keyText.split(',')
+	// Trim any remaining whitespace
+	.map(function (key) {
+		return key.trim();
+	})
+	// "Understand" CSS keyText keywords
+	.map(function (key) {
+		return key.replace('from', '0').replace('to', '100');
+	})
+	// Remove any math symbols
+	.map(function (key) {
+		return key.replace('%', '');
+	})
+	// Parse to integer
+	.map(function (key) {
+		return parseInt(key, 10);
+	});
+}
+
+module.exports = exports['default'];
+
+},{}],207:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = toArray;
+var empty = [];
+
+/**
+ * Cast array-like objects and collections to Array
+ * @param  {Object} arrayLike array-like to cast to Array
+ * @return {Array} Array cast from arrayLike
+ * @private
+ */
+
+function toArray(arrayLike) {
+  return empty.slice.call(arrayLike); // eslint-disable-line prefer-reflect
+}
+
+module.exports = exports["default"];
+
+},{}],208:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+// istanbul ignore next
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports['default'] = transformKeyframeDeclaration;
+// istanbul ignore next
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _parseKeyframeKey = require('./parse-keyframe-key');
+
+var _parseKeyframeKey2 = _interopRequireDefault(_parseKeyframeKey);
+
+var _getDefinedStyles = require('./get-defined-styles');
+
+var _getDefinedStyles2 = _interopRequireDefault(_getDefinedStyles);
+
+/**
+ * Transforms KeyFrameRule to array of web animation compatible keyframes
+ * @param  {Object} keyFrameRule KeyFrameRule to transform
+ * @return {Array}               Array of webanimation keyframes
+ * @private
+ */
+
+function transformKeyframeDeclaration(keyFrameRule) {
+	// Convert keyFrame.keyText to integers holding percentage of keyframe
+	var percentages = (0, _parseKeyframeKey2['default'])(keyFrameRule.keyText);
+	var style = (0, _getDefinedStyles2['default'])(keyFrameRule.style);
+
+	return percentages.map(function (percentage) {
+		return _extends({
+			// Convert percentage to fraction of 1 for webanimation compat
+			offset: percentage / 100
+		}, style);
+	});
+}
+
+module.exports = exports['default'];
+// Mixin with extracted keyframe styling
+
+},{"./get-defined-styles":200,"./parse-keyframe-key":206}]},{},[192]);
