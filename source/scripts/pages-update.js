@@ -15,6 +15,11 @@ async function main(options) {
 		`https://${process.env.GH_TOKEN}@github.com/${pkg.config.documentation.slug}.git` :
 		`origin`;
 
+	if (process.env.CI) {
+		shell.exec(`git config user.email "${pkg.author.email}"`, {silent: true});
+		shell.exec(`git config user.name "${pkg.author.name}"`, {silent: true});
+	}
+
 	shell.exec(`git add public`, {silent: true});
 	shell.exec(`git status --porcelain`, {silent: true});
 

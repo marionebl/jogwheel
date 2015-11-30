@@ -38,6 +38,11 @@ async function main() {
 		process.exit(0);
 	}
 
+	if (process.env.CI) {
+		shell.exec(`git config user.email "${pkg.author.email}"`, {silent: true});
+		shell.exec(`git config user.name "${pkg.author.name}"`, {silent: true});
+	}
+
 	const add = shell.exec(`git add *.md documentation/ examples/ public/`, {silent: true});
 
 	if (add.code === 0) {
