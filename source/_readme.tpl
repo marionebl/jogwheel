@@ -42,7 +42,7 @@
 <%= props.partials.badges(['dependency-manager', 'release-manager', 'ecma', 'codestyle', 'license', 'commitizen']) %>
 
 ## About
-${props.pkg.name} gives you the power to take full control over your CSS keyframe animations via JavaScript.
+${props.pkg.name} gives you the power to take full control of your CSS keyframe animations via JavaScript.
 
 - [x] **separation of concerns**: Declare animations with CSS
 - [x] **full control**: Play, pause and scrub your animations
@@ -50,13 +50,13 @@ ${props.pkg.name} gives you the power to take full control over your CSS keyfram
 - [ ] world peace
 
 ## Install
-[${props.pkg.name}](npm-url) is available on npm.
+[${props.pkg.name}][npm-url] is available on npm.
 ```
 npm install --save ${props.pkg.name}
 ```
 
 ## Usage
-**⚠ Please note** ${props.pkg.name} assumes `Element.prototype.animate` is defined and returns a valid WebAnimationPlayer instance.
+**:warning: Please note** ${props.pkg.name} assumes `Element.prototype.animate` is defined and returns a valid WebAnimationPlayer instance.
 To achieve this you will have to include a WebAnimation polyfill, [web-animations-js](https://github.com/web-animations/web-animations-js) by Google is recommended.
 
 The usage examples show recommended ways to include the polyfill.
