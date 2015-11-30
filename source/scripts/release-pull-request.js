@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import denodeify from 'denodeify';
 import shell from 'shelljs';
 import Github from 'github-api';
 import chalk from 'chalk';
