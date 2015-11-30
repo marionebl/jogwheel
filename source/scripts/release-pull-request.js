@@ -43,13 +43,18 @@ async function main() {
 		shell.exec(`git config user.name "${pkg.author.name}"`, {silent: true});
 	}
 
+	shell.exec(`git status`);
+
 	const add = shell.exec(`git add *.md documentation/ examples/ public/`, {silent: true});
+
 
 	if (add.code === 0) {
 		console.log(`  ${chalk.green('✔')}   added docs and gh-pages changes`);
 	} else {
 		throw new Error(`failed to add docs and gh-pages changes:\n${add.output}`);
 	}
+
+	shell.exec(`git status`);
 
 	const commit = shell.exec(`git commit -m "${title}"`, {silent: true});
 
@@ -58,6 +63,8 @@ async function main() {
 	} else {
 		throw new Error(`failed to commit changes to "${title}":\n${commit.output}`);
 	}
+
+	shell.exec(`git status`);
 
 	console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${head}.`);
 	const push = shell.exec(`git push ${remote} master:${head}`, {silent: true});
@@ -76,11 +83,24 @@ async function main() {
 		});
 		const repositoryNames = pkg.config.pages.slug.split('/');
 		const repository = github.getRepo(...repositoryNames);
-		await denodeify(repository.createPullRequest)({
-			title,
-			base,
-			head
-		});
+
+		try {
+			await denodeify(repository.createPullRequest)({
+				title,
+				base,
+				head
+			});
+		} catch (err) {
+			console.error(`  ${chalk.red('✖')}   pull request "${title}" failed`);
+			console.log(`  ${chalk.gray('⧗')}   deleting branch "${head}"`);
+			const remove = shell.exec(`git push ${remote} --delete ${head}`, {silent: true});
+			if (remove.code === 0) {
+				console.log(`  ${chalk.green('✔')}   removed github.com/${pkg.config.documentation.slug}#${head}.`);
+			} else {
+				console.log(`  ${chalk.red('✖')}   failed to remove github.com/${pkg.config.documentation.slug}#${head}`);
+			}
+			throw err;
+		}
 		console.log(`  ${chalk.green('✔')}   submitted pull request "${title}" via oauth`);
 	} else {
 		console.log(`  ${chalk.gray('⧗')}   submitting pull request "${title}" via hub`);
