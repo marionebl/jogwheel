@@ -27,7 +27,7 @@
     "semantic-release": "(semantic-release pre && npm run semantic-release-pull-request && npm publish && semantic-release post) && GH_PAGES_ARCHIVE=\"true\" npm run pages || GH_PAGES_ARCHIVE=\"false\" npm run pages",
     "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --master --dirty=public/**/* && $npm_package_config_jogwheel_pages_update --pull-request || echo ''",
     "release-pull-request": "node distribution/scripts/release-pull-request.js",
-    "semantic-release-pull-request": "not-in-install && ($npm_package_config_jogwheel_when_ci --leader --trusted --master && (npm run build && npm run release-pull-request))"
+    "semantic-release-pull-request": "not-in-install && ($npm_package_config_jogwheel_when_ci --leader --trusted && (npm run build && npm run release-pull-request))"
   },
   "homepage": "https://github.com/marionebl/jogwheel#readme",
   "repository": {

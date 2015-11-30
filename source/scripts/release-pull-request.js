@@ -38,9 +38,22 @@ async function main() {
 		process.exit(0);
 	}
 
-	shell.exec(`git add *.md documentation/ examples/ public/`, {silent: true});
+	const add = shell.exec(`git add *.md documentation/ examples/ public/`, {silent: true});
 
-	shell.exec(`git commit -m "${title}"`, {silent: true});
+	if (add.code === 0) {
+		console.log(`  ${chalk.green('✔')}   added docs and gh-pages changes`);
+	} else {
+		throw new Error(`failed to add docs and gh-pages changes:\n${add.output}`);
+	}
+
+	const commit = shell.exec(`git commit -m "${title}"`, {silent: true});
+
+	if (commit.code === 0) {
+		console.log(`  ${chalk.green('✔')}   commited changes to "${title}"`);
+	} else {
+		throw new Error(`failed to commit changes to "${title}":\n${commit.output}`);
+	}
+
 	console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${head}.`);
 	const push = shell.exec(`git push ${remote} master:${head}`, {silent: true});
 
