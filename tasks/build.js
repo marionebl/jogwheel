@@ -14,6 +14,7 @@ module.exports = function (gulp, paths, options) {
 	var copyStatic = require('./static').apply(null, args);
 	var html = require('./html').apply(null, args);
 	var css = require('./css').apply(null, args);
+	var testCSS = require('./test-css').apply(null, args);
 	var pack = require('./pack').apply(null, args);
 	var test = require('./test').apply(null, args);
 
@@ -25,6 +26,7 @@ module.exports = function (gulp, paths, options) {
 				task(copyStatic, 'copy-static'),
 				task(lint),
 				task(css),
+				task(testCSS, 'test-css'),
 				task(
 					sequence(
 						task(documentation),

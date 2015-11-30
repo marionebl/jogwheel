@@ -1,5 +1,6 @@
 import parseKeyframeKey from './parse-keyframe-key';
 import getDefinedStyles from './get-defined-styles';
+import removeVendorPrefix from './remove-vendor-prefix';
 
 /**
  * Transforms KeyFrameRule to array of web animation compatible keyframes
@@ -12,12 +13,18 @@ export default function transformKeyframeDeclaration(keyFrameRule) {
 	const percentages = parseKeyframeKey(keyFrameRule.keyText);
 	const style = getDefinedStyles(keyFrameRule.style);
 
+	// Normalize to unprefixed styles
+	const normalizedStyles = Object.keys(style).reduce((result, propertyName) => {
+		result[removeVendorPrefix(propertyName)] = style[propertyName];
+		return result;
+	}, {});
+
 	return percentages.map(percentage => {
 		return {
 			// Convert percentage to fraction of 1 for webanimation compat
 			offset: percentage / 100,
 			// Mixin with extracted keyframe styling
-			...style
+			...normalizedStyles
 		};
 	});
 }

@@ -40,8 +40,8 @@ tape('simple integration', t => {
 				setTimeout(() => { // eslint-disable-line max-nested-callbacks
 					t.notEqual(window.getComputedStyle(element).opacity, previous, 'Should leave element with different opacity after timeout');
 					t.end();
-				}, 100);
-			}, 100);
-		}, 100);
-	}, 100);
+				}, 300);
+			}, 300);
+		}, 300);
+	}, 300);
 });
