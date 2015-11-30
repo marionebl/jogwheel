@@ -24,8 +24,10 @@
     "commitmsg": "$npm_package_config_jogwheel_when_ci && $npm_package_config_jogwheel_validate_commit || $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
     "env": "env",
     "binaries": "ls node_modules/.bin/",
+    "prepublish": "not-in-install && ($npm_package_config_jogwheel_when_ci --leader --trusted --master && (npm run build && npm run release-pull-request) || echo \"\") || echo \"\"",
     "semantic-release": "(semantic-release pre && npm publish && semantic-release post) && GH_PAGES_ARCHIVE=\"true\" npm run pages || GH_PAGES_ARCHIVE=\"false\" npm run pages",
-    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --master --dirty=public/**/* && $npm_package_config_jogwheel_pages_update --pull-request || echo ''"
+    "pages": "$npm_package_config_jogwheel_when_ci --leader --trusted --master --dirty=public/**/* && $npm_package_config_jogwheel_pages_update --pull-request || echo ''",
+    "release-pull-request": "node distribution/scripts/release-pull-request.js"
   },
   "homepage": "https://github.com/marionebl/jogwheel#readme",
   "repository": {
@@ -128,6 +130,7 @@
     "gulp-util": "3.0.7",
     "highlight.js": "8.9.1",
     "husky": "0.10.2",
+    "in-publish": "2.0.0",
     "istanbul": "0.4.1",
     "js-git": "0.7.7",
     "lodash.flatten": "3.0.2",
