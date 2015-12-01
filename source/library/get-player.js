@@ -21,16 +21,17 @@ export default function getPlayer(element, settings, window = global.window, doc
 		iterationCount,
 		timingFunction,
 		fillMode,
-		playState
+		playState,
+		delay
 	} = getAnimationProperties(element, window, document);
 
 	// Generate keyframes based on the assigned animationName
 	const keyframes = getKeyframes(name, window, document);
 
-	// TODO: Should bail/stub? here if no keyframes are found
 	// Construct options for the webanimation player instance
 	const options = {
 		duration: convertAnimationDuration(duration),
+		delay: convertAnimationDuration(delay),
 		iterations: convertAnimationIterations(iterationCount),
 		fill: fillMode,
 		easing: timingFunction,
@@ -38,8 +39,7 @@ export default function getPlayer(element, settings, window = global.window, doc
 		...settings
 	};
 
-	// TODO: Test get-keyframes for sorting and duplication
-	// Sort by offset and remove duplicates
+	// Sort by offset
 	keyframes.sort((a, b) => a.offset - b.offset);
 
 	// Use user-provided animate function (ponyfill) or HTMLElement.prototype.animate

@@ -35,7 +35,8 @@ tape('get-animation-properties', t => {
 			'iterationCount',
 			'timingFunction',
 			'fillMode',
-			'playState'
+			'playState',
+			'delay'
 		],
 		'should return an object with the expected property values');
 
@@ -44,6 +45,7 @@ tape('get-animation-properties', t => {
 		{
 			name: 'default-animation',
 			duration: '300ms',
+			delay: undefined,
 			iterationCount: undefined,
 			timingFunction: 'linear',
 			fillMode: undefined,
@@ -66,6 +68,7 @@ tape('get-animation-properties', t => {
 		{
 			name: 'filled-animation',
 			duration: '1s',
+			delay: '.5s',
 			iterationCount: '10',
 			timingFunction: 'linear',
 			fillMode: 'both',

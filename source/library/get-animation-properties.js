@@ -6,7 +6,8 @@ const propertyNames = [
 	'iterationCount',
 	'timingFunction',
 	'fillMode',
-	'playState'
+	'playState',
+	'delay'
 ];
 
 /**
