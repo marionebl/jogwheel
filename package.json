@@ -1,6 +1,6 @@
 {
   "name": "jogwheel",
-  "description": "Take control of your CSS keyframe animations [🌐](https://marionebl.github.io/jogwheel/)",
+  "description": "Take control of your CSS keyframe animations",
   "main": "distribution/library/index.js",
   "jsnext:main": "source/library/index.js",
   "files": [
