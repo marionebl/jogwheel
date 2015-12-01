@@ -52,7 +52,9 @@ async function main() {
 	if (commit.code === 0) {
 		console.log(`  ${chalk.green('✔')}   commited changes to "${title}"`);
 	} else {
-		throw new Error(`failed to commit changes to "${title}":\n${commit.output}`);
+		console.log(`  ${chalk.yellow('⚠')}   failed to commit changes to "${title}"`);
+		console.log(`  ${chalk.yellow('✔')}   hand off to semantic-release`);
+		process.exit(0);
 	}
 
 	console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${head}.`);
