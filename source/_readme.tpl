@@ -29,9 +29,7 @@
 
 > Availability
 
-<%= props.partials.badges(['npm', 'npm-dl']) %>
-
-<%= props.partials.badges(['brcdn']) %>
+<%= props.partials.badges(['npm', 'brcdn', 'npm-dl']) %>
 
 > Activity
 
