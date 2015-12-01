@@ -89,6 +89,12 @@ async function main() {
 				base,
 				head
 			});
+
+			console.log(`  ${chalk.green('✔')}   submitted pull request "${title}" via oauth`);
+			console.log(`  ${chalk.green('✔')}   Exiting with code 1 to prevent semantic-release from publishing`);
+			const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
+			console.log(`  ${chalk.green('✔')}   release-pull-request successfully. ${timestamp}\n`);
+			process.exit(1);
 		} catch (err) {
 			console.error(`  ${chalk.red('✖')}   pull request "${title}" failed`);
 			console.log(`  ${chalk.gray('⧗')}   deleting branch "${head}"`);
