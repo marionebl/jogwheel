@@ -135,7 +135,7 @@
     "js-git": "0.7.7",
     "lodash.flatten": "3.0.2",
     "lodash.merge": "3.3.2",
-    "mdast": "2.2.2",
+    "mdast": "2.3.0",
     "mdast-highlight.js": "1.2.0",
     "mdast-html": "1.2.1",
     "mdast-inline-links": "1.0.0",
