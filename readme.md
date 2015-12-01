@@ -1,6 +1,6 @@
 
 <header class="jogwheel-header">
-	<blockquote class="jogwheel-claim">take control over your css keyframe animations</blockquote>
+	<blockquote class="jogwheel-claim">Take control of your CSS keyframe animations [🌐](https://marionebl.github.io/jogwheel/)</blockquote>
 	<div class="jogwheel-logo" align="center">
 		<img width="200" src="https://cdn.rawgit.com/marionebl/jogwheel/master/source/documentation/static/jogwheel.svg" />
 	</div>
@@ -32,7 +32,7 @@
 [![dependency-manager][dependency-manager-image]][dependency-manager-url] [![release-manager][release-manager-image]][release-manager-url] [![ecma][ecma-image]][ecma-url] [![codestyle][codestyle-image]][codestyle-url] [![license][license-image]][license-url] [![commitizen][commitizen-image]][commitizen-url]
 
 ## About
-jogwheel gives you the power to take full control over your CSS keyframe animations via JavaScript.
+jogwheel gives you the power to take full control of your CSS keyframe animations via JavaScript.
 
 - [x] **separation of concerns**: Declare animations with CSS
 - [x] **full control**: Play, pause and scrub your animations
@@ -40,13 +40,13 @@ jogwheel gives you the power to take full control over your CSS keyframe animati
 - [ ] world peace
 
 ## Install
-[jogwheel](npm-url) is available on npm.
+[jogwheel][npm-url] is available on npm.
 ```
 npm install --save jogwheel
 ```
 
 ## Usage
-**⚠ Please note** jogwheel assumes `Element.prototype.animate` is defined and returns a valid WebAnimationPlayer instance.
+**:warning: Please note** jogwheel assumes `Element.prototype.animate` is defined and returns a valid WebAnimationPlayer instance.
 To achieve this you will have to include a WebAnimation polyfill, [web-animations-js](https://github.com/web-animations/web-animations-js) by Google is recommended.
 
 The usage examples show recommended ways to include the polyfill.
@@ -75,8 +75,8 @@ player.seek(0.5);
 jogwheel provides prebundled downloads via [brcdn.org](https://www.brcdn.org/?module=jogwheel).
 Either embed or download the standalone bundle. Given you do not use a module system the standalone build will pollute `window.jogwheel`. This usage is viable but **not recommended**.
 
-* Development [v1.2.0](https://www.brcdn.org/jogwheel/v1.2.0/?standalone=jogwheel&uglify=false)
-* Production [v1.2.0](https://www.brcdn.org/jogwheel/1.2.0/?standalone=jogwheel&uglify=true)
+* Development [v1.2.4](https://www.brcdn.org/jogwheel/v1.2.4/?standalone=jogwheel&uglify=false)
+* Production [v1.2.4](https://www.brcdn.org/jogwheel/1.2.4/?standalone=jogwheel&uglify=true)
 * Development [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=false)
 * Production [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true)
 
@@ -229,7 +229,7 @@ See [Roadmap](./documentation/roadmap.md) for details.
 
 
 ---
-jogwheel `v1.2.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.2.4` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
@@ -238,7 +238,7 @@ and released under the [MIT License](./license.md).
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
 [brcdn-url]: https://www.brcdn.org/?module=jogwheel
-[brcdn-image]: https://img.shields.io/badge/cdn-v1.2.0-5ec792.svg?style=flat-square
+[brcdn-image]: https://img.shields.io/badge/cdn-v1.2.4-5ec792.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
 [ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square
