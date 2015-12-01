@@ -7,7 +7,7 @@ import minimist from 'minimist';
 import pkg from '../../package.json';
 
 function getHash() {
-	return process.env.TRAVIS_COMMIT || shell.exec(`git rev-parse --verify HEAD`, {silent: true}).output.split('\n')[0].trim()
+	return process.env.TRAVIS_COMMIT || shell.exec(`git rev-parse --verify HEAD`, {silent: true}).output.split('\n')[0].trim();
 }
 
 function getCommitMessage(hash = getHash()) {
@@ -19,7 +19,7 @@ function getCommitMessage(hash = getHash()) {
 
 async function main() {
 	const start = Date.now();
-	const version = pkg.version ? 'v' + pkg.version : shell.exec('git describe --abbrev=0 --tags', {silent: true}).output.split('\n')[0];
+	const version = pkg.version ? `v${pkg.version}` : shell.exec('git describe --abbrev=0 --tags', {silent: true}).output.split('\n')[0];
 	const head = `release/${version}`;
 
 	const remote = process.env.GH_TOKEN ?
@@ -47,7 +47,6 @@ async function main() {
 
 	const add = shell.exec(`git add *.md documentation/ examples/ public/`, {silent: true});
 
-
 	if (add.code === 0) {
 		console.log(`  ${chalk.green('✔')}   added docs and gh-pages changes`);
 	} else {
@@ -67,7 +66,7 @@ async function main() {
 	shell.exec(`git status`);
 
 	console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${head}.`);
-	const push = shell.exec(`git push ${remote} master:${head}`, {silent: true});
+	const push = shell.exec(`git push ${remote} HEAD:${head}`, {silent: true});
 
 	if (push.code === 0) {
 		console.log(`  ${chalk.green('✔')}   pushed to github.com/${pkg.config.documentation.slug}#${head}.`);
