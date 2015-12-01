@@ -20,29 +20,32 @@ async function main() {
 		shell.exec(`git config user.name "${pkg.author.name}"`, {silent: true});
 	}
 
-	const add = shell.exec(`git add public`, {silent: true});
+	if (process.env.GH_PAGES_ADD === 'true') {
+		const add = shell.exec(`git add public`, {silent: true});
 
-	if (add.code === 0) {
-		console.log(`  ${chalk.green('✔')}   added gh-pages changes`);
-	} else {
-		throw new Error(`failed to add gh-pages changes:\n${add.output}`);
-	}
+		if (add.code === 0) {
+			console.log(`  ${chalk.green('✔')}   added gh-pages changes`);
+		} else {
+			throw new Error(`failed to add gh-pages changes:\n${add.output}`);
+		}
 
-	const count = shell.exec(`git diff --cached --numstat`).output.split('\n').length;
+		const count = shell.exec(`git diff --cached --numstat`).output.split('\n').length;
 
-	if (count === 0) {
-		console.log(`  ${chalk.yellow('⚠')}   No file staged for commit and push, skipping`);
-		const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
-		return `  ${chalk.green('✔')}   pages-update executed successfully. ${timestamp}\n`;
-	}
+		if (count === 0) {
+			console.log(`  ${chalk.yellow('⚠')}   No file staged for commit and push, skipping`);
+			const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
+			return `  ${chalk.green('✔')}   pages-update executed successfully. ${timestamp}\n`;
+		}
 
-	console.log(`  ${chalk.green('✔')}   ${count} files staged for commit and push`);
-	const commit = shell.exec(`git commit -m "docs: ${hash} master → gh-pages"`, {silent: true});
+		console.log(`  ${chalk.green('✔')}   ${count} files staged for commit and push`);
 
-	if (commit.code === 0) {
-		console.log(`  ${chalk.green('✔')}   commited changes`);
-	} else {
-		throw new Error(`failed to commit changes:\n${commit.output}`);
+		const commit = shell.exec(`git commit -m "docs: ${hash} master → gh-pages"`, {silent: true});
+
+		if (commit.code === 0) {
+			console.log(`  ${chalk.green('✔')}   commited changes`);
+		} else {
+			throw new Error(`failed to commit changes:\n${commit.output}`);
+		}
 	}
 
 	console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${head}.`);
