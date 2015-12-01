@@ -1,6 +1,6 @@
 
 <header class="jogwheel-header">
-	<blockquote class="jogwheel-claim">take control over your css keyframe animations</blockquote>
+	<blockquote class="jogwheel-claim">Take control of your CSS keyframe animations [🌐](https://marionebl.github.io/jogwheel/)</blockquote>
 	<div class="jogwheel-logo" align="center">
 		<img width="200" src="https://cdn.rawgit.com/marionebl/jogwheel/master/source/documentation/static/jogwheel.svg" />
 	</div>
@@ -36,7 +36,7 @@ SOFTWARE.
 
 
 ---
-jogwheel `v1.2.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.2.4` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
@@ -45,7 +45,7 @@ and released under the [MIT License](./license.md).
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
 [brcdn-url]: https://www.brcdn.org/?module=jogwheel
-[brcdn-image]: https://img.shields.io/badge/cdn-v1.2.0-5ec792.svg?style=flat-square
+[brcdn-image]: https://img.shields.io/badge/cdn-v1.2.4-5ec792.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
 [ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square
