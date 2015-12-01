@@ -4703,7 +4703,7 @@ exports['default'] = getAnimationProperties;
 
 var _getVendorPrefix = require('./get-vendor-prefix');
 
-var propertyNames = ['name', 'duration', 'iterationCount', 'timingFunction', 'fillMode', 'playState'];
+var propertyNames = ['name', 'duration', 'iterationCount', 'timingFunction', 'fillMode', 'playState', 'delay'];
 
 /**
  * Returns applicable animation properties for a given node
@@ -5007,22 +5007,22 @@ function getPlayer(element, settings) {
 	var timingFunction = _getAnimationProperties.timingFunction;
 	var fillMode = _getAnimationProperties.fillMode;
 	var playState = _getAnimationProperties.playState;
+	var delay = _getAnimationProperties.delay;
 
 	// Generate keyframes based on the assigned animationName
 	var keyframes = (0, _getKeyframes2['default'])(name, window, document);
 
-	// TODO: Should bail/stub? here if no keyframes are found
 	// Construct options for the webanimation player instance
 	var options = _extends({
 		duration: (0, _convertAnimationDuration2['default'])(duration),
+		delay: (0, _convertAnimationDuration2['default'])(delay),
 		iterations: (0, _convertAnimationIterations2['default'])(iterationCount),
 		fill: fillMode,
 		easing: timingFunction,
 		playState: playState
 	}, settings);
 
-	// TODO: Test get-keyframes for sorting and duplication
-	// Sort by offset and remove duplicates
+	// Sort by offset
 	keyframes.sort(function (a, b) {
 		return a.offset - b.offset;
 	});
