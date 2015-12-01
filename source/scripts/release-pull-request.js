@@ -66,7 +66,7 @@ async function main() {
 	shell.exec(`git status`);
 
 	console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${head}.`);
-	const push = shell.exec(`git push ${remote} HEAD:${head}`, {silent: true});
+	const push = shell.exec(`git push ${remote} HEAD:refs/heads/${head}`, {silent: true});
 
 	if (push.code === 0) {
 		console.log(`  ${chalk.green('✔')}   pushed to github.com/${pkg.config.documentation.slug}#${head}.`);
