@@ -20,13 +20,30 @@ async function main() {
 		shell.exec(`git config user.name "${pkg.author.name}"`, {silent: true});
 	}
 
-	shell.exec(`git add public`, {silent: true});
-	shell.exec(`git status --porcelain`, {silent: true});
+	const add = shell.exec(`git add public`, {silent: true});
 
-	shell.exec(`git commit -m "docs: ${hash} master → gh-pages"`, {silent: true});
+	if (add.code === 0) {
+		console.log(`  ${chalk.green('✔')}   added gh-pages changes`);
+	} else {
+		throw new Error(`failed to add gh-pages changes:\n${add.output}`);
+	}
+
+	const commit = shell.exec(`git commit -m "docs: ${hash} master → gh-pages"`, {silent: true});
+
+	if (commit.code === 0) {
+		console.log(`  ${chalk.green('✔')}   commited changes`);
+	} else {
+		throw new Error(`failed to commit changes:\n${commit.output}`);
+	}
+
 	console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${head}.`);
-	shell.exec(`git subtree --prefix=public/ push ${remote} ${head}`, {silent: true});
-	console.log(`  ${chalk.green('✔')}   pushed to github.com/${pkg.config.documentation.slug}#${head}.`);
+	const push = shell.exec(`git subtree --prefix=public/ push ${remote} ${head}`, {silent: true});
+
+	if (push.code === 0) {
+		console.log(`  ${chalk.green('✔')}   pushed to github.com/${pkg.config.documentation.slug}#${head}.`);
+	} else {
+		throw new Error(`failed pushing to github.com/${pkg.config.documentation.slug}#${head}:\n${push.output}`);
+	}
 
 	const title = `docs: ${hash} master → gh-pages`;
 	const base = 'gh-pages';
