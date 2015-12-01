@@ -6,14 +6,10 @@ import chalk from 'chalk';
 import minimist from 'minimist';
 import pkg from '../../package.json';
 
-function getHash() {
-	return process.env.TRAVIS_COMMIT || shell.exec(`git rev-parse --verify HEAD`, {silent: true}).output.split('\n')[0].trim();
-}
-
-function getCommitMessage(hash = getHash()) {
-	return shell.exec(`git log -1 --format=oneline ${hash}`, {silent: true}).output
-		.split('\n')[0]
-		.replace(hash, '')
+function getCommitMessage() {
+	return shell.exec(`git log -2 --format=oneline`, {silent: true}).output
+		.split('\n')[1]
+		.split(' ').slice(1).join(' ')
 		.trim();
 }
 
@@ -31,10 +27,10 @@ async function main() {
 
 	const message = getCommitMessage();
 
-	if (title === message) {
-		console.log(`  ${chalk.green('✔')}   detected release build, exiting with code 0 and handing off to semantic-release.`);
+	if (message === title) {
+		console.log(`  ${chalk.green('✔')}   detected release build "${message}", exiting with code 0 and handing off to semantic-release.`);
 		const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
-		console.log(`  ${chalk.green('✔')}   release-pull-request successfully. ${timestamp}\n`);
+		console.log(`  ${chalk.green('✔')}   release-pull-request executed successfully. ${timestamp}\n`);
 		process.exit(0);
 	}
 
@@ -42,8 +38,6 @@ async function main() {
 		shell.exec(`git config user.email "${pkg.author.email}"`, {silent: true});
 		shell.exec(`git config user.name "${pkg.author.name}"`, {silent: true});
 	}
-
-	shell.exec(`git status`);
 
 	const add = shell.exec(`git add *.md documentation/ examples/ public/`, {silent: true});
 
@@ -53,8 +47,6 @@ async function main() {
 		throw new Error(`failed to add docs and gh-pages changes:\n${add.output}`);
 	}
 
-	shell.exec(`git status`);
-
 	const commit = shell.exec(`git commit -m "${title}"`, {silent: true});
 
 	if (commit.code === 0) {
@@ -62,8 +54,6 @@ async function main() {
 	} else {
 		throw new Error(`failed to commit changes to "${title}":\n${commit.output}`);
 	}
-
-	shell.exec(`git status`);
 
 	console.log(`  ${chalk.gray('⧗')}   pushing to github.com/${pkg.config.documentation.slug}#${head}.`);
 	const push = shell.exec(`git push ${remote} HEAD:refs/heads/${head}`, {silent: true});
