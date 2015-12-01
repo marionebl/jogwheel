@@ -6,7 +6,7 @@ import shell from 'shelljs';
 import Github from 'github-api';
 import pkg from '../../package.json';
 
-async function main(options) {
+async function main() {
 	const start = Date.now();
 	const hash = shell.exec(`git rev-parse --short HEAD`, {silent: true}).output.split('\n')[0];
 
@@ -58,7 +58,6 @@ async function main(options) {
 			console.log(pr.output);
 		}
 	}
-
 
 	const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
 	return `  ${chalk.green('✔')}   pages-update executed successfully. ${timestamp}\n`;
