@@ -53,7 +53,7 @@ async function main() {
 		console.log(`  ${chalk.green('✔')}   commited changes to "${title}"`);
 	} else {
 		console.log(`  ${chalk.yellow('⚠')}   failed to commit changes to "${title}"`);
-		console.log(`  ${chalk.yellow('✔')}   hand off to semantic-release`);
+		console.log(`  ${chalk.green('✔')}   hand off to semantic-release`);
 		process.exit(0);
 	}
 

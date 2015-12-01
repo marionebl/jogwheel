@@ -28,6 +28,15 @@ async function main() {
 		throw new Error(`failed to add gh-pages changes:\n${add.output}`);
 	}
 
+	const count = shell.exec(`git diff --cached --numstat`).output.split('\n').length;
+
+	if (count === 0) {
+		console.log(`  ${chalk.yellow('⚠')}   No file staged for commit and push, skipping`);
+		const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
+		return `  ${chalk.green('✔')}   pages-update executed successfully. ${timestamp}\n`;
+	}
+
+	console.log(`  ${chalk.green('✔')}   ${count} files staged for commit and push`);
 	const commit = shell.exec(`git commit -m "docs: ${hash} master → gh-pages"`, {silent: true});
 
 	if (commit.code === 0) {
