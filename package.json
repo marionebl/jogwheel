@@ -115,7 +115,7 @@
     "gulp-cached": "1.1.0",
     "gulp-cssnext": "1.0.1",
     "gulp-data": "1.2.1",
-    "gulp-documentation": "2.0.1",
+    "gulp-documentation": "2.1.0",
     "gulp-eslint": "1.1.1",
     "gulp-ext-replace": "0.2.0",
     "gulp-istanbul": "0.10.3",
