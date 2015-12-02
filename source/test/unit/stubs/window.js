@@ -9,6 +9,9 @@ const windowStub = {
 	getComputedStyle(element) {
 		return element.style || {};
 	},
+	requestAnimationFrame(fn) {
+		setTimeout(fn, 15);
+	},
 	NodeList(elements) {
 		elements.forEach((element, index) => this[index] = element);
 		this.length = elements.length;

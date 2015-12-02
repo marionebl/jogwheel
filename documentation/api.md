@@ -35,9 +35,21 @@ const wheel = new jogwheel(element);
 
 Returns **jogwheel** jogwheel instance
 
-# durations
+# JogWheel.prototype.durations
 
 Returns **array** durations used by jogwheel instance
+
+# JogWheel.prototype.players
+
+Returns **array** WebAnimationPlayer instances by jogwheel instance
+
+# JogWheel.prototype.playState
+
+Returns **string** playState, either `running` or `paused`
+
+# JogWheel.prototype.progress
+
+Returns **float** progress in fraction of 1 [0..1]
 
 # pause
 
@@ -79,19 +91,7 @@ const wheel = jogwheel.create(element, {
 wheel.seek(0.5).play();
 ```
 
-Returns **jogwheel** jogwheel instance
-
-# players
-
-Returns **array** WebAnimationPlayer instances by jogwheel instance
-
-# playState
-
-Returns **string** playState, either `running` or `paused`
-
-# progress
-
-Returns **float** progress in fraction of 1 [0..1]
+Returns **JogWheel** JogWheel instance
 
 # seek
 
@@ -135,7 +135,7 @@ Creates a new jogwheel instance
 
 **Parameters**
 
--   `element` **HTMLElement** HTMLElement to instantiate on
+-   `nodes` **Node or NodeList** Node or NodeList to instantiate on
 -   `options` **object** Options object
 -   `window` **[Window]** Global context to use (optional, default `global.window`)
 -   `document` **[Document]** Document context to use (optional, default `global.window`)
@@ -146,7 +146,7 @@ Creates a new jogwheel instance
 ```javascript
 import jogwheel from 'jogwheel';
 const element = document.querySelector('[data-animated]');
-
+:
 // Instantiate a paused jogwheel instance on element
 const wheel = jogwheel.create(element, {
 	paused: true

@@ -9,18 +9,15 @@ import JogWheel from '../../library/index.js';
 
 tape('constructor', t => {
 	t.throws(() => {
-		const instance = new JogWheel(undefined, windowStub, documentStub);
-		instance.unplug();
+		new JogWheel(undefined, windowStub, documentStub); // eslint-disable-line no-new
 	}, 'should throw when called without element');
 
 	t.doesNotThrow(() => {
-		const instance = new JogWheel(elementStub, {}, windowStub, documentStub);
-		instance.unplug();
+		new JogWheel(elementStub, {}, windowStub, documentStub); // eslint-disable-line no-new
 	}, 'should not throw when called with element');
 
 	t.doesNotThrow(() => {
-		const instance = new JogWheel(nodeListStub, {}, windowStub, documentStub);
-		instance.unplug();
+		new JogWheel(nodeListStub, {}, windowStub, documentStub); // eslint-disable-line no-new
 	}, 'should not throw when called with node-list');
 
 	t.end();
