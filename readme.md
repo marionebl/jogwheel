@@ -119,8 +119,8 @@ Either embed or download the standalone bundle. Given you do not use a module sy
   </style>
   <body>
     <div data-animated></div>
-    <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true" />
-    <script src="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true" />
+    <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true"></script>
+    <script src="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true"></script>
     <script>
       var element = document.querySelector('[data-animated]');
       var player = JogWheel.create(element);
@@ -266,4 +266,3 @@ and released under the [MIT License](./license.md).
 
 [gitter-image]: https://img.shields.io/badge/gitter-join%20chat-5ec792.svg?style=flat-square
 [gitter-url]: https://gitter.im/sinnerschrader/patternplate
-
