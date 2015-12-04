@@ -95,46 +95,63 @@ Either embed or download the standalone bundle. Given you do not use a module sy
     <title>CDN example</title>
   </head>
   <style>
-    @keframes bounce {
-      0% {
+    @keyframes bounce {
+      0%, 100% {
         transform: none;
       }
-
-      25% {
-        transform: translateY(-100%);
-      }
-
       50% {
-        transform: none;
-      }
-
-      75% {
         transform: translateY(100%);
       }
+    }
 
-      100% {
-        transform: none;
+    @-webkit-keyframes bounce {
+      0%, 100% {
+        -webkit-transform: none;
+      }
+      50% {
+        -webkit-transform: translateY(100%);
       }
     }
 
     [data-animated] {
-      animation: bounce 1s;
+      animation: bounce 10s;
       animation-fill-mode: both;
       animation-play-state: paused;
+      animation-iteration-count: infinite;
+      display: inline-block;
       height: 100px;
       width: 100px;
       background: #333;
       border-radius: 50%;
+      color: #fff;
+      font-family: sans-serif;
+      line-height: 100px;
+      text-align: center;
+    }
+    [data-animated]:nth-child(2) {
+      animation-delay: 2.5s;
+    }
+    [data-animated]:nth-child(3) {
+      animation-delay: 5s;
     }
   </style>
   <body>
-    <div data-animated></div>
-    <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true" />
-    <script src="https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=true" />
+    <div data-animated>Paused 0.5</div>
+    <div data-animated>Paused 0.5</div>
+    <div data-animated>Paused 0.5</div>
+    <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true"></script>
+    <script src="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true"></script>
     <script>
-      var element = document.querySelector('[data-animated]');
-      var player = JogWheel.create(element);
-      player.seek(0.5).play();
+      var elements = document.querySelectorAll('[data-animated]');
+      var player = jogwheel.create(elements);
+      player.seek(0.5);
+
+      setTimeout(function(){
+        player.play();
+        for (var i = 0; i < elements.length; i += 1) {
+          elements[i].innerText = 'Playing';
+        }
+      }, 5000);
     </script>
   </body>
 </html>
