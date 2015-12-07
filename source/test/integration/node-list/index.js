@@ -1,11 +1,11 @@
 import 'web-animations-js';
 
 const tape = require('tape');
-const JogWheel = require('jogwheel');
+const jogwheel = require('jogwheel');
 
 tape('node-list', t => {
 	const elements = document.querySelectorAll('[data-animated]');
-	const wheel = JogWheel.create(elements, {}, window, document);
+	const wheel = jogwheel.create(elements, {}, window, document);
 
 	t.doesNotThrow(() => {
 		wheel.seek(0.5);

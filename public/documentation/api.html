@@ -21,6 +21,7 @@
 <li class="jogwheel-item"><a href="./../contributing.html">Contributing</a></li>
 <li class="jogwheel-item jogwheel-item--active"><a href="./api.html">Api</a></li>
 <li class="jogwheel-item"><a href="./roadmap.html">Roadmap</a></li>
+<li class="jogwheel-item"><a href="./../examples/cdn.html">Cdn</a></li>
 <li class="jogwheel-item"><a href="./../examples/index.html">Examples</a></li>
 <li class="jogwheel-item"><a href="./../license.html">License</a></li>
 				</ul>
@@ -38,7 +39,7 @@
 </header>
 <br />
 <h1 id="constructor">constructor</h1>
-<p>Creates a new JogWheel instance</p>
+<p>Creates a new jogwheel instance</p>
 <p><strong>Parameters</strong></p>
 <ul>
 <li><code>nodes</code> <strong>Node or NodeList</strong> Node or NodeList to instantiate on</li>
@@ -47,44 +48,44 @@
 <li><code>document</code> <strong>[Document]</strong> Document context to use (optional, default <code>global.window</code>)</li>
 </ul>
 <p><strong>Examples</strong></p>
-<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> JogWheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
+<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> jogwheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
 <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'[data-animated]'</span>);
 
-<span class="hljs-comment">// Instantiate a JogWheel instance on element</span>
-<span class="hljs-keyword">const</span> wheel = <span class="hljs-keyword">new</span> JogWheel(element);</code></pre>
-<p>Returns <strong>JogWheel</strong> JogWheel instance</p>
+<span class="hljs-comment">// Instantiate a jogwheel instance on element</span>
+<span class="hljs-keyword">const</span> wheel = <span class="hljs-keyword">new</span> jogwheel(element);</code></pre>
+<p>Returns <strong>jogwheel</strong> jogwheel instance</p>
 <h1 id="durations">durations</h1>
-<p>Returns <strong>array</strong> durations used by JogWheel instance</p>
+<p>Returns <strong>array</strong> durations used by jogwheel instance</p>
 <h1 id="pause">pause</h1>
 <p>Pauses the animation</p>
 <p><strong>Examples</strong></p>
-<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> JogWheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
+<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> jogwheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
 <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'[data-animated]'</span>);
 
-<span class="hljs-comment">// Instantiate a paused JogWheel instance on element</span>
-<span class="hljs-keyword">const</span> wheel = JogWheel.create(element, {
+<span class="hljs-comment">// Instantiate a paused jogwheel instance on element</span>
+<span class="hljs-keyword">const</span> wheel = jogwheel.create(element, {
 	paused: <span class="hljs-literal">false</span>
 });
 
 <span class="hljs-comment">// Pause the animation and reset it to animation start</span>
 wheel.pause().seek(<span class="hljs-number">0</span>);</code></pre>
-<p>Returns <strong>JogWheel</strong> JogWheel instance</p>
+<p>Returns <strong>jogwheel</strong> jogwheel instance</p>
 <h1 id="play">play</h1>
 <p>Plays the animation</p>
 <p><strong>Examples</strong></p>
-<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> JogWheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
+<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> jogwheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
 <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'[data-animated]'</span>);
 
-<span class="hljs-comment">// Instantiate a paused JogWheel instance on element</span>
-<span class="hljs-keyword">const</span> wheel = JogWheel.create(element, {
+<span class="hljs-comment">// Instantiate a paused jogwheel instance on element</span>
+<span class="hljs-keyword">const</span> wheel = jogwheel.create(element, {
 	paused: <span class="hljs-literal">true</span>
 });
 
 <span class="hljs-comment">// Seek to middle of animation sequence and play</span>
 wheel.seek(<span class="hljs-number">0.5</span>).play();</code></pre>
-<p>Returns <strong>JogWheel</strong> JogWheel instance</p>
+<p>Returns <strong>jogwheel</strong> jogwheel instance</p>
 <h1 id="players">players</h1>
-<p>Returns <strong>array</strong> WebAnimationPlayer instances by JogWheel instance</p>
+<p>Returns <strong>array</strong> WebAnimationPlayer instances by jogwheel instance</p>
 <h1 id="playstate">playState</h1>
 <p>Returns <strong>string</strong> playState, either <code>running</code> or <code>paused</code></p>
 <h1 id="progress">progress</h1>
@@ -96,11 +97,11 @@ wheel.seek(<span class="hljs-number">0.5</span>).play();</code></pre>
 <li><code>progress</code> <strong>float</strong> fraction of the animation timeline [0..1]</li>
 </ul>
 <p><strong>Examples</strong></p>
-<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> JogWheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
+<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> jogwheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
 <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'[data-animated]'</span>);
 
-<span class="hljs-comment">// Instantiate a paused JogWheel instance on element</span>
-<span class="hljs-keyword">const</span> wheel = JogWheel.create(element, {
+<span class="hljs-comment">// Instantiate a paused jogwheel instance on element</span>
+<span class="hljs-keyword">const</span> wheel = jogwheel.create(element, {
 	paused: <span class="hljs-literal">true</span>
 });
 
@@ -117,9 +118,9 @@ wheel.seek(<span class="hljs-number">0.5</span>).play();</code></pre>
 
 <span class="hljs-comment">// Start the render loop</span>
 loop();</code></pre>
-<p>Returns <strong>JogWheel</strong> JogWheel instance</p>
+<p>Returns <strong>jogwheel</strong> jogwheel instance</p>
 <h1 id="create">create</h1>
-<p>Creates a new JogWheel instance</p>
+<p>Creates a new jogwheel instance</p>
 <p><strong>Parameters</strong></p>
 <ul>
 <li><code>element</code> <strong>HTMLElement</strong> HTMLElement to instantiate on</li>
@@ -129,11 +130,11 @@ loop();</code></pre>
 <li><code>args</code> <strong>...</strong> </li>
 </ul>
 <p><strong>Examples</strong></p>
-<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> JogWheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
+<pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> jogwheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
 <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'[data-animated]'</span>);
 
-<span class="hljs-comment">// Instantiate a paused JogWheel instance on element</span>
-<span class="hljs-keyword">const</span> wheel = JogWheel.create(element, {
+<span class="hljs-comment">// Instantiate a paused jogwheel instance on element</span>
+<span class="hljs-keyword">const</span> wheel = jogwheel.create(element, {
 	paused: <span class="hljs-literal">true</span>
 });
 
@@ -142,7 +143,7 @@ wheel.seek(<span class="hljs-number">0.5</span>);
 
 <span class="hljs-comment">// Play the animation</span>
 wheel.play();</code></pre>
-<p>Returns <strong>JogWheel</strong> JogWheel instance</p>
+<p>Returns <strong>jogwheel</strong> jogwheel instance</p>
 <hr>
 <p>jogwheel <code>v1.3.0</code> is built by Mario Nebl and <a href="./documentation/contributors.html">contributors</a> with :heart:
 and released under the <a href="./license.html">MIT License</a>.</p>

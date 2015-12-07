@@ -8,7 +8,7 @@ import runningAnimation from './fixtures/running-animation';
 import pausedAnimation from './fixtures/paused-animation';
 import slowAnimation from './fixtures/slow-animation';
 
-import JogWheel from '../../library/';
+import jogwheel from '../../library/';
 
 tape('instance.seek', t => {
 	const element = {
@@ -19,10 +19,10 @@ tape('instance.seek', t => {
 		}
 	};
 
-	const instance = JogWheel.create(element, {}, windowStub, documentStub);
+	const instance = jogwheel.create(element, {}, windowStub, documentStub);
 	t.ok(
 		instance.seek() === instance,
-		'should return the JogWheel instance'
+		'should return the jogwheel instance'
 	);
 	t.end();
 
@@ -66,7 +66,7 @@ tape('instance.seek', t => {
 		}
 	};
 
-	const runningInstance = JogWheel.create(runningElement, {}, windowStub, documentStub);
+	const runningInstance = jogwheel.create(runningElement, {}, windowStub, documentStub);
 	runningInstance.seek(1);
 
 	t.equals(
@@ -91,7 +91,7 @@ tape('instance.seek', t => {
 		}
 	};
 
-	const slowInstance = JogWheel.create(slowElement, {}, windowStub, documentStub);
+	const slowInstance = jogwheel.create(slowElement, {}, windowStub, documentStub);
 	slowInstance.seek(0.5);
 
 	t.equals(

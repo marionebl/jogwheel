@@ -3,12 +3,12 @@ import tape from 'tape';
 import windowStub from './stubs/window.js';
 import documentStub from './stubs/document.js';
 import elementStub from './stubs/element.js';
-import JogWheel from '../../library/index.js';
+import jogwheel from '../../library/index.js';
 
-tape('JogWheel.create', t => {
+tape('jogwheel.create', t => {
 	t.ok(
-		JogWheel.create(elementStub, {}, windowStub, documentStub) instanceof JogWheel,
-		'should return an instance of JogWheel');
+		jogwheel.create(elementStub, {}, windowStub, documentStub) instanceof jogwheel,
+		'should return an instance of jogwheel');
 
 	t.end();
 });

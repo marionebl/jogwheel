@@ -6,13 +6,13 @@ import elementStub from './stubs/element.js';
 
 import pausedAnimation from './fixtures/paused-animation';
 
-import JogWheel from '../../library/';
+import jogwheel from '../../library/';
 
 tape('instance.play', t => {
-	const instance = JogWheel.create(elementStub, {}, windowStub, documentStub);
+	const instance = jogwheel.create(elementStub, {}, windowStub, documentStub);
 	t.ok(
 		instance.play() === instance,
-		'should return the JogWheel instance'
+		'should return the jogwheel instance'
 	);
 
 	const pausedElement = {
@@ -23,13 +23,13 @@ tape('instance.play', t => {
 		}
 	};
 
-	const pausedInstance = JogWheel.create(pausedElement, {}, windowStub, documentStub);
+	const pausedInstance = jogwheel.create(pausedElement, {}, windowStub, documentStub);
 	pausedInstance.play();
 
 	t.equals(
 		pausedInstance.playState,
 		'running',
-		'should start a paused JogWheel instance'
+		'should start a paused jogwheel instance'
 	);
 
 	t.end();

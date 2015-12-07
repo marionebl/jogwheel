@@ -14,7 +14,7 @@
 
 # constructor
 
-Creates a new JogWheel instance
+Creates a new jogwheel instance
 
 **Parameters**
 
@@ -26,18 +26,18 @@ Creates a new JogWheel instance
 **Examples**
 
 ```javascript
-import JogWheel from 'jogwheel';
+import jogwheel from 'jogwheel';
 const element = document.querySelector('[data-animated]');
 
-// Instantiate a JogWheel instance on element
-const wheel = new JogWheel(element);
+// Instantiate a jogwheel instance on element
+const wheel = new jogwheel(element);
 ```
 
-Returns **JogWheel** JogWheel instance
+Returns **jogwheel** jogwheel instance
 
 # durations
 
-Returns **array** durations used by JogWheel instance
+Returns **array** durations used by jogwheel instance
 
 # pause
 
@@ -46,11 +46,11 @@ Pauses the animation
 **Examples**
 
 ```javascript
-import JogWheel from 'jogwheel';
+import jogwheel from 'jogwheel';
 const element = document.querySelector('[data-animated]');
 
-// Instantiate a paused JogWheel instance on element
-const wheel = JogWheel.create(element, {
+// Instantiate a paused jogwheel instance on element
+const wheel = jogwheel.create(element, {
 	paused: false
 });
 
@@ -58,7 +58,7 @@ const wheel = JogWheel.create(element, {
 wheel.pause().seek(0);
 ```
 
-Returns **JogWheel** JogWheel instance
+Returns **jogwheel** jogwheel instance
 
 # play
 
@@ -67,11 +67,11 @@ Plays the animation
 **Examples**
 
 ```javascript
-import JogWheel from 'jogwheel';
+import jogwheel from 'jogwheel';
 const element = document.querySelector('[data-animated]');
 
-// Instantiate a paused JogWheel instance on element
-const wheel = JogWheel.create(element, {
+// Instantiate a paused jogwheel instance on element
+const wheel = jogwheel.create(element, {
 	paused: true
 });
 
@@ -79,11 +79,11 @@ const wheel = JogWheel.create(element, {
 wheel.seek(0.5).play();
 ```
 
-Returns **JogWheel** JogWheel instance
+Returns **jogwheel** jogwheel instance
 
 # players
 
-Returns **array** WebAnimationPlayer instances by JogWheel instance
+Returns **array** WebAnimationPlayer instances by jogwheel instance
 
 # playState
 
@@ -104,11 +104,11 @@ Seeks the timeline of the animation
 **Examples**
 
 ```javascript
-import JogWheel from 'jogwheel';
+import jogwheel from 'jogwheel';
 const element = document.querySelector('[data-animated]');
 
-// Instantiate a paused JogWheel instance on element
-const wheel = JogWheel.create(element, {
+// Instantiate a paused jogwheel instance on element
+const wheel = jogwheel.create(element, {
 	paused: true
 });
 
@@ -127,11 +127,11 @@ function loop() {
 loop();
 ```
 
-Returns **JogWheel** JogWheel instance
+Returns **jogwheel** jogwheel instance
 
 # create
 
-Creates a new JogWheel instance
+Creates a new jogwheel instance
 
 **Parameters**
 
@@ -144,11 +144,11 @@ Creates a new JogWheel instance
 **Examples**
 
 ```javascript
-import JogWheel from 'jogwheel';
+import jogwheel from 'jogwheel';
 const element = document.querySelector('[data-animated]');
 
-// Instantiate a paused JogWheel instance on element
-const wheel = JogWheel.create(element, {
+// Instantiate a paused jogwheel instance on element
+const wheel = jogwheel.create(element, {
 	paused: true
 });
 
@@ -159,7 +159,7 @@ wheel.seek(0.5);
 wheel.play();
 ```
 
-Returns **JogWheel** JogWheel instance
+Returns **jogwheel** jogwheel instance
 
 
 
