@@ -22,6 +22,7 @@ module.exports = function (gulp, paths, options, cli) {
 		var lint = require('./lint')(gulp, paths, watchOptions, cli);
 		var test = require('./test')(gulp, paths, watchOptions, cli);
 		var copy = require('./copy')(gulp, paths, watchOptions, cli);
+		var copyExample = require('./copy-example')(gulp, paths, watchOptions, cli);
 		var copyStatic = require('./static')(gulp, paths, watchOptions, cli);
 		var html = require('./html')(gulp, paths, watchOptions, cli);
 		var css = require('./css')(gulp, paths, watchOptions, cli);
@@ -44,6 +45,7 @@ module.exports = function (gulp, paths, options, cli) {
 							[
 								task(copy),
 								task(copyStatic, 'copy-static'),
+								task(copyExample, 'copy-example'),
 								task(lint),
 								task(css),
 								task(testCss, 'test-css'),

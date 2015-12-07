@@ -90,7 +90,7 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 
 **Fast track example**
 ```
-npm install --g opn-cli && curl https://${props.pkg.config.documentation.host}/examples/cdn.html > jogwheel-example.html && opn jogwheel-example.html
+npm install --g opn-cli && curl https://${props.pkg.config.documentation.host}/${props.pkg.name}/examples/cdn.html > jogwheel-example.html && opn jogwheel-example.html
 ```
 
 **All the code**
@@ -199,7 +199,7 @@ ${props.pkg.name} is up to a lot of good. This includes but is not limited to
 - [x] super-awesome cross-browser tests
 - [ ] unit-tested documentation code examples, because rust isn't the only language that can do cool dev convenience stuff
 - [ ] an interactive playground and animation editor
-- [ ] a plug-an-play react integration component
+- [ ] a plug-and-play react integration component
 
 ---
 See [Roadmap](./documentation/roadmap.md) for details.
