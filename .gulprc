@@ -8,6 +8,7 @@
       "scripts": "source/scripts/**/*.js",
       "documentation": "source/**/*.tpl",
       "static": "source/**/*.html",
+      "example": "source/examples/**/*.html",
       "public-static": "source/documentation/**/*.{png,svg}",
       "markdown": [
         "**/*.md",
@@ -30,7 +31,8 @@
       "library": "distribution/library/",
       "test": "distribution/test/",
       "scripts": "distribution/scripts/",
-      "public": "public"
+      "public": "public",
+      "example": "public/examples/"
     },
     // executables
     "executable":{

@@ -11,6 +11,7 @@ module.exports = function (gulp, paths, options) {
 	var documentation = require('./documentation').apply(null, args);
 	var transpile = require('./transpile').apply(null, args);
 	var copy = require('./copy').apply(null, args);
+	var copyExample = require('./copy-example').apply(null, args);
 	var copyStatic = require('./static').apply(null, args);
 	var html = require('./html').apply(null, args);
 	var css = require('./css').apply(null, args);
@@ -24,6 +25,7 @@ module.exports = function (gulp, paths, options) {
 			[
 				task(copy),
 				task(copyStatic, 'copy-static'),
+				task(copyExample, 'copy-example'),
 				task(lint),
 				task(css),
 				task(testCSS, 'test-css'),

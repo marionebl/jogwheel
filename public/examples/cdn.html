@@ -1,33 +1,4 @@
 <!doctype html>
-<html lang="en" prefix="og: http://ogp.me/ns#">
-	<head>
-		<title>jogwheel - Take control of your CSS keyframe animations</title>
-		<link rel="stylesheet" href="../static/index.css" />
-		<meta property="og:title" content="jogwheel" />
-		<meta property="og:title" content="Take control of your CSS keyframe animations" />
-		<meta property="og:image" content="../static/jogwheel.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="../static/jogwheel.svg" />
-		<link rel="icon" type="image/png" href="../static/jogwheel.png" />
-	</head>
-	<body>
-		<div class="jogwheel-teaser">
-			<a href="https://github.com/marionebl/jogwheel#-jogwheel">
-				Fork me on Github
-			</a>
-			<nav class="jogwheel-main-navigation">
-				<ul class="jogwheel-main-navigation-list">
-					<li class="jogwheel-item"><a href="./..">Home</a></li>
-<li class="jogwheel-item"><a href="./../contributing.html">Contributing</a></li>
-<li class="jogwheel-item"><a href="./../documentation/api.html">Api</a></li>
-<li class="jogwheel-item"><a href="./../documentation/roadmap.html">Roadmap</a></li>
-<li class="jogwheel-item jogwheel-item--active"><a href="./cdn.html">Cdn</a></li>
-<li class="jogwheel-item"><a href="./index.html">Examples</a></li>
-<li class="jogwheel-item"><a href="./../license.html">License</a></li>
-				</ul>
-			</nav>
-		</div>
-		<!doctype html>
 <html>
   <head>
     <title>CDN example</title>
@@ -41,37 +12,37 @@
         transform: translateY(100%);
       }
     }
-<pre><code>@-webkit-keyframes bounce {
-  0%, 100% {
-    -webkit-transform: none;
-  }
-  50% {
-    -webkit-transform: translateY(100%);
-  }
-}
 
-[data-animated] {
-  animation: bounce 10s;
-  animation-fill-mode: both;
-  animation-play-state: paused;
-  animation-iteration-count: infinite;
-  display: inline-block;
-  height: 100px;
-  width: 100px;
-  background: #333;
-  border-radius: 50%;
-  color: #fff;
-  font-family: sans-serif;
-  line-height: 100px;
-  text-align: center;
-}
-[data-animated]:nth-child(2) {
-  animation-delay: 2.5s;
-}
-[data-animated]:nth-child(3) {
-  animation-delay: 5s;
-}
-</code></pre>
+    @-webkit-keyframes bounce {
+      0%, 100% {
+        -webkit-transform: none;
+      }
+      50% {
+        -webkit-transform: translateY(100%);
+      }
+    }
+
+    [data-animated] {
+      animation: bounce 10s;
+      animation-fill-mode: both;
+      animation-play-state: paused;
+      animation-iteration-count: infinite;
+      display: inline-block;
+      height: 100px;
+      width: 100px;
+      background: #333;
+      border-radius: 50%;
+      color: #fff;
+      font-family: sans-serif;
+      line-height: 100px;
+      text-align: center;
+    }
+    [data-animated]:nth-child(2) {
+      animation-delay: 2.5s;
+    }
+    [data-animated]:nth-child(3) {
+      animation-delay: 5s;
+    }
   </style>
   <body>
     <div data-animated>Paused 0.5</div>
@@ -83,20 +54,13 @@
       var elements = document.querySelectorAll('[data-animated]');
       var player = jogwheel.create(elements);
       player.seek(0.5);
-<pre><code>  setTimeout(function(){
-    player.play();
-    for (var i = 0; i &lt; elements.length; i += 1) {
-      elements[i].innerText = &apos;Playing&apos;;
-    }
-  }, 5000);
-&lt;/script&gt;
-</code></pre>
-  </body>
-</html>
 
-		<aside class="jogwheel-archive-teaser">
-			Looking for older versions? Search our <a href="./archives/index.html">archives</a>.
-		</aside>
-		<script src="../static/index.js"></script>
-	</body>
+      setTimeout(function(){
+        player.play();
+        for (var i = 0; i < elements.length; i += 1) {
+          elements[i].innerText = 'Playing';
+        }
+      }, 5000);
+    </script>
+  </body>
 </html>
