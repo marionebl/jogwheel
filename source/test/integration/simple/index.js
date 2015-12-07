@@ -1,7 +1,7 @@
 import 'web-animations-js';
 
 const tape = require('tape');
-const JogWheel = require('jogwheel');
+const jogwheel = require('jogwheel');
 
 const element = document.querySelector('[data-animated]');
 
@@ -12,7 +12,7 @@ tape('simple integration', t => {
 	 * - rewind to 0
 	 * - play
 	 */
-	const wheel = JogWheel.create(element, {}, window, document);
+	const wheel = jogwheel.create(element, {}, window, document);
 
 	t.comment('Pausing and seeking to 0');
 	t.doesNotThrow(() => wheel.pause(), 'Pausing does not throw');

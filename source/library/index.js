@@ -3,19 +3,19 @@ import getPlayer from './get-player.js';
 
 class JogWheel {
 	/**
-	 * Creates a new JogWheel instance
+	 * Creates a new jogwheel instance
 	 * @constructor
 	 * @param  {HTMLElement} element  HTMLElement to instantiate on
 	 * @param  {object} options Options object
 	 * @param  {Window} [window=global.window] Global context to use
 	 * @param  {Document} [document=global.window] Document context to use
-	 * @return {JogWheel} JogWheel instance
+	 * @return {jogwheel} jogwheel instance
 	 * @example
-	 * import JogWheel from 'jogwheel';
+	 * import jogwheel from 'jogwheel';
 	 * const element = document.querySelector('[data-animated]');
 	 *
-	 * // Instantiate a paused JogWheel instance on element
-	 * const wheel = JogWheel.create(element, {
+	 * // Instantiate a paused jogwheel instance on element
+	 * const wheel = jogwheel.create(element, {
 	 * 	paused: true
 	 * });
 	 *
@@ -30,23 +30,23 @@ class JogWheel {
 	}
 
 	/**
-	 * Creates a new JogWheel instance
+	 * Creates a new jogwheel instance
 	 * @constructor
 	 * @param  {Node|NodeList} nodes  Node or NodeList to instantiate on
 	 * @param  {object} options Options object
 	 * @param  {Window} [window=global.window] Global context to use
 	 * @param  {Document} [document=global.window] Document context to use
-	 * @return {JogWheel} JogWheel instance
+	 * @return {jogwheel} jogwheel instance
 	 * @example
-	 * import JogWheel from 'jogwheel';
+	 * import jogwheel from 'jogwheel';
 	 * const element = document.querySelector('[data-animated]');
 	 *
-	 * // Instantiate a JogWheel instance on element
-	 * const wheel = new JogWheel(element);
+	 * // Instantiate a jogwheel instance on element
+	 * const wheel = new jogwheel(element);
 	 */
 	constructor(nodes, options, window = global.window, document = global.document) {
 		if (!nodes) {
-			throw new Error(`Could not construct JogWheel, missing element`);
+			throw new Error(`Could not construct jogwheel, missing element`);
 		}
 
 		const settings = {...defaults, ...options};
@@ -66,7 +66,7 @@ class JogWheel {
 	 * @return {string} playState, either `running` or `paused`
 	 */
 	get playState() {
-		// JogWheel does not support asynchronously running animations
+		// jogwheel does not support asynchronously running animations
 		// in one instance, thus fetching the first player is enough
 		const player = this.players[0];
 		return player.playState;
@@ -77,7 +77,7 @@ class JogWheel {
 	 * @return {float} progress in fraction of 1 [0..1]
 	 */
 	get progress() {
-		// JogWheel does not support asynchronously running animations
+		// jogwheel does not support asynchronously running animations
 		// in one instance, thus fetching the first player is enough
 		const player = this.players[0];
 		const duration = this.durations[0];
@@ -86,7 +86,7 @@ class JogWheel {
 
 	/**
 	 * @readonly
-	 * @return {array} WebAnimationPlayer instances by JogWheel instance
+	 * @return {array} WebAnimationPlayer instances by jogwheel instance
 	 */
 	get players() {
 		return this.__instance.players;
@@ -94,7 +94,7 @@ class JogWheel {
 
 	/**
 	 * @readonly
-	 * @return {array} durations used by JogWheel instance
+	 * @return {array} durations used by jogwheel instance
 	 */
 	get durations() {
 		return this.__instance.durations;
@@ -102,13 +102,13 @@ class JogWheel {
 
 	/**
 	 * Plays the animation
-	 * @return {JogWheel} JogWheel instance
+	 * @return {jogwheel} jogwheel instance
 	 * @example
-	 * import JogWheel from 'jogwheel';
+	 * import jogwheel from 'jogwheel';
 	 * const element = document.querySelector('[data-animated]');
 	 *
-	 * // Instantiate a paused JogWheel instance on element
-	 * const wheel = JogWheel.create(element, {
+	 * // Instantiate a paused jogwheel instance on element
+	 * const wheel = jogwheel.create(element, {
 	 * 	paused: true
 	 * });
 	 *
@@ -122,13 +122,13 @@ class JogWheel {
 
 	/**
 	 * Pauses the animation
-	 * @return {JogWheel} JogWheel instance
+	 * @return {jogwheel} jogwheel instance
 	 * @example
-	 * import JogWheel from 'jogwheel';
+	 * import jogwheel from 'jogwheel';
 	 * const element = document.querySelector('[data-animated]');
 	 *
-	 * // Instantiate a paused JogWheel instance on element
-	 * const wheel = JogWheel.create(element, {
+	 * // Instantiate a paused jogwheel instance on element
+	 * const wheel = jogwheel.create(element, {
 	 * 	paused: false
 	 * });
 	 *
@@ -143,13 +143,13 @@ class JogWheel {
 	/**
 	 * Seeks the timeline of the animation
 	 * @param  {float} progress fraction of the animation timeline [0..1]
-	 * @return {JogWheel} JogWheel instance
+	 * @return {jogwheel} jogwheel instance
 	 * @example
-	 * import JogWheel from 'jogwheel';
+	 * import jogwheel from 'jogwheel';
 	 * const element = document.querySelector('[data-animated]');
 	 *
-	 * // Instantiate a paused JogWheel instance on element
-	 * const wheel = JogWheel.create(element, {
+	 * // Instantiate a paused jogwheel instance on element
+	 * const wheel = jogwheel.create(element, {
 	 * 	paused: true
 	 * });
 	 *
@@ -175,15 +175,15 @@ class JogWheel {
 	}
 
 	/**
-	 * Reregister all eventListeners and cache entries for this JogWheel instance
-	 * @return {JogWheel} JogWheel instance
+	 * Reregister all eventListeners and cache entries for this jogwheel instance
+	 * @return {jogwheel} jogwheel instance
 	 * @private
  	 * @example
- 	 * import JogWheel from 'jogwheel';
+ 	 * import jogwheel from 'jogwheel';
  	 * const element = document.querySelector('[data-animated]');
  	 *
- 	 * // Instantiate a paused JogWheel instance on element
- 	 * const wheel = JogWheel.create(element);
+ 	 * // Instantiate a paused jogwheel instance on element
+ 	 * const wheel = jogwheel.create(element);
  	 *
  	 * // Attach new styling on the page
  	 * const link = document.createElement('link');
@@ -200,15 +200,15 @@ class JogWheel {
 	}
 
 	/**
-	 * Unregisters all eventListeners and cache entries for this JogWheel instance
-	 * @return {JogWheel} JogWheel instance
+	 * Unregisters all eventListeners and cache entries for this jogwheel instance
+	 * @return {jogwheel} jogwheel instance
 	 * @private
 	 * @example
-	 * import JogWheel from 'jogwheel';
+	 * import jogwheel from 'jogwheel';
 	 * const element = document.querySelector('[data-animated]');
 	 *
-	 * // Instantiate a paused JogWheel instance on element
-	 * const wheel = JogWheel.create(element);
+	 * // Instantiate a paused jogwheel instance on element
+	 * const wheel = jogwheel.create(element);
 	 *
 	 * // Attach new styling on the page
 	 * const link = document.createElement('link');
@@ -226,7 +226,7 @@ class JogWheel {
 
 	/**
 	 * Renders inline styles on the instance element if applicable
-	 * @return {JogWheel} JogWheel instance
+	 * @return {jogwheel} jogwheel instance
 	 * @private
 	 */
 	render() {

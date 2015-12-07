@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import 'web-animations-js/web-animations-next.min.js';
-import JogWheel from '../../library';
+import jogwheel from '../../library';
 
 /* let state = {
 	scrollTop: 0,
@@ -68,11 +68,11 @@ function measure(context, data = {}) {
 }
 
 function main(window, document) {
-	const logoWheel = JogWheel.create(document.querySelector('.jogwheel-logo'));
+	const logoWheel = jogwheel.create(document.querySelector('.jogwheel-logo'));
 	logoWheel.play();
 
 	const teaser = document.querySelector('.jogwheel-teaser');
-	const teaserWheel = JogWheel.create(teaser);
+	const teaserWheel = jogwheel.create(teaser);
 	teaserWheel.pause();
 
 	const options = {
@@ -93,7 +93,7 @@ function main(window, document) {
 	measure(options, data)();
 	loop(options)();
 
-	window.JogWheel = JogWheel;
+	window.jogwheel = jogwheel;
 	window.teaser = teaserWheel;
 }
 

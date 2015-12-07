@@ -7,7 +7,7 @@ import convertAnimationIterations from './convert-animation-iterations';
 /**
  * Gets a web animation player based on the currently assigned CSS animation
  * @param element {HTMLElement} DOM element to scan for an applied CSS animation
- * @param settings {object} Settings object passed to JogWheel instance
+ * @param settings {object} Settings object passed to jogwheel instance
  * @param window {Window} [window=global.window] Global context to use
  * @param document {Document} [document=global.window] Document context to use
  * @return {Object} `player` and `duration` attached to element

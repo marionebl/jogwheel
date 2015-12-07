@@ -74,7 +74,8 @@
       "icon": "",
       "color": "5ec792",
       "logo": "source/documentation/static/jogwheel.svg",
-      "statichost": "https://cdn.rawgit.com"
+      "statichost": "https://cdn.rawgit.com",
+      "host": "marionebl.github.io"
     },
     "pages": {
       "slug": "marionebl/jogwheel",

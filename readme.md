@@ -56,14 +56,14 @@ jogwheel exposes its API as CommonJS module. Using the export and bundling your 
 // import the polyfill
 import 'web-animations-js';
 
-// import JogWheel
-import JogWheel from 'jogwheel';
+// import jogwheel
+import jogwheel from 'jogwheel';
 
 // Select target element
 const element = document.querySelector('[data-animated]');
 
-// Construct JogWheel instance from element
-const player = JogWheel.create(element);
+// Construct jogwheel instance from element
+const player = jogwheel.create(element);
 
 // Jump halfway into the animation
 player.seek(0.5);
@@ -78,6 +78,12 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 * Development [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=false)
 * Production [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true)
 
+**Fast track example**
+```
+npm install --g opn-cli && curl https://marionebl.github.io/examples/cdn.html > jogwheel-example.html && opn jogwheel-example.html
+```
+
+**All the code**
 ```html
 <!doctype html>
 <html>
@@ -85,120 +91,84 @@ Either embed or download the standalone bundle. Given you do not use a module sy
     <title>CDN example</title>
   </head>
   <style>
-    @keframes bounce {
-      0% {
+    @keyframes bounce {
+      0%, 100% {
         transform: none;
       }
-
-      25% {
-        transform: translateY(-100%);
-      }
-
       50% {
-        transform: none;
-      }
-
-      75% {
         transform: translateY(100%);
       }
+    }
 
-      100% {
-        transform: none;
+    @-webkit-keyframes bounce {
+      0%, 100% {
+        -webkit-transform: none;
+      }
+      50% {
+        -webkit-transform: translateY(100%);
       }
     }
 
     [data-animated] {
-      animation: bounce 1s;
+      animation: bounce 10s;
       animation-fill-mode: both;
       animation-play-state: paused;
+      animation-iteration-count: infinite;
+      display: inline-block;
       height: 100px;
       width: 100px;
       background: #333;
       border-radius: 50%;
+      color: #fff;
+      font-family: sans-serif;
+      line-height: 100px;
+      text-align: center;
+    }
+    [data-animated]:nth-child(2) {
+      animation-delay: 2.5s;
+    }
+    [data-animated]:nth-child(3) {
+      animation-delay: 5s;
     }
   </style>
   <body>
-    <div data-animated></div>
+    <div data-animated>Paused 0.5</div>
+    <div data-animated>Paused 0.5</div>
+    <div data-animated>Paused 0.5</div>
     <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true"></script>
     <script src="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true"></script>
     <script>
-      var element = document.querySelector('[data-animated]');
-      var player = JogWheel.create(element);
-      player.seek(0.5).play();
+      var elements = document.querySelectorAll('[data-animated]');
+      var player = jogwheel.create(elements);
+      player.seek(0.5);
+
+      setTimeout(function(){
+        player.play();
+        for (var i = 0; i < elements.length; i += 1) {
+          elements[i].innerText = 'Playing';
+        }
+      }, 5000);
     </script>
   </body>
 </html>
 ```
 
 ---
-See [API Documentation](./documentation/api.md) for details.
-
-## Example
-jogwheel shines brightest when used with CSS animations.
-
-**JavaScript**
-
-```js
-import JogWheel from 'jogwheel';
-const element = document.querySelector('[data-animated]');
-const player = JogWheel.create(element);
-
-// Jump halfway into the animation
-player.seek(0.5);
-```
-
-**CSS**
-
-```css
-@keframes bounce {
-  0% {
-    transform: none;
-  }
-
-  25% {
-    transform: translateY(-100%);
-  }
-
-  50% {
-    transform: none;
-  }
-
-  75% {
-    transform: translateY(100%);
-  }
-
-  100% {
-    transform: none;
-  }
-}
-
-[data-animated] {
-  animation: bounce 1s;
-  /* animation-fill-mode and animation-play-state are recommended */
-  animation-fill-mode: both;
-  animation-play-state: paused;
-  height: 100px;
-  width: 100px;
-  background: #333;
-  border-radius: 50%;
-}
-
-```
-
-**HTML**
-
-```html
-<div data-animated>
-</div>
-```
----
-See [Examples](./examples/readme.md) for more use cases.
-
+See [API Documentation](./documentation/api.md) for details and [examples](./examples/readme.md) for more use cases.
 
 ## Browser support
 jogwheel performs cross browser testing with SauceLabs
 
 [![Browser Support](https://saucelabs.com/browser-matrix/jogwheel-unit.svg)](https://saucelabs.com/u/jogwheel-unit)
+
+## Limitations
+Depending on the WebAnimations implementation you choose there are some limitations for properties usable with jogwheel.
+
+| Feature                   | Test        | Issue | Blink     | Gecko     | `web-animations-js 2.1.4` | `web-animations-next 2.1.4` |
+|:--------------------------|:-----------:|:-----:|:---------:|:---------:|:-------------------------:|:---------------------------:|
+|`animation-timing-function`| [Link][1]   | #161  | :warning: | :warning: | :warning:                 | :warning:                   |
+|`filter`                   | [Link][2]   | #162  | :warning: | :warning: | :warning:                 | :warning:                   |
+
 
 ## Development
 You dig jogwheel and want to submit a pull request? Awesome!
@@ -224,7 +194,8 @@ jogwheel is up to a lot of good. This includes but is not limited to
 ---
 See [Roadmap](./documentation/roadmap.md) for details.
 
-
+[1]: http://codepen.io/marionebl/pen/RrbzOO
+[2]: http://codepen.io/marionebl/pen/RrbzOO
 
 ---
 jogwheel `v1.3.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
@@ -266,3 +237,4 @@ and released under the [MIT License](./license.md).
 
 [gitter-image]: https://img.shields.io/badge/gitter-join%20chat-5ec792.svg?style=flat-square
 [gitter-url]: https://gitter.im/sinnerschrader/patternplate
+

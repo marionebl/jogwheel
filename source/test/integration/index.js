@@ -3,7 +3,7 @@ import 'web-animations-js';
 import 'whatwg-fetch';
 import tape from 'tape';
 
-import JogWheel from '../../library';
+import jogwheel from '../../library';
 
 const tests = [
 	'simple',
@@ -149,7 +149,7 @@ async function main() {
 					const js = await jsLoading;
 					const code = await js.text();
 
-					frame.contentWindow.__jogwheel = JogWheel;
+					frame.contentWindow.__jogwheel = jogwheel;
 					frame.contentWindow.__jogWheelTape = t.test;
 					frame.contentWindow.___jogWheelElement = {
 						animate: HTMLElement.prototype.animate,

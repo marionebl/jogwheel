@@ -6,13 +6,13 @@ import elementStub from './stubs/element.js';
 
 import runningAnimation from './fixtures/running-animation';
 
-import JogWheel from '../../library/';
+import jogwheel from '../../library/';
 
 tape('instance.pause', t => {
-	const instance = JogWheel.create(elementStub, {}, windowStub, documentStub);
+	const instance = jogwheel.create(elementStub, {}, windowStub, documentStub);
 	t.ok(
 		instance.pause() === instance,
-		'should return the JogWheel instance'
+		'should return the jogwheel instance'
 	);
 	t.end();
 
@@ -24,12 +24,12 @@ tape('instance.pause', t => {
 		}
 	};
 
-	const runningInstance = JogWheel.create(runningElement, {}, windowStub, documentStub);
+	const runningInstance = jogwheel.create(runningElement, {}, windowStub, documentStub);
 	runningInstance.pause();
 
 	t.equals(
 		runningInstance.playState,
 		'paused',
-		'should pause a running JogWheel instance'
+		'should pause a running jogwheel instance'
 	);
 });

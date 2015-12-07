@@ -66,14 +66,14 @@ ${props.pkg.name} exposes its API as CommonJS module. Using the export and bundl
 // import the polyfill
 import 'web-animations-js';
 
-// import JogWheel
-import JogWheel from '${props.pkg.name}';
+// import jogwheel
+import jogwheel from '${props.pkg.name}';
 
 // Select target element
 const element = document.querySelector('[data-animated]');
 
-// Construct JogWheel instance from element
-const player = JogWheel.create(element);
+// Construct jogwheel instance from element
+const player = jogwheel.create(element);
 
 // Jump halfway into the animation
 player.seek(0.5);
@@ -88,6 +88,12 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 * Development [latest](https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=false)
 * Production [latest](https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=true)
 
+**Fast track example**
+```
+npm install --g opn-cli && curl https://${props.pkg.config.documentation.host}/examples/cdn.html > jogwheel-example.html && opn jogwheel-example.html
+```
+
+**All the code**
 ```html
 <!doctype html>
 <html>
@@ -158,74 +164,21 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 ```
 
 ---
-See [API Documentation](./documentation/api.md) for details.
-
-## Example
-${props.pkg.name} shines brightest when used with CSS animations.
-
-**JavaScript**
-
-```js
-import JogWheel from '${props.pkg.name}';
-const element = document.querySelector('[data-animated]');
-const player = JogWheel.create(element);
-
-// Jump halfway into the animation
-player.seek(0.5);
-```
-
-**CSS**
-
-```css
-@keframes bounce {
-  0% {
-    transform: none;
-  }
-
-  25% {
-    transform: translateY(-100%);
-  }
-
-  50% {
-    transform: none;
-  }
-
-  75% {
-    transform: translateY(100%);
-  }
-
-  100% {
-    transform: none;
-  }
-}
-
-[data-animated] {
-  animation: bounce 1s;
-  /* animation-fill-mode and animation-play-state are recommended */
-  animation-fill-mode: both;
-  animation-play-state: paused;
-  height: 100px;
-  width: 100px;
-  background: #333;
-  border-radius: 50%;
-}
-
-```
-
-**HTML**
-
-```html
-<div data-animated>
-</div>
-```
----
-See [Examples](./examples/readme.md) for more use cases.
-
+See [API Documentation](./documentation/api.md) for details and [examples](./examples/readme.md) for more use cases.
 
 ## Browser support
 ${props.pkg.name} performs cross browser testing with SauceLabs
 
 [![Browser Support](https://saucelabs.com/browser-matrix/jogwheel-unit.svg)](https://saucelabs.com/u/jogwheel-unit)
+
+## Limitations
+Depending on the WebAnimations implementation you choose there are some limitations for properties usable with ${props.pkg.name}.
+
+| Feature                   | Test        | Issue | Blink     | Gecko     | `web-animations-js 2.1.4` | `web-animations-next 2.1.4` |
+|:--------------------------|:-----------:|:-----:|:---------:|:---------:|:-------------------------:|:---------------------------:|
+|`animation-timing-function`| [Link][1]   | #161  | :warning: | :warning: | :warning:                 | :warning:                   |
+|`filter`                   | [Link][2]   | #162  | :warning: | :warning: | :warning:                 | :warning:                   |
+
 
 ## Development
 You dig ${props.pkg.name} and want to submit a pull request? Awesome!
@@ -251,5 +204,6 @@ ${props.pkg.name} is up to a lot of good. This includes but is not limited to
 ---
 See [Roadmap](./documentation/roadmap.md) for details.
 
-
+[1]: http://codepen.io/marionebl/pen/RrbzOO
+[2]: http://codepen.io/marionebl/pen/RrbzOO
 <%= props.partials.footer() %>
