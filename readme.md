@@ -81,7 +81,7 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 **Fast track example**
 ```shell
 # Install cross-platform opn command
-npm install --g opn-cli
+npm install -g opn-cli
 
 # Download an open example
 curl https://git.io/v0Y9l > jogwheel-example.html
