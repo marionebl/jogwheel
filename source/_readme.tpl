@@ -93,8 +93,10 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 # Install cross-platform opn command
 npm install -g opn-cli
 
-# Download an open example
-curl ${examples.cdn} > jogwheel-example.html
+# Download example
+curl -L ${examples.cdn} > jogwheel-example.html
+
+# Open example in default browser
 opn jogwheel-example.html
 ```
 
