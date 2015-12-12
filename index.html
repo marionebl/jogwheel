@@ -96,8 +96,12 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 <li>Production <a href="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&amp;uglify=true">latest</a></li>
 </ul>
 <p><strong>Fast track example</strong></p>
-<pre><code>npm install --g opn-cli &amp;&amp; curl https://marionebl.github.io/jogwheel/examples/cdn.html &gt; jogwheel-example.html &amp;&amp; opn jogwheel-example.html
-</code></pre>
+<pre><code class="hljs language-shell language-shell"># Install cross-platform opn command
+npm install --g opn-cli
+
+# Download an open example
+curl https://git.io/v0Y9l &gt; jogwheel-example.html
+opn jogwheel-example.html</code></pre>
 <p><strong>All the code</strong></p>
 <pre><code class="hljs language-html language-html"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
@@ -209,12 +213,13 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 <p>You dig jogwheel and want to submit a pull request? Awesome!
 Be sure to read the <a href="./contributing.html">contribution guide</a> and you should be good to go.
 Here are some notes to get you coding real quick.</p>
-<p>Fetch, install and start the default watch task</p>
-<pre><code>git clone https://github.com/marionebl/jogwheel.git
+<pre><code class="hljs language-shell language-shell"># Clone repository, cd into it
+git clone https://github.com/marionebl/jogwheel.git
 cd jogwheel
+# Install npm dependencies
 npm install
-npm start
-</code></pre>
+# Start the default build/watch task
+npm start</code></pre>
 <p>This will watch all files in <code>source</code> and start the appropriate tasks when changes are detected.</p>
 <h2 id="roadmap">Roadmap</h2>
 <p>jogwheel is up to a lot of good. This includes but is not limited to</p>
