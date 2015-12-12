@@ -1,3 +1,4 @@
+var path = require('path');
 var merge = require('lodash.merge');
 var async = require('async');
 var documentationjs = require('documentation');
@@ -10,6 +11,8 @@ var data = require('gulp-data');
 var template = require('gulp-template');
 var extension = require('gulp-ext-replace');
 var rename = require('gulp-rename');
+var globby = require('globby');
+var request = require('sync-request');
 
 var pkg = require('../package');
 var header = require('./partials/header');
@@ -63,11 +66,34 @@ module.exports = function (gulp, paths) {
 
 			props.pkg.tag = props.pkg.version ? 'v' + props.pkg.version : shell.exec('git describe --abbrev=0 --tags', {silent: true}).output.split('\n')[0];
 
+			var exampleFiles = globby.sync(paths.source.example);
+
+			var examples = exampleFiles.reduce(function(registry, exampleFile){
+				var name = path.basename(exampleFile, path.extname(exampleFile));
+				var uri = path.relative(paths.target.root, exampleFile)
+					.split(path.sep).slice(1).join('/');
+
+				var host = props.pkg.config.documentation.host;
+				var url = 'https://' + host + '/' + props.pkg.name + '/' + uri;
+
+				var response = request('POST', 'https://git.io', {
+					body: 'url=' + url
+				});
+
+				url = response.headers.location || url;
+
+				var amendment = {};
+				amendment[name] = url;
+
+				return Object.assign(registry, amendment);
+			}, {});
+
 			gulp.src(paths.source.documentation)
 				.pipe(cached('documentation'))
 				.pipe(data({
 					props: props,
-					docs: docs
+					docs: docs,
+					examples: examples
 				}))
 				.pipe(template())
 				.pipe(remember('documentation'))

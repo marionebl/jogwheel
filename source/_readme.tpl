@@ -89,8 +89,13 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 * Production [latest](https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=true)
 
 **Fast track example**
-```
-npm install --g opn-cli && curl https://${props.pkg.config.documentation.host}/${props.pkg.name}/examples/cdn.html > jogwheel-example.html && opn jogwheel-example.html
+```shell
+# Install cross-platform opn command
+npm install --g opn-cli
+
+# Download an open example
+curl ${examples.cdn} > jogwheel-example.html
+opn jogwheel-example.html
 ```
 
 **All the code**
@@ -185,11 +190,13 @@ You dig ${props.pkg.name} and want to submit a pull request? Awesome!
 Be sure to read the [contribution guide](./contributing.md) and you should be good to go.
 Here are some notes to get you coding real quick.
 
-Fetch, install and start the default watch task
-```
+```shell
+# Clone repository, cd into it
 git clone ${props.pkg.repository.url}
 cd ${props.pkg.name}
+# Install npm dependencies
 npm install
+# Start the default build/watch task
 npm start
 ```
 This will watch all files in `source` and start the appropriate tasks when changes are detected.
