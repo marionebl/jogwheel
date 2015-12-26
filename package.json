@@ -158,7 +158,7 @@
     "tape-catch": "1.0.4",
     "through2": "2.0.0",
     "unist-util-visit": "1.0.0",
-    "vfile": "1.1.2",
+    "vfile": "1.2.0",
     "vinyl-source-stream": "1.1.0",
     "watchify": "3.6.1",
     "web-animations-js": "2.1.4",
