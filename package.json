@@ -138,7 +138,7 @@
     "lodash.merge": "3.3.2",
     "mdast": "2.3.0",
     "mdast-highlight.js": "1.2.0",
-    "mdast-html": "1.2.1",
+    "mdast-html": "2.0.0",
     "mdast-inline-links": "1.0.0",
     "mdast-slug": "2.0.0",
     "minimist": "1.2.0",
