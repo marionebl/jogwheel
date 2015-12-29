@@ -148,7 +148,7 @@
     "parallelshell": "2.0.0",
     "phantomjs": "1.9.19",
     "phantomjs-function-bind-polyfill": "1.0.0",
-    "rc": "1.1.5",
+    "rc": "1.1.6",
     "semantic-release": "4.3.5",
     "shelljs": "0.5.3",
     "string-humanize": "1.0.0",
