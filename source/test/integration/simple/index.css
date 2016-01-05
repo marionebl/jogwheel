@@ -8,6 +8,16 @@
 	}
 }
 
+@keyframes simplebig {
+  from, to {
+		transform: scale(0);
+	}
+
+	50% {
+		transform: scale(1);
+	}
+}
+
 [data-animated] {
 	height: 100px;
 	width: 100px;
@@ -18,4 +28,12 @@
 	animation: simple 3s;
 	animation-iteration-count: infinite;
 	animation-fill-mode: both;
+}
+
+@media screen and (min-width: 1000px) {
+	[data-animated] {
+		height: 150px;
+		width: 150px;
+		animation-name: simplebig;
+	}
 }

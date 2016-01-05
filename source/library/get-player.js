@@ -26,7 +26,8 @@ export default function getPlayer(element, settings, window = global.window, doc
 	} = getAnimationProperties(element, window, document);
 
 	// Generate keyframes based on the assigned animationName
-	const keyframes = getKeyframes(name, window, document);
+	const keyframes = getKeyframes(name, document.styleSheets)
+		.sort((a, b) => a.offset - b.offset);
 
 	// Construct options for the webanimation player instance
 	const options = {
@@ -39,9 +40,6 @@ export default function getPlayer(element, settings, window = global.window, doc
 		playState,
 		...settings
 	};
-
-	// Sort by offset
-	keyframes.sort((a, b) => a.offset - b.offset);
 
 	// Instantiate player instance
 	const player = initPlayer(element, keyframes, options, options.render, window, document);

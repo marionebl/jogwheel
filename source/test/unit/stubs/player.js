@@ -14,6 +14,9 @@ const playerStub = options => {
 		pause() {
 			_state.playState = 'paused';
 		},
+		cancel() {
+			_state.playState = 'canceled';
+		},
 		effect: {
 			get currentTime() {
 				return _state.currentTime;

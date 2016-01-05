@@ -1,15 +1,4 @@
 /**
- * isObject
- * Tests if value is an object
- * @param value to test
- * @returns {boolean}
- * @private
- */
-function isObject(value) {
-	return Object.prototype.toString.call(value) === '[object Object]'; // eslint-disable-line prefer-reflect
-}
-
-/**
  * createTrap
  * Traps writes to property targetName on host and calls handler instead
  *
@@ -21,17 +10,13 @@ function isObject(value) {
  */
 export default function createTrap(host, prisonerName, warden) {
 	const prison = {...host};
-	let cell = {};
+	const cell = {...(host[prisonerName] || {})};
 
-	Reflect.defineProperty(prison, prisonerName, {
+	Object.defineProperty(prison, prisonerName, { // eslint-disable-line prefer-reflect
 		configurable: true,
 		enumerable: prison.propertyIsEnumerable(prisonerName),
 
 		get() {
-			if (!isObject(cell)) {
-				return cell;
-			}
-
 			const trap = {...cell};
 
 			setTimeout(() => {
@@ -45,11 +30,6 @@ export default function createTrap(host, prisonerName, warden) {
 			});
 
 			return trap;
-		},
-
-		set(value) {
-			cell = warden(host, null, value);
-			return cell;
 		}
 	});
 

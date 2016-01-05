@@ -10,7 +10,7 @@ const prefixes = [
  * @return {string}              unprefixed property name
  * @private
  */
-export default function removeVendorPrefix(propertyName) {
+export default function removeVendorPrefix(propertyName = '') {
 	const fragments = propertyName.split('-');
 
 	if (prefixes.indexOf(fragments[1]) > -1) {

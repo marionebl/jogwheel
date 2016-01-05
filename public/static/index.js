@@ -4632,7 +4632,7 @@ function main(window, document) {
 
 main(global, global.document); */
 
-},{"../../library":205,"babel-polyfill":1,"web-animations-js/web-animations-next.min.js":191}],193:[function(require,module,exports){
+},{"../../library":206,"babel-polyfill":1,"web-animations-js/web-animations-next.min.js":191}],193:[function(require,module,exports){
 /**
  * Converts CSS animation duration string to integer holding duration in milliseconds
  * @param CSSAnimationDuration {string} [CSSAnimationDuration='0s'] The CSS animation duration string to convert
@@ -4695,27 +4695,6 @@ module.exports = exports['default'];
 
 },{}],195:[function(require,module,exports){
 /**
- * isObject
- * Tests if value is an object
- * @param value to test
- * @returns {boolean}
- * @private
- */
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-// istanbul ignore next
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-exports['default'] = createTrap;
-function isObject(value) {
-	return Object.prototype.toString.call(value) === '[object Object]'; // eslint-disable-line prefer-reflect
-}
-
-/**
  * createTrap
  * Traps writes to property targetName on host and calls handler instead
  *
@@ -4725,20 +4704,26 @@ function isObject(value) {
  * @returns prison {object} host with trapped targetName property
  * @private
  */
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+// istanbul ignore next
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports["default"] = createTrap;
 
 function createTrap(host, prisonerName, warden) {
 	var prison = _extends({}, host);
-	var cell = {};
+	var cell = _extends({}, host[prisonerName] || {});
 
-	Reflect.defineProperty(prison, prisonerName, {
+	Object.defineProperty(prison, prisonerName, { // eslint-disable-line prefer-reflect
 		configurable: true,
 		enumerable: prison.propertyIsEnumerable(prisonerName),
 
 		get: function get() {
-			if (!isObject(cell)) {
-				return cell;
-			}
-
 			var trap = _extends({}, cell);
 
 			setTimeout(function () {
@@ -4752,18 +4737,13 @@ function createTrap(host, prisonerName, warden) {
 			});
 
 			return trap;
-		},
-
-		set: function set(value) {
-			cell = warden(host, null, value);
-			return cell;
 		}
 	});
 
 	return prison;
 }
 
-module.exports = exports['default'];
+module.exports = exports["default"];
 
 },{}],196:[function(require,module,exports){
 // CSSRule type enums
@@ -4829,7 +4809,7 @@ function getAnimationProperties(node) {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./get-vendor-prefix":204}],198:[function(require,module,exports){
+},{"./get-vendor-prefix":205}],198:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -4863,7 +4843,7 @@ function getCSSRules(styleSheet) {
 
 module.exports = exports['default'];
 
-},{"./to-array":209}],199:[function(require,module,exports){
+},{"./to-array":210}],199:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -4923,7 +4903,7 @@ function getDeclarations() {
 
 module.exports = exports['default'];
 
-},{"./cssrule-enumerations":196,"./to-array":209}],200:[function(require,module,exports){
+},{"./cssrule-enumerations":196,"./to-array":210}],200:[function(require,module,exports){
 /**
  * Gets map of defined styles from CSS2Properties object
  * @param  {CSS2Properties} properties CSS2Properties object to return defined styles from
@@ -4986,7 +4966,6 @@ function getKeyframeDeclarations(animationName, rules) {
 module.exports = exports['default'];
 
 },{"./get-declarations":199}],202:[function(require,module,exports){
-(function (global){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -5020,18 +4999,14 @@ var _transformKeyframeDeclaration2 = _interopRequireDefault(_transformKeyframeDe
 /**
  * Gets webanimation keyframes attached to a CSS animationName
  * @param {string} animationName - CSS animationName to search keyframes for
- * @param {Window} [window=global.window] - Global context to use
- * @param {Document} [document=global.window] - Document context to use
+ * @param {StyleSheetList} list of stylesheets to search in
  * @return {array} Array of webanimation keyframes attached to animationName
  * @private
  */
 
-function getKeyframes(animationName) {
-	var window = arguments.length <= 1 || arguments[1] === undefined ? global.window : arguments[1];
-	var document = arguments.length <= 2 || arguments[2] === undefined ? global.document : arguments[2];
-
+function getKeyframes(animationName, styleSheets) {
 	// Collect CSSRules present in the document
-	var CSSRules = (0, _toArray2['default'])(document.styleSheets).reduce(function (results, styleSheet) {
+	var CSSRules = (0, _toArray2['default'])(styleSheets).reduce(function (results, styleSheet) {
 		return [].concat(_toConsumableArray(results), _toConsumableArray((0, _getCssRules2['default'])(styleSheet)));
 	}, []);
 
@@ -5048,8 +5023,67 @@ function getKeyframes(animationName) {
 
 module.exports = exports['default'];
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./get-css-rules":198,"./get-keyframe-declarations":201,"./to-array":209,"./transform-keyframe-declaration":210}],203:[function(require,module,exports){
+},{"./get-css-rules":198,"./get-keyframe-declarations":201,"./to-array":210,"./transform-keyframe-declaration":211}],203:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+exports['default'] = getMediaqueryMedia;
+// istanbul ignore next
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+// istanbul ignore next
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
+var _toArray = require('./to-array');
+
+var _toArray2 = _interopRequireDefault(_toArray);
+
+var _cssruleEnumerations = require('./cssrule-enumerations');
+
+var _cssruleEnumerations2 = _interopRequireDefault(_cssruleEnumerations);
+
+var _getCssRules = require('./get-css-rules');
+
+var _getCssRules2 = _interopRequireDefault(_getCssRules);
+
+/**
+ * Gets media query rules from styleSheets
+ * @param {CSSStyleSheetList} styleSheets - StyleSheetList to search in
+ * @returns {Array} Array of media query rule media texts
+ * @private
+ */
+
+function getMediaqueryMedia(styleSheets) {
+	// Collect CSSRules present in document
+	var CSSRules = (0, _toArray2['default'])(styleSheets).reduce(function (results, styleSheet) {
+		return [].concat(_toConsumableArray(results), _toConsumableArray((0, _getCssRules2['default'])(styleSheet)));
+	}, []);
+
+	// Get all media query declarations and return array of media rules
+	var type = _cssruleEnumerations2['default'].media;
+
+	return CSSRules
+	// filter for media queries
+	.filter(function (rule) {
+		return rule.type === type;
+	})
+	// map to media rules
+	.map(function (rule) {
+		return rule.media.mediaText;
+	})
+	// filter not all media query
+	.filter(function (media) {
+		return media !== 'not all';
+	});
+}
+
+module.exports = exports['default'];
+
+},{"./cssrule-enumerations":196,"./get-css-rules":198,"./to-array":210}],204:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -5112,7 +5146,9 @@ function getPlayer(element, settings) {
 	var delay = _getAnimationProperties.delay;
 
 	// Generate keyframes based on the assigned animationName
-	var keyframes = (0, _getKeyframes2['default'])(name, window, document);
+	var keyframes = (0, _getKeyframes2['default'])(name, document.styleSheets).sort(function (a, b) {
+		return a.offset - b.offset;
+	});
 
 	// Construct options for the webanimation player instance
 	var options = _extends({
@@ -5124,11 +5160,6 @@ function getPlayer(element, settings) {
 		easing: timingFunction,
 		playState: playState
 	}, settings);
-
-	// Sort by offset
-	keyframes.sort(function (a, b) {
-		return a.offset - b.offset;
-	});
 
 	// Instantiate player instance
 	var player = (0, _initPlayer2['default'])(element, keyframes, options, options.render, window, document);
@@ -5142,7 +5173,7 @@ function getPlayer(element, settings) {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./convert-animation-duration":193,"./convert-animation-iterations":194,"./get-animation-properties":197,"./get-keyframes":202,"./init-player":206}],204:[function(require,module,exports){
+},{"./convert-animation-duration":193,"./convert-animation-iterations":194,"./get-animation-properties":197,"./get-keyframes":202,"./init-player":207}],205:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -5214,7 +5245,7 @@ function prefix(propertyName) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],205:[function(require,module,exports){
+},{}],206:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -5239,9 +5270,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _getPlayerJs = require('./get-player.js');
+var _getPlayer = require('./get-player');
 
-var _getPlayerJs2 = _interopRequireDefault(_getPlayerJs);
+var _getPlayer2 = _interopRequireDefault(_getPlayer);
+
+var _getMediaqueryMedia = require('./get-mediaquery-media');
+
+var _getMediaqueryMedia2 = _interopRequireDefault(_getMediaqueryMedia);
+
+var _getVendorPrefix = require('./get-vendor-prefix');
 
 var JogWheel = (function () {
 	_createClass(JogWheel, null, [{
@@ -5308,20 +5345,35 @@ var JogWheel = (function () {
 	}]);
 
 	function JogWheel(nodes, options) {
+		// istanbul ignore next
+
+		var _this = this;
+
 		var window = arguments.length <= 2 || arguments[2] === undefined ? global.window : arguments[2];
 		var document = arguments.length <= 3 || arguments[3] === undefined ? global.document : arguments[3];
 
 		_classCallCheck(this, JogWheel);
 
+		// Lax sanity check
 		if (!nodes) {
 			throw new Error('Could not construct jogwheel, missing element');
 		}
 
+		// Copy options to avoid copy-by-reference bugs
 		var settings = _extends({}, options);
+
+		// Normalize nodes to array
 		var elements = nodes instanceof window.NodeList ? [].slice.call(nodes) : [nodes]; // eslint-disable-line prefer-reflect
+
+		// Get WANPlayer configuration for each element
 		var configurations = elements.map(function (element) {
-			return (0, _getPlayerJs2['default'])(element, settings, window, document);
+			return (0, _getPlayer2['default'])(element, settings, window, document);
 		});
+
+		// Get media query rules
+		var medias = (0, _getMediaqueryMedia2['default'])(document.styleSheets).map(window.matchMedia);
+
+		// Unwrap values relevant for instance
 		var players = configurations.map(function (configuration) {
 			return configuration.player;
 		});
@@ -5329,8 +5381,14 @@ var JogWheel = (function () {
 			return configuration.duration;
 		});
 
+		// Listen for media query changes and update accordingly
+		medias.forEach(function (media) {
+			return media.addListener(_this.onMatchMedia.bind(_this));
+		});
+
+		// Hold references for later use
 		this.__instance = {
-			elements: elements, players: players, durations: durations, settings: settings
+			elements: elements, players: players, durations: durations, settings: settings, medias: medias, window: window, document: document
 		};
 	}
 
@@ -5341,7 +5399,37 @@ var JogWheel = (function () {
   */
 
 	_createClass(JogWheel, [{
-		key: 'play',
+		key: 'onMatchMedia',
+
+		/*
+   * @name JogWheel.prototype.onMatchMedia
+   * @return null
+   * @private
+   */
+		value: function onMatchMedia() {
+			var settings = this.__instance.settings;
+
+			// Save current state
+			var state = {
+				progress: this.progress,
+				playState: this.playState
+			};
+
+			// Kill off current instance
+			this.unplug();
+
+			// Init new instance
+			this.plug();
+
+			global.instance = this;
+
+			// Resume from last progress
+			if (settings.resume !== false) {
+				var start = state.playState === 'paused' ? this.pause : this.play;
+				this.seek(state.progress);
+				start.bind(this)();
+			}
+		}
 
 		/**
    * Plays the animation
@@ -5358,6 +5446,8 @@ var JogWheel = (function () {
    * // Seek to middle of animation sequence and play
    * wheel.seek(0.5).play();
    */
+	}, {
+		key: 'play',
 		value: function play() {
 			this.players.forEach(function (player) {
 				return player.play();
@@ -5422,10 +5512,10 @@ var JogWheel = (function () {
 		value: function seek(progress) {
 			// istanbul ignore next
 
-			var _this = this;
+			var _this2 = this;
 
 			this.__instance.players.forEach(function (player, index) {
-				player.currentTime = _this.durations[index] * progress;
+				player.currentTime = _this2.durations[index] * progress;
 			});
 			return this;
 		}
@@ -5452,8 +5542,42 @@ var JogWheel = (function () {
 	}, {
 		key: 'plug',
 		value: function plug() {
-			// TODO: implement this
-			// TODO: test this
+			// istanbul ignore next
+
+			var _this3 = this;
+
+			var _instance = this.__instance;
+			var elements = _instance.elements;
+			var settings = _instance.settings;
+			var window = _instance.window;
+			var document = _instance.document;
+
+			// Get WANPlayer configuration for each element
+			var configurations = elements.map(function (element) {
+				return (0, _getPlayer2['default'])(element, settings, window, document);
+			});
+
+			// Get media query rules
+			var medias = (0, _getMediaqueryMedia2['default'])(document.styleSheets).map(window.matchMedia);
+
+			// Unwrap values relevant for instance
+			var players = configurations.map(function (configuration) {
+				return configuration.player;
+			});
+			var durations = configurations.map(function (configuration) {
+				return configuration.duration;
+			});
+
+			// Listen for media query changes and update accordingly
+			medias.forEach(function (media) {
+				return media.addListener(_this3.onMatchMedia.bind(_this3));
+			});
+
+			// Update references for later use
+			this.__instance = _extends({}, this.__instance, {
+				players: players, durations: durations, medias: medias
+			});
+
 			return this;
 		}
 
@@ -5479,8 +5603,39 @@ var JogWheel = (function () {
 	}, {
 		key: 'unplug',
 		value: function unplug() {
-			// TODO: implement this
-			// TODO: test this
+			// istanbul ignore next
+
+			var _this4 = this;
+
+			var _instance2 = this.__instance;
+			var medias = _instance2.medias;
+			var elements = _instance2.elements;
+			var players = _instance2.players;
+			var window = _instance2.window;
+			var document = _instance2.document;
+
+			// Cancel all players
+			players.forEach(function (player) {
+				return player.cancel();
+			});
+
+			// Remove former matchMedia callbacks
+			medias.forEach(function (media) {
+				return media.removeListener(_this4.onMatchMedia);
+			});
+
+			// Clean up element animationName reset
+			elements.map(function (element) {
+				return element.style[(0, _getVendorPrefix.prefix)('animationName', window, document)] = '';
+			});
+
+			// Cleanse state
+			this.__instance = _extends({}, this.__instance, {
+				players: [],
+				durations: [],
+				medias: []
+			});
+
 			return this;
 		}
 	}, {
@@ -5537,7 +5692,7 @@ exports['default'] = JogWheel;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./get-player.js":203}],206:[function(require,module,exports){
+},{"./get-mediaquery-media":203,"./get-player":204,"./get-vendor-prefix":205}],207:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -5607,7 +5762,7 @@ function initPlayer(element, keyframes, options, render) {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./create-trap":195,"./get-vendor-prefix":204}],207:[function(require,module,exports){
+},{"./create-trap":195,"./get-vendor-prefix":205}],208:[function(require,module,exports){
 /**
  * Parses KeyFrameRule.keyText to an array of integers holding keyframe percentages
  * @param  {string} keyText KeyFrameRule.keyText to parse
@@ -5644,7 +5799,7 @@ function parseKeyframeKey(keyText) {
 
 module.exports = exports['default'];
 
-},{}],208:[function(require,module,exports){
+},{}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -5660,7 +5815,9 @@ var prefixes = ['ms', 'webkit', 'moz'];
  * @private
  */
 
-function removeVendorPrefix(propertyName) {
+function removeVendorPrefix() {
+	var propertyName = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
 	var fragments = propertyName.split('-');
 
 	if (prefixes.indexOf(fragments[1]) > -1) {
@@ -5672,7 +5829,7 @@ function removeVendorPrefix(propertyName) {
 
 module.exports = exports['default'];
 
-},{}],209:[function(require,module,exports){
+},{}],210:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5694,7 +5851,7 @@ function toArray(arrayLike) {
 
 module.exports = exports["default"];
 
-},{}],210:[function(require,module,exports){
+},{}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -5750,4 +5907,4 @@ function transformKeyframeDeclaration(keyFrameRule) {
 module.exports = exports['default'];
 // Mixin with extracted keyframe styling
 
-},{"./get-defined-styles":200,"./parse-keyframe-key":207,"./remove-vendor-prefix":208}]},{},[192]);
+},{"./get-defined-styles":200,"./parse-keyframe-key":208,"./remove-vendor-prefix":209}]},{},[192]);

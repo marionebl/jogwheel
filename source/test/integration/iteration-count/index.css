@@ -19,3 +19,11 @@
 	animation-play-state: paused;
 	animation-fill-mode: both;
 }
+
+@media screen and (min-width: 1000px) {
+	[data-animated] {
+		height: 150px;
+		width: 150px;
+		animation-name: none;
+	}
+}

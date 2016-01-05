@@ -31,5 +31,8 @@ npm-debug.log
 # Build output
 distribution
 
+# Coverage
+.nyc_output
+
 # Sensitive config files
 .zuulrc
