@@ -53,8 +53,14 @@
 <span class="hljs-comment">// Instantiate a jogwheel instance on element</span>
 <span class="hljs-keyword">const</span> wheel = <span class="hljs-keyword">new</span> jogwheel(element);</code></pre>
 <p>Returns <strong>jogwheel</strong> jogwheel instance</p>
-<h1 id="durations">durations</h1>
+<h1 id="jogwheelprototypedurations">JogWheel.prototype.durations</h1>
 <p>Returns <strong>array</strong> durations used by jogwheel instance</p>
+<h1 id="jogwheelprototypeplayers">JogWheel.prototype.players</h1>
+<p>Returns <strong>array</strong> WebAnimationPlayer instances by jogwheel instance</p>
+<h1 id="jogwheelprototypeplaystate">JogWheel.prototype.playState</h1>
+<p>Returns <strong>string</strong> playState, either <code>running</code> or <code>paused</code></p>
+<h1 id="jogwheelprototypeprogress">JogWheel.prototype.progress</h1>
+<p>Returns <strong>float</strong> progress in fraction of 1 [0..1]</p>
 <h1 id="pause">pause</h1>
 <p>Pauses the animation</p>
 <p><strong>Examples</strong></p>
@@ -82,13 +88,7 @@ wheel.pause().seek(<span class="hljs-number">0</span>);</code></pre>
 
 <span class="hljs-comment">// Seek to middle of animation sequence and play</span>
 wheel.seek(<span class="hljs-number">0.5</span>).play();</code></pre>
-<p>Returns <strong>jogwheel</strong> jogwheel instance</p>
-<h1 id="players">players</h1>
-<p>Returns <strong>array</strong> WebAnimationPlayer instances by jogwheel instance</p>
-<h1 id="playstate">playState</h1>
-<p>Returns <strong>string</strong> playState, either <code>running</code> or <code>paused</code></p>
-<h1 id="progress">progress</h1>
-<p>Returns <strong>float</strong> progress in fraction of 1 [0..1]</p>
+<p>Returns <strong>JogWheel</strong> JogWheel instance</p>
 <h1 id="seek">seek</h1>
 <p>Seeks the timeline of the animation</p>
 <p><strong>Parameters</strong></p>
@@ -122,7 +122,7 @@ loop();</code></pre>
 <p>Creates a new jogwheel instance</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><code>element</code> <strong>HTMLElement</strong> HTMLElement to instantiate on</li>
+<li><code>nodes</code> <strong>Node or NodeList</strong> Node or NodeList to instantiate on</li>
 <li><code>options</code> <strong>object</strong> Options object</li>
 <li><code>window</code> <strong>[Window]</strong> Global context to use (optional, default <code>global.window</code>)</li>
 <li><code>document</code> <strong>[Document]</strong> Document context to use (optional, default <code>global.window</code>)</li>
@@ -131,7 +131,7 @@ loop();</code></pre>
 <p><strong>Examples</strong></p>
 <pre><code class="hljs language-javascript language-javascript"><span class="hljs-keyword">import</span> jogwheel <span class="hljs-keyword">from</span> <span class="hljs-string">'jogwheel'</span>;
 <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'[data-animated]'</span>);
-
+:
 <span class="hljs-comment">// Instantiate a paused jogwheel instance on element</span>
 <span class="hljs-keyword">const</span> wheel = jogwheel.create(element, {
 	paused: <span class="hljs-literal">true</span>

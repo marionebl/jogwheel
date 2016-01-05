@@ -1,8 +1,8 @@
-import {prefix} from './get-vendor-prefix';
 import getKeyframes from './get-keyframes';
 import getAnimationProperties from './get-animation-properties';
 import convertAnimationDuration from './convert-animation-duration';
 import convertAnimationIterations from './convert-animation-iterations';
+import initPlayer from './init-player';
 
 /**
  * Gets a web animation player based on the currently assigned CSS animation
@@ -30,6 +30,7 @@ export default function getPlayer(element, settings, window = global.window, doc
 
 	// Construct options for the webanimation player instance
 	const options = {
+		name,
 		duration: convertAnimationDuration(duration),
 		delay: convertAnimationDuration(delay),
 		iterations: convertAnimationIterations(iterationCount),
@@ -42,28 +43,8 @@ export default function getPlayer(element, settings, window = global.window, doc
 	// Sort by offset
 	keyframes.sort((a, b) => a.offset - b.offset);
 
-	// Use user-provided animate function (ponyfill) or HTMLElement.prototype.animate
-	const animate = settings.animate ?
-		(...args) => settings.animate(element, ...args) :
-		element.animate;
-
-	if (typeof animate !== 'function') {
-		console.warn('No animation function found. Have you forgotten to include a pony- or polyfill?');
-	}
-
-	// Construct webanimation player instance with keyframes and options
-	const player = animate.bind(element)(keyframes, options);
-
-	// Detach the former animation to prevent problems with polyfill
-	element.style[prefix('animationName', window, document)] = `__jogwheelName-${name}`;
-	player.__jogwheelName = name;
-
-	// Pause or play the webanimation player instance based on CSS animationPlayState
-	if (options.playState === 'paused') {
-		player.pause();
-	} else {
-		player.play();
-	}
+	// Instantiate player instance
+	const player = initPlayer(element, keyframes, options, options.render, window, document);
 
 	return {
 		player,
