@@ -130,7 +130,7 @@
     "gulp-tape": "git+https://github.com/marionebl/gulp-tape.git#93abadf0f130afed6c63910ba0acb790ca01aa37",
     "gulp-template": "3.1.0",
     "gulp-util": "3.0.7",
-    "highlight.js": "9.0.0",
+    "highlight.js": "9.1.0",
     "husky": "0.10.2",
     "in-publish": "2.0.0",
     "istanbul": "0.4.1",
