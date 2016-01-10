@@ -2,13 +2,9 @@ import tape from 'tape';
 
 import getCSSRules from '../../library/get-css-rules.js';
 
-import simple, {
-	animation as simpleAnimationDefinition
-} from './fixtures/simple-animation-declaration.js';
+import simple from './fixtures/simple-animation-declaration.js';
 
-import keyWord, {
-	animation as keyWordAnimationDefinition
-} from './fixtures/keyword-animation-declaration.js';
+import keyWord from './fixtures/keyword-animation-declaration.js';
 
 import crossDomain, {
 	animation as crossDomainAnimationDefinition
@@ -20,11 +16,11 @@ import crossDomainUnsafe, {
 
 tape('get-css-rules', t => {
 	t.ok(
-		Array.isArray(getCSSRules(simple)),
+		Array.isArray(getCSSRules(simple[0])),
 		'should return an array for simple-stylesheet');
 
 	t.ok(
-		Array.isArray(getCSSRules(keyWord)),
+		Array.isArray(getCSSRules(keyWord[0])),
 		'should return an array for keyword-stylesheet');
 
 	t.ok(
@@ -36,45 +32,45 @@ tape('get-css-rules', t => {
 		'should return an array for cross-domain-unsafe-stylesheet');
 
 	t.doesNotThrow(
-		() => getCSSRules(simple),
+		() => getCSSRules(simple[0]),
 		'should not fail for simple-stylesheet'
 	);
 
 	t.doesNotThrow(
-		() => getCSSRules(keyWord),
+		() => getCSSRules(keyWord[0]),
 		'should not fail for keyword-stylesheet'
 	);
 
 	t.doesNotThrow(
-		() => getCSSRules(crossDomain),
+		() => getCSSRules(crossDomain[0]),
 		'should not fail for cross-domain-stylesheet'
 	);
 
 	t.doesNotThrow(
-		() => getCSSRules(crossDomainUnsafe),
+		() => getCSSRules(crossDomainUnsafe[0]),
 		'should not fail for cross-domain-unsafe-stylesheet'
 	);
 
 	t.deepEqual(
-		getCSSRules(simple),
-		simpleAnimationDefinition,
+		getCSSRules(simple[0]),
+		simple[0].cssRules,
 		'returns correct css rules for simple-stylesheet'
 	);
 
 	t.deepEqual(
-		getCSSRules(keyWord),
-		keyWordAnimationDefinition,
+		getCSSRules(keyWord[0]),
+		keyWord[0].cssRules,
 		'returns correct css rules for keyword-stylesheet'
 	);
 
 	t.deepEqual(
-		getCSSRules(crossDomain),
+		getCSSRules(crossDomain[0]),
 		crossDomainAnimationDefinition,
 		'returns correct css rules for cross-domain-stylesheet'
 	);
 
 	t.deepEqual(
-		getCSSRules(crossDomainUnsafe),
+		getCSSRules(crossDomainUnsafe[0]),
 		crossDomainUnsafeAnimationDefinition,
 		'returns correct css rules for cross-domain-unsafe-stylesheet'
 	);

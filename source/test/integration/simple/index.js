@@ -46,7 +46,8 @@ tape('simple integration', t => {
 				setTimeout(() => { // eslint-disable-line max-nested-callbacks
 					value = actual.opacity || window.getComputedStyle(element).opacity;
 					t.notEqual(value, previous, 'Should leave element with different opacity after timeout');
-					wheel.pause();
+
+					window.resize('1001px');
 					t.end();
 				}, 300);
 			}, 300);

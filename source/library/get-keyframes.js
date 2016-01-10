@@ -6,14 +6,13 @@ import transformKeyframeDeclaration from './transform-keyframe-declaration';
 /**
  * Gets webanimation keyframes attached to a CSS animationName
  * @param {string} animationName - CSS animationName to search keyframes for
- * @param {Window} [window=global.window] - Global context to use
- * @param {Document} [document=global.window] - Document context to use
+ * @param {StyleSheetList} list of stylesheets to search in
  * @return {array} Array of webanimation keyframes attached to animationName
  * @private
  */
-export default function getKeyframes(animationName, window = global.window, document = global.document) {
+export default function getKeyframes(animationName, styleSheets) {
 	// Collect CSSRules present in the document
-	const CSSRules = toArray(document.styleSheets)
+	const CSSRules = toArray(styleSheets)
 		.reduce((results, styleSheet) => [...results, ...getCSSRules(styleSheet)], []);
 
 	// Filter CSSRules for KeyFrameRules

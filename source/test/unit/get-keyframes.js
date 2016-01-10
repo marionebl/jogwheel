@@ -1,5 +1,4 @@
 import tape from 'tape';
-import windowStub from './stubs/window.js';
 import documentStub from './stubs/document.js';
 import keywordDocumentStub from './stubs/keyword-document';
 import crossDomainDocumentStub from './stubs/cross-domain-document';
@@ -28,29 +27,29 @@ tape('get-keyframes', t => {
 	}};
 
 	t.ok(
-		Array.isArray(getKeyframes(element, windowStub, documentStub)),
+		Array.isArray(getKeyframes(element, documentStub.styleSheets)),
 		'should return an array');
 
 	t.doesNotThrow(
-		() => getKeyframes('default-animation', windowStub, crossDomainDocumentStub),
+		() => getKeyframes('default-animation', crossDomainDocumentStub.styleSheets),
 		crossDomainAnimationDefinition,
 		'should not fail for cross-domain-stylesheet'
 	);
 
 	t.deepEqual(
-		getKeyframes('default-animation', windowStub, crossDomainDocumentStub),
+		getKeyframes('default-animation', crossDomainDocumentStub.styleSheets),
 		crossDomainAnimationDefinition,
 		'should return empty keyframes for cross-domain-stylesheet'
 	);
 
 	t.deepEqual(
-		getKeyframes('default-animation', windowStub, documentStub),
+		getKeyframes('default-animation', documentStub.styleSheets),
 		simpleAnimationDefinition,
 		'should return the correct keyframes for simple-animation'
 	);
 
 	t.deepEqual(
-		getKeyframes('default-animation', windowStub, keywordDocumentStub),
+		getKeyframes('default-animation', keywordDocumentStub.styleSheets),
 		keyWordAnimationDefinition,
 		'should return the correct keyframes for keyword-animation'
 	);

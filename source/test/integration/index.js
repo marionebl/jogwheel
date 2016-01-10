@@ -149,6 +149,9 @@ async function main() {
 					const js = await jsLoading;
 					const code = await js.text();
 
+					frame.contentWindow.resize = function (size) {
+						frame.style.width = size;
+					};
 					frame.contentWindow.__jogwheel = jogwheel;
 					frame.contentWindow.__jogWheelTape = t.test;
 					frame.contentWindow.___jogWheelElement = {

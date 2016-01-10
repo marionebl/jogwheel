@@ -1,4 +1,6 @@
-import getPlayer from './get-player.js';
+import getPlayer from './get-player';
+import getMediaqueryMedia from './get-mediaquery-media';
+import {prefix} from './get-vendor-prefix';
 
 class JogWheel {
 	/**
@@ -56,18 +58,34 @@ class JogWheel {
 	 * const wheel = new jogwheel(element);
 	 */
 	constructor(nodes, options, window = global.window, document = global.document) {
+		// Lax sanity check
 		if (!nodes) {
 			throw new Error(`Could not construct jogwheel, missing element`);
 		}
 
+		// Copy options to avoid copy-by-reference bugs
 		const settings = {...options};
+
+		// Normalize nodes to array
 		const elements = nodes instanceof window.NodeList ? [].slice.call(nodes) : [nodes]; // eslint-disable-line prefer-reflect
+
+		// Get WANPlayer configuration for each element
 		const configurations = elements.map(element => getPlayer(element, settings, window, document));
+
+		// Get media query rules
+		const medias = getMediaqueryMedia(document.styleSheets)
+			.map(window.matchMedia);
+
+		// Unwrap values relevant for instance
 		const players = configurations.map(configuration => configuration.player);
 		const durations = configurations.map(configuration => configuration.duration);
 
+		// Listen for media query changes and update accordingly
+		medias.forEach(media => media.addListener(this.onMatchMedia.bind(this)));
+
+		// Hold references for later use
 		this.__instance = {
-			elements, players, durations, settings
+			elements, players, durations, settings, medias, window, document
 		};
 	}
 
@@ -112,6 +130,36 @@ class JogWheel {
 	 */
 	get durations() {
 		return this.__instance.durations;
+	}
+
+	/*
+	 * @name JogWheel.prototype.onMatchMedia
+	 * @return null
+	 * @private
+	 */
+	onMatchMedia() {
+		const {settings} = this.__instance;
+
+		// Save current state
+		const state = {
+			progress: this.progress,
+			playState: this.playState
+		};
+
+		// Kill off current instance
+		this.unplug();
+
+		// Init new instance
+		this.plug();
+
+		global.instance = this;
+
+		// Resume from last progress
+		if (settings.resume !== false) {
+			const start = state.playState === 'paused' ? this.pause : this.play;
+			this.seek(state.progress);
+			start.bind(this)();
+		}
 	}
 
 	/**
@@ -209,8 +257,28 @@ class JogWheel {
  	 * wheel.unplug().plug();
  	 */
 	plug() {
-		// TODO: implement this
-		// TODO: test this
+		const {elements, settings, window, document} = this.__instance;
+
+		// Get WANPlayer configuration for each element
+		const configurations = elements.map(element => getPlayer(element, settings, window, document));
+
+		// Get media query rules
+		const medias = getMediaqueryMedia(document.styleSheets)
+			.map(window.matchMedia);
+
+		// Unwrap values relevant for instance
+		const players = configurations.map(configuration => configuration.player);
+		const durations = configurations.map(configuration => configuration.duration);
+
+		// Listen for media query changes and update accordingly
+		medias.forEach(media => media.addListener(this.onMatchMedia.bind(this)));
+
+		// Update references for later use
+		this.__instance = {
+			...this.__instance,
+			players, durations, medias
+		};
+
 		return this;
 	}
 
@@ -234,8 +302,25 @@ class JogWheel {
 	 * wheel.unplug().plug();
 	 */
 	unplug() {
-		// TODO: implement this
-		// TODO: test this
+		const {medias, elements, players, window, document} = this.__instance;
+
+		// Cancel all players
+		players.forEach(player => player.cancel());
+
+		// Remove former matchMedia callbacks
+		medias.forEach(media => media.removeListener(this.onMatchMedia));
+
+		// Clean up element animationName reset
+		elements.map(element => element.style[prefix('animationName', window, document)] = '');
+
+		// Cleanse state
+		this.__instance = {
+			...this.__instance,
+			players: [],
+			durations: [],
+			medias: []
+		};
+
 		return this;
 	}
 }

@@ -15,5 +15,6 @@ tape('iteration-count', t => {
 		wheel.play();
 	});
 
+	window.resize('1001px');
 	t.end();
 });

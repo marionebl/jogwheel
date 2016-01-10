@@ -9,7 +9,7 @@ import jogwheel from '../../library/';
 tape('instance.unplug', t => {
 	const instance = jogwheel.create(elementStub, {}, windowStub, documentStub);
 	t.ok(
-		instance.unplug() === instance,
+		instance.unplug(windowStub, documentStub) === instance,
 		'should return the jogwheel instance'
 	);
 	t.end();
