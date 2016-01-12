@@ -56,7 +56,9 @@
   },
   "license": "MIT",
   "nyc": {
-    "include": ["distribution/library/**/*.js"]
+    "include": [
+      "distribution/library/**/*.js"
+    ]
   },
   "config": {
     "jogwheel": {
@@ -106,7 +108,7 @@
     "babelify": "6.4.0",
     "browserify": "12.0.1",
     "chalk": "1.1.1",
-    "commitizen": "2.4.5",
+    "commitizen": "2.5.0",
     "coveralls": "2.11.5",
     "cz-conventional-changelog": "1.1.5",
     "del": "2.2.0",
