@@ -56,7 +56,9 @@
   },
   "license": "MIT",
   "nyc": {
-    "include": ["distribution/library/**/*.js"]
+    "include": [
+      "distribution/library/**/*.js"
+    ]
   },
   "config": {
     "jogwheel": {
@@ -172,6 +174,6 @@
     "watchify": "3.6.1",
     "web-animations-js": "2.1.4",
     "whatwg-fetch": "0.10.1",
-    "zuul": "3.8.0"
+    "zuul": "3.9.0"
   }
 }
