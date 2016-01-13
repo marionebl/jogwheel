@@ -142,7 +142,7 @@
     "highlight.js": "9.1.0",
     "husky": "0.10.2",
     "in-publish": "2.0.0",
-    "istanbul": "0.4.1",
+    "istanbul": "0.4.2",
     "js-git": "0.7.7",
     "lodash.flatten": "3.0.2",
     "lodash.merge": "3.3.2",
