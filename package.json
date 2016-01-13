@@ -144,7 +144,7 @@
     "in-publish": "2.0.0",
     "istanbul": "0.4.2",
     "js-git": "0.7.7",
-    "lodash.flatten": "3.0.2",
+    "lodash.flatten": "4.0.0",
     "lodash.merge": "3.3.2",
     "mdast": "2.3.2",
     "mdast-highlight.js": "1.2.0",
