@@ -24,7 +24,7 @@
     "coveralls": "$npm_package_config_jogwheel_when_ci --leader && (npm run coverage && nyc report --reporter=text-lcov | coveralls) || echo ''",
     "commit": "git-cz",
     "commitmsg": "$npm_package_config_jogwheel_when_ci && $npm_package_config_jogwheel_validate_commit || $npm_package_config_jogwheel_validate_commit \".git/COMMIT_EDITMSG\"",
-    "prepush": "npm run coverage:check",
+    "prepush": "npm run test:local:unit && npm run coverage:check",
     "env": "env",
     "binaries": "ls node_modules/.bin/",
     "semantic-release": "(semantic-release pre && npm run semantic-release-pull-request && npm publish && semantic-release post) && GH_PAGES_ARCHIVE=\"true\" GH_PAGES_ADD=\"false\" npm run pages || GH_PAGES_ARCHIVE=\"false\" GH_PAGES_ADD=\"true\" npm run pages",
@@ -106,7 +106,7 @@
     "babel-regenerator-runtime": "6.2.0",
     "babel-runtime": "5.8.29",
     "babelify": "6.4.0",
-    "browserify": "12.0.1",
+    "browserify": "13.0.0",
     "chalk": "1.1.1",
     "commitizen": "2.4.5",
     "coveralls": "2.11.5",
@@ -163,7 +163,7 @@
     "semantic-release": "4.3.5",
     "shelljs": "0.5.3",
     "string-humanize": "1.0.0",
-    "sync-request": "2.1.0",
+    "sync-request": "2.2.0",
     "tap-spec": "4.1.1",
     "tape": "4.4.0",
     "tape-catch": "1.0.4",
@@ -171,9 +171,9 @@
     "unist-util-visit": "1.0.0",
     "vfile": "1.2.0",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.6.1",
+    "watchify": "3.7.0",
     "web-animations-js": "2.1.4",
     "whatwg-fetch": "0.10.1",
-    "zuul": "3.8.0"
+    "zuul": "3.9.0"
   }
 }
