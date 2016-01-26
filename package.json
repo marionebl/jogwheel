@@ -145,7 +145,7 @@
     "istanbul": "0.4.2",
     "js-git": "0.7.7",
     "lodash.flatten": "4.0.0",
-    "lodash.merge": "4.0.1",
+    "lodash.merge": "4.0.2",
     "mdast": "2.3.2",
     "mdast-highlight.js": "1.2.0",
     "mdast-html": "1.2.1",
