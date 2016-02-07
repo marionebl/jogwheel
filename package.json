@@ -103,7 +103,7 @@
     "babel-eslint": "4.1.6",
     "babel-plugin-object-assign": "1.2.1",
     "babel-polyfill": "6.0.16",
-    "babel-regenerator-runtime": "6.2.0",
+    "babel-regenerator-runtime": "6.3.13",
     "babel-runtime": "5.8.29",
     "babelify": "6.4.0",
     "browserify": "13.0.0",
