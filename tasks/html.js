@@ -23,8 +23,8 @@ module.exports = function (gulp, paths) {
 
 				visit(ast, 'link', node => {
 					// Rewrite local md links to html files in md
-					if (node.href[0] === '.') {
-						node.href = node.href
+					if (node.url[0] === '.') {
+						node.url = node.url
 							.replace('.md', '.html')
 							.replace('readme', 'index');
 					}
