@@ -1,26 +1,26 @@
-var path = require('path');
-var merge = require('lodash.merge');
-var async = require('async');
-var documentationjs = require('documentation');
-var shell = require('shelljs');
+const path = require('path');
+const merge = require('lodash.merge');
+const async = require('async');
+const documentationjs = require('documentation');
+const shell = require('shelljs');
 
-var cached = require('gulp-cached');
-var remember = require('gulp-remember');
+const cached = require('gulp-cached');
+const remember = require('gulp-remember');
 
-var data = require('gulp-data');
-var template = require('gulp-template');
-var extension = require('gulp-ext-replace');
-var rename = require('gulp-rename');
-var globby = require('globby');
-var request = require('sync-request');
+const data = require('gulp-data');
+const template = require('gulp-template');
+const extension = require('gulp-ext-replace');
+const rename = require('gulp-rename');
+const globby = require('globby');
+const request = require('sync-request');
 
-var pkg = require('../package');
-var header = require('./partials/header');
-var footer = require('./partials/footer');
-var badges = require('./partials/badges');
+const pkg = require('../package');
+const header = require('./partials/header');
+const footer = require('./partials/footer');
+const badges = require('./partials/badges');
 
 module.exports = function (gulp, paths) {
-	var props = {
+	const props = {
 		paths: paths,
 		gulp: gulp,
 		pkg: merge({}, pkg, pkg.config.documentation),
@@ -44,8 +44,8 @@ module.exports = function (gulp, paths) {
 				}, cb);
 			},
 			function (comments, cb) {
-				async.reduce(formats, {}, function (result, format, callback) {
-					documentationjs.formats[format](comments, {}, function (err, formatted) {
+				async.reduce(formats, {}, (result, format, callback) => {
+					documentationjs.formats[format](comments, {}, (err, formatted) => {
 						if (err) {
 							return callback(err);
 						}
@@ -59,30 +59,31 @@ module.exports = function (gulp, paths) {
 
 	return function documentation(done) {
 		/* @desc build markdown from sources */
-		getApiDocumentation(paths.source.entry, ['md', 'json', 'html'], function (err, docs) {
+		getApiDocumentation(paths.source.entry, ['md', 'json', 'html'], (err, docs) => {
 			if (err) {
 				return done(err);
 			}
 
-			props.pkg.tag = props.pkg.version ? 'v' + props.pkg.version : shell.exec('git describe --abbrev=0 --tags', {silent: true}).output.split('\n')[0];
+			const version = props.pkg.version || shell.exec('git describe --abbrev=0 --tags', {silent: true}).output.split('\n')[0];
+			props.pkg.tag = `v${version}`;
 
-			var exampleFiles = globby.sync(paths.source.example);
+			const exampleFiles = globby.sync(paths.source.example);
 
-			var examples = exampleFiles.reduce(function(registry, exampleFile){
-				var name = path.basename(exampleFile, path.extname(exampleFile));
-				var uri = path.relative(paths.target.root, exampleFile)
+			const examples = exampleFiles.reduce((registry, exampleFile) => {
+				const name = path.basename(exampleFile, path.extname(exampleFile));
+				const uri = path.relative(paths.target.root, exampleFile)
 					.split(path.sep).slice(1).join('/');
 
-				var host = props.pkg.config.documentation.host;
-				var url = 'https://' + host + '/' + props.pkg.name + '/' + uri;
+				const host = props.pkg.config.documentation.host;
+				let url = `https://${host}/${props.pkg.name}/${uri}`;
 
-				var response = request('POST', 'https://git.io', {
-					body: 'url=' + url
+				const response = request('POST', 'https://git.io', {
+					body: `url=${url}`
 				});
 
 				url = response.headers.location || url;
 
-				var amendment = {};
+				const amendment = {};
 				amendment[name] = url;
 
 				return Object.assign(registry, amendment);
@@ -98,7 +99,7 @@ module.exports = function (gulp, paths) {
 				.pipe(template())
 				.pipe(remember('documentation'))
 				.pipe(extension('.md'))
-				.pipe(rename(function (pathInfo) {
+				.pipe(rename(pathInfo => {
 					if (pathInfo.basename[0] === '_') {
 						pathInfo.basename = pathInfo.basename.slice(1);
 					}
