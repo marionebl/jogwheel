@@ -1,26 +1,26 @@
-var mdast = require('mdast');
-var html = require('mdast-html');
-var inline = require('mdast-inline-links');
-var slug = require('mdast-slug');
-var highlight = require('mdast-highlight.js');
-var visit = require('unist-util-visit');
-var VFile = require('vfile');
-var through = require('through2');
-var rename = require('gulp-rename');
-var path = require('path');
-var globby = require('globby');
-var humanize = require('string-humanize');
-var pkg = require('../package.json');
-var layout = require('./partials/page-layout');
+const remark = require('remark');
+const html = require('remark-html');
+const inline = require('remark-inline-links');
+const slug = require('remark-slug');
+const highlight = require('remark-highlight.js');
+const visit = require('unist-util-visit');
+const VFile = require('vfile');
+const through = require('through2');
+const rename = require('gulp-rename');
+const path = require('path');
+const globby = require('globby');
+const humanize = require('string-humanize');
+const pkg = require('../package.json');
+const layout = require('./partials/page-layout');
 
 module.exports = function (gulp, paths) {
 	function toHtml() {
 		const rewrite = function () {
 			return function (ast, file) {
-				var base = path.relative(file.filePath(), path.resolve('./'));
+				const base = path.relative(file.filePath(), path.resolve('./'));
 				pkg.staticBase = base === '..' ? '.' : path.dirname(base);
 
-				visit(ast, 'link', function (node) {
+				visit(ast, 'link', node => {
 					// Rewrite local md links to html files in md
 					if (node.href[0] === '.') {
 						node.href = node.href
@@ -39,7 +39,7 @@ module.exports = function (gulp, paths) {
 			};
 		};
 
-		const processor = mdast()
+		const processor = remark()
 			.use(inline)
 			.use(slug)
 			.use(highlight)
@@ -48,18 +48,18 @@ module.exports = function (gulp, paths) {
 
 		const markdownFiles = globby.sync(paths.source.markdown);
 
-		return through.obj(function (file, enc, cb) {
-			var vfile = new VFile({
+		return through.obj((file, enc, cb) => {
+			const vfile = new VFile({
 				contents: file.contents.toString('utf-8'),
 				directory: path.dirname(file.path),
 				filename: path.basename(file.path, path.extname(file.path)),
 				extension: path.extname(file.path).slice(1)
 			});
 
-			var result = processor.process(vfile);
+			const result = processor.process(vfile);
 
-			var navigationFiles = markdownFiles
-				.map(function (markdownFile) {
+			const navigationFiles = markdownFiles
+				.map(markdownFile => {
 					const absolutePath = path.resolve(markdownFile);
 					const base = `${path.basename(markdownFile, path.extname(markdownFile))}.html`;
 					const target = base === 'readme.html' ? path.join(markdownFile, '..', 'index.html') : path.join(path.dirname(markdownFile), base);
@@ -70,7 +70,7 @@ module.exports = function (gulp, paths) {
 				})
 				.filter(Boolean);
 
-			var navigation = [
+			const navigation = [
 				{
 					name: 'Home',
 					href: path.relative(file.path, './').slice(1)
@@ -92,7 +92,7 @@ module.exports = function (gulp, paths) {
 		/* @desc compile markdown to html */
 		return gulp.src(paths.source.markdown)
 			.pipe(toHtml())
-			.pipe(rename(function (info) {
+			.pipe(rename(info => {
 				info.basename = info.basename === 'readme' ? 'index' : info.basename;
 				info.extname = '.html';
 			}))
