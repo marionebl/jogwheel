@@ -66,8 +66,10 @@ module.exports = function (gulp, paths) {
 				return done(err);
 			}
 
-			const version = props.pkg.version || shell.exec('git describe --abbrev=0 --tags', {silent: true}).output.split('\n')[0];
-			props.pkg.tag = `v${version}`;
+			props.pkg.tag = `v${props.pkg.version}` ||
+				shell
+					.exec('git describe --abbrev=0 --tags', {silent: true})
+					.output.split('\n')[0];
 
 			const exampleFiles = globby.sync(paths.source.example);
 

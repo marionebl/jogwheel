@@ -245,11 +245,37 @@ blockquote + p {
 
 table td,
 table th {
-	border: 1px solid rgba(255, 255, 255, 0);
+	padding: 7.5px 10px;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+table tr:nth-child(even) td {
+	background: rgba(255, 255, 255, 0.05);
 }
 
 @media (--medium) {
 	body {
 		border: none;
+	}
+	table {
+		display: block;
+	}
+	thead {
+		display: none;
+	}
+	tr {
+		display: block;
+	}
+	table tr:nth-child(even) td {
+		background: none;
+	}
+	table td {
+		display: block;
+		padding: 5px 0;
+		border: none;
+		text-align: left;
+	}
+	table td:last-child {
+		padding-bottom: 15px;
 	}
 }
