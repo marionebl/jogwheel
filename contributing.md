@@ -80,7 +80,7 @@ To make your life easier jogwheel is commitizen-friendly and provides the npm ru
 
 
 ---
-jogwheel `v1.4.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `vv1.4.0` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
@@ -89,7 +89,7 @@ and released under the [MIT License](./license.md).
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
 [brcdn-url]: https://www.brcdn.org/?module=jogwheel
-[brcdn-image]: https://img.shields.io/badge/cdn-v1.4.0-5ec792.svg?style=flat-square
+[brcdn-image]: https://img.shields.io/badge/cdn-vv1.4.0-5ec792.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
 [ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square

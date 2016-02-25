@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const merge = require('lodash.merge');
 const async = require('async');

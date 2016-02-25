@@ -14,6 +14,7 @@ const pkg = require('../package.json');
 const layout = require('./partials/page-layout');
 
 module.exports = function (gulp, paths) {
+	'use strict';
 	function toHtml() {
 		const rewrite = function () {
 			return function (ast, file) {
