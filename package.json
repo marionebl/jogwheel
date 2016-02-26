@@ -110,7 +110,7 @@
     "chalk": "1.1.1",
     "commitizen": "2.5.0",
     "conventional-changelog-lint": "0.3.1",
-    "coveralls": "2.11.5",
+    "coveralls": "2.11.8",
     "cz-conventional-changelog": "1.1.5",
     "del": "2.2.0",
     "denodeify": "1.2.1",
