@@ -1,10 +1,8 @@
-@import 'normalize.css';
-@import 'highlight.js/styles/monokai.css';
-
+@import "normalize.css";
+@import "highlight.js/styles/monokai.css";
 @custom-media --medium (max-width: 30em);
 @custom-media --large (max-width: 60em);
 @custom-media --larger (max-width: 80em);
-
 @custom-selector :--githubteaser .jogwheel-teaser;
 @custom-selector :--mainnavigation .jogwheel-main-navigation;
 @custom-selector :--mainnavigationlist .jogwheel-main-navigation-list;
@@ -76,7 +74,7 @@ a:link,
 a:visited {
 	text-decoration: none;
 	color: var(--primaryColor);
-	transition: .3s color ease-in-out;
+	transition: 0.3s color ease-in-out;
 }
 
 a:hover,
@@ -102,7 +100,7 @@ hr {
 
 blockquote {
 	margin-bottom: 0;
-	padding: .5em 1em 1em 1em;
+	padding: 0.5em 1em 1em 1em;
 }
 
 blockquote p {
@@ -110,10 +108,11 @@ blockquote p {
 }
 
 blockquote + p {
-	padding: 0 1em .5em 1em;
+	padding: 0 1em 0.5em 1em;
 }
 
-blockquote, blockquote + p {
+blockquote,
+blockquote + p {
 	border-left: 5px solid rgba(255, 255, 255, 0.2);
 	margin-left: 0;
 	margin-top: 0;
@@ -138,11 +137,11 @@ blockquote, blockquote + p {
 :--mainnavigationlist .jogwheel-item {
 	display: inline-block;
 	border-bottom: 7px solid transparent;
-	transition: .3s border-color ease-in-out;
+	transition: 0.3s border-color ease-in-out;
 }
 
 :--mainnavigationlist .jogwheel-item.jogwheel-item--active {
-	border-color: var(--primaryColor);;
+	border-color: var(--primaryColor);
 }
 
 :--mainnavigationlist a {
@@ -162,14 +161,14 @@ blockquote, blockquote + p {
 :--githubteaser a {
 	display: block;
 	padding: 20px;
-	transition: .3s background-color ease-in-out;
+	transition: 0.3s background-color ease-in-out;
 }
 
 :--githubteaser a:hover {
-	background: rgba(255,255,255,.1);
+	background: rgba(255, 255, 255, 0.1);
 }
 
-:--header	{
+:--header {
 	display: flex;
 	flex-direction: column;
 	padding-top: 60px;
@@ -244,8 +243,48 @@ blockquote, blockquote + p {
 	color: var(--backgroundColor);
 }
 
+table td,
+table th {
+	padding: 7.5px 10px;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+table tr:nth-child(even) td {
+	background: rgba(255, 255, 255, 0.05);
+}
+
+.emoji {
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	max-width: none;
+	background: transparent;
+}
+
 @media (--medium) {
 	body {
 		border: none;
+	}
+	table {
+		display: block;
+	}
+	thead {
+		display: none;
+	}
+	tr {
+		display: block;
+	}
+	table tr:nth-child(even) td {
+		background: none;
+	}
+	table td {
+		display: block;
+		padding: 5px 0;
+		border: none;
+		text-align: left;
+	}
+	table td:last-child {
+		padding-bottom: 15px;
 	}
 }
