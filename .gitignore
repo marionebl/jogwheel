@@ -36,3 +36,6 @@ distribution
 
 # Sensitive config files
 .zuulrc
+
+# Temp files
+.tmp

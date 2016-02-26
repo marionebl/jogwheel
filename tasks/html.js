@@ -1,17 +1,24 @@
+const path = require('path');
+const fs = require('fs');
+
 const remark = require('remark');
 const html = require('remark-html');
 const inline = require('remark-inline-links');
 const slug = require('remark-slug');
 const highlight = require('remark-highlight.js');
+const gemoji = require('remark-gemoji');
+const emojiParser = require('emoji-parser');
 const visit = require('unist-util-visit');
 const VFile = require('vfile');
 const through = require('through2');
 const rename = require('gulp-rename');
-const path = require('path');
 const globby = require('globby');
 const humanize = require('string-humanize');
 const pkg = require('../package.json');
 const layout = require('./partials/page-layout');
+
+const emojiBase = './.tmp/emoji/';
+const emoji = emojiParser.init(emojiBase).update();
 
 module.exports = function (gulp, paths) {
 	'use strict';
@@ -45,13 +52,21 @@ module.exports = function (gulp, paths) {
 			.use(slug)
 			.use(highlight)
 			.use(rewrite)
+			.use(gemoji)
 			.use(html);
 
 		const markdownFiles = globby.sync(paths.source.markdown);
 
 		return through.obj((file, enc, cb) => {
 			const vfile = new VFile({
-				contents: file.contents.toString('utf-8'),
+				contents: emoji.parse(file.contents.toString('utf-8'), '', (match, url, className, options) => {
+					const name = match[1];
+					if (options.parser.list.indexOf(name) > -1) {
+						const image = fs.readFileSync(path.resolve(emojiBase, `${name}.png`));
+						return `<img width="20" height="20" class="emoji" src="data:image/png;base64,${image.toString('base64')}" />`;
+					}
+					return match;
+				}),
 				directory: path.dirname(file.path),
 				filename: path.basename(file.path, path.extname(file.path)),
 				extension: path.extname(file.path).slice(1)
