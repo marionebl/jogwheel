@@ -66,7 +66,8 @@ module.exports = function (gulp, paths) {
 				return done(err);
 			}
 
-			props.pkg.tag = `v${props.pkg.version}` ||
+			props.pkg.tag = props.pkg.version ?
+				`v${props.pkg.version}` :
 				shell
 					.exec('git describe --abbrev=0 --tags', {silent: true})
 					.output.split('\n')[0];
