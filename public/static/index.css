@@ -566,8 +566,8 @@ a:link,
 a:visited {
 	text-decoration: none;
 	color: rgb(94, 199, 146);
-	-webkit-transition: .3s color ease-in-out;
-	        transition: .3s color ease-in-out;
+	-webkit-transition: 0.3s color ease-in-out;
+	        transition: 0.3s color ease-in-out;
 }
 
 a:hover,
@@ -594,7 +594,7 @@ hr {
 
 blockquote {
 	margin-bottom: 0;
-	padding: .5em 1em 1em 1em;
+	padding: 0.5em 1em 1em 1em;
 }
 
 blockquote p {
@@ -602,10 +602,11 @@ blockquote p {
 }
 
 blockquote + p {
-	padding: 0 1em .5em 1em;
+	padding: 0 1em 0.5em 1em;
 }
 
-blockquote, blockquote + p {
+blockquote,
+blockquote + p {
 	border-left: 5px solid rgba(255, 255, 255, 0.2);
 	margin-left: 0;
 	margin-top: 0;
@@ -630,12 +631,12 @@ blockquote, blockquote + p {
 .jogwheel-main-navigation-list .jogwheel-item {
 	display: inline-block;
 	border-bottom: 7px solid transparent;
-	-webkit-transition: .3s border-color ease-in-out;
-	        transition: .3s border-color ease-in-out;
+	-webkit-transition: 0.3s border-color ease-in-out;
+	        transition: 0.3s border-color ease-in-out;
 }
 
 .jogwheel-main-navigation-list .jogwheel-item.jogwheel-item--active {
-	border-color: rgb(94, 199, 146);;
+	border-color: rgb(94, 199, 146);
 }
 
 .jogwheel-main-navigation-list a {
@@ -658,16 +659,16 @@ blockquote, blockquote + p {
 .jogwheel-teaser a {
 	display: block;
 	padding: 20px;
-	-webkit-transition: .3s background-color ease-in-out;
-	        transition: .3s background-color ease-in-out;
+	-webkit-transition: 0.3s background-color ease-in-out;
+	        transition: 0.3s background-color ease-in-out;
 }
 
 .jogwheel-teaser a:hover {
 	background: #FFFFFF;
-	background: rgba(255,255,255,.1);
+	background: rgba(255, 255, 255, 0.1);
 }
 
-.jogwheel-header	{
+.jogwheel-header {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -758,8 +759,50 @@ body > p:last-of-type {
 	color: #222;
 }
 
+table td,
+table th {
+	padding: 7.5px 10px;
+	border: 1px solid #FFFFFF;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+table tr:nth-child(even) td {
+	background: #FFFFFF;
+	background: rgba(255, 255, 255, 0.05);
+}
+
+.emoji {
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	max-width: none;
+	background: transparent;
+}
+
 @media (max-width: 30em) {
 	body {
 		border: none;
+	}
+	table {
+		display: block;
+	}
+	thead {
+		display: none;
+	}
+	tr {
+		display: block;
+	}
+	table tr:nth-child(even) td {
+		background: none;
+	}
+	table td {
+		display: block;
+		padding: 5px 0;
+		border: none;
+		text-align: left;
+	}
+	table td:last-child {
+		padding-bottom: 15px;
 	}
 }
