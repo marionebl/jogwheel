@@ -102,7 +102,7 @@
     "babel-core": "5.8.33",
     "babel-eslint": "5.0.0",
     "babel-plugin-object-assign": "1.2.1",
-    "babel-polyfill": "6.5.0",
+    "babel-polyfill": "6.6.0",
     "babel-regenerator-runtime": "6.2.0",
     "babel-runtime": "6.5.0",
     "babelify": "6.4.0",
