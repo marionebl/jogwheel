@@ -109,7 +109,7 @@
     "browserify": "13.0.0",
     "chalk": "1.1.1",
     "commitizen": "2.5.0",
-    "conventional-changelog-lint": "0.3.1",
+    "conventional-changelog-lint": "0.3.2",
     "coveralls": "2.11.8",
     "cz-conventional-changelog": "1.1.5",
     "del": "2.2.0",
