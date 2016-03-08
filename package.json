@@ -181,7 +181,7 @@
     "watchify": "3.7.0",
     "web-animations-js": "2.1.4",
     "whatwg-fetch": "0.11.0",
-    "zuul": "3.9.0"
+    "zuul": "3.10.1"
   },
   "dependencies": {}
 }
