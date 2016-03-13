@@ -172,7 +172,7 @@
     "stylelint-config-standard": "4.0.1",
     "sync-request": "3.0.0",
     "tap-spec": "4.1.1",
-    "tape": "4.5.0",
+    "tape": "4.5.1",
     "tape-catch": "1.0.4",
     "through2": "2.0.1",
     "unist-util-visit": "1.0.0",
