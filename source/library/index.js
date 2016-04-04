@@ -76,12 +76,12 @@ class JogWheel {
 		const medias = getMediaqueryMedia(document.styleSheets)
 			.map(window.matchMedia);
 
+		// Listen for media query changes and update accordingly
+		medias.forEach(media => media.addListener(this.onMatchMedia.bind(this)));
+
 		// Unwrap values relevant for instance
 		const players = configurations.map(configuration => configuration.player);
 		const durations = configurations.map(configuration => configuration.duration);
-
-		// Listen for media query changes and update accordingly
-		medias.forEach(media => media.addListener(this.onMatchMedia.bind(this)));
 
 		// Hold references for later use
 		this.__instance = {
@@ -138,7 +138,13 @@ class JogWheel {
 	 * @private
 	 */
 	onMatchMedia() {
-		const {settings} = this.__instance;
+		const {
+			elements,
+			players,
+			settings,
+			window,
+			document
+		} = this.__instance;
 
 		// Save current state
 		const state = {
@@ -146,11 +152,21 @@ class JogWheel {
 			playState: this.playState
 		};
 
-		// Kill off current instance
-		this.unplug();
+		// Cancel all players
+		players.forEach(player => player.cancel());
+
+		// Clean up element animationName reset
+		elements.map(element =>
+			element.style[prefix('animationName', window, document)] = ''
+		);
 
 		// Init new instance
-		this.plug();
+		// Get WANPlayer configuration for each element
+		const configurations = elements.map(element => getPlayer(element, settings, window, document));
+
+		// Unwrap values relevant for instance
+		const updatedPlayers = configurations.map(configuration => configuration.player);
+		const durations = configurations.map(configuration => configuration.duration);
 
 		global.instance = this;
 
@@ -160,6 +176,12 @@ class JogWheel {
 			this.seek(state.progress);
 			start.bind(this)();
 		}
+
+		this.__instance = {
+			...this.__instance,
+			players: updatedPlayers,
+			durations
+		};
 	}
 
 	/**
@@ -266,6 +288,9 @@ class JogWheel {
 		const medias = getMediaqueryMedia(document.styleSheets)
 			.map(window.matchMedia);
 
+		// Listen for media query changes and update accordingly
+		medias.forEach(media => media.addListener(this.onMatchMedia.bind(this)));
+
 		// Unwrap values relevant for instance
 		const players = configurations.map(configuration => configuration.player);
 		const durations = configurations.map(configuration => configuration.duration);
@@ -275,8 +300,7 @@ class JogWheel {
 
 		// Update references for later use
 		this.__instance = {
-			...this.__instance,
-			players, durations, medias
+			...this.__instance, players, durations, medias
 		};
 
 		return this;

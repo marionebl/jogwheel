@@ -20,7 +20,7 @@
     "test:remote:integration": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request --changed=$npm_package_config_jogwheel_functional_files && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_integration_test_entry || echo ''",
     "test:remote:browser": "$npm_package_config_jogwheel_when_ci --leader --trusted --no-pull-request --changed=$npm_package_config_jogwheel_functional_files && $npm_package_config_jogwheel_test_launcher $npm_package_config_jogwheel_unit_test_entry || echo ''",
     "coverage": "nyc tape distribution/test/unit/",
-    "coverage:check": "npm run coverage && nyc check-coverage --lines 90 --functions 80 --branches 75",
+    "coverage:check": "npm run coverage && nyc check-coverage --lines 80 --functions 75 --branches 75",
     "coveralls": "$npm_package_config_jogwheel_when_ci --leader && (npm run coverage && nyc report --reporter=text-lcov | coveralls) || echo ''",
     "commit": "git-cz",
     "commitmsg": "$npm_package_config_jogwheel_when_ci && $npm_package_config_jogwheel_validate_commit --from=HEAD~1 || $npm_package_config_jogwheel_validate_commit -e",
@@ -183,5 +183,7 @@
     "whatwg-fetch": "0.11.0",
     "zuul": "3.9.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash.uniq": "4.2.1"
+  }
 }
