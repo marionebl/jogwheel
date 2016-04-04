@@ -1,3 +1,5 @@
+import uniq from 'lodash.uniq';
+
 import toArray from './to-array';
 import cssRuleEnumerations from './cssrule-enumerations';
 import getCSSRules from './get-css-rules';
@@ -16,11 +18,13 @@ export default function getMediaqueryMedia(styleSheets) {
 	// Get all media query declarations and return array of media rules
 	const type = cssRuleEnumerations.media;
 
-	return CSSRules
-		// filter for media queries
-		.filter(rule => rule.type === type)
-		// map to media rules
-		.map(rule => rule.media.mediaText)
-		// filter not all media query
-		.filter(media => media !== 'not all');
+	return uniq(
+		CSSRules
+			// filter for media queries
+			.filter(rule => rule.type === type)
+			// map to media rules
+			.map(rule => rule.media.mediaText)
+			// filter not all media query
+			.filter(media => media !== 'not all')
+	);
 }
