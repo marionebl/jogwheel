@@ -1,7 +1,7 @@
 import tape from 'tape';
 import windowStub from './stubs/window.js';
 import documentStub from './stubs/document.js';
-import elementStub from './stubs/element.js';
+import elementStub, {unpolyfilledElementStub} from './stubs/element.js';
 import initPlayer from '../../library/init-player.js';
 
 tape('init-player', t => {
@@ -12,6 +12,14 @@ tape('init-player', t => {
 			() => {},
 			windowStub, documentStub) === 'object',
 		'should return an object');
+
+	t.ok(
+		typeof initPlayer(unpolyfilledElementStub,
+			[],
+			{},
+			() => {},
+			windowStub, documentStub) === 'object',
+		'should return an object when initializing on element without animate method');
 
 	const stub = {...elementStub, style: {}};
 
