@@ -6843,10 +6843,18 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
 	value: true
 });
+// istanbul ignore next
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports['default'] = initPlayer;
 // istanbul ignore next
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+// istanbul ignore next
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
 var _getVendorPrefix = require('./get-vendor-prefix');
 
@@ -6862,7 +6870,11 @@ var _createTrap2 = _interopRequireDefault(_createTrap);
  * @private
  */
 function isNativeFunction(fn) {
-	Function.prototype.toString.call(fn).match(/\{\s*\[native code\]\s*\}/); // eslint-disable-line prefer-reflect
+	if (typeof fn !== 'function') {
+		return false;
+	}
+
+	return Function.prototype.toString.call(fn).match(/\{\s*\[native code\]\s*\}/); // eslint-disable-line prefer-reflect
 }
 
 /**
@@ -6881,10 +6893,40 @@ function initPlayer(element, keyframes, options, render) {
 	var window = arguments.length <= 4 || arguments[4] === undefined ? global.window : arguments[4];
 	var document = arguments.length <= 5 || arguments[5] === undefined ? global.document : arguments[5];
 
-	// Create a proxy for the playElement if needed
+	// Gracefully handle cases where element.animate is not defined
+	if (typeof element.animate !== 'function') {
+		var _window$HTMLElement = window.HTMLElement;
+
+		var _HTMLElement = _window$HTMLElement === undefined ? {} : _window$HTMLElement;
+
+		var _HTMLElement$prototype = _HTMLElement.prototype;
+		var ElementPrototype = _HTMLElement$prototype === undefined ? {} : _HTMLElement$prototype;
+		var animateMethod = ElementPrototype.animateMethod;
+
+		var animateAvailable = typeof animateMethod === 'function';
+
+		var polyFillMessage = animateAvailable === false ? ['Did you include a WebAnimation polyfill?', 'https://git.io/vVV3x'] : [];
+
+		var message = ['Initializing JogWheel on an object without animate method', 'falling back to noop WebAnimationsPlayer instance.'].concat(polyFillMessage);
+
+		console.warn.apply(console, _toConsumableArray(message));
+
+		element.animate = function () {
+			return _extends({}, element, {
+				currentTime: 0,
+				play: function play() {},
+				pause: function pause() {}
+			});
+		};
+	}
+
+	// Create a proxy for the playerElement if needed
 	// - no native implementation
 	// - render function is given
-	var playerElement = isNativeFunction(element.animate) === false && render ? (0, _createTrap2['default'])(element, 'style', render) : element;
+	var isNative = isNativeFunction(element.animate);
+	var hasRenderCallback = typeof render === 'function';
+
+	var playerElement = isNative === false && hasRenderCallback ? (0, _createTrap2['default'])(element, 'style', render) : element;
 
 	// Create the WebAnimationPlayer instance
 	var player = playerElement.animate(keyframes, options);
