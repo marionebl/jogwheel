@@ -11,4 +11,8 @@ const elementStub = {
 	}
 };
 
+export const unpolyfilledElementStub = {
+	style: {}
+};
+
 export default elementStub;

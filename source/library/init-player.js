@@ -9,7 +9,11 @@ import createTrap from './create-trap';
  * @private
  */
 function isNativeFunction(fn) {
-	Function.prototype.toString.call(fn).match(/\{\s*\[native code\]\s*\}/); // eslint-disable-line prefer-reflect
+	if (typeof fn !== 'function') {
+		return false;
+	}
+
+	return Function.prototype.toString.call(fn).match(/\{\s*\[native code\]\s*\}/); // eslint-disable-line prefer-reflect
 }
 
 /**
@@ -24,10 +28,43 @@ function isNativeFunction(fn) {
  * @private
  */
 export default function initPlayer(element, keyframes, options, render, window = global.window, document = global.document) {
-	// Create a proxy for the playElement if needed
+	// Gracefully handle cases where element.animate is not defined
+	if (typeof element.animate !== 'function') {
+		const {HTMLElement = {}} = window;
+		const {prototype: ElementPrototype = {}} = HTMLElement;
+		const {animateMethod} = ElementPrototype;
+		const animateAvailable = typeof animateMethod === 'function';
+
+		const polyFillMessage = animateAvailable === false ? [
+			`Did you include a WebAnimation polyfill?`,
+			`https://git.io/vVV3x`
+		] : [];
+
+		const message = [
+			`Initializing JogWheel on an object without animate method`,
+			`falling back to noop WebAnimationsPlayer instance.`,
+			...polyFillMessage
+		];
+
+		console.warn(...message);
+
+		element.animate = () => {
+			return {
+				...element,
+				currentTime: 0,
+				play() {},
+				pause() {}
+			};
+		};
+	}
+
+	// Create a proxy for the playerElement if needed
 	// - no native implementation
 	// - render function is given
-	const playerElement = isNativeFunction(element.animate) === false && render ?
+	const isNative = isNativeFunction(element.animate);
+	const hasRenderCallback = typeof render === 'function';
+
+	const playerElement = isNative === false && hasRenderCallback ?
 		createTrap(element, 'style', render) :
 		element;
 
