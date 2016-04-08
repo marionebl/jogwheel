@@ -99,7 +99,7 @@
   },
   "devDependencies": {
     "async": "1.5.2",
-    "babel-core": "5.8.33",
+    "babel-core": "6.7.6",
     "babel-eslint": "6.0.0",
     "babel-plugin-object-assign": "1.2.1",
     "babel-polyfill": "6.5.0",
