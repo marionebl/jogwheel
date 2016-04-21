@@ -111,7 +111,7 @@
     "commitizen": "2.8.0",
     "conventional-changelog-lint": "0.3.4",
     "coveralls": "2.11.8",
-    "cz-conventional-changelog": "1.1.5",
+    "cz-conventional-changelog": "1.1.6",
     "del": "2.2.0",
     "denodeify": "1.2.1",
     "dom-stub": "1.0.1",
