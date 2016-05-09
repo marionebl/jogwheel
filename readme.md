@@ -19,7 +19,7 @@
 
 > Availability
 
-[![npm][npm-image]][npm-url] [![brcdn][brcdn-image]][brcdn-url] [![npm-dl][npm-dl-image]][npm-dl-url]
+[![npm][npm-image]][npm-url] [![cdn][cdn-image]][cdn-url] [![npm-dl][npm-dl-image]][npm-dl-url]
 
 > Activity
 
@@ -70,13 +70,13 @@ player.seek(0.5);
 ```
 
 ### CDN
-jogwheel provides prebundled downloads via [brcdn.org](https://www.brcdn.org/?module=jogwheel).
+jogwheel provides prebundled downloads via [wzrd.in](https://wzrd.in/).
 Either embed or download the standalone bundle. Given you do not use a module system the standalone build will pollute `window.jogwheel`. This usage is viable but **not recommended**.
 
-* Development [v1.4.3](https://www.brcdn.org/jogwheel/v1.4.3/?standalone=jogwheel&uglify=false)
-* Production [v1.4.3](https://www.brcdn.org/jogwheel/1.4.3/?standalone=jogwheel&uglify=true)
-* Development [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=false)
-* Production [latest](https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true)
+* Development [v1.4.3](https://wzrd.in/debug-standalone/jogwheel@v1.4.3)
+* Production [v1.4.3](https://wzrd.in/standalone/jogwheel@v1.4.3)
+* Development [latest](https://wzrd.in/debug-standalone/jogwheel@latest)
+* Production [latest](https://wzrd.in/standalone/jogwheel@latest)
 
 **Fast track example**
 ```shell
@@ -84,7 +84,7 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 npm install -g opn-cli
 
 # Download example
-curl -L https://git.io/v0Y9l > jogwheel-example.html
+curl -L  > jogwheel-example.html
 
 # Open example in default browser
 opn jogwheel-example.html
@@ -142,8 +142,8 @@ opn jogwheel-example.html
     <div data-animated>Paused 0.5</div>
     <div data-animated>Paused 0.5</div>
     <div data-animated>Paused 0.5</div>
-    <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true"></script>
-    <script src="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true"></script>
+    <script src="https://wzrd.in/standalone/web-animations-js@latest"></script>
+    <script src="https://wzrd.in/standalone/jogwheel@latest"></script>
     <script>
       var elements = document.querySelectorAll('[data-animated]');
       var player = jogwheel.create(elements);
@@ -215,8 +215,8 @@ and released under the [MIT License](./license.md).
 [npm-dl-url]: https://www.npmjs.org/package/jogwheel
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
-[brcdn-url]: https://www.brcdn.org/?module=jogwheel
-[brcdn-image]: https://img.shields.io/badge/cdn-v1.4.3-5ec792.svg?style=flat-square
+[cdn-url]: https://wzrd.in/standalone/jogwheel@latest
+[cdn-image]: https://img.shields.io/badge/cdn-v1.4.3-5ec792.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
 [ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square
