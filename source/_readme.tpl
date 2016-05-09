@@ -29,7 +29,7 @@
 
 > Availability
 
-<%= props.partials.badges(['npm', 'brcdn', 'npm-dl']) %>
+<%= props.partials.badges(['npm', 'cdn', 'npm-dl']) %>
 
 > Activity
 
@@ -80,13 +80,13 @@ player.seek(0.5);
 ```
 
 ### CDN
-${props.pkg.name} provides prebundled downloads via [brcdn.org](https://www.brcdn.org/?module=${props.pkg.name}).
+${props.pkg.name} provides prebundled downloads via [wzrd.in](https://wzrd.in/).
 Either embed or download the standalone bundle. Given you do not use a module system the standalone build will pollute `window.jogwheel`. This usage is viable but **not recommended**.
 
-* Development [${props.pkg.tag}](https://www.brcdn.org/${props.pkg.name}/${props.pkg.tag}/?standalone=${props.pkg.name}&uglify=false)
-* Production [${props.pkg.tag}](https://www.brcdn.org/${props.pkg.name}/${props.pkg.tag.slice(1)}/?standalone=${props.pkg.name}&uglify=true)
-* Development [latest](https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=false)
-* Production [latest](https://www.brcdn.org/${props.pkg.name}/latest/?standalone=${props.pkg.name}&uglify=true)
+* Development [${props.pkg.tag}](https://wzrd.in/debug-standalone/${props.pkg.name}@${props.pkg.tag})
+* Production [${props.pkg.tag}](https://wzrd.in/standalone/${props.pkg.name}@${props.pkg.tag})
+* Development [latest](https://wzrd.in/debug-standalone/${props.pkg.name}@latest)
+* Production [latest](https://wzrd.in/standalone/${props.pkg.name}@latest)
 
 **Fast track example**
 ```shell
@@ -152,8 +152,8 @@ opn jogwheel-example.html
     <div data-animated>Paused 0.5</div>
     <div data-animated>Paused 0.5</div>
     <div data-animated>Paused 0.5</div>
-    <script src="https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&uglify=true"></script>
-    <script src="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&uglify=true"></script>
+    <script src="https://wzrd.in/standalone/web-animations-js@latest"></script>
+    <script src="https://wzrd.in/standalone/${props.pkg.name}@latest"></script>
     <script>
       var elements = document.querySelectorAll('[data-animated]');
       var player = jogwheel.create(elements);
