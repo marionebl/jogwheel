@@ -11,8 +11,8 @@ and released under the [${props.pkg.license} License](./license.md).
 [npm-dl-url]: https://www.npmjs.org/package/${props.pkg.name}
 [npm-dl-image]: http://img.shields.io/npm/dm/${props.pkg.name}.svg?style=flat-square
 
-[brcdn-url]: https://www.brcdn.org/?module=${props.pkg.name}
-[brcdn-image]: https://img.shields.io/badge/cdn-${props.pkg.tag}-${props.pkg.color}.svg?style=flat-square
+[cdn-url]: https://wzrd.in/standalone/${props.pkg.name}@latest
+[cdn-image]: https://img.shields.io/badge/cdn-${props.pkg.tag}-${props.pkg.color}.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/${props.pkg.slug}
 [ci-image]: https://img.shields.io/travis/${props.pkg.slug}/master.svg?style=flat-square

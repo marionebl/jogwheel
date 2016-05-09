@@ -58,6 +58,12 @@ module.exports = function (gulp, paths) {
 		const markdownFiles = globby.sync(paths.source.markdown);
 
 		return through.obj((file, enc, cb) => {
+			const isPlain = file.contents.indexOf('<!doctype html>') === 0;
+
+			if (isPlain) {
+				return cb(null, file);
+			}
+
 			const vfile = new VFile({
 				contents: emoji.parse(file.contents.toString('utf-8'), '', (match, url, className, options) => {
 					const name = match[1];
@@ -93,13 +99,14 @@ module.exports = function (gulp, paths) {
 				}
 			].concat(navigationFiles);
 
-			file.contents = new Buffer(layout({
+			const renderedResult = layout({
 				pkg: pkg,
 				navigation: navigation,
 				body: result,
 				static: pkg.staticBase
-			}));
+			});
 
+			file.contents = new Buffer(renderedResult);
 			cb(null, file);
 		});
 	}
