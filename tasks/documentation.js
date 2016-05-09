@@ -76,7 +76,10 @@ module.exports = function (gulp, paths) {
 
 			const examples = exampleFiles.reduce((registry, exampleFile) => {
 				const name = path.basename(exampleFile, path.extname(exampleFile));
-				const uri = path.relative(paths.target.root, exampleFile)
+				const parsed = path.parse(path.relative(paths.target.root, exampleFile));
+				parsed.ext = '.html';
+
+				const uri = path.format(parsed)
 					.split(path.sep).slice(1).join('/');
 
 				const host = props.pkg.config.documentation.host;

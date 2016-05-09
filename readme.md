@@ -84,7 +84,7 @@ Either embed or download the standalone bundle. Given you do not use a module sy
 npm install -g opn-cli
 
 # Download example
-curl -L  > jogwheel-example.html
+curl -L https://git.io/vreEP > jogwheel-example.html
 
 # Open example in default browser
 opn jogwheel-example.html

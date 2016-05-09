@@ -8,7 +8,7 @@
       "scripts": "source/scripts/**/*.js",
       "documentation": "source/**/*.tpl",
       "static": "source/**/*.html",
-      "example": "source/examples/**/*.html",
+      "example": "source/examples/**/*",
       "public-static": "source/documentation/**/*.{png,svg}",
       "markdown": [
         "**/*.md",
