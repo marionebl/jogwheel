@@ -21,6 +21,7 @@
 <li class="jogwheel-item"><a href="./contributing.html">Contributing</a></li>
 <li class="jogwheel-item"><a href="./documentation/api.html">Api</a></li>
 <li class="jogwheel-item"><a href="./documentation/roadmap.html">Roadmap</a></li>
+<li class="jogwheel-item"><a href="./examples/cdn.html">Cdn</a></li>
 <li class="jogwheel-item"><a href="./examples/index.html">Examples</a></li>
 <li class="jogwheel-item"><a href="./license.html">License</a></li>
 				</ul>
@@ -45,7 +46,7 @@
 <blockquote>
 <p>Availability</p>
 </blockquote>
-<p><a href="https://www.npmjs.org/package/jogwheel"><img src="https://img.shields.io/npm/v/jogwheel.svg?style=flat-square" alt="npm"></a> <a href="https://www.brcdn.org/?module=jogwheel"><img src="https://img.shields.io/badge/cdn-v1.4.3-5ec792.svg?style=flat-square" alt="brcdn"></a> <a href="https://www.npmjs.org/package/jogwheel"><img src="http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square" alt="npm-dl"></a></p>
+<p><a href="https://www.npmjs.org/package/jogwheel"><img src="https://img.shields.io/npm/v/jogwheel.svg?style=flat-square" alt="npm"></a> <a href="https://wzrd.in/standalone/jogwheel@latest"><img src="https://img.shields.io/badge/cdn-v1.4.3-5ec792.svg?style=flat-square" alt="cdn"></a> <a href="https://www.npmjs.org/package/jogwheel"><img src="http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square" alt="npm-dl"></a></p>
 <blockquote>
 <p>Activity</p>
 </blockquote>
@@ -87,20 +88,20 @@ To achieve this you will have to include a WebAnimation polyfill, <a href="https
 <span class="hljs-comment">// Jump halfway into the animation</span>
 player.seek(<span class="hljs-number">0.5</span>);</code></pre>
 <h3 id="cdn">CDN</h3>
-<p>jogwheel provides prebundled downloads via <a href="https://www.brcdn.org/?module=jogwheel">brcdn.org</a>.
+<p>jogwheel provides prebundled downloads via <a href="https://wzrd.in/">wzrd.in</a>.
 Either embed or download the standalone bundle. Given you do not use a module system the standalone build will pollute <code>window.jogwheel</code>. This usage is viable but <strong>not recommended</strong>.</p>
 <ul>
-<li>Development <a href="https://www.brcdn.org/jogwheel/v1.4.3/?standalone=jogwheel&amp;uglify=false">v1.4.3</a></li>
-<li>Production <a href="https://www.brcdn.org/jogwheel/1.4.3/?standalone=jogwheel&amp;uglify=true">v1.4.3</a></li>
-<li>Development <a href="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&amp;uglify=false">latest</a></li>
-<li>Production <a href="https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&amp;uglify=true">latest</a></li>
+<li>Development <a href="https://wzrd.in/debug-standalone/jogwheel@v1.4.3">v1.4.3</a></li>
+<li>Production <a href="https://wzrd.in/standalone/jogwheel@v1.4.3">v1.4.3</a></li>
+<li>Development <a href="https://wzrd.in/debug-standalone/jogwheel@latest">latest</a></li>
+<li>Production <a href="https://wzrd.in/standalone/jogwheel@latest">latest</a></li>
 </ul>
 <p><strong>Fast track example</strong></p>
 <pre><code class="hljs language-shell"># Install cross-platform opn command
 npm install -g opn-cli
 
 # Download example
-curl -L https://git.io/v0Y9l &gt; jogwheel-example.html
+curl -L  &gt; jogwheel-example.html
 
 # Open example in default browser
 opn jogwheel-example.html</code></pre>
@@ -116,7 +117,7 @@ opn jogwheel-example.html</code></pre>
         <span class="hljs-attribute">transform</span>: none;
       }
       50% {
-        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(100%);
+        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">100%</span>);
       }
     }
 
@@ -125,7 +126,7 @@ opn jogwheel-example.html</code></pre>
         <span class="hljs-attribute">-webkit-transform</span>: none;
       }
       50% {
-        <span class="hljs-attribute">-webkit-transform</span>: <span class="hljs-built_in">translateY</span>(100%);
+        <span class="hljs-attribute">-webkit-transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">100%</span>);
       }
     }
 
@@ -155,8 +156,8 @@ opn jogwheel-example.html</code></pre>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-animated</span>&gt;</span>Paused 0.5<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-animated</span>&gt;</span>Paused 0.5<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-animated</span>&gt;</span>Paused 0.5<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://www.brcdn.org/web-animations-js/latest/?standalone=web-animations-js&amp;uglify=true"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://www.brcdn.org/jogwheel/latest/?standalone=jogwheel&amp;uglify=true"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://wzrd.in/standalone/web-animations-js@latest"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://wzrd.in/standalone/jogwheel@latest"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
       <span class="hljs-keyword">var</span> elements = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'[data-animated]'</span>);
       <span class="hljs-keyword">var</span> player = jogwheel.create(elements);
