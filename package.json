@@ -184,6 +184,6 @@
     "zuul": "3.9.0"
   },
   "dependencies": {
-    "lodash.uniq": "4.2.1"
+    "lodash.uniq": "4.3.0"
   }
 }
