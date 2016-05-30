@@ -48,11 +48,16 @@ tape('get-keyframes', t => {
 		'should return the correct keyframes for simple-animation'
 	);
 
-	t.deepEqual(
-		getKeyframes('default-animation', keywordDocumentStub.styleSheets),
-		keyWordAnimationDefinition,
-		'should return the correct keyframes for keyword-animation'
-	);
+	{
+		const actual = getKeyframes('default-animation', keywordDocumentStub.styleSheets);
+		const expected = keyWordAnimationDefinition;
+
+		t.deepEqual(
+			actual,
+			expected,
+			'should return the correct keyframes for keyword-animation'
+		);
+	}
 
 	t.end();
 });

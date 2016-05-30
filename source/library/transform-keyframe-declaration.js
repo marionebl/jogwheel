@@ -1,6 +1,18 @@
+import camelCase from 'lodash.camelcase';
+
 import parseKeyframeKey from './parse-keyframe-key';
 import getDefinedStyles from './get-defined-styles';
 import removeVendorPrefix from './remove-vendor-prefix';
+
+/**
+ * Normalize as cssPropertyName to its unprefixed, camelcased form
+ * @param  {string} propertyName
+ * @return {string}
+ * @private
+ */
+function normalizePropertyName(propertyName) {
+	return camelCase(removeVendorPrefix(propertyName));
+}
 
 /**
  * Transforms KeyFrameRule to array of web animation compatible keyframes
@@ -15,7 +27,8 @@ export default function transformKeyframeDeclaration(keyFrameRule) {
 
 	// Normalize to unprefixed styles
 	const normalizedStyles = Object.keys(style).reduce((result, propertyName) => {
-		result[removeVendorPrefix(propertyName)] = style[propertyName];
+		const name = normalizePropertyName(propertyName);
+		result[name] = style[propertyName];
 		return result;
 	}, {});
 
