@@ -182,7 +182,7 @@
     "watchify": "3.7.0",
     "web-animations-js": "2.2.0",
     "whatwg-fetch": "0.11.0",
-    "zuul": "3.9.0"
+    "zuul": "3.10.1"
   },
   "dependencies": {
     "lodash.camelcase": "4.1.1",
