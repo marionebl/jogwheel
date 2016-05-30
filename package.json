@@ -115,6 +115,7 @@
     "cz-conventional-changelog-lint": "0.1.3",
     "del": "2.2.0",
     "denodeify": "1.2.1",
+    "documentation": "3.0.4",
     "dom-stub": "1.0.1",
     "emoji-parser": "0.1.1",
     "emojify.js": "1.1.0",
