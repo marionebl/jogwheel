@@ -5,7 +5,7 @@ import Github from 'github-api';
 import chalk from 'chalk';
 import conventionalChangelog from 'conventional-changelog';
 import minimist from 'minimist';
-import stripIndent from 'common-tags';
+import {stripIndent} from 'common-tags';
 
 import pkg from '../../package.json';
 
