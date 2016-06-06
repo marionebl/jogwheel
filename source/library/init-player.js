@@ -35,18 +35,21 @@ export default function initPlayer(element, keyframes, options, render, window =
 		const {animateMethod} = ElementPrototype;
 		const animateAvailable = typeof animateMethod === 'function';
 
-		const polyFillMessage = animateAvailable === false ? [
-			`Did you include a WebAnimation polyfill?`,
-			`https://git.io/vVV3x`
-		] : [];
+		// Log warnings in development mode
+		if (process.env.NODE_ENV !== 'production') {
+			const polyFillMessage = animateAvailable === false ? [
+				`Did you include a WebAnimation polyfill?`,
+				`https://git.io/vVV3x`
+			] : [];
 
-		const message = [
-			`Initializing JogWheel on an object without animate method`,
-			`falling back to noop WebAnimationsPlayer instance.`,
-			...polyFillMessage
-		];
+			const message = [
+				`Initializing JogWheel on an object without animate method`,
+				`falling back to noop WebAnimationsPlayer instance.`,
+				...polyFillMessage
+			];
 
-		console.warn(...message);
+			console.warn(...message);
+		}
 
 		element.animate = () => {
 			return {
@@ -67,6 +70,11 @@ export default function initPlayer(element, keyframes, options, render, window =
 	const playerElement = isNative === false && hasRenderCallback ?
 		createTrap(element, 'style', render) :
 		element;
+
+	// Log warnings in development mode
+	if (process.env.NODE_ENV !== 'production') {
+
+	}
 
 	// Create the WebAnimationPlayer instance
 	const player = playerElement.animate(keyframes, options);

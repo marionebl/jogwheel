@@ -9,5 +9,9 @@ export default function convertAnimationIterations(CSSIterationCount = '1') {
 		return Infinity;
 	}
 
-	return parseInt(CSSIterationCount, 10);
+	const converted = parseInt(CSSIterationCount, 10);
+
+	return typeof converted === 'number' ?
+		converted :
+		1;
 }

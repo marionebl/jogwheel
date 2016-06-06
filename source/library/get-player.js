@@ -31,7 +31,9 @@ export default function getPlayer(element, settings, window = global.window, doc
 
 	// Construct options for the webanimation player instance
 	const options = {
-		name,
+		id: name,
+		composite: 'replace',
+		iterationComposite: 'replace',
 		duration: convertAnimationDuration(duration),
 		delay: convertAnimationDuration(delay),
 		iterations: convertAnimationIterations(iterationCount),
