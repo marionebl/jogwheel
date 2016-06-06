@@ -3,7 +3,10 @@ import denodeify from 'denodeify';
 import shell from 'shelljs';
 import Github from 'github-api';
 import chalk from 'chalk';
+import conventionalChangelog from 'conventional-changelog';
 import minimist from 'minimist';
+import stripIndent from 'common-tags';
+
 import pkg from '../../package.json';
 
 function getCommitMessage() {
@@ -11,6 +14,25 @@ function getCommitMessage() {
 		.split('\n')[1]
 		.split(' ').slice(1).join(' ')
 		.trim();
+}
+
+function getChangelog() {
+	return new Promise((resolve, reject) => {
+		const data = [];
+
+		conventionalChangelog({
+			preset: 'angular'
+		})
+		.on('data', chunk => {
+			data.push(chunk);
+		})
+		.on('end', () => {
+			resolve(data.join(''));
+		})
+		.on('error', error => {
+			reject(error);
+		});
+	});
 }
 
 async function main() {
@@ -26,6 +48,7 @@ async function main() {
 	const base = 'master';
 
 	const message = getCommitMessage();
+	const gettingChangeLog = getChangelog();
 
 	if (message === title) {
 		console.log(`  ${chalk.green('✔')}   detected release build "${message}", exiting with code 0 and handing off to semantic-release.`);
@@ -74,12 +97,19 @@ async function main() {
 		});
 		const repositoryNames = pkg.config.pages.slug.split('/');
 		const repository = github.getRepo(...repositoryNames);
+		const changelog = await gettingChangeLog;
+
+		const body = stripIndent`
+		This release includes the following changes:
+		${changelog}
+		`;
 
 		try {
 			const createPullRequest = denodeify(repository.createPullRequest.bind(repository));
 			await createPullRequest({
 				title,
 				base,
+				body,
 				head
 			});
 
