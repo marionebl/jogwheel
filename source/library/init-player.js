@@ -58,6 +58,10 @@ export default function initPlayer(element, keyframes, options, render, window =
 		};
 	}
 
+	if (isNaN(options.delay) || isNaN(options.duration) || isNaN(options.iterations)) {
+		return;
+	}
+
 	// Create a proxy for the playerElement if needed
 	// - no native implementation
 	// - render function is given
