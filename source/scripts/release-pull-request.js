@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import path from 'path';
 import denodeify from 'denodeify';
 import shell from 'shelljs';
 import Github from 'github-api';
@@ -6,14 +7,32 @@ import chalk from 'chalk';
 import conventionalChangelog from 'conventional-changelog';
 import minimist from 'minimist';
 import {stripIndent} from 'common-tags';
+import gitFsRepository from '@marionebl/git-fs-repo';
+import gitSemverTags from 'git-semver-tags';
 
 import pkg from '../../package.json';
 
-function getCommitMessage() {
-	return shell.exec(`git log -2 --format=oneline`, {silent: true}).output
-		.split('\n')[1]
-		.split(' ').slice(1).join(' ')
-		.trim();
+const semverTags = denodeify(gitSemverTags);
+
+function getRepository() {
+	return new Promise((resolve, reject) => {
+		const dbPath = path.join(process.cwd(), '.git');
+		gitFsRepository(dbPath, (error, git) => {
+			if (error) {
+				return reject(error);
+			}
+			resolve(git);
+		});
+	});
+}
+
+async function getCommitMessage() {
+	const repository = await getRepository();
+	const {hash} = repository.ref('HEAD');
+	const find = denodeify(repository.find.bind(repository));
+	const commit = await find(hash);
+	const message = commit.message();
+	return message;
 }
 
 function getChangelog() {
@@ -35,9 +54,14 @@ function getChangelog() {
 	});
 }
 
+async function getVersion() {
+	const [version] = await semverTags();
+	return version;
+}
+
 async function main() {
 	const start = Date.now();
-	const version = pkg.version ? `v${pkg.version}` : shell.exec('git describe --abbrev=0 --tags', {silent: true}).output.split('\n')[0];
+	const version = await getVersion();
 	const head = `release/${version}`;
 
 	const remote = process.env.GH_TOKEN ?
@@ -47,10 +71,10 @@ async function main() {
 	const title = `chore: release version ${version}`;
 	const base = 'master';
 
-	const message = getCommitMessage();
+	const message = await getCommitMessage();
 	const gettingChangeLog = getChangelog();
 
-	if (message === title) {
+	if (message.startsWith(title)) {
 		console.log(`  ${chalk.green('✔')}   detected release build "${message}", exiting with code 0 and handing off to semantic-release.`);
 		const timestamp = chalk.gray(`   [${Date.now() - start}ms]`);
 		console.log(`  ${chalk.green('✔')}   release-pull-request executed successfully. ${timestamp}\n`);

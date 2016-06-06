@@ -73,8 +73,8 @@ player.seek(0.5);
 jogwheel provides prebundled downloads via [wzrd.in](https://wzrd.in/).
 Either embed or download the standalone bundle. Given you do not use a module system the standalone build will pollute `window.jogwheel`. This usage is viable but **not recommended**.
 
-* Development [v1.4.3](https://wzrd.in/debug-standalone/jogwheel@v1.4.3)
-* Production [v1.4.3](https://wzrd.in/standalone/jogwheel@v1.4.3)
+* Development [v1.4.5](https://wzrd.in/debug-standalone/jogwheel@v1.4.5)
+* Production [v1.4.5](https://wzrd.in/standalone/jogwheel@v1.4.5)
 * Development [latest](https://wzrd.in/debug-standalone/jogwheel@latest)
 * Production [latest](https://wzrd.in/standalone/jogwheel@latest)
 
@@ -207,7 +207,7 @@ See [Roadmap](./documentation/roadmap.md) for details.
 [2]: http://codepen.io/marionebl/pen/RrbzOO
 
 ---
-jogwheel `v1.4.3` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
+jogwheel `v1.4.5` is built by Mario Nebl and [contributors](./documentation/contributors.md) with :heart:
 and released under the [MIT License](./license.md).
 
 [npm-url]: https://www.npmjs.org/package/jogwheel
@@ -216,7 +216,7 @@ and released under the [MIT License](./license.md).
 [npm-dl-image]: http://img.shields.io/npm/dm/jogwheel.svg?style=flat-square
 
 [cdn-url]: https://wzrd.in/standalone/jogwheel@latest
-[cdn-image]: https://img.shields.io/badge/cdn-v1.4.3-5ec792.svg?style=flat-square
+[cdn-image]: https://img.shields.io/badge/cdn-v1.4.5-5ec792.svg?style=flat-square
 
 [ci-url]: https://travis-ci.org/marionebl/jogwheel
 [ci-image]: https://img.shields.io/travis/marionebl/jogwheel/master.svg?style=flat-square
