@@ -76,7 +76,8 @@ async function main() {
 		const repository = github.getRepo(...repositoryNames);
 
 		try {
-			await denodeify(repository.createPullRequest)({
+			const createPullRequest = denodeify(repository.createPullRequest.bind(repository));
+			await createPullRequest({
 				title,
 				base,
 				head
