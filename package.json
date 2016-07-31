@@ -154,7 +154,7 @@
     "istanbul": "0.4.2",
     "js-git": "0.7.7",
     "lodash.flatten": "4.2.0",
-    "lodash.merge": "4.4.0",
+    "lodash.merge": "4.5.1",
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",
     "node-notifier": "4.4.0",
