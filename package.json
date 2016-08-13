@@ -191,6 +191,6 @@
   },
   "dependencies": {
     "lodash.camelcase": "4.1.1",
-    "lodash.uniq": "4.3.0"
+    "lodash.uniq": "4.5.0"
   }
 }
