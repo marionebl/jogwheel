@@ -170,7 +170,7 @@
     "remark-html": "3.0.0",
     "remark-inline-links": "3.0.0",
     "remark-lint": "4.0.0",
-    "remark-slug": "4.1.0",
+    "remark-slug": "4.2.1",
     "semantic-release": "4.3.5",
     "shelljs": "0.6.0",
     "string-humanize": "1.0.0",
