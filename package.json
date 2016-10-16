@@ -100,7 +100,7 @@
   "devDependencies": {
     "@marionebl/git-fs-repo": "0.1.1",
     "@marionebl/git-semver-tags": "1.1.7",
-    "async": "1.5.2",
+    "async": "2.1.2",
     "babel-core": "6.16.0",
     "babel-eslint": "6.0.0",
     "babel-plugin-object-assign": "1.2.1",
