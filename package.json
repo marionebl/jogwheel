@@ -186,7 +186,7 @@
     "vinyl-source-stream": "1.1.0",
     "watchify": "3.7.0",
     "web-animations-js": "2.2.0",
-    "whatwg-fetch": "0.11.0",
+    "whatwg-fetch": "2.0.0",
     "zuul": "3.10.1"
   },
   "dependencies": {
