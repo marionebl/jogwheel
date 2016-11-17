@@ -102,7 +102,7 @@
     "@marionebl/git-semver-tags": "1.1.7",
     "async": "1.5.2",
     "babel-core": "6.16.0",
-    "babel-eslint": "6.0.0",
+    "babel-eslint": "7.1.1",
     "babel-plugin-object-assign": "1.2.1",
     "babel-polyfill": "6.5.0",
     "babel-regenerator-runtime": "6.2.0",
