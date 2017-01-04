@@ -108,7 +108,7 @@
     "babel-regenerator-runtime": "6.2.0",
     "babel-runtime": "6.5.0",
     "babelify": "6.4.0",
-    "browserify": "13.0.0",
+    "browserify": "13.3.0",
     "chalk": "1.1.3",
     "commitizen": "2.8.1",
     "common-tags": "1.2.0",
