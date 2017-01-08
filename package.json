@@ -144,7 +144,7 @@
     "gulp-rename": "1.2.2",
     "gulp-sequence": "0.4.4",
     "gulp-shell": "0.5.2",
-    "gulp-sourcemaps": "1.6.0",
+    "gulp-sourcemaps": "1.9.2",
     "gulp-tape": "git+https://github.com/marionebl/gulp-tape.git#93abadf0f130afed6c63910ba0acb790ca01aa37",
     "gulp-template": "4.0.0",
     "gulp-util": "3.0.7",
