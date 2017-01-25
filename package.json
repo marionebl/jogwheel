@@ -184,7 +184,7 @@
     "unist-util-visit": "1.1.0",
     "vfile": "1.4.0",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.7.0",
+    "watchify": "3.9.0",
     "web-animations-js": "2.2.0",
     "whatwg-fetch": "0.11.0",
     "zuul": "3.10.1"
