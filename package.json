@@ -138,7 +138,7 @@
     "gulp-eslint": "1.1.1",
     "gulp-ext-replace": "0.2.0",
     "gulp-istanbul": "0.10.4",
-    "gulp-notify": "2.2.0",
+    "gulp-notify": "3.0.0",
     "gulp-plumber": "1.1.0",
     "gulp-remember": "0.3.1",
     "gulp-rename": "1.2.2",
