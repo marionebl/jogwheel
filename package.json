@@ -159,7 +159,7 @@
     "mkdirp": "0.5.1",
     "node-notifier": "4.4.0",
     "normalize.css": "5.0.0",
-    "nyc": "6.4.0",
+    "nyc": "10.2.0",
     "parallelshell": "2.0.0",
     "phantomjs": "2.1.7",
     "phantomjs-function-bind-polyfill": "1.0.0",
