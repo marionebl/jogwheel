@@ -163,7 +163,7 @@
     "parallelshell": "2.0.0",
     "phantomjs": "2.1.7",
     "phantomjs-function-bind-polyfill": "1.0.0",
-    "rc": "1.1.6",
+    "rc": "1.2.0",
     "remark": "4.2.1",
     "remark-gemoji": "1.0.0",
     "remark-highlight.js": "3.0.0",
