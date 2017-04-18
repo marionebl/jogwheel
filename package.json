@@ -174,7 +174,7 @@
     "semantic-release": "4.3.5",
     "shelljs": "0.6.0",
     "string-humanize": "1.0.0",
-    "stylelint": "5.4.0",
+    "stylelint": "6.3.2",
     "stylelint-config-standard": "4.0.1",
     "sync-request": "3.0.0",
     "tap-spec": "4.1.1",
