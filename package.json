@@ -167,7 +167,7 @@
     "remark": "4.2.1",
     "remark-gemoji": "1.0.0",
     "remark-highlight.js": "3.0.0",
-    "remark-html": "3.0.0",
+    "remark-html": "5.0.0",
     "remark-inline-links": "3.0.0",
     "remark-lint": "4.0.0",
     "remark-slug": "4.1.0",
